@@ -1,6 +1,6 @@
 # Wland Chat iA
 
-Plugin WordPress profesional para integrar chat con inteligencia artificial mediante bloque Gutenberg.
+Plugin WordPress profesional para integrar chat con inteligencia artificial con N8N mediante bloques Gutenberg.
 
 **Versión actual**: 1.2.3
 
