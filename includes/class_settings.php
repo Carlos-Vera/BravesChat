@@ -85,6 +85,8 @@ class Settings {
             'position',
             'display_mode',
             'chat_icon',
+            'icon_color',
+            'bubble_tooltip',
             'bubble_color',
             'primary_color',
             'background_color',
@@ -384,6 +386,20 @@ class Settings {
             'type' => 'string',
             'sanitize_callback' => array($this, 'sanitize_chat_icon'),
             'default' => 'robot-chat'
+        ));
+
+        // Icon Color
+        register_setting('wland_chat_settings', $this->option_prefix . 'icon_color', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_hex_color',
+            'default' => '#f2f2f2'
+        ));
+
+        // Bubble Tooltip
+        register_setting('wland_chat_settings', $this->option_prefix . 'bubble_tooltip', array(
+            'type' => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default' => __('Habla con nuestro asistente IA', 'wland-chat')
         ));
 
         add_settings_field(

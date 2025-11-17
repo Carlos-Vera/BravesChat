@@ -2,7 +2,7 @@
 
 Plugin WordPress profesional para integrar chat con inteligencia artificial con N8N mediante bloques Gutenberg.
 
-**Versión actual**: 1.2.3
+**Versión actual**: 1.2.4
 
 ## 📋 Tabla de Contenidos
 
@@ -135,6 +135,14 @@ Personaliza el aspecto visual del chat:
 - **Modo de Visualización**:
   - Modal (ventana flotante) - default
   - Pantalla completa
+- **Tooltip del Botón**: Mensaje que aparece al pasar el cursor sobre el botón flotante (default: "Habla con nuestro asistente IA")
+- **Icono del Botón**: Selecciona entre 4 iconos SVG (Original, Círculo, Happy, Burbuja)
+- **Color del Icono**: Color del icono SVG (default: #f2f2f2)
+- **Colores Personalizados**:
+  - Color de la Burbuja (botón flotante)
+  - Color Primario (header y mensajes del asistente)
+  - Color de Fondo (ventana del chat)
+  - Color de Texto (mensajes)
 
 ### 3. Horarios
 

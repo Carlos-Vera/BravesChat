@@ -21,7 +21,7 @@ class WlandChatScreen {
      */
     constructor() {
         this.is_open = false;
-        
+
         this.conversation_history = [];
         this.session_id = null; // Se inicializará de forma asíncrona
 
@@ -30,9 +30,17 @@ class WlandChatScreen {
         this.auth_token = window.WlandChatConfig?.auth_token || ''; // Token de autenticación
         this.is_available = window.WlandChatConfig?.isAvailable !== undefined ? window.WlandChatConfig.isAvailable : true;
 
+        // Inicializar RedirectHandler
+        this.redirect_handler = new WlandRedirectHandler({
+            on_message_callback: (text, type, append) => this.add_message(text, type, append),
+            on_error_callback: (error_msg) => this.add_message(error_msg, 'bot')
+        });
+
         // Inicializar session_id de forma asíncrona
         this.generate_session_id().then(session_id => {
             this.session_id = session_id;
+            // Verificar si hay conversación pendiente de recuperación
+            this.check_and_restore_conversation();
         });
 
         this.init();
@@ -72,6 +80,11 @@ class WlandChatScreen {
         // Event Listeners
         this.setup_event_listeners();
 
+        // Listener para acción close_chat desde RedirectHandler
+        document.addEventListener('wland_chat_close_requested', () => {
+            this.close_window();
+        });
+
         console.log('Chat Fullscreen inicializado correctamente');
     }
 
@@ -106,6 +119,32 @@ class WlandChatScreen {
         });
     }
 
+
+    /**
+     * Verifica si hay una conversación pendiente y la restaura
+     * @returns {void}
+     */
+    check_and_restore_conversation() {
+        const restored_state = this.redirect_handler.restore_conversation_state();
+
+        if (restored_state) {
+            console.log('[Wland Chat Screen] Restaurando conversación:', restored_state);
+
+            // Restaurar historial
+            this.conversation_history = restored_state.history || [];
+
+            // Restaurar mensajes en el DOM
+            this.conversation_history.forEach(msg => {
+                const type = msg.role === 'user' ? 'user' : 'bot';
+                this.add_message(msg.content, type, false);
+            });
+
+            // Abrir el chat automáticamente si había conversación
+            if (this.conversation_history.length > 0) {
+                this.open_window();
+            }
+        }
+    }
 
     /**
      * Genera un ID único para la sesión del chat usando fingerprinting
@@ -342,24 +381,27 @@ class WlandChatScreen {
             // Ocultar indicador de escritura
             this.hide_typing_indicator();
 
-            // Adaptarse a diferentes formatos de respuesta de N8N
-            // El módulo de chat N8N puede devolver varios formatos
-            let bot_message = null;
+            // Usar RedirectHandler para parsear la respuesta
+            const parsed = this.redirect_handler.parse_response(response_text);
 
-            if (data.output) {
-                bot_message = data.output;
-            } else if (data.response) {
-                bot_message = data.response;
-            } else if (data.message) {
-                bot_message = data.message;
-            } else if (data.text) {
-                bot_message = data.text;
-            } else if (typeof data === 'string') {
-                // Si la respuesta es directamente un string
-                bot_message = data;
-            } else if (data.data && typeof data.data === 'string') {
-                // Si viene en un campo "data"
-                bot_message = data.data;
+            // Adaptarse a diferentes formatos de respuesta de N8N (fallback)
+            let bot_message = parsed.message;
+
+            // Si el parser no encontró mensaje, intentar formatos legacy
+            if (!bot_message || bot_message === response_text) {
+                if (data.output) {
+                    bot_message = data.output;
+                } else if (data.response) {
+                    bot_message = data.response;
+                } else if (data.message) {
+                    bot_message = data.message;
+                } else if (data.text) {
+                    bot_message = data.text;
+                } else if (typeof data === 'string') {
+                    bot_message = data;
+                } else if (data.data && typeof data.data === 'string') {
+                    bot_message = data.data;
+                }
             }
 
             if (!bot_message) {
@@ -369,6 +411,7 @@ class WlandChatScreen {
                 throw new Error(`RESPONSE_FORMAT_ERROR: No se encontró el mensaje en la respuesta.\n\nCampos disponibles: ${Object.keys(data).join(', ')}\n\nRespuesta completa: ${JSON.stringify(data).substring(0, 200)}`);
             }
 
+            // Agregar mensaje al chat
             this.add_message(bot_message, 'bot');
 
             // Guardar en historial
@@ -378,6 +421,24 @@ class WlandChatScreen {
             });
 
             console.log('Mensaje procesado correctamente');
+
+            // Procesar redirecciones si existen
+            if (parsed.has_redirect && parsed.redirect_url) {
+                this.redirect_handler.execute_redirect(
+                    parsed.redirect_url,
+                    parsed.redirect_delay,
+                    this.conversation_history,
+                    this.session_id
+                );
+            }
+
+            // Procesar acciones custom si existen
+            if (parsed.has_action && parsed.action_type) {
+                this.redirect_handler.execute_custom_action(
+                    parsed.action_type,
+                    parsed.action_data
+                );
+            }
 
         } catch (error) {
             console.error('ERROR COMPLETO:', error);
@@ -451,9 +512,25 @@ class WlandChatScreen {
      * Añade un mensaje al área de chat
      * @param {string} text - Texto del mensaje
      * @param {string} type - Tipo de mensaje ('user' o 'bot')
+     * @param {boolean} append - Si es true, agrega el texto al último mensaje en lugar de crear uno nuevo
      * @returns {void}
      */
-    add_message(text, type) {
+    add_message(text, type, append = false) {
+        // Si append es true, agregar al último mensaje del mismo tipo
+        if (append) {
+            const messages = this.chat_messages.querySelectorAll(`.message.${type}`);
+            if (messages.length > 0) {
+                const last_message = messages[messages.length - 1];
+                const bubble = last_message.querySelector('.message-bubble');
+                if (bubble) {
+                    bubble.textContent += text;
+                    this.scroll_to_bottom();
+                    return;
+                }
+            }
+        }
+
+        // Crear nuevo mensaje
         const message_div = document.createElement('div');
         message_div.className = `message ${type}`;
 

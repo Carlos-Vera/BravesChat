@@ -131,6 +131,8 @@ if (empty($theme_colors)) {
                         'position',
                         'display_mode',
                         'chat_icon',
+                        'icon_color',
+                        'bubble_tooltip',
                         'bubble_color',
                         'primary_color',
                         'background_color',
@@ -293,6 +295,33 @@ if (empty($theme_colors)) {
                             ));
                             ?>
 
+                            <!-- Card: Tooltip del Botón -->
+                            <?php
+                            $bubble_tooltip = get_option($option_prefix . 'bubble_tooltip', __('Habla con nuestro asistente IA', 'wland-chat'));
+
+                            ob_start();
+                            ?>
+                            <input type="text"
+                                   id="<?php echo esc_attr($option_prefix . 'bubble_tooltip'); ?>"
+                                   name="<?php echo esc_attr($option_prefix . 'bubble_tooltip'); ?>"
+                                   value="<?php echo esc_attr($bubble_tooltip); ?>"
+                                   class="wland-input"
+                                   placeholder="<?php esc_attr_e('Habla con nuestro asistente IA', 'wland-chat'); ?>"
+                                   style="width: 100%;"
+                            />
+                            <p class="wland-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
+                                <?php _e('Texto que aparecerá al pasar el cursor sobre el botón flotante.', 'wland-chat'); ?>
+                            </p>
+                            <?php
+                            $tooltip_content = ob_get_clean();
+
+                            Template_Helpers::card(array(
+                                'title' => __('Tooltip del Botón', 'wland-chat'),
+                                'description' => __('Mensaje que se muestra al pasar el cursor sobre el botón.', 'wland-chat'),
+                                'content' => $tooltip_content,
+                            ));
+                            ?>
+
                             <!-- Card: Icono del Botón de Chat -->
                             <?php
                             $current_icon = get_option($option_prefix . 'chat_icon', 'robot-chat');
@@ -330,6 +359,65 @@ if (empty($theme_colors)) {
                                 'description' => __('Icono que aparecerá en el botón flotante del chat.', 'wland-chat'),
                                 'content' => $icon_content,
                                 'custom_class' => 'wland-card--full-width',
+                            ));
+                            ?>
+
+                            <!-- Card: Color del Icono -->
+                            <?php
+                            $icon_color = get_option($option_prefix . 'icon_color', '#f2f2f2');
+
+                            ob_start();
+                            ?>
+                            <!-- Color Picker Principal - Material Design List Style -->
+                            <div style="margin-bottom: 16px;">
+                                <input type="color"
+                                       id="<?php echo esc_attr($option_prefix . 'icon_color'); ?>"
+                                       name="<?php echo esc_attr($option_prefix . 'icon_color'); ?>"
+                                       value="<?php echo esc_attr($icon_color); ?>"
+                                       class="wland-color-picker"
+                                       title="<?php esc_attr_e('Seleccionar color personalizado', 'wland-chat'); ?>"
+                                       style="display: inline-block; vertical-align: middle; margin: 0;">
+                                <input type="text"
+                                       value="<?php echo esc_attr($icon_color); ?>"
+                                       class="wland-color-text"
+                                       data-color-input="<?php echo esc_attr($option_prefix . 'icon_color'); ?>"
+                                       readonly
+                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                            </div>
+
+                            <!-- Toggle para mostrar paleta -->
+                            <div style="margin-bottom: 12px;">
+                                <button type="button" class="wland-palette-toggle" data-palette-target="icon-color-palette">
+                                    <span class="wland-palette-toggle-icon">▶</span>
+                                    <span><?php _e('Colores del tema', 'wland-chat'); ?></span>
+                                </button>
+                            </div>
+
+                            <!-- Paleta de colores predefinidos (oculta por defecto) -->
+                            <div class="wland-color-palette wland-color-palette--collapsed" id="icon-color-palette">
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <?php foreach ($theme_colors as $preset): ?>
+                                        <button type="button"
+                                                class="wland-color-preset"
+                                                data-color="<?php echo esc_attr($preset['color']); ?>"
+                                                data-target="<?php echo esc_attr($option_prefix . 'icon_color'); ?>"
+                                                title="<?php echo esc_attr($preset['name']); ?>"
+                                                style="background: <?php echo esc_attr($preset['color']); ?>;">
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+
+                            <p class="wland-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
+                                <?php _e('Color del icono SVG en el botón flotante del chat.', 'wland-chat'); ?>
+                            </p>
+                            <?php
+                            $icon_color_content = ob_get_clean();
+
+                            Template_Helpers::card(array(
+                                'title' => __('Color del Icono', 'wland-chat'),
+                                'description' => __('Color que se aplicará al icono SVG del botón.', 'wland-chat'),
+                                'content' => $icon_color_content,
                             ));
                             ?>
 

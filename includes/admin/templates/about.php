@@ -141,6 +141,29 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'wland-chat'); ?>
                     </h2>
 
+                    <!-- Version 1.2.4 -->
+                    <div class="wland-changelog">
+                        <div class="wland-changelog__version">
+                            <h3 class="wland-changelog__title">
+                                <span class="wland-badge wland-badge--primary">v1.2.4</span>
+                                <?php _e('Tooltip Personalizable y Color de Icono', 'wland-chat'); ?>
+                            </h3>
+                            <p class="wland-changelog__date"><?php _e('17 de Enero, 2025', 'wland-chat'); ?></p>
+
+                            <div class="wland-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Campo de texto para personalizar el tooltip del botón flotante del chat', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Opción bubble_tooltip registrada en WordPress Settings API', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Card "Tooltip del Botón" en página de Apariencia (antes del selector de iconos)', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Atributo title dinámico en botón flotante usando valor personalizado', 'wland-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Color por defecto del icono SVG cambiado de #5B4CCC a #f2f2f2 (gris claro)', 'wland-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Mejor organización de opciones en panel de Apariencia', 'wland-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Tooltip ubicado estratégicamente antes del selector de iconos', 'wland-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     <!-- Version 1.2.3 -->
                     <div class="wland-changelog">
                         <div class="wland-changelog__version">

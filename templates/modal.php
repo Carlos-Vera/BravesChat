@@ -11,13 +11,14 @@ if (!defined('ABSPATH')) {
 ?>
 
 <?php
-// Obtener el icono seleccionado
+// Obtener el icono seleccionado y tooltip
 $chat_icon = get_option('wland_chat_chat_icon', 'robot-chat');
 $icon_path = WLAND_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . '.svg';
+$bubble_tooltip = get_option('wland_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'wland-chat'));
 ?>
 <div id="<?php echo esc_attr($unique_id); ?>" class="braveslab-chat-widget-container position-<?php echo esc_attr($position); ?>">
     <div id="braveslab-chat-container" class="chat-closed">
-        <button id="chat-toggle" title="<?php esc_attr_e('Habla con nuestro asistente IA', 'wland-chat'); ?>">
+        <button id="chat-toggle" title="<?php echo esc_attr($bubble_tooltip); ?>">
             <img id="chat-icon" src="<?php echo esc_url($icon_path); ?>" alt="<?php esc_attr_e('Chat', 'wland-chat'); ?>">
             <span id="close-icon" style="display: none;">✕</span>
         </button>

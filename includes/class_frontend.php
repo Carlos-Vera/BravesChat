@@ -113,9 +113,9 @@ class Frontend {
             array(),
             WLAND_CHAT_VERSION
         );
-        
+
         $display_mode = get_option('wland_chat_display_mode', 'modal');
-        
+
         // CSS condicional según modo de visualización
         wp_enqueue_style(
             'wland-chat-frontend',
@@ -124,11 +124,20 @@ class Frontend {
             WLAND_CHAT_VERSION
         );
 
-        // JS condicional según modo de visualización
+        // RedirectHandler - debe cargarse antes de los scripts del chat
+        wp_enqueue_script(
+            'wland-chat-redirect-handler',
+            WLAND_CHAT_PLUGIN_URL . 'assets/js/redirect_handler.js',
+            array(),
+            WLAND_CHAT_VERSION,
+            true
+        );
+
+        // JS condicional según modo de visualización (depende de redirect_handler)
         wp_enqueue_script(
             'wland-chat-frontend',
             WLAND_CHAT_PLUGIN_URL . 'assets/js/wland_chat_block_' . $display_mode . '.js',
-            array('wp-i18n'),
+            array('wp-i18n', 'wland-chat-redirect-handler'),
             WLAND_CHAT_VERSION,
             true
         );
@@ -286,6 +295,7 @@ class Frontend {
 
         // Obtener colores personalizados
         $bubble_color = get_option('wland_chat_bubble_color', '#01B7AF');
+        $icon_color = get_option('wland_chat_icon_color', '#ffffff');
         $primary_color = get_option('wland_chat_primary_color', '#01B7AF');
         $background_color = get_option('wland_chat_background_color', '#FFFFFF');
         $text_color = get_option('wland_chat_text_color', '#333333');
@@ -305,6 +315,16 @@ class Frontend {
 
             body #braveslab-chat-container #chat-toggle:hover {
                 box-shadow: 0 6px 25px <?php echo esc_attr($bubble_color); ?>99 !important;
+            }
+
+            /* Color del icono SVG */
+            body #braveslab-chat-container #chat-toggle #chat-icon {
+                filter: brightness(0) invert(1);
+            }
+
+            body #braveslab-chat-container #chat-toggle #chat-icon path,
+            body #braveslab-chat-container #chat-toggle #chat-icon g {
+                fill: <?php echo esc_attr($icon_color); ?> !important;
             }
 
             /* Color del header */

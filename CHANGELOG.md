@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [1.2.3](#123---2025-10-26) - **Actual** - Fix wp.i18n y mejora de compatibilidad JS
+- [1.2.4](#124---2025-01-17) - **Actual** - Tooltip personalizable y color de icono actualizado
+- [1.2.3](#123---2025-10-26) - Fix wp.i18n y mejora de compatibilidad JS
 - [1.2.2](#122---2025-10-25) - Corrección crítica de inputs en formularios
 - [1.2.1](#121---2025-10-24) - Rediseño completo del admin con Bentō
 - [1.2.0](#120---2025-10-23) - Nuevo sistema de administración
@@ -14,6 +15,38 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [1.2.4] - 2025-01-17
+
+### 🎨 Nueva Funcionalidad - Tooltip Personalizable
+- **ADDED**: Campo de texto para personalizar el tooltip del botón flotante del chat
+- **ADDED**: Opción `bubble_tooltip` registrada en WordPress Settings API
+- **ADDED**: Card "Tooltip del Botón" en página de Apariencia (antes del selector de iconos)
+- **ADDED**: Input de texto con `width: 100%` para consistencia visual
+- **ADDED**: Atributo `title` dinámico en botón flotante usando valor personalizado
+
+### 🎨 Mejoras de Apariencia
+- **IMPROVED**: Color por defecto del icono SVG cambiado de `#5B4CCC` a `#f2f2f2` (gris claro)
+- **IMPROVED**: Mejor organización de opciones en panel de Apariencia
+- **IMPROVED**: Tooltip ubicado estratégicamente antes del selector de iconos
+
+### 📋 Archivos Modificados
+- `class_settings.php` - Registro opción `bubble_tooltip` + actualización default `icon_color` a #f2f2f2
+- `appearance.php` - Card "Tooltip del Botón" agregada + fallback actualizado para `icon_color`
+- `modal.php` - Variable `$bubble_tooltip` obtenida y usada en atributo `title`
+- `screen.php` - Variable `$bubble_tooltip` obtenida y usada en atributo `title`
+
+### 🔧 Opciones Nuevas
+```php
+wland_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con nuestro asistente IA")
+```
+
+### 🔧 Opciones Actualizadas
+```php
+wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2 - antes: #5B4CCC)
+```
 
 ---
 

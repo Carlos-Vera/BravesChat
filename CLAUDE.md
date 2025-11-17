@@ -1,7 +1,7 @@
 # Wland Chat iA - Documentación Técnica para Claude Code
 
 > **Plugin**: Wland Chat iA
-> **Versión**: 1.2.3
+> **Versión**: 1.2.4
 > **Autor**: Carlos Vera (BravesLab)
 > **Diseño**: Bentō moderno
 > **Patrón**: Singleton + Componentes modulares
@@ -18,7 +18,7 @@ Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
 - **Raíz de WordPress**: `/Applications/XAMPP/xamppfiles/htdocs/wordpress`
 - **URL de prueba**: `http://localhost/wordpress/wp-admin`
 - **PHP**: `/Applications/XAMPP/xamppfiles/bin/php` (usado para linting)
-- **Actualización**: solo se actualizará versión cuando el usuario confirme que los cambios hechos funcionan correctamente, entoces se utilizará la siguiente estructura, se actualizan los archivos en este orden: 
+- **Actualización**: solo se actualizará versión cuando el usuario confirme que los cambios hechos funcionan correctamente, entonces se utilizará la siguiente estructura, se actualizan los archivos en este orden: 
     1. CLAUDE.md: agrega los cambios realizados, actualiza la estructura de archivos, incluye aclaraciones que puedan servir para un mejor desarrollo de parte de Claude en el futuro. 
     2. README.md: Agrega los cambios de funciones, estructura de archivos, mejoras, documentación, etc.
     3. CHANGELOG.md: Actualiza con las funciones, mejoras, implementaciones y demas datos importantes que deban estar aquí.
@@ -28,7 +28,7 @@ Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
 ### Convenciones de Código
 
 - **Nomenclatura**: `snake_case` para todas las variables, funciones y archivos
-- **NO usar camelCase** en ningún lugar
+- **NO usar camelCase** intenta evitar el uso a menos que la sintaxis lo exija
 - **JSDoc**: Cada función nueva debe incluir comentarios JSDoc
 - **Namespace**: Todas las clases PHP usan `WlandChat\Admin`
 - **Patrón Singleton**: Todos los componentes admin usan instancia única
@@ -485,6 +485,36 @@ add_filter('wland_chat_admin_menu_items', function($items) {
 add_action('wland_chat_admin_sidebar_items', function($current_page) {
     echo '<div class="custom-sidebar-content">...</div>';
 });
+```
+
+---
+
+## 📦 Cambios en v1.2.4
+
+### 🎨 Personalización del Tooltip y Color de Icono
+
+**Nueva funcionalidad**: Tooltip personalizable para el botón flotante y nuevo color por defecto del icono.
+
+**Características**:
+- Campo de texto para personalizar el mensaje del tooltip del botón flotante
+- Color por defecto del icono SVG cambiado a `#f2f2f2` (gris claro)
+- Tooltip ubicado estratégicamente antes del selector de iconos en la UI
+
+**Implementación**:
+- Input text con `width: 100%` para consistencia visual
+- Opción `wland_chat_bubble_tooltip` registrada en Settings API
+- Default: "Habla con nuestro asistente IA" (traducible)
+- Atributo `title` en botón flotante usa el valor personalizado
+
+**Archivos modificados**:
+- `class_settings.php` - Registro opción `bubble_tooltip` y actualización `icon_color` default a `#f2f2f2`
+- `appearance.php` - Card "Tooltip del Botón" agregada antes de "Icono del Botón", fallback actualizado
+- `modal.php` / `screen.php` - Variable `$bubble_tooltip` obtenida y usada en atributo `title`
+
+**Opciones registradas**:
+```php
+wland_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con nuestro asistente IA")
+wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 ```
 
 ---
@@ -988,6 +1018,6 @@ En `about.php` debe quedar:
 
 ---
 
-**Wland Chat iA** - Documentación técnica v1.2.2
+**Wland Chat iA** - Documentación técnica v1.2.4
 
 © 2025 Braves Lab LLC. Todos los derechos reservados.
