@@ -512,7 +512,27 @@ wland_chat_gdpr_consent:    accepted
 
 Ver historial completo de cambios y detalles técnicos en [CHANGELOG.md](CHANGELOG.md).
 
-### Versión Actual: 1.2.3 (26 de Octubre, 2025)
+### Versión Actual: 1.2.4 (17 de Noviembre, 2025)
+
+**🎨 Personalización del Tooltip y Color de Icono**:
+- Added: Campo personalizable para el tooltip del botón flotante desde el panel de Apariencia
+- Added: Color por defecto del icono SVG cambiado a gris claro (#f2f2f2)
+- Added: Tooltip ubicado estratégicamente antes del selector de iconos en la UI
+- Added: Input text con `width: 100%` para consistencia visual
+
+**🔄 Detección y Reemplazo Automático de Versiones Antiguas**:
+- Added: Sistema automático de detección de versiones anteriores del plugin al activar
+- Added: Desactivación automática de plugins antiguos si están activos
+- Added: Eliminación automática de directorios de versiones anteriores
+- Added: Preservación de configuraciones del usuario durante la migración
+- Added: Prevención de errores fatales por funciones redeclaradas
+
+**🐛 Correcciones Críticas**:
+- Fixed: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente
+- Fixed: Implementación de `function_exists()` check para prevenir redeclaraciones
+- Fixed: Fallback del color del icono corregido en appearance.php
+
+### Versión Anterior: 1.2.3 (26 de Octubre, 2025)
 
 **🎨 Nuevas Funcionalidades**:
 - Added: Sistema de personalización de colores desde el panel de Apariencia

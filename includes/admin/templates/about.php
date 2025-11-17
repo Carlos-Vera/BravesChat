@@ -148,7 +148,7 @@ $sidebar = Admin_Sidebar::get_instance();
                                 <span class="wland-badge wland-badge--primary">v1.2.4</span>
                                 <?php _e('Tooltip Personalizable y Color de Icono', 'wland-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('17 de Enero, 2025', 'wland-chat'); ?></p>
+                            <p class="wland-changelog__date"><?php _e('17 de Noviembre, 2025', 'wland-chat'); ?></p>
 
                             <div class="wland-changelog__section">
                                 <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
@@ -160,6 +160,26 @@ $sidebar = Admin_Sidebar::get_instance();
                                     <li><?php _e('IMPROVED: Color por defecto del icono SVG cambiado de #5B4CCC a #f2f2f2 (gris claro)', 'wland-chat'); ?></li>
                                     <li><?php _e('IMPROVED: Mejor organización de opciones en panel de Apariencia', 'wland-chat'); ?></li>
                                     <li><?php _e('IMPROVED: Tooltip ubicado estratégicamente antes del selector de iconos', 'wland-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="wland-changelog__section">
+                                <h4><?php _e('🔄 Detección Automática de Versiones', 'wland-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Sistema automático de detección de versiones anteriores del plugin al activar', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Desactivación automática de plugins antiguos si están activos', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Eliminación automática de directorios de versiones anteriores', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Preservación de configuraciones del usuario durante la migración', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Prevención de errores fatales por funciones redeclaradas', 'wland-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="wland-changelog__section">
+                                <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente', 'wland-chat'); ?></li>
+                                    <li><?php _e('FIXED: Implementación de function_exists() check para prevenir redeclaraciones', 'wland-chat'); ?></li>
+                                    <li><?php _e('FIXED: Fallback del color del icono corregido en appearance.php', 'wland-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>

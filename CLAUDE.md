@@ -517,7 +517,33 @@ wland_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con n
 wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 ```
 
+### 🔄 Detección y Reemplazo Automático de Versiones Antiguas
+
+**Nueva funcionalidad**: El plugin ahora detecta automáticamente versiones anteriores instaladas y las reemplaza al activar una nueva versión.
+
+**Características**:
+- Escaneo automático del directorio de plugins en busca de versiones antiguas (Wland-Chat-iA-*)
+- Desactivación automática de plugins antiguos si están activos
+- Eliminación automática de directorios de versiones anteriores
+- Preservación de configuraciones del usuario durante la migración
+
+**Implementación**:
+- Método `detect_and_replace_old_versions()` en `WlandChatIA::activate()`
+- Uso de WordPress Filesystem API para eliminación segura de directorios
+- Patrón de búsqueda: `Wland-Chat-iA*` para detectar todas las versiones antiguas
+- Exclusión del directorio actual para evitar auto-eliminación
+
+**Archivos modificados**:
+- `wland_chat_ia.php` - Nuevo método `detect_and_replace_old_versions()` agregado al hook de activación
+
+**Beneficios**:
+- ✅ Evita conflictos de versiones múltiples instaladas simultáneamente
+- ✅ Previene errores fatales de "function already declared"
+- ✅ Mantiene la instalación limpia y actualizada
+- ✅ Experiencia de actualización fluida para usuarios
+
 ---
+
 
 ## 📦 Cambios en v1.2.3
 

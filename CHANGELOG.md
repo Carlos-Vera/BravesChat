@@ -43,6 +43,22 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 wland_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con nuestro asistente IA")
 ```
 
+### 🔄 Nueva Funcionalidad - Detección y Reemplazo Automático de Versiones
+- **ADDED**: Sistema automático de detección de versiones anteriores del plugin al activar
+- **ADDED**: Desactivación automática de plugins antiguos si están activos
+- **ADDED**: Eliminación automática de directorios de versiones anteriores
+- **ADDED**: Preservación de configuraciones del usuario durante la migración
+- **ADDED**: Prevención de errores fatales por funciones redeclaradas
+- **ADDED**: Método `detect_and_replace_old_versions()` en hook de activación
+
+### 🐛 Correcciones Críticas
+- **FIXED**: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente
+- **FIXED**: Implementación de `function_exists()` check para prevenir redeclaraciones
+- **FIXED**: Fallback del color del icono corregido en appearance.php
+
+### 📋 Archivos Modificados
+- `wland_chat_ia.php` - Método `detect_and_replace_old_versions()` agregado al hook de activación + hotfix function_exists()
+
 ### 🔧 Opciones Actualizadas
 ```php
 wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2 - antes: #5B4CCC)

@@ -162,7 +162,10 @@ class WlandChatIA {
         
         // Guardar versión
         update_option('wland_chat_version', WLAND_CHAT_VERSION);
-        
+
+        // Detectar y reemplazar versiones antiguas
+        $this->detect_and_replace_old_versions();
+
         flush_rewrite_rules();
     }
     
@@ -176,6 +179,48 @@ class WlandChatIA {
      */
     public function deactivate() {
         flush_rewrite_rules();
+    }
+
+    /**
+     * Detectar y reemplazar versiones antiguas del plugin
+     *
+     * Escanea el directorio de plugins en busca de versiones anteriores,
+     * las desactiva si están activas y elimina los directorios
+     *
+     * @since 1.2.4
+     * @return void
+     */
+    private function detect_and_replace_old_versions() {
+        // Inicializar WP_Filesystem si no está disponible
+        if (!function_exists('WP_Filesystem')) {
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+        }
+        WP_Filesystem();
+        global $wp_filesystem;
+
+        $plugins_dir = WP_PLUGIN_DIR;
+        $current_dir = basename(WLAND_CHAT_PLUGIN_DIR);
+        $current_dir = rtrim($current_dir, '/');
+
+        // Patrón para versiones antiguas: Wland-Chat-iA seguido de cualquier cosa
+        $pattern = $plugins_dir . '/Wland-Chat-iA*';
+        $dirs = glob($pattern, GLOB_ONLYDIR);
+
+        foreach ($dirs as $dir) {
+            $dirname = basename($dir);
+            if ($dirname !== $current_dir) {
+                // Versión antigua encontrada
+                $plugin_file = $dirname . '/wland_chat_ia.php';
+
+                // Desactivar si está activo
+                if (is_plugin_active($plugin_file)) {
+                    deactivate_plugins($plugin_file);
+                }
+
+                // Eliminar el directorio
+                $wp_filesystem->delete($dir, true);
+            }
+        }
     }
 
     /**
