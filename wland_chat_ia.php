@@ -246,8 +246,10 @@ class WlandChatIA {
  * @since 1.0.0
  * @return WlandChatIA Instancia del plugin
  */
-function wland_chat_init() {
-    return WlandChatIA::get_instance();
+if (!function_exists('WlandChat\wland_chat_init')) {
+    function wland_chat_init() {
+        return WlandChatIA::get_instance();
+    }
 }
 
 // Iniciar el plugin
