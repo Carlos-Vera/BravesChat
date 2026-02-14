@@ -4,14 +4,14 @@
  *
  * Página de Ajustes con diseño Bentō
  *
- * @package WlandChat
+ * @package BravesChat
  * @subpackage Admin\Templates
  * @since 1.2.1
  */
 
-use WlandChat\Admin\Admin_Header;
-use WlandChat\Admin\Admin_Sidebar;
-use WlandChat\Admin\Template_Helpers;
+use BravesChat\Admin\Admin_Header;
+use BravesChat\Admin\Admin_Sidebar;
+use BravesChat\Admin\Template_Helpers;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'wland-chat'));
+    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
 // Obtener instancias de componentes
@@ -33,11 +33,11 @@ $config_status = Template_Helpers::get_config_status();
 $settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
 
 // Prefijo de opciones
-$option_prefix = 'wland_chat_';
+$option_prefix = 'braves_chat_';
 ?>
 
-<div class="wrap wland-admin-wrap">
-    <div class="wland-admin-container">
+<div class="wrap braves-admin-wrap">
+    <div class="braves-admin-container">
 
         <?php
         // Renderizar header
@@ -47,30 +47,30 @@ $option_prefix = 'wland_chat_';
         ));
         ?>
 
-        <div class="wland-admin-body">
+        <div class="braves-admin-body">
 
             <?php
             // Renderizar sidebar
             $sidebar->render($current_page);
             ?>
 
-            <div class="wland-admin-content">
+            <div class="braves-admin-content">
 
                 <!-- Page Header -->
-                <div class="wland-page-header">
-                    <h1 class="wland-page-title"><?php _e('Ajustes', 'wland-chat'); ?></h1>
-                    <p class="wland-page-description">
-                        <?php _e('Configura los ajustes principales del chat: habilitación global, webhook, token de autenticación y páginas excluidas.', 'wland-chat'); ?>
+                <div class="braves-page-header">
+                    <h1 class="braves-page-title"><?php _e('<strong>Ajustes</strong>', 'braves-chat'); ?></h1>
+                    <p class="braves-page-description">
+                        <?php _e('Configura los ajustes principales del chat: habilitación global, webhook, token de autenticación y páginas excluidas.', 'braves-chat'); ?>
                     </p>
                 </div>
 
                 <!-- Configuration Status Section -->
                 <?php if (!$config_status['is_configured']): ?>
-                <div class="wland-section wland-section--warning">
+                <div class="braves-section braves-section--warning">
                     <?php
                     Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'wland-chat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'wland-chat'),
+                        '<strong>' . __('Acción requerida:', 'braves-chat') . '</strong> ' .
+                        __('Para que el chat funcione, necesitas configurar la <strong>URL del webhook</strong> en la página de ajustes.', 'braves-chat'),
                         'warning'
                     );
                     ?>
@@ -79,10 +79,10 @@ $option_prefix = 'wland_chat_';
 
                 <!-- Success Notice -->
                 <?php if ($settings_updated): ?>
-                <div class="wland-section">
+                <div class="braves-section">
                     <?php
                     Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'wland-chat'),
+                        __('Configuración guardada correctamente.', 'braves-chat'),
                         'success'
                     );
                     ?>
@@ -92,22 +92,23 @@ $option_prefix = 'wland_chat_';
                 <!-- Settings Form -->
                 <form action="options.php" method="post">
                     <?php
-                    settings_fields('wland_chat_settings');
+                    settings_fields('braves_chat_settings');
                     // Preservar opciones no mostradas en este formulario
-                    \WlandChat\Settings::get_instance()->render_hidden_fields(array(
+                    \BravesChat\Settings::get_instance()->render_hidden_fields(array(
                         'global_enable',
                         'webhook_url',
-                        'n8n_auth_token'
+                        'n8n_auth_token',
+                        'excluded_pages'
                     ));
                     ?>
 
                     <!-- Configuración General Section -->
-                    <div class="wland-section">
-                        <h2 class="wland-section__title">
-                            <?php _e('Configuración General', 'wland-chat'); ?>
+                    <div class="braves-section">
+                        <h2 class="braves-section__title">
+                            <?php _e('Configuración General', 'braves-chat'); ?>
                         </h2>
 
-                        <div class="wland-card-grid wland-card-grid--2-cols">
+                        <div class="braves-card-grid braves-card-grid--2-cols">
 
                             <!-- Card: Mostrar en toda la web -->
                             <?php
@@ -115,26 +116,26 @@ $option_prefix = 'wland_chat_';
 
                             ob_start();
                             ?>
-                            <label class="wland-toggle-wrapper">
+                            <label class="braves-toggle-wrapper">
                                 <input type="checkbox"
                                        id="<?php echo esc_attr($option_prefix . 'global_enable'); ?>"
                                        name="<?php echo esc_attr($option_prefix . 'global_enable'); ?>"
                                        value="1"
                                        <?php checked(1, $global_enable); ?>
-                                       class="wland-toggle-input">
-                                <span class="wland-toggle-slider"></span>
+                                       class="braves-toggle-input">
+                                <span class="braves-toggle-slider"></span>
                             </label>
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mostrar el chat en todas las páginas del sitio web', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Mostrar el chat en todas las páginas del sitio web', 'braves-chat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Mostrar en toda la web', 'wland-chat'),
-                                'description' => __('Habilita el chat globalmente en todas las páginas del sitio web.', 'wland-chat'),
+                                'title' => __('Mostrar en toda la web', 'braves-chat'),
+                                'description' => __('Habilita el chat globalmente en todas las páginas del sitio web.', 'braves-chat'),
                                 'content' => $toggle_content,
-                                'custom_class' => 'wland-card--full-width',
+                                'custom_class' => 'braves-card--full-width',
                             ));
                             ?>
 
@@ -148,18 +149,18 @@ $option_prefix = 'wland_chat_';
                                    id="<?php echo esc_attr($option_prefix . 'webhook_url'); ?>"
                                    name="<?php echo esc_attr($option_prefix . 'webhook_url'); ?>"
                                    value="<?php echo esc_attr($webhook_url); ?>"
-                                   class="wland-input"
+                                   class="braves-input"
                                    style="width: 100%;"
                                    placeholder="https://flow.braveslab.com/webhook/...">
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('URL del webhook de N8N para procesar los mensajes del chat.', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('URL del webhook de N8N para procesar los mensajes del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $webhook_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('URL del Webhook', 'wland-chat'),
-                                'description' => __('URL del endpoint de N8N donde se procesarán los mensajes.', 'wland-chat'),
+                                'title' => __('URL del Webhook', 'braves-chat'),
+                                'description' => __('URL del endpoint de N8N donde se procesarán los mensajes.', 'braves-chat'),
                                 'content' => $webhook_content,
                             ));
                             ?>
@@ -174,19 +175,19 @@ $option_prefix = 'wland_chat_';
                                    id="<?php echo esc_attr($option_prefix . 'n8n_auth_token'); ?>"
                                    name="<?php echo esc_attr($option_prefix . 'n8n_auth_token'); ?>"
                                    value="<?php echo esc_attr($n8n_token); ?>"
-                                   class="wland-input"
+                                   class="braves-input"
                                    style="width: 100%;"
                                    autocomplete="new-password"
                                    placeholder="••••••••••••••••">
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Token secreto para autenticar las peticiones al webhook (Header X-N8N-Auth). Déjalo vacío si no usas autenticación.', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Token secreto para autenticar las peticiones al webhook (Header X-N8N-Auth). Déjalo vacío si no usas autenticación.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $token_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Token de Autenticación N8N', 'wland-chat'),
-                                'description' => __('Token de seguridad para verificar las peticiones al webhook.', 'wland-chat'),
+                                'title' => __('Token de Autenticación N8N', 'braves-chat'),
+                                'description' => __('Token de seguridad para verificar las peticiones al webhook.', 'braves-chat'),
                                 'content' => $token_content,
                             ));
                             ?>
@@ -202,7 +203,7 @@ $option_prefix = 'wland_chat_';
                                     id="<?php echo esc_attr($option_prefix . 'excluded_pages'); ?>"
                                     multiple
                                     size="8"
-                                    class="wland-select"
+                                    class="braves-select"
                                     style="width: 100%; height: auto;">
                                 <?php foreach ($all_pages as $page): ?>
                                     <option value="<?php echo esc_attr($page->ID); ?>"
@@ -211,29 +212,39 @@ $option_prefix = 'wland_chat_';
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braves-chat'); ?>
                             </p>
+                            <div class="braves-button-group" style="margin-top: 10px;">
+                                <button type="button" id="braves-select-all-pages" class="button button-secondary button-small">
+                                    <?php _e('Seleccionar todas', 'braves-chat'); ?>
+                                </button>
+                                <button type="button" id="braves-deselect-all-pages" class="button button-secondary button-small">
+                                    <?php _e('Deseleccionar todas', 'braves-chat'); ?>
+                                </button>
+                            </div>
                             <?php
                             $pages_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Páginas Excluidas', 'wland-chat'),
-                                'description' => __('Selecciona las páginas donde NO quieres que aparezca el chat.', 'wland-chat'),
+                                'title' => __('Páginas Excluidas', 'braves-chat'),
+                                'description' => __('Selecciona las páginas donde NO quieres que aparezca el chat.', 'braves-chat'),
                                 'content' => $pages_content,
-                                'custom_class' => 'wland-card--full-width',
+                                'custom_class' => 'braves-card--full-width',
                             ));
                             ?>
+
+
 
                         </div>
                     </div>
 
                     <!-- Save Button -->
-                    <div class="wland-section wland-section--actions">
-                        <div class="wland-button-group">
+                    <div class="braves-section braves-section--actions">
+                        <div class="braves-button-group">
                             <?php submit_button(
-                                __('Guardar', 'wland-chat'),
-                                'primary wland-button wland-button--primary',
+                                __('Guardar', 'braves-chat'),
+                                'primary braves-button braves-button--primary',
                                 'submit',
                                 false
                             ); ?>
@@ -242,9 +253,9 @@ $option_prefix = 'wland_chat_';
 
                 </form>
 
-            </div><!-- .wland-admin-content -->
+            </div><!-- .braves-admin-content -->
 
-        </div><!-- .wland-admin-body -->
+        </div><!-- .braves-admin-body -->
 
-    </div><!-- .wland-admin-container -->
+    </div><!-- .braves-admin-container -->
 </div><!-- .wrap -->

@@ -1,7 +1,7 @@
 /**
- * Estilos para el chat en modo Modal - Wland Chat iA
+ * Estilos para el chat en modo Modal - Braves Chat iA
  * Version: 1.0.0
- * @package WlandChat
+ * @package BravesChat
  * CORREGIDO: Display del chat window
  */
 
@@ -44,7 +44,8 @@ body #braveslab-chat-container {
 /* ============================================
    BOTÓN DE TOGGLE (BURBUJA)
    ============================================ */
-body #braveslab-chat-container #chat-toggle {
+/* NOTA: Estos estilos NO se aplican al skin Braves, que tiene su propio diseño */
+body #braveslab-chat-container:not(.braves-skin-braves) #chat-toggle {
     position: relative;
     width: 60px;
     height: 60px;
@@ -68,7 +69,7 @@ body #braveslab-chat-container #chat-toggle {
     overflow: hidden;
 }
 
-body #braveslab-chat-container #chat-toggle:hover {
+body #braveslab-chat-container:not(.braves-skin-braves) #chat-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 25px rgba(1, 183, 175, 0.6);
 }
@@ -76,7 +77,7 @@ body #braveslab-chat-container #chat-toggle:hover {
 /* ============================================
    LOTTIE ANIMATION - ESTADO CERRADO
    ============================================ */
-body #braveslab-chat-container.chat-closed #chat-toggle #chat-lottie {
+body #braveslab-chat-container.chat-closed:not(.braves-skin-braves) #chat-toggle #chat-lottie {
     display: block;
     width: 40px;
     height: 40px;
@@ -84,7 +85,7 @@ body #braveslab-chat-container.chat-closed #chat-toggle #chat-lottie {
     transition: opacity 0.2s ease;
 }
 
-body #braveslab-chat-container.chat-closed #chat-toggle #chat-lottie svg {
+body #braveslab-chat-container.chat-closed:not(.braves-skin-braves) #chat-toggle #chat-lottie svg {
     width: 270%;
     height: 100%;
     transform: translate3d(-10px, 0px, 0px);
@@ -93,15 +94,15 @@ body #braveslab-chat-container.chat-closed #chat-toggle #chat-lottie svg {
 /* ============================================
    ICONO X - ESTADO ABIERTO
    ============================================ */
-body #braveslab-chat-container.chat-closed #chat-toggle #close-icon {
+body #braveslab-chat-container.chat-closed:not(.braves-skin-braves) #chat-toggle #close-icon {
     display: none !important;
 }
 
-body #braveslab-chat-container.chat-open #chat-toggle #chat-lottie {
+body #braveslab-chat-container.chat-open:not(.braves-skin-braves) #chat-toggle #chat-lottie {
     display: none !important;
 }
 
-body #braveslab-chat-container.chat-open #chat-toggle #close-icon {
+body #braveslab-chat-container.chat-open:not(.braves-skin-braves) #chat-toggle #close-icon {
     display: block !important;
     position: absolute;
     top: 50%;
@@ -125,14 +126,20 @@ body #braveslab-chat-container #chat-window {
     background: white;
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(10, 10, 10, 0.15);
-    display: flex; /* CAMBIADO: Era display: none */
+    display: flex;
+    /* CAMBIADO: Era display: none */
     flex-direction: column;
     overflow: hidden;
-    opacity: 0; /* NUEVO: Usamos opacity en vez de display */
-    visibility: hidden; /* NUEVO: Ocultamos con visibility */
-    transform: translateY(20px); /* NUEVO: Animación inicial */
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; /* NUEVO */
-    pointer-events: none; /* NUEVO: Evita clicks cuando está oculto */
+    opacity: 0;
+    /* NUEVO: Usamos opacity en vez de display */
+    visibility: hidden;
+    /* NUEVO: Ocultamos con visibility */
+    transform: translateY(20px);
+    /* NUEVO: Animación inicial */
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    /* ACTUALIZADO: Añadida transición de width y height para contracción suave */
+    pointer-events: none;
+    /* NUEVO: Evita clicks cuando está oculto */
 }
 
 /* Estado ABIERTO - NUEVO ⭐ */
@@ -141,6 +148,13 @@ body #braveslab-chat-container.chat-open #chat-window {
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+}
+
+/* Estado EXPANDIDO - NUEVO ⭐ */
+body #braveslab-chat-container.braves-expanded #chat-window {
+    width: 600px;
+    height: 776px;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 /* Estado CERRADO - NUEVO ⭐ */
@@ -157,6 +171,7 @@ body #braveslab-chat-container.chat-closed #chat-window {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -165,7 +180,7 @@ body #braveslab-chat-container.chat-closed #chat-window {
 
 /* Header del chat */
 body #braveslab-chat-container #chat-header {
-    background: linear-gradient(135deg, #01B7AF 0%, #5DD5C7 100%);
+    background: #141414;
     color: white;
     padding: 20px;
     display: flex;
@@ -245,6 +260,7 @@ body #braveslab-chat-container .message {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -297,7 +313,7 @@ body #braveslab-chat-container #chat-input-container {
     border-top: 1px solid #CEF2EF;
     display: flex;
     gap: 10px;
-    align-items: center;
+    align-items: flex-end;
 }
 
 body #braveslab-chat-container #chat-input {
@@ -307,12 +323,18 @@ body #braveslab-chat-container #chat-input {
     padding: 12px 16px;
     font-size: 14px;
     outline: none;
-    transition: all 0.2s ease;
+    transition: height 0.15s ease-out;
     color: #242424;
     background: white;
     box-shadow: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.5;
+    resize: none;
+    overflow-y: auto;
+    min-height: 44px;
+    max-height: 150px;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
 body #braveslab-chat-container #chat-input:focus {
@@ -403,9 +425,13 @@ body #braveslab-chat-container .typing-dot:nth-child(3) {
 }
 
 @keyframes typing {
-    0%, 60%, 100% {
+
+    0%,
+    60%,
+    100% {
         transform: translateY(0);
     }
+
     30% {
         transform: translateY(-10px);
     }
@@ -415,12 +441,14 @@ body #braveslab-chat-container .typing-dot:nth-child(3) {
    RESPONSIVE
    ============================================ */
 @media (max-width: 480px) {
-    body #braveslab-chat-container #chat-window {
+
+    body #braveslab-chat-container #chat-window,
+    body #braveslab-chat-container.braves-expanded #chat-window {
         width: calc(100vw - 40px);
         right: -10px;
         height: calc(100vh - 140px);
     }
-    
+
     .braveslab-chat-widget-container.position-bottom-right #braveslab-chat-container,
     .braveslab-chat-widget-container.position-bottom-left #braveslab-chat-container {
         bottom: 20px;
@@ -444,4 +472,129 @@ body #braveslab-chat-container button {
 body #braveslab-chat-container input {
     appearance: none;
     -webkit-appearance: none;
+}
+
+/* Ocultar elementos de burbuja Braves cuando el chat está abierto */
+body #braveslab-chat-container.chat-open #chat-toggle .braves-bubble-wrapper {
+    display: none !important;
+}
+
+body #braveslab-chat-container.chat-open #chat-toggle #chat-bubble-image {
+    display: none !important;
+}
+
+/* ============================================
+   HEADER STATUS TEXT & ANIMATION
+   ============================================ */
+body #braveslab-chat-container .chat-header-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body #braveslab-chat-container .chat-header-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+body #braveslab-chat-container .chat-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: white;
+    margin: 0;
+}
+
+body #braveslab-chat-container .chat-status-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 2px;
+    animation: slideOutText 0.8s ease-out forwards;
+    transform-origin: left;
+    max-width: 0;
+    opacity: 0;
+}
+
+@keyframes slideOutText {
+    0% {
+        max-width: 0;
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    100% {
+        max-width: 250px;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   STREAMING VISUAL - CURSOR PARPADEANTE
+   ============================================ */
+body #braveslab-chat-container .typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #01B7AF;
+    animation: heartbeat 2s ease-in-out infinite;
+    /* Efecto latido de corazón */
+    margin-left: 4px;
+    margin-bottom: 2px;
+    vertical-align: middle;
+}
+
+/* Animación tipo latido de corazón: "tun-tun" (pausa) "tun-tun" */
+@keyframes heartbeat {
+    0% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    /* Primer latido */
+    10% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    20% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    /* Segundo latido */
+    30% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    40% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+
+    /* Pausa larga */
+    100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+}
+
+
+/* Smooth scrolling durante streaming */
+body #braveslab-chat-container #chat-messages {
+    scroll-behavior: smooth;
+}
+
+/* Input deshabilitado durante streaming */
+body #braveslab-chat-container #chat-input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #f5f5f5;
 }

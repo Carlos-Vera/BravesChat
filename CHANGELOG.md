@@ -1,12 +1,12 @@
 # Changelog
 
-Registro de cambios del plugin **Wland Chat iA**.
+Registro de cambios del plugin **BravesChat iA**.
 
 Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning](https://semver.org/).
 
 ## 📋 Índice de Versiones
 
-- [1.2.4](#124---2025-01-17) - **Actual** - Tooltip personalizable y color de icono actualizado
+- [1.2.4](#124---2025-01-17) - **Actual** - Sistema completo reestructurado
 - [1.2.3](#123---2025-10-26) - Fix wp.i18n y mejora de compatibilidad JS
 - [1.2.2](#122---2025-10-25) - Corrección crítica de inputs en formularios
 - [1.2.1](#121---2025-10-24) - Rediseño completo del admin con Bentō
@@ -15,6 +15,40 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.0.0] - 2026-02-14
+
+### 🚀 Lanzamiento Mayor - BravesChat iA 2.0
+- **MAJOR**: Sistema reestructurado completo adoptando el nombre de "**BravesChat iA**"
+- **MAJOR**: Refactorización profunda de namespaces a `BravesChat\` y `BravesChat\Admin`
+- **MAJOR**: Actualización de estructura de directorios y nombres de archivos principales
+
+### ✨ Nuevas Funcionalidades UI/UX
+- **ADDED**: Funcionalidad de **expansión del chat** (botón de maximizar)
+- **ADDED**: **Auto-crecimiento** del área de texto (textarea) al escribir múltiples líneas
+- **ADDED**: Enlace directo a la sección "About" desde la tarjeta de versión en el Dashboard
+- **ADDED**: **Estado Minimizado** de la burbuja tras interacción (pill shape con solo imagen e icono)
+
+### 🎨 Mejoras Visuales
+- **IMPROVED**: Unificación de identidad visual con colores corporativos "**Braves Primary**"
+- **IMPROVED**: Corrección de estilos en burbujas de chat (texto cortado, borders)
+- **IMPROVED**: Actualización de tooltips predeterminados ("Habla con nuestro asistente IA")
+- **IMPROVED**: Icono de enviar mensaje actualizado a diseño personalizado (blanco)
+- **IMPROVED**: Títulos de menú admin actualizados a "**BravesChat iA**"
+
+### 🐛 Correcciones y Estabilidad
+- **FIXED**: Lógica del botón de enviar (estado habilitado/deshabilitado)
+- **FIXED**: Guardado de configuración en sección "Páginas Excluidas"
+- **FIXED**: Depuración de salida JSON en integración con n8n
+- **FIXED**: Renderizado de campos ocultos en formularios de configuración (`render_hidden_fields`)
+
+### 📋 Archivos Clave Modificados
+- `braves_chat.php` - Definición de constantes y versión
+- `includes/admin/class_admin_controller.php` - Títulos de menús y encolado de assets
+- `assets/css/skins/braves.css` - Estilos visuales del chat
+- `assets/js/braves_chat_block_modal.js` - Lógica de expansión y textarea
 
 ---
 
@@ -360,7 +394,7 @@ Correcciones de bugs y mejoras menores.
 
 ## Enlaces
 
-- **Repositorio**: [GitHub - Wland Chat iA](https://github.com/Carlos-Vera/Wland-Chat-iA)
+- **Repositorio**: [GitHub - BravesChat iA](https://github.com/Carlos-Vera/braveschat)
 - **Documentación**: Ver [README.md](README.md) para guía de usuario
 - **Documentación Técnica**: Ver [CLAUDE.md](CLAUDE.md) para desarrollo
 - **Soporte**: carlos@braveslab.com
@@ -368,6 +402,6 @@ Correcciones de bugs y mejoras menores.
 
 ---
 
-**Wland Chat iA** - Integrando la inteligencia artificial en WordPress de forma profesional.
+**BravesChat iA** - Integrando la inteligencia artificial en WordPress de forma profesional.
 
 © 2025 Braves Lab LLC. Todos los derechos reservados.

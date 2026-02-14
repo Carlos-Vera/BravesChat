@@ -4,17 +4,23 @@
  *
  * Funciones auxiliares estáticas para renderizado rápido de componentes
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.2.0
- * @version 1.2.0
+ * @version 1.2.2
  */
 
-namespace WlandChat\Admin;
+namespace BravesChat\Admin;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
+
+use function defined;
+use function esc_attr;
+use function sanitize_html_class;
+use function wp_kses_post;
+use function get_option;
 
 /**
  * Clase Template_Helpers
@@ -145,11 +151,11 @@ class Template_Helpers {
      * @return void
      */
     public static function notice($message, $type = 'info') {
-        $notice_class = 'wland-notice wland-notice--' . sanitize_html_class($type);
+        $notice_class = 'braves-notice braves-notice--' . sanitize_html_class($type);
 
         ?>
         <div class="<?php echo esc_attr($notice_class); ?>">
-            <div class="wland-notice__content">
+            <div class="braves-notice__content">
                 <?php echo wp_kses_post($message); ?>
             </div>
         </div>
@@ -163,14 +169,14 @@ class Template_Helpers {
      * @return array Estado de configuración con claves: is_configured, webhook_url, global_enabled, display_mode
      */
     public static function get_config_status() {
-        $webhook_url = get_option('wland_chat_webhook_url');
+        $webhook_url = get_option('braves_chat_webhook_url');
         $is_configured = !empty($webhook_url);
 
         return array(
             'is_configured' => $is_configured,
             'webhook_url' => $webhook_url,
-            'global_enabled' => get_option('wland_chat_global_enable', false),
-            'display_mode' => get_option('wland_chat_display_mode', 'modal'),
+            'global_enabled' => get_option('braves_chat_global_enable', false),
+            'display_mode' => get_option('braves_chat_display_mode', 'modal'),
         );
     }
 }

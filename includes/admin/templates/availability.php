@@ -4,14 +4,14 @@
  *
  * Página de Horarios con diseño Bentō
  *
- * @package WlandChat
+ * @package BravesChat
  * @subpackage Admin\Templates
  * @since 1.2.1
  */
 
-use WlandChat\Admin\Admin_Header;
-use WlandChat\Admin\Admin_Sidebar;
-use WlandChat\Admin\Template_Helpers;
+use BravesChat\Admin\Admin_Header;
+use BravesChat\Admin\Admin_Sidebar;
+use BravesChat\Admin\Template_Helpers;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'wland-chat'));
+    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
 // Obtener instancias de componentes
@@ -33,11 +33,11 @@ $config_status = Template_Helpers::get_config_status();
 $settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
 
 // Prefijo de opciones
-$option_prefix = 'wland_chat_';
+$option_prefix = 'braves_chat_';
 ?>
 
-<div class="wrap wland-admin-wrap">
-    <div class="wland-admin-container">
+<div class="wrap braves-admin-wrap">
+    <div class="braves-admin-container">
 
         <?php
         // Renderizar header
@@ -47,30 +47,30 @@ $option_prefix = 'wland_chat_';
         ));
         ?>
 
-        <div class="wland-admin-body">
+        <div class="braves-admin-body">
 
             <?php
             // Renderizar sidebar
             $sidebar->render($current_page);
             ?>
 
-            <div class="wland-admin-content">
+            <div class="braves-admin-content">
 
                 <!-- Page Header -->
-                <div class="wland-page-header">
-                    <h1 class="wland-page-title"><?php _e('Horarios', 'wland-chat'); ?></h1>
-                    <p class="wland-page-description">
-                        <?php _e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'wland-chat'); ?>
+                <div class="braves-page-header">
+                    <h1 class="braves-page-title"><?php _e('<strong>Horarios</strong>', 'braves-chat'); ?></h1>
+                    <p class="braves-page-description">
+                        <?php _e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'braves-chat'); ?>
                     </p>
                 </div>
 
                 <!-- Configuration Status Section -->
                 <?php if (!$config_status['is_configured']): ?>
-                <div class="wland-section wland-section--warning">
+                <div class="braves-section braves-section--warning">
                     <?php
                     Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'wland-chat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'wland-chat'),
+                        '<strong>' . __('Acción requerida:', 'braves-chat') . '</strong> ' .
+                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braves-chat'),
                         'warning'
                     );
                     ?>
@@ -79,10 +79,10 @@ $option_prefix = 'wland_chat_';
 
                 <!-- Success Notice -->
                 <?php if ($settings_updated): ?>
-                <div class="wland-section">
+                <div class="braves-section">
                     <?php
                     Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'wland-chat'),
+                        __('Configuración guardada correctamente.', 'braves-chat'),
                         'success'
                     );
                     ?>
@@ -92,10 +92,9 @@ $option_prefix = 'wland_chat_';
                 <!-- Availability Form -->
                 <form action="options.php" method="post">
                     <?php
-                    settings_fields('wland_chat_settings');
+                    settings_fields('braves_chat_settings');
                     // Preservar opciones no mostradas en este formulario
-                    \WlandChat\Settings::get_instance()->render_hidden_fields(array(
-                        'excluded_pages',
+                    \BravesChat\Settings::get_instance()->render_hidden_fields(array(
                         'availability_enabled',
                         'availability_start',
                         'availability_end',
@@ -105,12 +104,12 @@ $option_prefix = 'wland_chat_';
                     ?>
 
                     <!-- Horarios Section -->
-                    <div class="wland-section">
-                        <h2 class="wland-section__title">
-                            <?php _e('Configuración de Horarios', 'wland-chat'); ?>
+                    <div class="braves-section">
+                        <h2 class="braves-section__title">
+                            <?php _e('Configuración de Horarios', 'braves-chat'); ?>
                         </h2>
 
-                        <div class="wland-card-grid wland-card-grid--2-cols">
+                        <div class="braves-card-grid braves-card-grid--2-cols">
 
                             <!-- Card: Habilitar Horarios -->
                             <?php
@@ -118,26 +117,26 @@ $option_prefix = 'wland_chat_';
 
                             ob_start();
                             ?>
-                            <label class="wland-toggle-wrapper">
+                            <label class="braves-toggle-wrapper">
                                 <input type="checkbox"
                                        id="<?php echo esc_attr($option_prefix . 'availability_enabled'); ?>"
                                        name="<?php echo esc_attr($option_prefix . 'availability_enabled'); ?>"
                                        value="1"
                                        <?php checked(1, $availability_enabled); ?>
-                                       class="wland-toggle-input">
-                                <span class="wland-toggle-slider"></span>
+                                       class="braves-toggle-input">
+                                <span class="braves-toggle-slider"></span>
                             </label>
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Activar restricción por horarios de atención', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Activar restricción por horarios de atención', 'braves-chat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Habilitar Horarios', 'wland-chat'),
-                                'description' => __('Activa las restricciones de horario para el chat.', 'wland-chat'),
+                                'title' => __('Habilitar Horarios', 'braves-chat'),
+                                'description' => __('Activa las restricciones de horario para el chat.', 'braves-chat'),
                                 'content' => $toggle_content,
-                                'custom_class' => 'wland-card--full-width',
+                                'custom_class' => 'braves-card--full-width',
                             ));
                             ?>
 
@@ -150,7 +149,7 @@ $option_prefix = 'wland_chat_';
                             ?>
                             <select name="<?php echo esc_attr($option_prefix . 'availability_timezone'); ?>"
                                     id="<?php echo esc_attr($option_prefix . 'availability_timezone'); ?>"
-                                    class="wland-select"
+                                    class="braves-select"
                                     style="width: 100%;">
                                 <?php foreach ($timezones as $timezone): ?>
                                     <option value="<?php echo esc_attr($timezone); ?>"
@@ -159,17 +158,17 @@ $option_prefix = 'wland_chat_';
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Zona horaria de referencia para los horarios configurados.', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Zona horaria de referencia para los horarios configurados.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $timezone_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Zona Horaria', 'wland-chat'),
-                                'description' => __('Zona horaria de referencia para el horario.', 'wland-chat'),
+                                'title' => __('Zona Horaria', 'braves-chat'),
+                                'description' => __('Zona horaria de referencia para el horario.', 'braves-chat'),
                                 'content' => $timezone_content,
-                                'custom_class' => 'wland-card--full-width',
+                                'custom_class' => 'braves-card--full-width',
                             ));
                             ?>
 
@@ -183,17 +182,17 @@ $option_prefix = 'wland_chat_';
                                    id="<?php echo esc_attr($option_prefix . 'availability_start'); ?>"
                                    name="<?php echo esc_attr($option_prefix . 'availability_start'); ?>"
                                    value="<?php echo esc_attr($availability_start); ?>"
-                                   class="wland-input"
+                                   class="braves-input"
                                    style="width: 100%;">
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Hora de inicio del horario de atención (formato 24h).', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Hora de inicio del horario de atención (formato 24h).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $start_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Hora de Inicio', 'wland-chat'),
-                                'description' => __('Hora en que el chat comienza a estar disponible.', 'wland-chat'),
+                                'title' => __('Hora de Inicio', 'braves-chat'),
+                                'description' => __('Hora en que el chat comienza a estar disponible.', 'braves-chat'),
                                 'content' => $start_content,
                             ));
                             ?>
@@ -208,44 +207,44 @@ $option_prefix = 'wland_chat_';
                                    id="<?php echo esc_attr($option_prefix . 'availability_end'); ?>"
                                    name="<?php echo esc_attr($option_prefix . 'availability_end'); ?>"
                                    value="<?php echo esc_attr($availability_end); ?>"
-                                   class="wland-input"
+                                   class="braves-input"
                                    style="width: 100%;">
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Hora de fin del horario de atención (formato 24h).', 'wland-chat'); ?>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Hora de fin del horario de atención (formato 24h).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $end_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Hora de Fin', 'wland-chat'),
-                                'description' => __('Hora en que el chat deja de estar disponible.', 'wland-chat'),
+                                'title' => __('Hora de Fin', 'braves-chat'),
+                                'description' => __('Hora en que el chat deja de estar disponible.', 'braves-chat'),
                                 'content' => $end_content,
                             ));
                             ?>
 
                             <!-- Card: Mensaje Fuera de Horario -->
                             <?php
-                            $availability_message = get_option($option_prefix . 'availability_message', __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'wland-chat'));
+                            $availability_message = get_option($option_prefix . 'availability_message', __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'));
 
                             ob_start();
                             ?>
                             <textarea id="<?php echo esc_attr($option_prefix . 'availability_message'); ?>"
                                       name="<?php echo esc_attr($option_prefix . 'availability_message'); ?>"
                                       rows="4"
-                                      class="wland-textarea"
+                                      class="braves-textarea"
                                       style="width: 100%;"
-                                      placeholder="<?php echo esc_attr(__('Mensaje fuera de horario de atención', 'wland-chat')); ?>"><?php echo esc_textarea($availability_message); ?></textarea>
-                            <p class="wland-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'wland-chat'); ?>
+                                      placeholder="<?php echo esc_attr(__('Mensaje fuera de horario de atención', 'braves-chat')); ?>"><?php echo esc_textarea($availability_message); ?></textarea>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $message_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Mensaje Fuera de Horario', 'wland-chat'),
-                                'description' => __('Texto que verán los usuarios fuera del horario de atención.', 'wland-chat'),
+                                'title' => __('Mensaje Fuera de Horario', 'braves-chat'),
+                                'description' => __('Texto que verán los usuarios fuera del horario de atención.', 'braves-chat'),
                                 'content' => $message_content,
-                                'custom_class' => 'wland-card--full-width',
+                                'custom_class' => 'braves-card--full-width',
                             ));
                             ?>
 
@@ -253,11 +252,11 @@ $option_prefix = 'wland_chat_';
                     </div>
 
                     <!-- Save Button -->
-                    <div class="wland-section wland-section--actions">
-                        <div class="wland-button-group">
+                    <div class="braves-section braves-section--actions">
+                        <div class="braves-button-group">
                             <?php submit_button(
-                                __('Guardar', 'wland-chat'),
-                                'primary wland-button wland-button--primary',
+                                __('Guardar', 'braves-chat'),
+                                'primary braves-button braves-button--primary',
                                 'submit',
                                 false
                             ); ?>
@@ -266,9 +265,9 @@ $option_prefix = 'wland_chat_';
 
                 </form>
 
-            </div><!-- .wland-admin-content -->
+            </div><!-- .braves-admin-content -->
 
-        </div><!-- .wland-admin-body -->
+        </div><!-- .braves-admin-body -->
 
-    </div><!-- .wland-admin-container -->
+    </div><!-- .braves-admin-container -->
 </div><!-- .wrap -->

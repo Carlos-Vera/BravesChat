@@ -1,34 +1,34 @@
 /**
- * Wland Chat Fingerprinting System
+ * BravesChat Fingerprinting System
  *
  * Sistema de fingerprinting del navegador para identificación única de usuarios.
  * Incluye fallback a localStorage, detección de cambios significativos y compliance GDPR.
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.1.0
  */
 
 /**
- * Clase WlandFingerprint
+ * Clase BravesFingerprint
  *
  * Genera fingerprints únicos del navegador combinando múltiples características del dispositivo.
  * Implementa detección de cambios, fallback a localStorage y banner GDPR.
  */
-class WlandFingerprint {
+class BravesFingerprint {
     /**
      * Constructor
      *
      * Inicializa el sistema de fingerprinting y verifica configuración GDPR.
      */
     constructor() {
-        this.cookie_name = 'wland_chat_session';
+        this.cookie_name = 'braves_chat_session';
         this.cookie_duration = 365; // días
-        this.storage_key = 'wland_chat_session_backup';
-        this.fingerprint_key = 'wland_chat_fingerprint';
-        this.gdpr_consent_key = 'wland_chat_gdpr_consent';
+        this.storage_key = 'braves_chat_session_backup';
+        this.fingerprint_key = 'braves_chat_fingerprint';
+        this.gdpr_consent_key = 'braves_chat_gdpr_consent';
 
         // Configuración GDPR (viene de PHP via wp_localize_script)
-        this.gdpr_config = typeof wlandGDPRConfig !== 'undefined' ? wlandGDPRConfig : {
+        this.gdpr_config = typeof bravesGDPRConfig !== 'undefined' ? bravesGDPRConfig : {
             enabled: false,
             message: '',
             accept_text: 'Aceptar',
@@ -81,24 +81,138 @@ class WlandFingerprint {
     /**
      * Mostrar banner GDPR
      *
-     * Crea y muestra un banner modal para solicitar consentimiento de cookies.
+     * Crea y muestra un banner/modal para solicitar consentimiento de cookies.
+     * Usa modal centrado para skin Braves, banner inferior para otros skins.
      *
      * @return {void}
      */
     show_gdpr_banner() {
         // Verificar si ya existe el banner
-        if (document.getElementById('wland-gdpr-banner')) {
+        if (document.getElementById('braves-gdpr-banner')) {
             return;
         }
 
-        // Crear estructura del banner
+        // Detectar el skin actual
+        const chatContainer = document.getElementById('braveslab-chat-container');
+        const isBraves = chatContainer && chatContainer.classList.contains('braves-skin-braves');
+
+        if (isBraves) {
+            this.show_braves_modal();
+        } else {
+            this.show_default_banner();
+        }
+    }
+
+    /**
+     * Mostrar modal GDPR estilo Braves
+     *
+     * Crea un modal centrado con overlay para el skin Braves.
+     *
+     * @return {void}
+     */
+    show_braves_modal() {
+        // Crear overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'braves-gdpr-overlay';
+        overlay.id = 'braves-gdpr-overlay';
+
+        // Crear modal
+        const modal = document.createElement('div');
+        modal.id = 'braves-gdpr-banner';
+        modal.className = 'braves-gdpr-banner';
+
+        modal.innerHTML = `
+            <h3 class="braves-gdpr-title">Antes de comenzar</h3>
+            <ul class="braves-gdpr-conditions">
+                <li>Usaremos cookies para mejorar su experiencia</li>
+                <li>Su información se procesará de forma segura</li>
+                <li>Puede revisar nuestra <a href="#" class="braves-gdpr-privacy-link">política de privacidad</a></li>
+            </ul>
+            <div class="braves-gdpr-buttons">
+                <button class="braves-gdpr-accept" id="braves-gdpr-accept-btn">
+                    Estoy de acuerdo
+                </button>
+                <button class="braves-gdpr-reject" id="braves-gdpr-reject-btn">
+                    Cerrar
+                </button>
+            </div>
+        `;
+
+        // Agregar al body
+        document.body.appendChild(overlay);
+        document.body.appendChild(modal);
+
+        // Activar animaciones
+        setTimeout(() => {
+            overlay.classList.add('active');
+            modal.classList.add('active');
+        }, 10);
+
+        // Event listeners
+        const acceptBtn = document.getElementById('braves-gdpr-accept-btn');
+        const rejectBtn = document.getElementById('braves-gdpr-reject-btn');
+
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', async () => {
+                this.save_gdpr_consent();
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+
+                setTimeout(() => {
+                    overlay.remove();
+                    modal.remove();
+                }, 300);
+
+                // Crear sesión y abrir chat
+                await this.get_or_create_session();
+
+                // Trigger para abrir el chat
+                const chatToggle = document.getElementById('chat-toggle');
+                if (chatToggle) {
+                    chatToggle.click();
+                }
+            });
+        }
+
+        if (rejectBtn) {
+            rejectBtn.addEventListener('click', () => {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+
+                setTimeout(() => {
+                    overlay.remove();
+                    modal.remove();
+                }, 300);
+            });
+        }
+
+        // Cerrar al hacer clic en el overlay
+        overlay.addEventListener('click', () => {
+            overlay.classList.remove('active');
+            modal.classList.remove('active');
+
+            setTimeout(() => {
+                overlay.remove();
+                modal.remove();
+            }, 300);
+        });
+    }
+
+    /**
+     * Mostrar banner GDPR predeterminado
+     *
+     * Crea un banner inferior para skins que no son Braves.
+     *
+     * @return {void}
+     */
+    show_default_banner() {
         const banner = document.createElement('div');
-        banner.id = 'wland-gdpr-banner';
-        banner.className = 'wland-gdpr-banner';
+        banner.id = 'braves-gdpr-banner';
+        banner.className = 'braves-gdpr-banner';
         banner.innerHTML = `
-            <div class="wland-gdpr-content">
-                <p class="wland-gdpr-message">${this.gdpr_config.message}</p>
-                <button class="wland-gdpr-accept" id="wland-gdpr-accept-btn">
+            <div class="braves-gdpr-content">
+                <p class="braves-gdpr-message">${this.gdpr_config.message}</p>
+                <button class="braves-gdpr-accept" id="braves-gdpr-accept-btn">
                     ${this.gdpr_config.accept_text}
                 </button>
             </div>
@@ -122,7 +236,7 @@ class WlandFingerprint {
         document.body.appendChild(banner);
 
         // Event listener para botón de aceptar
-        const accept_btn = document.getElementById('wland-gdpr-accept-btn');
+        const accept_btn = document.getElementById('braves-gdpr-accept-btn');
         if (accept_btn) {
             accept_btn.addEventListener('click', async () => {
                 this.save_gdpr_consent();
@@ -132,6 +246,7 @@ class WlandFingerprint {
             });
         }
     }
+
 
     /**
      * Obtener o crear sesión
@@ -155,7 +270,7 @@ class WlandFingerprint {
         } else {
             // Verificar si el fingerprint ha cambiado significativamente
             if (this.should_regenerate_session()) {
-                console.log('[Wland Fingerprint] Cambios significativos detectados, regenerando sesión');
+                console.log('[BravesFingerprint] Cambios significativos detectados, regenerando sesión');
                 session_id = await this.create_new_session();
             }
         }
@@ -188,7 +303,7 @@ class WlandFingerprint {
         try {
             return localStorage.getItem(this.storage_key);
         } catch (e) {
-            console.error('[Wland Fingerprint] Error accediendo a localStorage:', e);
+            console.error('[BravesFingerprint] Error accediendo a localStorage:', e);
             return null;
         }
     }
@@ -214,7 +329,7 @@ class WlandFingerprint {
         // Guardar fingerprint actual para detectar cambios
         this.save_current_fingerprint(fingerprint);
 
-        console.log('[Wland Fingerprint] Nueva sesión creada:', session_id);
+        console.log('[BravesFingerprint] Nueva sesión creada:', session_id);
 
         return session_id;
     }
@@ -296,7 +411,7 @@ class WlandFingerprint {
             ctx.fillStyle = '#f60';
             ctx.fillRect(125, 1, 62, 20);
             ctx.fillStyle = '#069';
-            ctx.fillText('Wland Chat 🤖', 2, 15);
+            ctx.fillText('BravesChat 🤖', 2, 15);
             ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
             ctx.fillText('Fingerprinting', 4, 17);
 
@@ -369,7 +484,7 @@ class WlandFingerprint {
                 const hash_array = Array.from(new Uint8Array(hash_buffer));
                 return hash_array.map(b => b.toString(16).padStart(2, '0')).join('');
             } catch (e) {
-                console.error('[Wland Fingerprint] Error con Web Crypto API:', e);
+                console.error('[BravesFingerprint] Error con Web Crypto API:', e);
             }
         }
 
@@ -425,7 +540,7 @@ class WlandFingerprint {
         try {
             localStorage.setItem(this.storage_key, session_id);
         } catch (e) {
-            console.error('[Wland Fingerprint] Error guardando en localStorage:', e);
+            console.error('[BravesFingerprint] Error guardando en localStorage:', e);
         }
     }
 
@@ -439,7 +554,7 @@ class WlandFingerprint {
         try {
             localStorage.setItem(this.fingerprint_key, JSON.stringify(fingerprint));
         } catch (e) {
-            console.error('[Wland Fingerprint] Error guardando fingerprint:', e);
+            console.error('[BravesFingerprint] Error guardando fingerprint:', e);
         }
     }
 
@@ -478,7 +593,7 @@ class WlandFingerprint {
             return change_count >= 2;
 
         } catch (e) {
-            console.error('[Wland Fingerprint] Error verificando cambios:', e);
+            console.error('[BravesFingerprint] Error verificando cambios:', e);
             return false;
         }
     }
@@ -511,18 +626,18 @@ class WlandFingerprint {
             localStorage.removeItem(this.fingerprint_key);
             localStorage.removeItem(this.gdpr_consent_key);
         } catch (e) {
-            console.error('[Wland Fingerprint] Error limpiando localStorage:', e);
+            console.error('[BravesFingerprint] Error limpiando localStorage:', e);
         }
 
-        console.log('[Wland Fingerprint] Sesión limpiada');
+        console.log('[BravesFingerprint] Sesión limpiada');
     }
 }
 
 // Inicializar automáticamente cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        window.wlandFingerprint = new WlandFingerprint();
+        window.bravesFingerprint = new BravesFingerprint();
     });
 } else {
-    window.wlandFingerprint = new WlandFingerprint();
+    window.bravesFingerprint = new BravesFingerprint();
 }

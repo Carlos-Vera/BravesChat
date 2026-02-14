@@ -4,12 +4,12 @@
  *
  * Proporciona métodos estáticos para validación, configuración y utilidades
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.0.0
  * @version 1.2.2
  */
 
-namespace WlandChat;
+namespace BravesChat;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -56,7 +56,7 @@ class Helpers {
      * @return bool True si está excluida, false en caso contrario
      */
     public static function is_page_excluded() {
-        $excluded_pages = get_option('wland_chat_excluded_pages', array());
+        $excluded_pages = get_option('braves_chat_excluded_pages', array());
 
         if (empty($excluded_pages) || !is_array($excluded_pages)) {
             return false;
@@ -74,7 +74,7 @@ class Helpers {
      * @return bool True si los horarios están habilitados
      */
     public static function is_availability_enabled() {
-        return (bool) get_option('wland_chat_availability_enabled', false);
+        return (bool) get_option('braves_chat_availability_enabled', false);
     }
 
     /**
@@ -87,9 +87,9 @@ class Helpers {
      * @return bool True si está dentro del horario, false en caso contrario
      */
     public static function is_within_availability_hours() {
-        $start_time = get_option('wland_chat_availability_start', '09:00');
-        $end_time = get_option('wland_chat_availability_end', '18:00');
-        $timezone = get_option('wland_chat_availability_timezone', 'Europe/Madrid');
+        $start_time = get_option('braves_chat_availability_start', '09:00');
+        $end_time = get_option('braves_chat_availability_end', '18:00');
+        $timezone = get_option('braves_chat_availability_timezone', 'Europe/Madrid');
         
         try {
             $tz = new \DateTimeZone($timezone);
@@ -120,13 +120,13 @@ class Helpers {
      */
     public static function get_welcome_message() {
         if (self::is_availability_enabled() && !self::is_within_availability_hours()) {
-            return get_option('wland_chat_availability_message',
-                __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'wland-chat')
+            return get_option('braves_chat_availability_message',
+                __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat')
             );
         }
 
-        return get_option('wland_chat_welcome_message',
-            __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'wland-chat')
+        return get_option('braves_chat_welcome_message',
+            __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braves-chat')
         );
     }
 
@@ -141,13 +141,16 @@ class Helpers {
      */
     public static function get_chat_config() {
         return array(
-            'webhook_url'     => get_option('wland_chat_webhook_url'),
-            'n8n_auth_token'  => get_option('wland_chat_n8n_auth_token', ''),
-            'header_title'    => get_option('wland_chat_header_title'),
-            'header_subtitle' => get_option('wland_chat_header_subtitle'),
+            'webhook_url'     => get_option('braves_chat_webhook_url'),
+            'n8n_auth_token'  => get_option('braves_chat_n8n_auth_token', ''),
+            'header_title'    => get_option('braves_chat_header_title'),
+            'header_subtitle' => get_option('braves_chat_header_subtitle'),
             'welcome_message' => self::get_welcome_message(),
-            'position'        => get_option('wland_chat_position', 'bottom-right'),
-            'display_mode'    => get_option('wland_chat_display_mode', 'modal'),
+            'position'        => get_option('braves_chat_position', 'bottom-right'),
+            'display_mode'    => get_option('braves_chat_display_mode', 'modal'),
+            'skin'            => get_option('braves_chat_chat_skin', 'default'),
+            'bubble_image'    => get_option('braves_chat_bubble_image', ''),
+            'bubble_text'     => get_option('braves_chat_bubble_text', 'Chat de voz'),
             'is_available'    => !self::is_availability_enabled() || self::is_within_availability_hours(),
         );
     }
@@ -163,12 +166,15 @@ class Helpers {
      */
     public static function sanitize_block_attributes($attributes) {
         $defaults = array(
-            'webhookUrl'      => get_option('wland_chat_webhook_url'),
-            'headerTitle'     => get_option('wland_chat_header_title'),
-            'headerSubtitle'  => get_option('wland_chat_header_subtitle'),
+            'webhookUrl'      => get_option('braves_chat_webhook_url'),
+            'headerTitle'     => get_option('braves_chat_header_title'),
+            'headerSubtitle'  => get_option('braves_chat_header_subtitle'),
             'welcomeMessage'  => self::get_welcome_message(),
-            'position'        => get_option('wland_chat_position', 'bottom-right'),
-            'displayMode'     => get_option('wland_chat_display_mode', 'modal'),
+            'position'        => get_option('braves_chat_position', 'bottom-right'),
+            'displayMode'     => get_option('braves_chat_display_mode', 'modal'),
+            'chatSkin'        => get_option('braves_chat_chat_skin', 'default'),
+            'bubbleImage'     => get_option('braves_chat_bubble_image', ''),
+            'bubbleText'      => get_option('braves_chat_bubble_text', __('¿Necesitas ayuda?', 'braves-chat')),
         );
         
         $attributes = wp_parse_args($attributes, $defaults);
@@ -182,6 +188,10 @@ class Helpers {
                 ? $attributes['position'] : 'bottom-right',
             'displayMode'     => in_array($attributes['displayMode'], array('modal', 'fullscreen'))
                 ? $attributes['displayMode'] : 'modal',
+            'chatSkin'        => in_array($attributes['chatSkin'], array('default', 'braves'))
+                ? $attributes['chatSkin'] : 'default',
+            'bubbleImage'     => esc_url_raw($attributes['bubbleImage']),
+            'bubbleText'      => sanitize_text_field($attributes['bubbleText']),
         );
     }
     
@@ -194,7 +204,7 @@ class Helpers {
      * @return string ID único del widget
      */
     public static function generate_unique_id() {
-        return 'wland-chat-' . wp_generate_password(8, false);
+        return 'braves-chat-' . wp_generate_password(8, false);
     }
 
     /**
@@ -212,7 +222,7 @@ class Helpers {
             return;
         }
 
-        $log_message = '[Wland Chat] ' . $message;
+        $log_message = '[Braves Chat] ' . $message;
 
         if ($data !== null) {
             $log_message .= ' | Data: ' . print_r($data, true);

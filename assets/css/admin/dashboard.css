@@ -1,8 +1,8 @@
 /**
- * Wland Chat iA Dashboard Styles
+ * Braves Chat iA Dashboard Styles
  * Diseño moderno para el panel de administración
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
@@ -10,49 +10,67 @@
    Variables and Base Styles
    ============================================ */
 
-/* Aplicar estilos a todas las páginas de Wland Chat */
-.toplevel_page_wland-chat-ia,
-.admin_page_wland-chat-settings,
-.admin_page_wland-chat-appearance,
-.admin_page_wland-chat-availability,
-.admin_page_wland-chat-gdpr,
-.admin_page_wland-chat-about {
+/* Aplicar estilos a todas las páginas de Braves Chat */
+.toplevel_page_braves-chat,
+.admin_page_braves-chat-settings,
+.admin_page_braves-chat-appearance,
+.admin_page_braves-chat-availability,
+.admin_page_braves-chat-gdpr,
+.admin_page_braves-chat-about {
     background-color: #f3f6fc;
     --wp-components-color-accent: #3858e9;
     --wp-components-color-accent-darker-10: #2145e6;
     --wp-components-color-accent-darker-20: #183ad6;
-    --wland-dashboard-width: 1130px;
+    --braves-dashboard-width: 1200px;
+    /* Wider for better Bento layout */
+}
+
+/* ============================================
+   Linked Cards
+   ============================================ */
+a.braves-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+a.braves-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.braves-card-link:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 /* ============================================
    WordPress Admin Menu Styles
    ============================================ */
 
-/* Mantener el menú resaltado y con el mismo estilo en todas las páginas de Wland Chat */
-ul#adminmenu li.toplevel_page_wland-chat-ia,
-ul#adminmenu li.menu-top.toplevel_page_wland-chat-ia {
-    /* Forzar el estado activo en todas las subpáginas */
-}
+/* Mantener el menú resaltado y con el mismo estilo en todas las páginas de Braves Chat */
+
 
 /* El ítem del menú debe verse activo en todas las páginas */
-.toplevel_page_wland-chat-ia ul#adminmenu li.toplevel_page_wland-chat-ia > a,
-.admin_page_wland-chat-settings ul#adminmenu li.toplevel_page_wland-chat-ia > a,
-.admin_page_wland-chat-appearance ul#adminmenu li.toplevel_page_wland-chat-ia > a,
-.admin_page_wland-chat-availability ul#adminmenu li.toplevel_page_wland-chat-ia > a,
-.admin_page_wland-chat-gdpr ul#adminmenu li.toplevel_page_wland-chat-ia > a,
-.admin_page_wland-chat-about ul#adminmenu li.toplevel_page_wland-chat-ia > a {
+.toplevel_page_braves-chat ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-settings ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-appearance ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-availability ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-gdpr ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-about ul#adminmenu li.toplevel_page_braves-chat>a {
     background-color: #2271b1;
     color: #fff;
 }
 
 /* WordPress admin bar offset fix - mantener la flecha blanca */
-ul#adminmenu > li.toplevel_page_wland-chat-ia.current > a.current:after,
-ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
-.admin_page_wland-chat-settings ul#adminmenu > li.toplevel_page_wland-chat-ia > a:after,
-.admin_page_wland-chat-appearance ul#adminmenu > li.toplevel_page_wland-chat-ia > a:after,
-.admin_page_wland-chat-availability ul#adminmenu > li.toplevel_page_wland-chat-ia > a:after,
-.admin_page_wland-chat-gdpr ul#adminmenu > li.toplevel_page_wland-chat-ia > a:after,
-.admin_page_wland-chat-about ul#adminmenu > li.toplevel_page_wland-chat-ia > a:after {
+ul#adminmenu>li.toplevel_page_braves-chat.current>a.current:after,
+ul#adminmenu>li.menu-top.toplevel_page_braves-chat>a.current:after,
+.admin_page_braves-chat-settings ul#adminmenu>li.toplevel_page_braves-chat>a:after,
+.admin_page_braves-chat-appearance ul#adminmenu>li.toplevel_page_braves-chat>a:after,
+.admin_page_braves-chat-availability ul#adminmenu>li.toplevel_page_braves-chat>a:after,
+.admin_page_braves-chat-gdpr ul#adminmenu>li.toplevel_page_braves-chat>a:after,
+.admin_page_braves-chat-about ul#adminmenu>li.toplevel_page_braves-chat>a:after {
     border-right-color: #f3f6fc;
     right: 0;
     border: 8px solid transparent;
@@ -66,36 +84,36 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     margin-top: -8px;
 }
 
-.toplevel_page_wland-chat-ia #wpcontent,
-.admin_page_wland-chat-settings #wpcontent,
-.admin_page_wland-chat-appearance #wpcontent,
-.admin_page_wland-chat-availability #wpcontent,
-.admin_page_wland-chat-gdpr #wpcontent,
-.admin_page_wland-chat-about #wpcontent {
+.toplevel_page_braves-chat #wpcontent,
+.admin_page_braves-chat-settings #wpcontent,
+.admin_page_braves-chat-appearance #wpcontent,
+.admin_page_braves-chat-availability #wpcontent,
+.admin_page_braves-chat-gdpr #wpcontent,
+.admin_page_braves-chat-about #wpcontent {
     padding-left: 0 !important;
 }
 
-.toplevel_page_wland-chat-ia #wpfooter,
-.toplevel_page_wland-chat-ia .notice:not(.wland-dashboard .notice),
-.admin_page_wland-chat-settings #wpfooter,
-.admin_page_wland-chat-settings .notice:not(.wland-notice),
-.admin_page_wland-chat-appearance #wpfooter,
-.admin_page_wland-chat-appearance .notice:not(.wland-notice),
-.admin_page_wland-chat-availability #wpfooter,
-.admin_page_wland-chat-availability .notice:not(.wland-notice),
-.admin_page_wland-chat-gdpr #wpfooter,
-.admin_page_wland-chat-gdpr .notice:not(.wland-notice),
-.admin_page_wland-chat-about #wpfooter,
-.admin_page_wland-chat-about .notice:not(.wland-notice) {
+.toplevel_page_braves-chat #wpfooter,
+.toplevel_page_braves-chat .notice:not(.braves-dashboard .notice),
+.admin_page_braves-chat-settings #wpfooter,
+.admin_page_braves-chat-settings .notice:not(.braves-notice),
+.admin_page_braves-chat-appearance #wpfooter,
+.admin_page_braves-chat-appearance .notice:not(.braves-notice),
+.admin_page_braves-chat-availability #wpfooter,
+.admin_page_braves-chat-availability .notice:not(.braves-notice),
+.admin_page_braves-chat-gdpr #wpfooter,
+.admin_page_braves-chat-gdpr .notice:not(.braves-notice),
+.admin_page_braves-chat-about #wpfooter,
+.admin_page_braves-chat-about .notice:not(.braves-notice) {
     display: none;
 }
 
-.toplevel_page_wland-chat-ia #wpbody-content,
-.admin_page_wland-chat-settings #wpbody-content,
-.admin_page_wland-chat-appearance #wpbody-content,
-.admin_page_wland-chat-availability #wpbody-content,
-.admin_page_wland-chat-gdpr #wpbody-content,
-.admin_page_wland-chat-about #wpbody-content {
+.toplevel_page_braves-chat #wpbody-content,
+.admin_page_braves-chat-settings #wpbody-content,
+.admin_page_braves-chat-appearance #wpbody-content,
+.admin_page_braves-chat-availability #wpbody-content,
+.admin_page_braves-chat-gdpr #wpbody-content,
+.admin_page_braves-chat-about #wpbody-content {
     padding-bottom: 0;
 }
 
@@ -103,21 +121,21 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Dashboard Container
    ============================================ */
 
-#wland-dashboard {
+#braves-dashboard {
     background-color: #fff;
     color: #1e1e1e;
     min-height: 100vh;
 }
 
-#wland-dashboard h1 {
+#braves-dashboard h1 {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
     color: #1e1e1e;
 }
 
-#wland-dashboard h2,
-#wland-dashboard h3 {
+#braves-dashboard h2,
+#braves-dashboard h3 {
     color: #1e1e1e;
     font-weight: 600;
 }
@@ -126,7 +144,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Header
    ============================================ */
 
-.wland-dashboard__header {
+.braves-dashboard__header {
     position: sticky;
     left: 0;
     top: 32px;
@@ -141,7 +159,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     border-bottom: 1px solid #ddd;
 }
 
-.wland-dashboard__logo svg {
+.braves-dashboard__logo svg {
     display: block;
     height: 32px;
     width: auto;
@@ -151,12 +169,12 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Dashboard Layout
    ============================================ */
 
-.wland-dashboard__content {
+.braves-dashboard__content {
     display: flex;
     min-height: calc(100vh - 92px);
 }
 
-.wland-dashboard__tabs {
+.braves-dashboard__tabs {
     display: grid;
     grid-template-columns: 220px auto;
     width: 100%;
@@ -166,7 +184,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Sidebar Navigation
    ============================================ */
 
-.wland-dashboard__nav {
+.braves-dashboard__nav {
     padding: 20px 12px;
     border-right: 1px solid #ddd;
     background: #fff;
@@ -177,7 +195,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     box-sizing: border-box;
 }
 
-.wland-dashboard__nav-item {
+.braves-dashboard__nav-item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -192,18 +210,18 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     margin-bottom: 4px;
 }
 
-.wland-dashboard__nav-item svg {
+.braves-dashboard__nav-item svg {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
 }
 
-.wland-dashboard__nav-item:hover {
+.braves-dashboard__nav-item:hover {
     background: #f0f0f0;
 }
 
-.wland-dashboard__nav-item--active,
-.wland-dashboard__nav-item--active:hover {
+.braves-dashboard__nav-item--active,
+.braves-dashboard__nav-item--active:hover {
     background: #f0f0f0;
     font-weight: 500;
     color: var(--wp-components-color-accent);
@@ -213,12 +231,12 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Tab Content Area
    ============================================ */
 
-.wland-dashboard__tab-content {
+.braves-dashboard__tab-content {
     padding: 0 32px;
     flex: 1;
 }
 
-.wland-tab-header {
+.braves-tab-header {
     padding: 26px 32px 20px;
     position: sticky;
     background-color: #fff;
@@ -232,7 +250,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     align-items: center;
 }
 
-.wland-tab-header.no-border {
+.braves-tab-header.no-border {
     border-bottom: 0;
     height: 80px;
 }
@@ -241,17 +259,17 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Sections
    ============================================ */
 
-.wland-section {
+.braves-section {
     margin: 32px auto;
-    max-width: var(--wland-dashboard-width);
+    max-width: var(--braves-dashboard-width);
 }
 
-.wland-section h2 {
+.braves-section h2 {
     font-size: 1.125rem;
     margin: 16px 0;
 }
 
-.wland-section p {
+.braves-section p {
     margin-top: 0;
     line-height: 1.6;
     color: #50575e;
@@ -261,18 +279,18 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Grid Layout
    ============================================ */
 
-.wland-about__grid {
+.braves-about__grid {
     margin: 24px auto;
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.wland-about__grid.columns-3 {
+.braves-about__grid.columns-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.wland-about__grid .column {
+.braves-about__grid .column {
     padding: 28px 24px;
     background-color: #f5f5f7;
     border-radius: 8px;
@@ -282,23 +300,23 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
     gap: 12px;
 }
 
-.wland-about__grid .column > svg {
+.braves-about__grid .column>svg {
     width: 30px;
     height: 30px;
     margin-left: -3px;
 }
 
-.wland-about__grid .column h2 {
+.braves-about__grid .column h2 {
     font-size: 1.125rem;
     margin: 8px 0;
 }
 
-.wland-about__grid .column p {
+.braves-about__grid .column p {
     margin: 0;
     flex: 1;
 }
 
-.wland-about__grid .column > .components-button:last-child {
+.braves-about__grid .column>.components-button:last-child {
     margin-top: auto;
 }
 
@@ -306,7 +324,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Buttons
    ============================================ */
 
-.wland-buttons {
+.braves-buttons {
     margin-top: 4px;
     margin-bottom: 32px;
     display: flex;
@@ -356,18 +374,18 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    ============================================ */
 
 @media screen and (max-width: 782px) {
-    .wland-dashboard__header {
+    .braves-dashboard__header {
         top: 0;
         padding-left: 24px;
         width: 100%;
         border-right: 0;
     }
 
-    .wland-dashboard__tabs {
+    .braves-dashboard__tabs {
         grid-template-columns: 1fr;
     }
 
-    .wland-dashboard__nav {
+    .braves-dashboard__nav {
         position: relative;
         top: 0;
         min-height: auto;
@@ -375,22 +393,22 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
         border-bottom: 1px solid #ddd;
     }
 
-    .wland-about__grid,
-    .wland-about__grid.columns-3 {
+    .braves-about__grid,
+    .braves-about__grid.columns-3 {
         grid-template-columns: 1fr;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .wland-about__grid {
+    .braves-about__grid {
         grid-template-columns: 1fr;
     }
 
-    .wland-dashboard__tab-content {
+    .braves-dashboard__tab-content {
         padding: 0 16px;
     }
 
-    .wland-tab-header {
+    .braves-tab-header {
         padding: 20px 16px;
         margin-inline: -16px;
     }
@@ -400,24 +418,24 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    WordPress Components Integration
    ============================================ */
 
-.toplevel_page_wland-chat-ia .components-external-link,
-.toplevel_page_wland-chat-ia .components-menu-item__button:focus,
-.admin_page_wland-chat-settings .components-external-link,
-.admin_page_wland-chat-settings .components-menu-item__button:focus,
-.admin_page_wland-chat-appearance .components-external-link,
-.admin_page_wland-chat-appearance .components-menu-item__button:focus,
-.admin_page_wland-chat-availability .components-external-link,
-.admin_page_wland-chat-availability .components-menu-item__button:focus,
-.admin_page_wland-chat-gdpr .components-external-link,
-.admin_page_wland-chat-gdpr .components-menu-item__button:focus {
+.toplevel_page_braves-chat-ia .components-external-link,
+.toplevel_page_braves-chat-ia .components-menu-item__button:focus,
+.admin_page_braves-chat-settings .components-external-link,
+.admin_page_braves-chat-settings .components-menu-item__button:focus,
+.admin_page_braves-chat-appearance .components-external-link,
+.admin_page_braves-chat-appearance .components-menu-item__button:focus,
+.admin_page_braves-chat-availability .components-external-link,
+.admin_page_braves-chat-availability .components-menu-item__button:focus,
+.admin_page_braves-chat-gdpr .components-external-link,
+.admin_page_braves-chat-gdpr .components-menu-item__button:focus {
     color: var(--wp-components-color-accent);
 }
 
-.toplevel_page_wland-chat-ia .components-external-link:focus,
-.admin_page_wland-chat-settings .components-external-link:focus,
-.admin_page_wland-chat-appearance .components-external-link:focus,
-.admin_page_wland-chat-availability .components-external-link:focus,
-.admin_page_wland-chat-gdpr .components-external-link:focus {
+.toplevel_page_braves-chat-ia .components-external-link:focus,
+.admin_page_braves-chat-settings .components-external-link:focus,
+.admin_page_braves-chat-appearance .components-external-link:focus,
+.admin_page_braves-chat-availability .components-external-link:focus,
+.admin_page_braves-chat-gdpr .components-external-link:focus {
     box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--wp-components-color-accent);
     border-radius: 2px;
 }
@@ -426,7 +444,7 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Notices
    ============================================ */
 
-.wland-dashboard .components-notice {
+.braves-dashboard .components-notice {
     margin: 20px 0;
     padding-block: 11px;
 }
@@ -435,15 +453,15 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Utilities
    ============================================ */
 
-.wland-dashboard .text-center {
+.braves-dashboard .text-center {
     text-align: center;
 }
 
-.wland-dashboard .mt-0 {
+.braves-dashboard .mt-0 {
     margin-top: 0;
 }
 
-.wland-dashboard .mb-0 {
+.braves-dashboard .mb-0 {
     margin-bottom: 0;
 }
 
@@ -451,14 +469,14 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Loading States
    ============================================ */
 
-.wland-dashboard__loading {
+.braves-dashboard__loading {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 300px;
 }
 
-.wland-dashboard__loading .components-spinner {
+.braves-dashboard__loading .components-spinner {
     margin: 0;
 }
 
@@ -466,26 +484,26 @@ ul#adminmenu > li.menu-top.toplevel_page_wland-chat-ia > a.current:after,
    Empty States
    ============================================ */
 
-.wland-dashboard__empty {
+.braves-dashboard__empty {
     text-align: center;
     padding: 60px 20px;
     color: #757575;
 }
 
-.wland-dashboard__empty svg {
+.braves-dashboard__empty svg {
     width: 64px;
     height: 64px;
     margin-bottom: 16px;
     opacity: 0.5;
 }
 
-.wland-dashboard__empty h3 {
+.braves-dashboard__empty h3 {
     font-size: 1.25rem;
     margin-bottom: 8px;
     color: #1e1e1e;
 }
 
-.wland-dashboard__empty p {
+.braves-dashboard__empty p {
     margin-bottom: 24px;
     max-width: 400px;
     margin-left: auto;

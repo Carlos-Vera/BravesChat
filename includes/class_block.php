@@ -4,12 +4,12 @@
  *
  * Maneja el registro y renderizado del bloque de chat para Gutenberg
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.0.0
  * @version 1.0.0
  */
 
-namespace WlandChat;
+namespace BravesChat;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -67,23 +67,23 @@ class Block {
         // Asegurar que tenemos los archivos necesarios
         $this->ensure_block_files();
         
-        register_block_type('wland/chat-widget', array(
-            'editor_script' => 'wland-chat-block-editor',
-            'editor_style' => 'wland-chat-block-editor-style',
-            'style' => 'wland-chat-block-style',
+        register_block_type('braves/chat-widget', array(
+            'editor_script' => 'braves-chat-block-editor',
+            'editor_style' => 'braves-chat-block-editor-style',
+            'style' => 'braves-chat-block-style',
             'render_callback' => array($this, 'render_block'),
             'attributes' => array(
                 'webhookUrl' => array(
                     'type' => 'string',
-                    'default' => get_option('wland_chat_webhook_url'),
+                    'default' => get_option('braves_chat_webhook_url'),
                 ),
                 'headerTitle' => array(
                     'type' => 'string',
-                    'default' => get_option('wland_chat_header_title'),
+                    'default' => get_option('braves_chat_header_title'),
                 ),
                 'headerSubtitle' => array(
                     'type' => 'string',
-                    'default' => get_option('wland_chat_header_subtitle'),
+                    'default' => get_option('braves_chat_header_subtitle'),
                 ),
                 'welcomeMessage' => array(
                     'type' => 'string',
@@ -91,11 +91,11 @@ class Block {
                 ),
                 'position' => array(
                     'type' => 'string',
-                    'default' => get_option('wland_chat_position', 'bottom-right'),
+                    'default' => get_option('braves_chat_position', 'bottom-right'),
                 ),
                 'displayMode' => array(
                     'type' => 'string',
-                    'default' => get_option('wland_chat_display_mode', 'modal'),
+                    'default' => get_option('braves_chat_display_mode', 'modal'),
                 ),
             ),
         ));
@@ -111,34 +111,34 @@ class Block {
      */
     public function enqueue_block_editor_assets() {
         wp_enqueue_script(
-            'wland-chat-block-editor',
-            WLAND_CHAT_PLUGIN_URL . 'assets/js/block.js',
+            'braves-chat-block-editor',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/js/block.js',
             array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n'),
-            WLAND_CHAT_VERSION
+            BRAVES_CHAT_VERSION
         );
         
         wp_enqueue_style(
-            'wland-chat-block-editor-style',
-            WLAND_CHAT_PLUGIN_URL . 'assets/css/block_editor.css',
+            'braves-chat-block-editor-style',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/block_editor.css',
             array(),
-            WLAND_CHAT_VERSION
+            BRAVES_CHAT_VERSION
         );
 
         wp_enqueue_style(
-            'wland-chat-block-style',
-            WLAND_CHAT_PLUGIN_URL . 'assets/css/block_style.css',
+            'braves-chat-block-style',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/block_style.css',
             array(),
-            WLAND_CHAT_VERSION
+            BRAVES_CHAT_VERSION
         );
         
         // Localizar datos para el bloque
-        wp_localize_script('wland-chat-block-editor', 'wlandChatBlock', array(
-            'defaultWebhookUrl' => get_option('wland_chat_webhook_url'),
-            'defaultHeaderTitle' => get_option('wland_chat_header_title'),
-            'defaultHeaderSubtitle' => get_option('wland_chat_header_subtitle'),
+        wp_localize_script('braves-chat-block-editor', 'bravesChatBlock', array(
+            'defaultWebhookUrl' => get_option('braves_chat_webhook_url'),
+            'defaultHeaderTitle' => get_option('braves_chat_header_title'),
+            'defaultHeaderSubtitle' => get_option('braves_chat_header_subtitle'),
             'defaultWelcomeMessage' => Helpers::get_welcome_message(),
-            'defaultPosition' => get_option('wland_chat_position', 'bottom-right'),
-            'defaultDisplayMode' => get_option('wland_chat_display_mode', 'modal'),
+            'defaultPosition' => get_option('braves_chat_position', 'bottom-right'),
+            'defaultDisplayMode' => get_option('braves_chat_display_mode', 'modal'),
         ));
     }
     
@@ -176,9 +176,9 @@ class Block {
         
         // Cargar plantilla correspondiente
         if ($display_mode === 'fullscreen') {
-            include WLAND_CHAT_PLUGIN_DIR . 'templates/screen.php';
+            include BRAVES_CHAT_PLUGIN_DIR . 'templates/screen.php';
         } else {
-            include WLAND_CHAT_PLUGIN_DIR . 'templates/modal.php';
+            include BRAVES_CHAT_PLUGIN_DIR . 'templates/modal.php';
         }
         
         return ob_get_clean();
@@ -193,8 +193,8 @@ class Block {
      * @return void
      */
     private function ensure_block_files() {
-        $js_dir = WLAND_CHAT_PLUGIN_DIR . 'assets/js/';
-        $css_dir = WLAND_CHAT_PLUGIN_DIR . 'assets/css/';
+        $js_dir = BRAVES_CHAT_PLUGIN_DIR . 'assets/js/';
+        $css_dir = BRAVES_CHAT_PLUGIN_DIR . 'assets/css/';
         
         // Crear directorios si no existen
         if (!file_exists($js_dir)) {
@@ -237,12 +237,12 @@ class Block {
     var SelectControl = components.SelectControl;
     var TextareaControl = components.TextareaControl;
 
-    blocks.registerBlockType('wland/chat-widget', {
-        title: __('Wland Chat iA', 'wland-chat'),
-        description: __('Widget de chat con IA de BravesLab', 'wland-chat'),
+    blocks.registerBlockType('braves/chat-widget', {
+        title: __('BravesChat', 'braves-chat'),
+        description: __('Widget de chat con IA de BravesLab', 'braves-chat'),
         icon: 'format-chat',
         category: 'widgets',
-        keywords: [__('chat', 'wland-chat'), __('ia', 'wland-chat'), __('asistente', 'wland-chat')],
+        keywords: [__('chat', 'braves-chat'), __('ia', 'braves-chat'), __('asistente', 'braves-chat')],
         supports: {
             html: false,
             multiple: false
@@ -251,27 +251,27 @@ class Block {
         attributes: {
             webhookUrl: {
                 type: 'string',
-                default: wlandChatBlock.defaultWebhookUrl
+                default: bravesChatBlock.defaultWebhookUrl
             },
             headerTitle: {
                 type: 'string',
-                default: wlandChatBlock.defaultHeaderTitle
+                default: bravesChatBlock.defaultHeaderTitle
             },
             headerSubtitle: {
                 type: 'string',
-                default: wlandChatBlock.defaultHeaderSubtitle
+                default: bravesChatBlock.defaultHeaderSubtitle
             },
             welcomeMessage: {
                 type: 'string',
-                default: wlandChatBlock.defaultWelcomeMessage
+                default: bravesChatBlock.defaultWelcomeMessage
             },
             position: {
                 type: 'string',
-                default: wlandChatBlock.defaultPosition
+                default: bravesChatBlock.defaultPosition
             },
             displayMode: {
                 type: 'string',
-                default: wlandChatBlock.defaultDisplayMode
+                default: bravesChatBlock.defaultDisplayMode
             }
         },
 
@@ -282,33 +282,33 @@ class Block {
             return el('div', {},
                 el(InspectorControls, {},
                     el(PanelBody, {
-                        title: __('Configuración del Chat', 'wland-chat'),
+                        title: __('Configuración del Chat', 'braves-chat'),
                         initialOpen: true
                     },
                         el(TextControl, {
-                            label: __('URL del Webhook', 'wland-chat'),
+                            label: __('URL del Webhook', 'braves-chat'),
                             value: attributes.webhookUrl,
                             onChange: function(value) {
                                 setAttributes({webhookUrl: value});
                             },
-                            help: __('URL del webhook de N8N', 'wland-chat')
+                            help: __('URL del webhook de N8N', 'braves-chat')
                         }),
                         el(TextControl, {
-                            label: __('Título del Header', 'wland-chat'),
+                            label: __('Título del Header', 'braves-chat'),
                             value: attributes.headerTitle,
                             onChange: function(value) {
                                 setAttributes({headerTitle: value});
                             }
                         }),
                         el(TextControl, {
-                            label: __('Subtítulo del Header', 'wland-chat'),
+                            label: __('Subtítulo del Header', 'braves-chat'),
                             value: attributes.headerSubtitle,
                             onChange: function(value) {
                                 setAttributes({headerSubtitle: value});
                             }
                         }),
                         el(TextareaControl, {
-                            label: __('Mensaje de Bienvenida', 'wland-chat'),
+                            label: __('Mensaje de Bienvenida', 'braves-chat'),
                             value: attributes.welcomeMessage,
                             onChange: function(value) {
                                 setAttributes({welcomeMessage: value});
@@ -316,23 +316,23 @@ class Block {
                             rows: 4
                         }),
                         el(SelectControl, {
-                            label: __('Posición del Chat', 'wland-chat'),
+                            label: __('Posición del Chat', 'braves-chat'),
                             value: attributes.position,
                             options: [
-                                {label: __('Abajo Derecha', 'wland-chat'), value: 'bottom-right'},
-                                {label: __('Abajo Izquierda', 'wland-chat'), value: 'bottom-left'},
-                                {label: __('Centro', 'wland-chat'), value: 'center'}
+                                {label: __('Abajo Derecha', 'braves-chat'), value: 'bottom-right'},
+                                {label: __('Abajo Izquierda', 'braves-chat'), value: 'bottom-left'},
+                                {label: __('Centro', 'braves-chat'), value: 'center'}
                             ],
                             onChange: function(value) {
                                 setAttributes({position: value});
                             }
                         }),
                         el(SelectControl, {
-                            label: __('Modo de Visualización', 'wland-chat'),
+                            label: __('Modo de Visualización', 'braves-chat'),
                             value: attributes.displayMode,
                             options: [
-                                {label: __('Modal (Ventana emergente)', 'wland-chat'), value: 'modal'},
-                                {label: __('Pantalla completa', 'wland-chat'), value: 'fullscreen'}
+                                {label: __('Modal (Ventana emergente)', 'braves-chat'), value: 'modal'},
+                                {label: __('Pantalla completa', 'braves-chat'), value: 'fullscreen'}
                             ],
                             onChange: function(value) {
                                 setAttributes({displayMode: value});
@@ -341,7 +341,7 @@ class Block {
                     )
                 ),
                 el('div', {
-                    className: 'wland-chat-block-preview',
+                    className: 'braves-chat-block-preview',
                     style: {
                         border: '2px dashed #01B7AF',
                         borderRadius: '10px',
@@ -404,11 +404,11 @@ class Block {
                             fontWeight: 'bold',
                             color: '#01B7AF'
                         }
-                    }, '📍 ' + __('Posición:', 'wland-chat') + ' ' + 
-                        (attributes.position === 'bottom-right' ? __('Abajo Derecha', 'wland-chat') : 
-                         attributes.position === 'bottom-left' ? __('Abajo Izquierda', 'wland-chat') : 
-                         __('Centro', 'wland-chat')) + ' | ' +
-                        (attributes.displayMode === 'modal' ? __('Modal', 'wland-chat') : __('Pantalla Completa', 'wland-chat'))
+                    }, '📍 ' + __('Posición:', 'braves-chat') + ' ' + 
+                        (attributes.position === 'bottom-right' ? __('Abajo Derecha', 'braves-chat') : 
+                         attributes.position === 'bottom-left' ? __('Abajo Izquierda', 'braves-chat') : 
+                         __('Centro', 'braves-chat')) + ' | ' +
+                        (attributes.displayMode === 'modal' ? __('Modal', 'braves-chat') : __('Pantalla Completa', 'braves-chat'))
                     )
                 )
             );
@@ -433,15 +433,15 @@ class Block {
      * Crear archivo block-editor.css
      */
     private function create_block_editor_css($file) {
-        $content = ".wland-chat-block-preview {
+        $content = ".braves-chat-block-preview {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.wland-chat-block-preview h3 {
+.braves-chat-block-preview h3 {
     font-weight: 600;
 }
 
-.wp-block-wland-chat-widget {
+.wp-block-braves-chat-widget {
     margin: 20px 0;
 }
 
@@ -457,7 +457,7 @@ class Block {
      */
     private function create_block_style_css($file) {
         $content = "/* Estilos del bloque en el frontend */
-.wp-block-wland-chat-widget {
+.wp-block-braves-chat-widget {
     position: relative;
 }
 

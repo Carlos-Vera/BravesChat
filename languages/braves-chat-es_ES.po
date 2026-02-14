@@ -1,8 +1,8 @@
-# Translation of Wland Chat iA in Spanish (Spain)
-# This file is distributed under the same license as the Wland Chat iA package.
+# Translation of BravesChat iA in Spanish (Spain)
+# This file is distributed under the same license as the BravesChat iA package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wland Chat iA 1.1.2\n"
+"Project-Id-Version: BravesChat iA 1.2.4\n"
 "Report-Msgid-Bugs-To: https://braveslab.com\n"
 "POT-Creation-Date: 2025-10-14 00:00:00+00:00\n"
 "PO-Revision-Date: 2025-10-14 15:30+0100\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4\n"
 
-#: wland-chat-ia.php
+#: braves_chat.php
 msgid "Ajustes"
 msgstr "Ajustes"
 
 #: includes/class-settings.php
-msgid "Wland Chat iA"
-msgstr "Wland Chat iA"
+msgid "BravesChat iA"
+msgstr "BravesChat iA"
 
 msgid "Configuración General"
 msgstr "Configuración General"
@@ -185,7 +185,7 @@ msgstr "Escribe tu mensaje"
 msgid "Enviar mensaje"
 msgstr "Enviar mensaje"
 
-#: assets/js/wland_chat_block_modal.js, assets/js/wland_chat_block_screen.js
+#: assets/js/braves_chat_block_modal.js, assets/js/braves_chat_block_screen.js
 msgid "Error al procesar tu mensaje:"
 msgstr "Error al procesar tu mensaje:"
 
@@ -213,8 +213,8 @@ msgstr "**Webhook no configurado**"
 msgid "El administrador debe configurar la URL del webhook en:"
 msgstr "El administrador debe configurar la URL del webhook en:"
 
-msgid "WordPress Admin > Ajustes > Wland Chat iA"
-msgstr "WordPress Admin > Ajustes > Wland Chat iA"
+msgid "WordPress Admin > Ajustes > BravesChat iA"
+msgstr "WordPress Admin > Ajustes > BravesChat iA"
 
 msgid "**Error de autenticación**"
 msgstr "**Error de autenticación**"

@@ -1,10 +1,10 @@
 /**
  * Estilos del bloque en el frontend
- * 
- * @package WlandChat
+ *
+ * @package BravesChat
  */
 
-.wp-block-wland-chat-widget {
+.wp-block-braves-chat-widget {
     position: relative;
 }
 

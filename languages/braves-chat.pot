@@ -1,8 +1,8 @@
-# Copyright (C) 2025 Wland Chat iA
-# This file is distributed under the same license as the Wland Chat iA package.
+# Copyright (C) 2025 BravesChat iA
+# This file is distributed under the same license as the BravesChat iA package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wland Chat iA 1.1.2\n"
+"Project-Id-Version: BravesChat iA 1.2.4\n"
 "Report-Msgid-Bugs-To: https://braveslab.com\n"
 "POT-Creation-Date: 2025-10-14 00:00:00+00:00\n"
 "MIME-Version: 1.0\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: wland-chat-ia.php
+#: braves_chat.php
 msgid "Ajustes"
 msgstr ""
 
 #: includes/class-settings.php
-msgid "Wland Chat iA"
+msgid "BravesChat iA"
 msgstr ""
 
 msgid "Configuración General"
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Enviar mensaje"
 msgstr ""
 
-#: assets/js/wland_chat_block_modal.js, assets/js/wland_chat_block_screen.js
+#: assets/js/braves_chat_block_modal.js, assets/js/braves_chat_block_screen.js
 msgid "Error al procesar tu mensaje:"
 msgstr ""
 
@@ -210,7 +210,7 @@ msgstr ""
 msgid "El administrador debe configurar la URL del webhook en:"
 msgstr ""
 
-msgid "WordPress Admin > Ajustes > Wland Chat iA"
+msgid "WordPress Admin > Ajustes > BravesChat iA"
 msgstr ""
 
 msgid "**Error de autenticación**"

@@ -5,11 +5,11 @@
  * Gestiona cookies persistentes con fingerprinting del navegador para identificación única de usuarios.
  * Incluye fallback a localStorage, regeneración de ID por cambios significativos y compliance GDPR.
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.1.0
  */
 
-namespace WlandChat;
+namespace BravesChat;
 
 // Prevenir acceso directo
 if (!defined('ABSPATH')) {
@@ -17,17 +17,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Clase WlandCookieManager
+ * Clase BravesCookieManager
  *
  * Sistema robusto de gestión de sesiones mediante cookies con fingerprinting del navegador.
  * Implementa patrón Singleton para garantizar una única instancia.
  */
-class WlandCookieManager {
+class BravesCookieManager {
 
     /**
      * Instancia única de la clase (patrón Singleton)
      *
-     * @var WlandCookieManager
+     * @var BravesCookieManager
      */
     private static $instance = null;
 
@@ -36,7 +36,7 @@ class WlandCookieManager {
      *
      * @var string
      */
-    const COOKIE_NAME = 'wland_chat_session';
+    const COOKIE_NAME = 'braves_chat_session';
 
     /**
      * Duración de la cookie en segundos (1 año)
@@ -50,21 +50,21 @@ class WlandCookieManager {
      *
      * @var string
      */
-    const GDPR_OPTION_NAME = 'wland_chat_gdpr_enabled';
+    const GDPR_OPTION_NAME = 'braves_chat_gdpr_enabled';
 
     /**
      * Nombre de la opción para mensaje del banner GDPR
      *
      * @var string
      */
-    const GDPR_MESSAGE_OPTION = 'wland_chat_gdpr_message';
+    const GDPR_MESSAGE_OPTION = 'braves_chat_gdpr_message';
 
     /**
      * Nombre de la opción para texto del botón de aceptar GDPR
      *
      * @var string
      */
-    const GDPR_ACCEPT_TEXT_OPTION = 'wland_chat_gdpr_accept_text';
+    const GDPR_ACCEPT_TEXT_OPTION = 'braves_chat_gdpr_accept_text';
 
     /**
      * Constructor privado (patrón Singleton)
@@ -74,14 +74,14 @@ class WlandCookieManager {
         add_action('wp_enqueue_scripts', array($this, 'localize_gdpr_settings'), 100);
 
         // NOTA: No establecemos cookies automáticamente en PHP para evitar
-        // "headers already sent" errors. El JavaScript (wland_fingerprint.js)
+        // "headers already sent" errors. El JavaScript (braves_fingerprint.js)
         // maneja la creación de cookies en el cliente.
     }
 
     /**
      * Obtener instancia única de la clase (patrón Singleton)
      *
-     * @return WlandCookieManager Instancia única
+     * @return BravesCookieManager Instancia única
      */
     public static function get_instance() {
         if (null === self::$instance) {
@@ -322,7 +322,7 @@ class WlandCookieManager {
      * @return string Mensaje personalizado o mensaje por defecto
      */
     public function get_gdpr_message() {
-        $default_message = __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'wland-chat');
+        $default_message = __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat');
         return get_option(self::GDPR_MESSAGE_OPTION, $default_message);
     }
 
@@ -332,7 +332,7 @@ class WlandCookieManager {
      * @return string Texto personalizado o texto por defecto
      */
     public function get_gdpr_accept_text() {
-        $default_text = __('Aceptar', 'wland-chat');
+        $default_text = __('Aceptar', 'braves-chat');
         return get_option(self::GDPR_ACCEPT_TEXT_OPTION, $default_text);
     }
 
@@ -359,8 +359,8 @@ class WlandCookieManager {
         );
 
         // Pasar al script de fingerprinting (siempre se carga)
-        if (wp_script_is('wland-chat-fingerprint', 'enqueued') || wp_script_is('wland-chat-fingerprint', 'registered')) {
-            wp_localize_script('wland-chat-fingerprint', 'wlandGDPRConfig', $gdpr_config);
+        if (wp_script_is('braves-chat-fingerprint', 'enqueued') || wp_script_is('braves-chat-fingerprint', 'registered')) {
+            wp_localize_script('braves-chat-fingerprint', 'bravesGDPRConfig', $gdpr_config);
         }
     }
 

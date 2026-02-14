@@ -1,0 +1,533 @@
+/**
+ * Braves Skin for Braves Chat
+ * 
+ * Theme: Black & White / Minimalist
+ * Updated to match new reference design
+ */
+
+/* ========================================
+   GLOBAL OVERRIDES & VARIABLES
+   ======================================== */
+body .braves-skin-braves {
+    --bc-bg-color: #F4F4F4;
+    --bc-chat-bg: #F4F4F4;
+    --bc-user-msg-bg: #000000;
+    --bc-user-msg-text: #ffffff;
+    --bc-bot-msg-bg: transparent;
+    --bc-bot-msg-text: #000000;
+    --bc-input-bg: #ffffff;
+    --bc-shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --bc-shadow-hard: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ========================================
+   BURBUJA FLOTANTE (LAUNCHER)
+   ======================================== */
+/* Ocultar el toggle por defecto cuando el chat está abierto, 
+   pero se mostrará como botón de minimizar estilizado */
+body .braves-skin-braves #chat-toggle {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/*Estado CERRADO: Diseño tipo tarjeta mejorado */
+body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-toggle {
+    background: #ffffff !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 280px !important;
+    /* Forzar ancho mínimo */
+    min-height: auto !important;
+    /* Resetear altura mínima del base CSS */
+    max-width: 320px !important;
+    border-radius: 24px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    /* Override linear gradient del CSS base */
+    background-image: none !important;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-toggle:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Contenedor principal del contenido de la burbuja */
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+}
+
+/* Header de la burbuja (Avatar + Texto) */
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-bubble-image {
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.3;
+    text-align: left;
+}
+
+/* Botón de llamada a la acción (CTA) */
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta {
+    background: #000000;
+    color: #ffffff;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta:hover {
+    opacity: 0.8;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta svg {
+    width: 18px;
+    height: 18px;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta-text {
+    color: #ffffff;
+}
+
+/* ====================================================
+   ESTADO MINIMIZADO (Después de interactuar)
+   ==================================================== */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized #chat-toggle {
+    min-width: auto !important;
+    width: auto !important;
+    padding: 6px !important;
+    border-radius: 50px !important;
+    gap: 8px !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    background: #ffffff !important;
+}
+
+/* Ocultar textos en modo minimizado */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-text,
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-cta-text {
+    display: none !important;
+}
+
+/* Ajustar header (imagen) */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-header {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized #chat-bubble-image {
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+}
+
+/* Ajustar botón CTA (solo icono) */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-cta {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #000000 !important;
+}
+
+/* Mostrar icono del CTA */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-cta-icon {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    fill: #ffffff !important;
+}
+
+/* Ajustar contenido */
+body #braveslab-chat-container.chat-closed.braves-skin-braves.braves-chat-minimized .braves-bubble-content {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: auto !important;
+}
+
+/* ====================================================
+   OCULTAR ELEMENTOS NO USADOS EN SKIN BRAVES
+   ==================================================== */
+/* Ocultar animación Lottie siempre */
+body .braves-skin-braves #chat-toggle #chat-lottie {
+    display: none !important;
+}
+
+/* Ocultar close-icon solo cuando el chat está CERRADO */
+body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-toggle #close-icon {
+    display: none !important;
+}
+
+/* ====================================================
+   ESTADO ABIERTO - BOTÓN MINIMIZAR
+   ==================================================== */
+/* Cuando el chat está abierto, el toggle se convierte en un botón de minimizar circular negro */
+body #braveslab-chat-container.chat-open.braves-skin-braves #chat-toggle {
+    background: #ffffff !important;
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    /* Ocultar el contenido de la burbuja cuando está abierto */
+}
+
+body #braveslab-chat-container.chat-open.braves-skin-braves #chat-toggle .braves-bubble-content {
+    display: none !important;
+}
+
+/* Mostrar el icono X cuando está abierto */
+body #braveslab-chat-container.chat-open.braves-skin-braves #chat-toggle #close-icon {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #f2f2f2 !important;
+    background: #000000 !important;
+    width: 44px;
+    /* Smaller than parent (60px) to show white border */
+    height: 44px;
+    border-radius: 50%;
+    font-size: 20px !important;
+    font-weight: 300 !important;
+    line-height: 1;
+    transform: none !important;
+    /* Reset any default transform */
+    position: static !important;
+    /* Reset absolute positioning from base css if any */
+    margin: 0 !important;
+}
+
+
+/* ========================================
+   CHAT WINDOW - DISEÑO BRAVES ACTUALIZADO
+   ======================================== */
+body .braves-skin-braves #chat-window {
+    border-radius: 24px !important;
+    box-shadow: var(--bc-shadow-soft) !important;
+    background: var(--bc-bg-color) !important;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 0;
+    /* Espacio manejado por el input flotante */
+    transition: width 0.3s ease, height 0.3s ease;
+    width: 380px;
+    /* Default width */
+    height: 600px;
+    /* Default height */
+}
+
+/* Modo Expandido */
+body #braveslab-chat-container.braves-skin-braves.braves-expanded #chat-window {
+    width: 600px !important;
+    height: 776px !important;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+body .braves-skin-braves #chat-header {
+    background: transparent !important;
+    padding: 24px 24px 10px 24px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: none !important;
+}
+
+/* Badge del Header (Avatar + Nombre) */
+body .braves-skin-braves #chat-header .chat-header-badge {
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    gap: 12px;
+}
+
+/* Avatar Header */
+body .braves-skin-braves #chat-header .chat-header-badge img,
+body .braves-skin-braves #chat-header .chat-header-badge .chat-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título Header - Oculto */
+body .braves-skin-braves #chat-header .chat-header-badge .chat-title {
+    display: none !important;
+}
+
+/* Acciones Header (Expandir + Cerrar) */
+body .braves-skin-braves .chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botón Expandir */
+body .braves-skin-braves #expand-chat {
+    background: transparent !important;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 1;
+    transition: opacity 0.2s;
+    width: auto;
+    height: auto;
+}
+
+body .braves-skin-braves #expand-chat:hover {
+    stroke: var(--braves-primary);
+    opacity: 0.7;
+}
+
+body .braves-skin-braves #expand-chat svg path {
+    stroke: #141414;
+}
+
+/* Toggle Icons Logic */
+body .braves-skin-braves #expand-chat .icon-collapse {
+    display: none;
+}
+
+body .braves-skin-braves.braves-expanded #expand-chat .icon-expand {
+    display: none;
+}
+
+body .braves-skin-braves.braves-expanded #expand-chat .icon-collapse {
+    display: block !important;
+}
+
+
+/* ========================================
+   MESSAGES AREA
+   ======================================== */
+body .braves-skin-braves #chat-messages {
+    background: var(--bc-chat-bg) !important;
+    padding: 10px 24px 100px 24px !important;
+    /* Extra padding bottom para input flotante */
+    gap: 20px;
+}
+
+/* Mensajes del BOT */
+body .braves-skin-braves .message.bot .message-bubble {
+    background: transparent !important;
+    color: var(--bc-bot-msg-text) !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+/* Eliminar avatar/tiempo en mensajes bot si existen estilos previos */
+body .braves-skin-braves .message.bot .message-time {
+    display: none;
+}
+
+/* Mensajes del USUARIO (Botón Negro) */
+body .braves-skin-braves .message.user {
+    align-self: flex-end;
+}
+
+body .braves-skin-braves .message.user .message-bubble {
+    background: var(--bc-user-msg-bg) !important;
+    color: var(--bc-user-msg-text) !important;
+    border-radius: 20px !important;
+    padding: 10px 18px !important;
+    font-size: 15px;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Typing Indicator (Simple dots) */
+body .braves-skin-braves .typing-indicator {
+    padding-left: 24px;
+    background: transparent !important;
+}
+
+body .braves-skin-braves .typing-indicator .typing-dot {
+    background: #000000 !important;
+    opacity: 0.4;
+}
+
+
+/* ========================================
+   INPUT AREA (FLOATING)
+   ======================================== */
+body .braves-skin-braves #chat-input-wrapper {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    z-index: 10;
+}
+
+body .braves-skin-braves #chat-input-container {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 8px 8px 8px 15px !important;
+    display: flex;
+    align-items: flex-end !important;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Sombra suave */
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Input text */
+body .braves-skin-braves #chat-input {
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-size: 15px !important;
+    color: #333 !important;
+    height: auto !important;
+    resize: none !important;
+    overflow-y: hidden !important;
+    min-height: 40px !important;
+    max-height: 250px !important;
+    line-height: 1.5 !important;
+    transition: height 0.15s ease-out !important;
+    box-sizing: border-box !important;
+}
+
+body .braves-skin-braves #chat-input::placeholder {
+    color: #999;
+}
+
+/* Botones dentro del input (Call & Send) */
+body .braves-skin-braves #send-button {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: none;
+    padding: 0;
+}
+
+/* Eliminado Botón Llamar (#call-button) */
+
+/* Botón Enviar */
+body .braves-skin-braves #send-button {
+    background: #666666 !important;
+    /* Gris por defecto */
+}
+
+body .braves-skin-braves #send-button:not(:disabled) {
+    background: #000000 !important;
+    /* Negro cuando activo */
+}
+
+body .braves-skin-braves #send-button:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+body .braves-skin-braves #send-button span {
+    display: none;
+    /* Ocultar texto por defecto si existe */
+}
+
+
+/* ========================================
+   MINIMIZE BUTTON (Botón Negro Flotante)
+   ======================================== */
+body .braves-skin-braves #minimize-chat {
+    position: absolute;
+    bottom: -70px;
+    /* Fuera del contenedor del chat */
+    right: 0;
+    width: 48px;
+    height: 48px;
+    background: #000000;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    z-index: 20;
+}
+
+body .braves-skin-braves #minimize-chat svg path {
+    stroke: var(--braves-primary) !important;
+}
+
+/* Ajuste para que el botón "salga" visualmente del chat window pero sea parte del bloque modal */
+body #braveslab-chat-container.chat-open {
+    overflow: visible !important;
+    /* Permitir ver el botón fuera */
+}
+
+body .braves-skin-braves #minimize-chat:hover {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 480px) {
+    body .braves-skin-braves #chat-window {
+        border-radius: 20px !important;
+        height: calc(100vh - 100px);
+        /* Ajuste altura en móvil */
+    }
+
+    body .braves-skin-braves #minimize-chat {
+        bottom: -60px;
+        right: 10px;
+    }
+}

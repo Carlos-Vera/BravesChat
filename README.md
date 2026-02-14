@@ -1,4 +1,4 @@
-# Wland Chat iA
+# Braves Chat iA
 
 Plugin WordPress profesional para integrar chat con inteligencia artificial con N8N mediante bloques Gutenberg.
 
@@ -93,24 +93,24 @@ Accede a información detallada del plugin haciendo clic en el **badge de versi�
 
 ### Método 2: Instalación manual
 1. Descomprime el archivo ZIP
-2. Sube la carpeta `wland-chat-ia` a `/wp-content/plugins/`
+2. Sube la carpeta `braves-chat-ia` a `/wp-content/plugins/`
 3. Activa el plugin desde el menú **Plugins** de WordPress
 
 ### Método 3: Desde GitHub
 ```bash
 cd wp-content/plugins/
-git clone https://github.com/Carlos-Vera/Wland-Chat-iA.git wland-chat-ia
+git clone https://github.com/Carlos-Vera/braveschat.git braves-chat-ia
 ```
 
 ## ⚙️ Configuración
 
 ### Acceso al Panel de Administración
 
-Después de activar el plugin, encontrarás el menú **"Wland Chat iA"** en el panel lateral de WordPress.
+Después de activar el plugin, encontrarás el menú **"Braves Chat iA"** en el panel lateral de WordPress.
 
 ### 1. Ajustes (Configuración General)
 
-**Ubicación**: Wland Chat iA > Ajustes
+**Ubicación**: Braves Chat iA > Ajustes
 
 Configura los parámetros fundamentales del chat:
 
@@ -121,7 +121,7 @@ Configura los parámetros fundamentales del chat:
 
 ### 2. Apariencia
 
-**Ubicación**: Wland Chat iA > Apariencia
+**Ubicación**: Braves Chat iA > Apariencia
 
 Personaliza el aspecto visual del chat:
 
@@ -146,7 +146,7 @@ Personaliza el aspecto visual del chat:
 
 ### 3. Horarios
 
-**Ubicación**: Wland Chat iA > Horarios
+**Ubicación**: Braves Chat iA > Horarios
 
 Configura la disponibilidad del chat por horario:
 
@@ -158,7 +158,7 @@ Configura la disponibilidad del chat por horario:
 
 ### 4. GDPR (Compliance de Cookies)
 
-**Ubicación**: Wland Chat iA > GDPR
+**Ubicación**: Braves Chat iA > GDPR
 
 Configura el banner de consentimiento de cookies:
 
@@ -176,7 +176,7 @@ Todas las páginas incluyen un botón **"Guardar cambios"** al final del formula
 
 1. Edita una página o entrada
 2. Haz clic en el botón **+** para agregar un bloque
-3. Busca **"Wland Chat iA"**
+3. Busca **"Braves Chat iA"**
 4. Haz clic para insertarlo
 
 ### Personalizar el Bloque
@@ -208,8 +208,8 @@ displayMode: 'modal' // 'fullscreen'
 Para documentación técnica completa sobre arquitectura, componentes, clases PHP, sistema de CSS y guías de desarrollo, consulta [CLAUDE.md](CLAUDE.md).
 
 ```
-wland-chat-ia/
-├── wland_chat_ia.php                          # Archivo principal del plugin (entry point)
+braves-chat-ia/
+├── braves_chat.php                            # Archivo principal del plugin (entry point)
 ├── uninstall.php                              # Script de desinstalación limpia
 ├── includes/
 │   ├── admin/                                 # Sistema de administración Bentō (v1.2.x)
@@ -239,27 +239,27 @@ wland-chat-ia/
 │   │   │   ├── base.css                       # Estilos base y reset
 │   │   │   ├── components.css                 # Componentes Bentō (cards, buttons, toggles)
 │   │   │   └── dashboard.css                  # Estilos específicos de páginas
-│   │   ├── wland_chat_block_modal.css         # Estilos del chat en modo modal
-│   │   ├── wland_chat_block_screen.css        # Estilos del chat en modo pantalla completa
-│   │   ├── wland_gdpr_banner.css              # Estilos del banner GDPR
+│   │   ├── braves_chat_block_modal.css        # Estilos del chat en modo modal
+│   │   ├── braves_chat_block_screen.css       # Estilos del chat en modo pantalla completa
+│   │   ├── braves_gdpr_banner.css             # Estilos del banner GDPR
 │   │   ├── block_editor.css                   # Estilos del editor de bloques
 │   │   └── block_style.css                    # Estilos base del bloque
 │   ├── js/
 │   │   ├── admin.js                           # Scripts del panel de administración
 │   │   ├── block.js                           # Registro del bloque Gutenberg
-│   │   ├── wland_chat_block_modal.js          # Lógica del chat modo modal
-│   │   ├── wland_chat_block_screen.js         # Lógica del chat modo pantalla completa
-│   │   └── wland_fingerprint.js               # Sistema de fingerprinting del navegador
+│   │   ├── braves_chat_block_modal.js         # Lógica del chat modo modal
+│   │   ├── braves_chat_block_screen.js        # Lógica del chat modo pantalla completa
+│   │   └── braves_fingerprint.js              # Sistema de fingerprinting del navegador
 │   └── media/
 │       ├── chat.json                          # Animación Lottie del botón de chat
-│       ├── wland-logo.svg                     # Logo del plugin
+│       ├── braves-logo.svg                    # Logo del plugin
 │       └── menu-icon.svg                      # Icono del menú WordPress
 ├── templates/                                 # Templates PHP frontend
 │   ├── modal.php                              # Template HTML para modo modal
 │   └── screen.php                             # Template HTML para modo pantalla completa
 ├── languages/                                 # Archivos de traducción (i18n)
-│   ├── wland-chat.pot                         # Plantilla de traducción
-│   └── wland-chat-es_ES.po                    # Traducción al español
+│   ├── braves-chat.pot                        # Plantilla de traducción
+│   └── braves-chat-es_ES.po                   # Traducción al español
 ├── CHANGELOG.md                               # Historial completo de cambios
 ├── CLAUDE.md                                  # Documentación técnica para desarrollo
 ├── README.md                                  # Este archivo (documentación general)
@@ -272,18 +272,18 @@ wland-chat-ia/
 
 ```php
 // Modificar configuración del chat
-add_filter('wland_chat_config', function($config) {
+add_filter('braves_chat_config', function($config) {
     $config['webhook_url'] = 'https://mi-webhook.com';
     return $config;
 });
 
 // Modificar mensaje de bienvenida
-add_filter('wland_chat_welcome_message', function($message) {
+add_filter('braves_chat_welcome_message', function($message) {
     return 'Mensaje personalizado';
 });
 
 // Admin: Agregar items al sidebar
-add_filter('wland_chat_admin_menu_items', function($items) {
+add_filter('braves_chat_admin_menu_items', function($items) {
     $items[] = array(
         'id' => 'custom',
         'label' => 'Mi Sección',
@@ -299,17 +299,17 @@ add_filter('wland_chat_admin_menu_items', function($items) {
 
 ```php
 // Antes de renderizar el chat
-add_action('wland_chat_before_render', function($attributes) {
+add_action('braves_chat_before_render', function($attributes) {
     // Tu código aquí
 });
 
 // Después de renderizar el chat
-add_action('wland_chat_after_render', function($attributes) {
+add_action('braves_chat_after_render', function($attributes) {
     // Tu código aquí
 });
 
 // Admin: Agregar contenido al sidebar
-add_action('wland_chat_admin_sidebar_items', function($current_page) {
+add_action('braves_chat_admin_sidebar_items', function($current_page) {
     echo '<div class="custom-sidebar-content">...</div>';
 });
 ```
@@ -318,27 +318,27 @@ add_action('wland_chat_admin_sidebar_items', function($current_page) {
 
 ```php
 // Verificar si el chat debe mostrarse
-\WlandChat\Helpers::should_display_chat();
+\BravesChat\Helpers::should_display_chat();
 
 // Verificar horarios de disponibilidad
-\WlandChat\Helpers::is_within_availability_hours();
+\BravesChat\Helpers::is_within_availability_hours();
 
 // Obtener configuración del chat
-\WlandChat\Helpers::get_chat_config();
+\BravesChat\Helpers::get_chat_config();
 
 // Obtener mensaje de bienvenida apropiado
-\WlandChat\Helpers::get_welcome_message();
+\BravesChat\Helpers::get_welcome_message();
 ```
 
 ## Internacionalización (i18n)
 
 ### Traducir el Plugin
 
-1. Copia el archivo `languages/wland-chat.pot`
+1. Copia el archivo `languages/braves-chat.pot`
 2. Usa [Poedit](https://poedit.net/) para crear traducciones
 3. Guarda los archivos como:
-   - `wland-chat-es_ES.po` y `wland-chat-es_ES.mo` (Español)
-   - `wland-chat-fr_FR.po` y `wland-chat-fr_FR.mo` (Francés)
+   - `braves-chat-es_ES.po` y `braves-chat-es_ES.mo` (Español)
+   - `braves-chat-fr_FR.po` y `braves-chat-fr_FR.mo` (Francés)
    - etc.
 4. Coloca los archivos en `/wp-content/languages/plugins/`
 
@@ -346,8 +346,8 @@ add_action('wland_chat_admin_sidebar_items', function($current_page) {
 
 ```php
 add_filter('load_textdomain_mofile', function($mofile, $domain) {
-    if ('wland-chat' === $domain) {
-        $mofile = WP_CONTENT_DIR . '/languages/plugins/wland-chat-' . get_locale() . '.mo';
+    if ('braves-chat' === $domain) {
+        $mofile = WP_CONTENT_DIR . '/languages/plugins/braves-chat-' . get_locale() . '.mo';
     }
     return $mofile;
 }, 10, 2);
@@ -380,7 +380,7 @@ El plugin sigue todas las mejores prácticas de seguridad de WordPress:
 
 El plugin incluye `uninstall.php` que realiza limpieza completa:
 
-- Elimina **todas las opciones** de la base de datos con prefijo `wland_chat_`
+- Elimina **todas las opciones** de la base de datos con prefijo `braves_chat_`
 - Borra archivos y directorios creados por el plugin
 - Limpia metadatos de posts y usuarios relacionados
 - Limpia transients y caché de WordPress
@@ -393,7 +393,7 @@ El plugin incluye `uninstall.php` que realiza limpieza completa:
 ### Características
 
 #### Identificación Única de Usuarios
-- **Cookie persistente** `wland_chat_session` con duración de 1 año
+- **Cookie persistente** `braves_chat_session` con duración de 1 año
 - **Hash SHA-256** de 64 caracteres hexadecimales
 - **Fingerprinting multi-característica** del navegador y dispositivo
 - **Fallback automático** a localStorage si las cookies están bloqueadas
@@ -416,7 +416,7 @@ El sistema genera un ID único basado en:
 
 Banner de consentimiento configurable desde el panel de administración:
 
-**Configuración**: WordPress Admin > Ajustes > Wland Chat iA > "Compliance GDPR / Cookies"
+**Configuración**: WordPress Admin > Ajustes > Braves Chat iA > "Compliance GDPR / Cookies"
 
 **Opciones disponibles**:
 - **Habilitar Banner GDPR**: Activa/desactiva el banner de consentimiento
@@ -454,7 +454,7 @@ Esto permite:
 
 #### Cookies (DevTools > Application > Cookies)
 ```
-Name:      wland_chat_session
+Name:      braves_chat_session
 Value:     [hash de 64 caracteres]
 Domain:    tu-dominio.com
 Path:      /
@@ -465,15 +465,15 @@ Secure:    ✓ (solo en HTTPS)
 
 #### Local Storage (DevTools > Application > Local Storage)
 ```
-wland_chat_session_backup:  [hash de 64 caracteres] (fallback)
-wland_chat_fingerprint:     [objeto JSON con datos del fingerprint]
-wland_chat_gdpr_consent:    accepted
+braves_chat_session_backup:  [hash de 64 caracteres] (fallback)
+braves_chat_fingerprint:     [objeto JSON con datos del fingerprint]
+braves_chat_gdpr_consent:    accepted
 ```
 
 #### Consola del Navegador
 ```javascript
-[Wland Fingerprint] Nueva sesión creada: 9f12e684d6abd5ef281b2f...
-[Wland Chat Modal] Usando session_id con fingerprinting: 9f12e684d6abd5ef281b2f...
+[Braves Fingerprint] Nueva sesión creada: 9f12e684d6abd5ef281b2f...
+[Braves Chat Modal] Usando session_id con fingerprinting: 9f12e684d6abd5ef281b2f...
 ```
 
 ### Implementación Técnica
@@ -484,10 +484,10 @@ wland_chat_gdpr_consent:    accepted
 - `includes/class_cookie_manager.php` - Gestión de cookies y configuración GDPR
 
 **JavaScript**:
-- `assets/js/wland_fingerprint.js` - Clase WlandFingerprint con generación de hash
+- `assets/js/braves_fingerprint.js` - Clase BravesFingerprint con generación de hash
 
 **CSS**:
-- `assets/css/wland_gdpr_banner.css` - Estilos del banner GDPR responsive
+- `assets/css/braves_gdpr_banner.css` - Estilos del banner GDPR responsive
 
 #### Flujo de Funcionamiento
 
@@ -495,7 +495,7 @@ wland_chat_gdpr_consent:    accepted
 2. Si GDPR habilitado → Muestra banner y espera consentimiento
 3. Genera fingerprint del navegador (múltiples características)
 4. Calcula hash SHA-256 usando Web Crypto API
-5. Crea cookie `wland_chat_session` (1 año de duración)
+5. Crea cookie `braves_chat_session` (1 año de duración)
 6. Guarda backup en localStorage por si cookies bloqueadas
 7. Cada mensaje incluye `sessionId` en el payload a N8N
 8. En visitas futuras, verifica cambios y regenera si es necesario
@@ -545,22 +545,22 @@ Ver historial completo de cambios y detalles técnicos en [CHANGELOG.md](CHANGEL
 
 **🐛 Correcciones Críticas**:
 - Fixed: Configuración JavaScript duplicada entre templates y class_frontend.php causaba inconsistencias
-- Fixed: Los templates modal.php y screen.php creaban variable `wlandChatConfig` conflictiva con `WlandChatConfig`
+- Fixed: Los templates modal.php y screen.php creaban variable `bravesChatConfig` conflictiva con `BravesChatConfig`
 - Fixed: JavaScript intentaba leer configuración de múltiples objetos con propiedades diferentes (camelCase vs snake_case)
-- Fixed: Eliminada variable duplicada en templates - ahora usa únicamente `WlandChatConfig` desde PHP
+- Fixed: Eliminada variable duplicada en templates - ahora usa únicamente `BravesChatConfig` desde PHP
 - Fixed: Alineación del color picker y input text usando `display: inline-block` con `vertical-align: middle`
 
 **✨ Mejoras**:
-- Improved: Unificación de configuración JavaScript - solo se usa `WlandChatConfig` pasado desde `class_frontend.php`
+- Improved: Unificación de configuración JavaScript - solo se usa `BravesChatConfig` pasado desde `class_frontend.php`
 - Improved: Logs de debug mejorados para troubleshooting (muestra objeto completo y valores de auth_token)
 - Improved: Eliminados emojis de todos los logs de consola en archivos JavaScript
-- Improved: Lectura simplificada de configuración en wland_chat_block_modal.js y wland_chat_block_screen.js
+- Improved: Lectura simplificada de configuración en braves_chat_block_modal.js y braves_chat_block_screen.js
 - Improved: Toggle buttons para expandir/colapsar paletas de colores con animación suave
 - Added: Propiedad `is_available` ahora se lee correctamente desde configuración PHP
 
 **🗑️ Limpieza**:
-- Removed: Bloque `<script>` duplicado en modal.php que creaba `wlandChatConfig`
-- Removed: Bloque `<script>` duplicado en screen.php que creaba `wlandChatConfig`
+- Removed: Bloque `<script>` duplicado en modal.php que creaba `bravesChatConfig`
+- Removed: Bloque `<script>` duplicado en screen.php que creaba `bravesChatConfig`
 - Removed: Emojis de todos los console.log en archivos JavaScript del frontend
 - Removed: Gradiente del botón flotante - ahora usa color sólido
 - Removed: Borde izquierdo de las burbujas de mensajes
@@ -574,22 +574,17 @@ Ver historial completo de cambios y detalles técnicos en [CHANGELOG.md](CHANGEL
 - **1.1.1**: Sistema de cookies con fingerprinting y GDPR
 - **1.0.0**: Versión inicial
 
-## Autores
+## Autor
 
-- **Carlos Vera** (Autor Principal) - [GitHub](https://github.com/Carlos-Vera) - carlos@braveslab.com
-- **Mikel Marqués** (Colaborador) - hola@mikimonokia.com
+- **Carlos Vera** - [GitHub](https://github.com/Carlos-Vera) - carlos@braveslab.com
 
 Desarrollado para **BravesLab.com** - [https://braveslab.com](https://braveslab.com)
-
-### Asistencia en Desarrollo
-
-- **Claude (Anthropic)** - Asistencia en desarrollo v1.2.x
 
 ## Licencia
 
 Este plugin es software comercial. Todos los derechos reservados.
 
-Copyright (c) 2025 Braves Lab LLC
+Copyright (c) 2025 BRAVES LAB LLC
 
 Para más información sobre la licencia, consulta el archivo [LICENSE](LICENSE).
 
@@ -672,7 +667,7 @@ No. Los assets (CSS/JS) solo se cargan cuando es necesario y están optimizados.
 
 **Solución**:
 - Ve a GDPR y activa "Habilitar Banner GDPR"
-- Para testear, borra `wland_chat_gdpr_consent` del localStorage del navegador
+- Para testear, borra `braves_chat_gdpr_consent` del localStorage del navegador
 
 ### Error "Las cookies están bloqueadas"
 
@@ -684,7 +679,7 @@ El sistema tiene fallback automático a localStorage. Si ves este mensaje:
 
 **Solución**:
 1. Abre DevTools > Console
-2. Busca mensajes `[Wland Fingerprint]`
+2. Busca mensajes `[Braves Fingerprint]`
 3. Verifica que el sessionId se genere correctamente
 4. Revisa la petición en DevTools > Network para confirmar que incluye el campo
 
@@ -694,7 +689,7 @@ Para soporte, consultas o reportar problemas:
 
 - **Email**: carlos@braveslab.com
 - **Web**: [https://braveslab.com](https://braveslab.com)
-- **GitHub Issues**: [Reportar un problema](https://github.com/Carlos-Vera/Wland-Chat-iA/issues)
+- **GitHub Issues**: [Reportar un problema](https://github.com/Carlos-Vera/braveschat/issues)
 - **Documentación Técnica**: Ver [CLAUDE.md](CLAUDE.md) para desarrollo
 
 ## 🙏 Agradecimientos
@@ -702,7 +697,6 @@ Para soporte, consultas o reportar problemas:
 - **BravesLab** por el desarrollo, diseño y financiación del proyecto
 - **Carlos Vera** por la visión y dirección técnica
 - **Mikel Marqués** por las contribuciones al código
-- **Claude (Anthropic)** por la asistencia en desarrollo de la arquitectura v1.2.x
 - **La comunidad de WordPress** por los estándares y mejores prácticas
 - **N8N** por la plataforma de automatización que permite la integración con IA
 - **Lottie (Airbnb)** por las animaciones del botón de chat
@@ -739,7 +733,7 @@ El chat funciona en todos los navegadores modernos:
 
 ---
 
-**Wland Chat iA** - Integrando la inteligencia artificial en WordPress de forma profesional.
+**Braves Chat iA** - Integrando la inteligencia artificial en WordPress de forma profesional.
 
 ---
 

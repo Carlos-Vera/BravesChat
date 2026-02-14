@@ -1,6 +1,6 @@
-# Wland Chat iA - Documentación Técnica para Claude Code
+# Braves Chat iA - Documentación Técnica para Claude Code
 
-> **Plugin**: Wland Chat iA
+> **Plugin**: Braves Chat iA
 > **Versión**: 1.2.4
 > **Autor**: Carlos Vera (BravesLab)
 > **Diseño**: Bentō moderno
@@ -14,7 +14,7 @@ Este archivo proporciona orientación técnica completa a Claude Code al trabaja
 
 Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
 
-- **Ruta del plugin**: `/Applications/XAMPP/xamppfiles/htdocs/wordpress/wp-content/plugins/Wland-Chat-iA`
+- **Ruta del plugin**: `/Applications/MAMP/htdocs/wordpress/wp-content/plugins/braveschat`
 - **Raíz de WordPress**: `/Applications/XAMPP/xamppfiles/htdocs/wordpress`
 - **URL de prueba**: `http://localhost/wordpress/wp-admin`
 - **PHP**: `/Applications/XAMPP/xamppfiles/bin/php` (usado para linting)
@@ -22,7 +22,7 @@ Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
     1. CLAUDE.md: agrega los cambios realizados, actualiza la estructura de archivos, incluye aclaraciones que puedan servir para un mejor desarrollo de parte de Claude en el futuro. 
     2. README.md: Agrega los cambios de funciones, estructura de archivos, mejoras, documentación, etc.
     3. CHANGELOG.md: Actualiza con las funciones, mejoras, implementaciones y demas datos importantes que deban estar aquí.
-    4. wland_chat_ia.php: actualiza la versión del plugin.
+    4. braves_chat.php: actualiza la versión del plugin.
     5. about.php: agrega la nueva versión en la lista de changelog de la página siguiendo las reglas abajo establecidas para actualizar la sección de about.
 
 ### Convenciones de Código
@@ -30,7 +30,7 @@ Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
 - **Nomenclatura**: `snake_case` para todas las variables, funciones y archivos
 - **NO usar camelCase** intenta evitar el uso a menos que la sintaxis lo exija
 - **JSDoc**: Cada función nueva debe incluir comentarios JSDoc
-- **Namespace**: Todas las clases PHP usan `WlandChat\Admin`
+- **Namespace**: Todas las clases PHP usan `BravesChat\Admin`
 - **Patrón Singleton**: Todos los componentes admin usan instancia única
 
 ### Comunicación con el Usuario
@@ -46,8 +46,8 @@ Este es un plugin de WordPress ubicado dentro de una instalación XAMPP:
 ## 📁 Estructura de Archivos
 
 ```
-wland-chat-ia/
-├── wland_chat_ia.php                          # Plugin principal (v1.2.2)
+braves-chat-ia/
+├── braves_chat.php                            # Plugin principal (v1.2.4)
 ├── includes/
 │   ├── admin/                                 # Sistema de administración Bentō
 │   │   ├── class_admin_controller.php         # Controlador principal
@@ -77,7 +77,7 @@ wland-chat-ia/
 │   │   ├── admin.js                           # Scripts admin
 │   │   └── chat_widget.js                     # Widget frontend
 │   └── media/
-│       ├── wland-logo.svg                     # Logo del plugin
+│       ├── braves-logo.svg                    # Logo del plugin
 │       └── menu-icon.svg                      # Icono del menú WP
 └── languages/                                 # Traducciones (i18n)
 ```
@@ -92,7 +92,7 @@ wland-chat-ia/
 2. **Separación de Responsabilidades**: Cada clase tiene un propósito específico
 3. **Componentes Reutilizables**: Header, Sidebar y Content compartidos
 4. **Template Helpers**: Métodos estáticos para renderizado rápido
-5. **Namespace**: `WlandChat\Admin` para organización
+5. **Namespace**: `BravesChat\Admin` para organización
 
 ### Flujo de Ejecución
 
@@ -132,13 +132,13 @@ Template (settings.php, appearance.php, etc.)
 - render_availability_page()     // Renderiza Horarios
 - render_gdpr_page()             // Renderiza GDPR
 - enqueue_admin_assets()         // Carga CSS/JS
-- is_wland_admin_page()          // Detecta páginas del plugin
+- is_braves_admin_page()         // Detecta páginas del plugin
 ```
 
 **Registro de páginas**:
 ```php
-// WordPress solo muestra "Wland Chat iA" en el menú
-add_menu_page('Wland Chat iA', ...);
+// WordPress solo muestra "Braves Chat iA" en el menú
+add_menu_page('Braves Chat iA', ...);
 
 // Todas las demás páginas están ocultas (parent_slug = null)
 add_submenu_page(null, 'Resumen', ...);
@@ -167,10 +167,10 @@ $header->render(array(
 
 **Salida HTML**:
 ```html
-<header class="wland-admin-header">
-    <div class="wland-admin-header__logo">
-        <img src="assets/media/wland-logo.svg" alt="Wland Chat iA">
-        <span class="wland-admin-header__version">v1.2.2</span>
+<header class="braves-admin-header">
+    <div class="braves-admin-header__logo">
+        <img src="assets/media/braves-logo.svg" alt="Braves Chat iA">
+        <span class="braves-admin-header__version">v1.2.4</span>
     </div>
 </header>
 ```
@@ -186,7 +186,7 @@ $header->render(array(
 **Características**:
 - 5 secciones con iconos SVG
 - Estado activo automático
-- Hook `wland_chat_admin_menu_items` para extensibilidad
+- Hook `braves_chat_admin_menu_items` para extensibilidad
 
 **Uso**:
 ```php
@@ -197,11 +197,11 @@ $sidebar->render($current_page);
 **Estructura de menú**:
 ```php
 array(
-    array('id' => 'dashboard',   'label' => 'Resumen',    'page_slug' => 'wland-chat-ia'),
-    array('id' => 'settings',    'label' => 'Ajustes',    'page_slug' => 'wland-chat-settings'),
-    array('id' => 'appearance',  'label' => 'Apariencia', 'page_slug' => 'wland-chat-appearance'),
-    array('id' => 'availability','label' => 'Horarios',   'page_slug' => 'wland-chat-availability'),
-    array('id' => 'gdpr',        'label' => 'GDPR',       'page_slug' => 'wland-chat-gdpr'),
+    array('id' => 'dashboard',   'label' => 'Resumen',    'page_slug' => 'braves-chat-ia'),
+    array('id' => 'settings',    'label' => 'Ajustes',    'page_slug' => 'braves-chat-settings'),
+    array('id' => 'appearance',  'label' => 'Apariencia', 'page_slug' => 'braves-chat-appearance'),
+    array('id' => 'availability','label' => 'Horarios',   'page_slug' => 'braves-chat-availability'),
+    array('id' => 'gdpr',        'label' => 'GDPR',       'page_slug' => 'braves-chat-gdpr'),
 )
 ```
 
@@ -227,8 +227,8 @@ array(
 Template_Helpers::card(array(
     'title' => 'Título del Card',
     'description' => 'Descripción breve',
-    'content' => '<input type="text" name="field" class="wland-input">', // ✅ AHORA FUNCIONA
-    'custom_class' => 'wland-card--full-width',
+    'content' => '<input type="text" name="field" class="braves-input">', // ✅ AHORA FUNCIONA
+    'custom_class' => 'braves-card--full-width',
 ));
 ```
 
@@ -270,7 +270,7 @@ Template_Helpers::notice('Configuración guardada correctamente.', 'success');
 Template_Helpers::card(array(
     'title' => 'URL del Webhook',
     'description' => 'Endpoint de N8N',
-    'content' => '<input type="url" name="wland_chat_webhook_url" value="..." class="wland-input">',
+    'content' => '<input type="url" name="braves_chat_webhook_url" value="..." class="braves-input">',
 ));
 ?>
 ```
@@ -286,9 +286,9 @@ Todos los templates siguen la misma estructura:
 ```php
 <?php
 // 1. Imports
-use WlandChat\Admin\Admin_Header;
-use WlandChat\Admin\Admin_Sidebar;
-use WlandChat\Admin\Template_Helpers;
+use BravesChat\Admin\Admin_Header;
+use BravesChat\Admin\Admin_Sidebar;
+use BravesChat\Admin\Template_Helpers;
 
 // 2. Seguridad
 if (!defined('ABSPATH')) exit;
@@ -298,28 +298,28 @@ if (!current_user_can('manage_options')) wp_die('...');
 $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
 $settings_updated = isset($_GET['settings-updated']);
-$option_prefix = 'wland_chat_';
+$option_prefix = 'braves_chat_';
 ?>
 
 <!-- 4. Layout -->
-<div class="wrap wland-admin-wrap">
-    <div class="wland-admin-container">
+<div class="wrap braves-admin-wrap">
+    <div class="braves-admin-container">
 
         <!-- Header -->
         <?php $header->render(array('show_logo' => true, 'show_version' => true)); ?>
 
-        <div class="wland-admin-body">
+        <div class="braves-admin-body">
 
             <!-- Sidebar -->
             <?php $sidebar->render($current_page); ?>
 
             <!-- Content -->
-            <div class="wland-admin-content">
+            <div class="braves-admin-content">
 
                 <!-- Page Header -->
-                <div class="wland-page-header">
-                    <h1 class="wland-page-title">Título</h1>
-                    <p class="wland-page-description">Descripción</p>
+                <div class="braves-page-header">
+                    <h1 class="braves-page-title">Título</h1>
+                    <p class="braves-page-description">Descripción</p>
                 </div>
 
                 <!-- Success Notice -->
@@ -329,12 +329,12 @@ $option_prefix = 'wland_chat_';
 
                 <!-- Form -->
                 <form action="options.php" method="post">
-                    <?php settings_fields('wland_chat_settings'); ?>
+                    <?php settings_fields('braves_chat_settings'); ?>
 
-                    <div class="wland-section">
-                        <h2 class="wland-section__title">Sección</h2>
+                    <div class="braves-section">
+                        <h2 class="braves-section__title">Sección</h2>
 
-                        <div class="wland-card-grid wland-card-grid--2-cols">
+                        <div class="braves-card-grid braves-card-grid--2-cols">
 
                             <?php
                             // Renderizar campos con Template_Helpers::card()
@@ -344,8 +344,8 @@ $option_prefix = 'wland_chat_';
                     </div>
 
                     <!-- Save Button -->
-                    <div class="wland-section wland-section--actions">
-                        <?php submit_button('Guardar cambios', 'primary wland-button'); ?>
+                    <div class="braves-section braves-section--actions">
+                        <?php submit_button('Guardar cambios', 'primary braves-button'); ?>
                     </div>
 
                 </form>
@@ -376,39 +376,39 @@ dashboard.css        → Estilos específicos de páginas
 
 **Layout**:
 ```css
-.wland-admin-wrap          /* Wrapper principal */
-.wland-admin-container     /* Container con padding */
-.wland-admin-header        /* Header con logo */
-.wland-admin-body          /* Body con sidebar + content */
-.wland-admin-sidebar       /* Sidebar de navegación */
-.wland-admin-content       /* Área de contenido */
+.braves-admin-wrap          /* Wrapper principal */
+.braves-admin-container     /* Container con padding */
+.braves-admin-header        /* Header con logo */
+.braves-admin-body          /* Body con sidebar + content */
+.braves-admin-sidebar       /* Sidebar de navegación */
+.braves-admin-content       /* Área de contenido */
 ```
 
 **Componentes**:
 ```css
-.wland-card                     /* Card Bentō */
-.wland-card__title              /* Título del card */
-.wland-card__description        /* Descripción del card */
-.wland-card__content            /* ✅ Contenido del card (v1.2.2) */
-.wland-card--full-width         /* Card ancho completo */
+.braves-card                     /* Card Bentō */
+.braves-card__title              /* Título del card */
+.braves-card__description        /* Descripción del card */
+.braves-card__content            /* ✅ Contenido del card (v1.2.2) */
+.braves-card--full-width         /* Card ancho completo */
 
-.wland-card-grid                /* Grid de cards */
-.wland-card-grid--2-cols        /* Grid de 2 columnas */
-.wland-card-grid--3-cols        /* Grid de 3 columnas */
+.braves-card-grid                /* Grid de cards */
+.braves-card-grid--2-cols        /* Grid de 2 columnas */
+.braves-card-grid--3-cols        /* Grid de 3 columnas */
 
-.wland-toggle-wrapper           /* Wrapper del toggle */
-.wland-toggle-input             /* Input checkbox */
-.wland-toggle-slider            /* Slider visual */
+.braves-toggle-wrapper           /* Wrapper del toggle */
+.braves-toggle-input             /* Input checkbox */
+.braves-toggle-slider            /* Slider visual */
 
-.wland-input                    /* Input text/url/password */
-.wland-textarea                 /* Textarea */
-.wland-select                   /* Select */
-.wland-button                   /* Botón */
-.wland-button--primary          /* Botón primario */
+.braves-input                    /* Input text/url/password */
+.braves-textarea                 /* Textarea */
+.braves-select                   /* Select */
+.braves-button                   /* Botón */
+.braves-button--primary          /* Botón primario */
 
-.wland-notice                   /* Notice/alert */
-.wland-notice--success          /* Success message */
-.wland-notice--error            /* Error message */
+.braves-notice                   /* Notice/alert */
+.braves-notice--success          /* Success message */
+.braves-notice--error            /* Error message */
 ```
 
 ---
@@ -419,33 +419,33 @@ dashboard.css        → Estilos específicos de páginas
 
 **Archivo**: `includes/class_settings.php`
 
-Todas las opciones se registran con prefijo `wland_chat_`:
+Todas las opciones se registran con prefijo `braves_chat_`:
 
 ```php
 // Ajustes
-wland_chat_global_enable         // boolean
-wland_chat_webhook_url           // string (URL)
-wland_chat_n8n_auth_token        // string
-wland_chat_excluded_pages        // array (IDs)
+braves_chat_global_enable         // boolean
+braves_chat_webhook_url           // string (URL)
+braves_chat_n8n_auth_token        // string
+braves_chat_excluded_pages        // array (IDs)
 
 // Apariencia
-wland_chat_header_title          // string
-wland_chat_header_subtitle       // string
-wland_chat_welcome_message       // string (textarea)
-wland_chat_position              // string (bottom-right|bottom-left|center)
-wland_chat_display_mode          // string (modal|fullscreen)
+braves_chat_header_title          // string
+braves_chat_header_subtitle       // string
+braves_chat_welcome_message       // string (textarea)
+braves_chat_position              // string (bottom-right|bottom-left|center)
+braves_chat_display_mode          // string (modal|fullscreen)
 
 // Horarios
-wland_chat_availability_enabled  // boolean
-wland_chat_availability_start    // string (time)
-wland_chat_availability_end      // string (time)
-wland_chat_availability_timezone // string
-wland_chat_availability_message  // string (textarea)
+braves_chat_availability_enabled  // boolean
+braves_chat_availability_start    // string (time)
+braves_chat_availability_end      // string (time)
+braves_chat_availability_timezone // string
+braves_chat_availability_message  // string (textarea)
 
 // GDPR
-wland_chat_gdpr_enabled          // boolean
-wland_chat_gdpr_message          // string (textarea)
-wland_chat_gdpr_accept_text      // string
+braves_chat_gdpr_enabled          // boolean
+braves_chat_gdpr_message          // string (textarea)
+braves_chat_gdpr_accept_text      // string
 ```
 
 ### Guardar Datos
@@ -454,7 +454,7 @@ Los formularios usan el Settings API nativo de WordPress:
 
 ```php
 <form action="options.php" method="post">
-    <?php settings_fields('wland_chat_settings'); ?>
+    <?php settings_fields('braves_chat_settings'); ?>
 
     <!-- Campos aquí -->
 
@@ -470,7 +470,7 @@ Los formularios usan el Settings API nativo de WordPress:
 
 ```php
 // Sidebar: Agregar items de navegación
-add_filter('wland_chat_admin_menu_items', function($items) {
+add_filter('braves_chat_admin_menu_items', function($items) {
     $items[] = array(
         'id' => 'custom',
         'label' => 'Mi Sección',
@@ -482,7 +482,7 @@ add_filter('wland_chat_admin_menu_items', function($items) {
 });
 
 // Sidebar: Agregar contenido extra
-add_action('wland_chat_admin_sidebar_items', function($current_page) {
+add_action('braves_chat_admin_sidebar_items', function($current_page) {
     echo '<div class="custom-sidebar-content">...</div>';
 });
 ```
@@ -499,10 +499,11 @@ add_action('wland_chat_admin_sidebar_items', function($current_page) {
 - Campo de texto para personalizar el mensaje del tooltip del botón flotante
 - Color por defecto del icono SVG cambiado a `#f2f2f2` (gris claro)
 - Tooltip ubicado estratégicamente antes del selector de iconos en la UI
+- Input text con `width: 100%` para consistencia visual
 
 **Implementación**:
 - Input text con `width: 100%` para consistencia visual
-- Opción `wland_chat_bubble_tooltip` registrada en Settings API
+- Opción `braves_chat_bubble_tooltip` registrada en Settings API
 - Default: "Habla con nuestro asistente IA" (traducible)
 - Atributo `title` en botón flotante usa el valor personalizado
 
@@ -513,8 +514,8 @@ add_action('wland_chat_admin_sidebar_items', function($current_page) {
 
 **Opciones registradas**:
 ```php
-wland_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con nuestro asistente IA")
-wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
+braves_chat_bubble_tooltip  // Tooltip del botón flotante (default: "Habla con nuestro asistente IA")
+braves_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 ```
 
 ### 🔄 Detección y Reemplazo Automático de Versiones Antiguas
@@ -522,19 +523,19 @@ wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 **Nueva funcionalidad**: El plugin ahora detecta automáticamente versiones anteriores instaladas y las reemplaza al activar una nueva versión.
 
 **Características**:
-- Escaneo automático del directorio de plugins en busca de versiones antiguas (Wland-Chat-iA-*)
+- Escaneo automático del directorio de plugins en busca de versiones antiguas del plugin
 - Desactivación automática de plugins antiguos si están activos
 - Eliminación automática de directorios de versiones anteriores
 - Preservación de configuraciones del usuario durante la migración
 
 **Implementación**:
-- Método `detect_and_replace_old_versions()` en `WlandChatIA::activate()`
+- Método `detect_and_replace_old_versions()` en `BravesChat::activate()`
 - Uso de WordPress Filesystem API para eliminación segura de directorios
-- Patrón de búsqueda: `Wland-Chat-iA*` para detectar todas las versiones antiguas
+- Patrón de búsqueda para detectar todas las versiones antiguas del plugin anterior
 - Exclusión del directorio actual para evitar auto-eliminación
 
 **Archivos modificados**:
-- `wland_chat_ia.php` - Nuevo método `detect_and_replace_old_versions()` agregado al hook de activación
+- `braves_chat.php` - Nuevo método `detect_and_replace_old_versions()` agregado al hook de activación
 
 **Beneficios**:
 - ✅ Evita conflictos de versiones múltiples instaladas simultáneamente
@@ -543,7 +544,6 @@ wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 - ✅ Experiencia de actualización fluida para usuarios
 
 ---
-
 
 ## 📦 Cambios en v1.2.3
 
@@ -573,15 +573,15 @@ wland_chat_icon_color      // Color del icono SVG (default: #f2f2f2)
 - `class_settings.php` - Registro de 4 opciones de color (default: #01B7AF, #FFFFFF, #333333)
 - `appearance.php` - Cards Bentō con color pickers y paletas colapsables
 - `class_frontend.php` - Método `inject_custom_colors()` con CSS inline
-- `components.css` - Estilos para `.wland-color-picker`, `.wland-palette-toggle`, `.wland-color-preset`
+- `components.css` - Estilos para `.braves-color-picker`, `.braves-palette-toggle`, `.braves-color-preset`
 - `class_admin_controller.php` - Enqueue color_picker.js
 
 **Opciones registradas**:
 ```php
-wland_chat_bubble_color      // Color del botón flotante (default: #01B7AF)
-wland_chat_primary_color     // Color del header y mensajes IA (default: #01B7AF)
-wland_chat_background_color  // Color de fondo del chat (default: #FFFFFF)
-wland_chat_text_color        // Color del texto de mensajes (default: #333333)
+braves_chat_bubble_color      // Color del botón flotante (default: #01B7AF)
+braves_chat_primary_color     // Color del header y mensajes IA (default: #01B7AF)
+braves_chat_background_color  // Color de fondo del chat (default: #FFFFFF)
+braves_chat_text_color        // Color del texto de mensajes (default: #333333)
 ```
 
 **CSS inyectado**:
@@ -601,7 +601,7 @@ El método `inject_custom_colors()` en `class_frontend.php` aplica los colores a
 - 4 iconos SVG optimizados: Original (robot), Círculo, Happy, Burbuja
 - Selector estilo tabs Bentō en página de Apariencia
 - Iconos con `width="48" height="48"` desde viewBox 460x460
-- Opción `wland_chat_chat_icon` registrada en Settings API
+- Opción `braves_chat_chat_icon` registrada en Settings API
 - Icono por defecto: "Original" (robot-chat)
 
 **Implementación**:
@@ -617,7 +617,7 @@ El método `inject_custom_colors()` en `class_frontend.php` aplica los colores a
 **Archivos modificados**:
 - `class_settings.php` - Registro opción `chat_icon` (default: robot-chat)
 - `appearance.php` - Selector tabs Bentō
-- `components.css` - Estilos `.wland-icon-tabs`
+- `components.css` - Estilos `.braves-icon-tabs`
 - `class_admin_controller.php` - Enqueue icon_selector.js
 - `modal.php` / `screen.php` - `<img>` SVG en botón flotante
 - `class_frontend.php` - Eliminada dependencia Lottie
@@ -633,8 +633,8 @@ El método `inject_custom_colors()` en `class_frontend.php` aplica los colores a
 4. ✅ JavaScript maneja `this.chat_icon` con show/hide
 
 **Archivos modificados**:
-- `wland_chat_block_modal.js` - Eliminado init_lottie_animation()
-- `wland_chat_block_screen.js` - Eliminado init_lottie_animation()
+- `braves_chat_block_modal.js` - Eliminado init_lottie_animation()
+- `braves_chat_block_screen.js` - Eliminado init_lottie_animation()
 - `class_frontend.php` - Eliminado wp_dequeue_script('lottie-player')
 
 ### 🔧 Fallback wp.i18n
@@ -663,7 +663,7 @@ const { __, _x, _n, sprintf } = window.wp && window.wp.i18n ? window.wp.i18n : {
 
 **Solución**:
 1. ✅ Agregado `'content' => ''` a defaults
-2. ✅ Agregado bloque de renderizado con `<div class="wland-card__content">`
+2. ✅ Agregado bloque de renderizado con `<div class="braves-card__content">`
 3. ✅ Configurado `wp_kses()` con whitelist completa para inputs
 
 **Archivos modificados**:
@@ -680,14 +680,14 @@ const { __, _x, _n, sprintf } = window.wp && window.wp.i18n ? window.wp.i18n : {
 - Menú lateral de WordPress con colores inconsistentes
 - Variables CSS no aplicadas en todas las páginas
 
-**Causa**: Los selectores CSS en `dashboard.css` solo aplicaban a `.toplevel_page_wland-chat-ia`, pero las subpáginas tienen identificadores diferentes (`.admin_page_wland-chat-settings`, etc.).
+**Causa**: Los selectores CSS en `dashboard.css` solo aplicaban a `.toplevel_page_braves-chat-ia`, pero las subpáginas tienen identificadores diferentes (`.admin_page_braves-chat-settings`, etc.).
 
 **Solución**:
 1. ✅ Extendido todos los selectores CSS para incluir las 5 páginas del plugin
 2. ✅ Agregado estilos del menú lateral de WordPress para mantener consistencia
 3. ✅ Agregado carga de `settings.css` en el controlador
 4. ✅ Aplicado background `#f3f6fc` a todas las páginas
-5. ✅ Forzado estado activo del menú "Wland Chat iA" en todas las subpáginas
+5. ✅ Forzado estado activo del menú "Braves Chat iA" en todas las subpáginas
 
 **Archivos modificados**:
 - `assets/css/admin/dashboard.css` (líneas 13-64, 362-382)
@@ -696,11 +696,11 @@ const { __, _x, _n, sprintf } = window.wp && window.wp.i18n ? window.wp.i18n : {
 **Selectores CSS agregados**:
 ```css
 /* Ahora aplican a TODAS las páginas del plugin */
-.toplevel_page_wland-chat-ia,
-.admin_page_wland-chat-settings,
-.admin_page_wland-chat-appearance,
-.admin_page_wland-chat-availability,
-.admin_page_wland-chat-gdpr {
+.toplevel_page_braves-chat-ia,
+.admin_page_braves-chat-settings,
+.admin_page_braves-chat-appearance,
+.admin_page_braves-chat-availability,
+.admin_page_braves-chat-gdpr {
     background-color: #f3f6fc;
     --wp-components-color-accent: #3858e9;
     /* ... */
@@ -718,21 +718,21 @@ const { __, _x, _n, sprintf } = window.wp && window.wp.i18n ? window.wp.i18n : {
 
 **Uso en templates**:
 ```php
-<label class="wland-toggle-wrapper">
+<label class="braves-toggle-wrapper">
     <input type="checkbox"
            id="option_name"
            name="option_name"
            value="1"
            <?php checked(1, $value); ?>
-           class="wland-toggle-input">
-    <span class="wland-toggle-slider"></span>
+           class="braves-toggle-input">
+    <span class="braves-toggle-slider"></span>
 </label>
 ```
 
 **Características del toggle**:
 - ✅ Ancho: 48px, Alto: 24px
-- ✅ Color inactivo: gris (`--wland-gray-300`)
-- ✅ Color activo: azul primario (`--wland-primary`)
+- ✅ Color inactivo: gris (`--braves-gray-300`)
+- ✅ Color activo: azul primario (`--braves-primary`)
 - ✅ Animación suave de transición
 - ✅ Focus state accesible
 - ✅ Estado disabled con opacidad reducida
@@ -795,255 +795,6 @@ const { __, _x, _n, sprintf } = window.wp && window.wp.i18n ? window.wp.i18n : {
    - **Animación**: Transición suave con `translateY(-20px)` y fade-out
    - **Archivos modificados**:
      - `assets/js/admin_settings.js` - Función init_notice_autohide()
-     - `assets/css/admin/components.css` - Keyframe wland-notice-slide-out
+     - `assets/css/admin/components.css` - Keyframe braves-notice-slide-out
 
 2. **Actualización de iconos de sidebar a versiones sólidas**
-   - Horarios: Cambiado de `access_time` (outline) a `access_time_filled` (solid)
-   - GDPR: Cambiado de `lock` (outline) a `lock` (solid/filled)
-   - **Archivos modificados**: `includes/admin/components/class_admin_sidebar.php`
-
-3. **Actualización de iconos en página About**
-   - Versión: `docs` → `verified` (check badge)
-   - Autor: `settings` → `person_pin` (person card)
-   - Empresa: `chat` → `business_center` (briefcase)
-   - **Archivos modificados**:
-     - `includes/admin/class_template_helpers.php` - Nuevos iconos agregados
-     - `includes/admin/templates/about.php` - Iconos actualizados
-
-4. **Tarjetas informativas clicables**
-   - Tarjetas de información del plugin ahora son clicables con enlaces externos
-   - Mejora de UX para acceso rápido a GitHub y BravesLab website
-   - **Archivos modificados**: `includes/admin/templates/about.php`
-
-**Archivos técnicos modificados**:
-- Total de archivos modificados: 12
-- Líneas de código agregadas: ~150
-- Nueva funcionalidad JavaScript: init_notice_autohide()
-- Nuevas animaciones CSS: wland-notice-slide-out
-- Nuevos iconos Material Design: verified, person_pin, business_center
-
----
-
-## 🛠️ Comandos Útiles
-
-### Linting PHP
-
-```bash
-# Verificar sintaxis de un archivo
-/Applications/XAMPP/xamppfiles/bin/php -l archivo.php
-
-# Verificar todos los archivos PHP del plugin
-find . -name "*.php" -exec /Applications/XAMPP/xamppfiles/bin/php -l {} \;
-```
-
-### Testing en Navegador
-
-```bash
-# URL del admin de WordPress
-http://localhost/wordpress/wp-admin
-
-# URL de la página del plugin
-http://localhost/wordpress/wp-admin/admin.php?page=wland-chat-ia
-```
-
-### Git Workflow
-
-```bash
-# Verificar estado antes de commit
-git status
-git diff
-
-# Crear commit con mensaje descriptivo
-git add .
-git commit -m "v1.2.2 - Fix: Cards content rendering + Form inputs functional"
-
-# Push a repositorio
-git push origin main
-```
-
----
-
-## 🐛 Debugging
-
-### Console Logs
-
-En desarrollo, buscar estos logs en la consola del navegador:
-
-```javascript
-[Wland Fingerprint] Nueva sesión creada: ...
-[Wland Chat Modal] Usando session_id con fingerprinting: ...
-[Wland Chat] Error en webhook: ...
-```
-
-### DevTools
-
-**Cookies** (Application > Cookies):
-```
-wland_chat_session: [hash SHA-256]
-```
-
-**Local Storage** (Application > Local Storage):
-```
-wland_chat_session_backup: [hash]
-wland_chat_fingerprint: {...}
-wland_chat_gdpr_consent: accepted
-```
-
-### Errores Comunes
-
-1. **Inputs no aparecen**: Verificar que `Admin_Content::render_card()` tiene soporte para `content`
-2. **Formularios no guardan**: Verificar nonces y permisos (`manage_options`)
-3. **CSS no carga**: Purgar caché del navegador y plugin de caché
-4. **PHP Fatal Error**: Verificar sintaxis con `php -l` antes de recargar
-
----
-
-## 📋 Checklist de Desarrollo
-
-Antes de hacer commit de cambios importantes:
-
-- [ ] ✅ Todos los archivos PHP pasan `php -l` (linting)
-- [ ] ✅ Funcionalidad testeada en navegador
-- [ ] ✅ Sin errores en consola del navegador
-- [ ] ✅ Formularios guardan datos correctamente
-- [ ] ✅ Diseño Bentō consistente en todas las páginas
-- [ ] ✅ Compatibilidad con WordPress 5.8+
-- [ ] ✅ README.md actualizado si hay nuevas features
-- [ ] ✅ CHANGELOG.md actualizado con cambios
-- [ ] ✅ Versión actualizada en `wland_chat_ia.php`
-- [ ] ✅ Página About actualizada con changelog respetando emojis patterns
-
----
-
-## 📝 Guía de Changelog (IMPORTANTE)
-
-Cuando actualices el changelog en la página About (`includes/admin/templates/about.php`), **SIEMPRE debes respetar** los siguientes emojis y nombres de sección para mantener coherencia:
-
-### Emojis Estándar por Tipo de Cambio
-
-```php
-🔧 Correcciones          // Para bugs fixes (FIXED)
-🎁 Mejoras               // Para improvements (ADDED, IMPROVED)
-⚙️ Características       // Para nuevas features principales (ADDED)
-🔁 Cambios               // Para cambios no-breaking (CHANGED)
-🛠️ Funcionalidades Principales  // Para features core del plugin
-🧬 Arquitectura          // Para cambios estructurales/técnicos
-🔒 Seguridad             // Para mejoras de seguridad
-🇻🇪 i18n                 // Para traducciones e internacionalización
-```
-
-### Ejemplo de Uso en About Page
-
-```php
-<div class="wland-changelog__section">
-    <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
-    <ul>
-        <li><?php _e('FIXED: Descripción del bug corregido', 'wland-chat'); ?></li>
-    </ul>
-</div>
-
-<div class="wland-changelog__section">
-    <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
-    <ul>
-        <li><?php _e('ADDED: Nueva funcionalidad agregada', 'wland-chat'); ?></li>
-        <li><?php _e('IMPROVED: Mejora a funcionalidad existente', 'wland-chat'); ?></li>
-    </ul>
-</div>
-```
-
-### Prefijos de Mensaje
-
-- **FIXED**: Para correcciones de bugs
-- **ADDED**: Para nuevas funcionalidades
-- **IMPROVED**: Para mejoras a funcionalidades existentes
-- **CHANGED**: Para cambios que no son bugs ni mejoras
-- **REMOVED**: Para funcionalidades eliminadas
-- **DEPRECATED**: Para funcionalidades marcadas como obsoletas
-
-### Reglas Importantes
-
-1. ✅ **SIEMPRE usar los emojis exactos** de la lista anterior
-2. ✅ **NUNCA inventar nuevos emojis** para secciones
-3. ✅ **Reutilizar nombres de título** de versiones anteriores (v1.2.1, v1.1.1, etc.)
-4. ✅ **Agrupar cambios por tipo** usando las secciones correspondientes
-5. ✅ **Usar formato de fecha**: "DD de Mes, YYYY" (ejemplo: "26 de Octubre, 2024")
-6. ✅ **Incluir función `_e()` para i18n** en todos los textos
-
-### Dónde Aplicar
-
-- **Archivo**: `includes/admin/templates/about.php`
-- **Sección**: Dentro de `.wland-changelog` > `.wland-changelog__version`
-- **Contexto**: Al crear una nueva versión del plugin
-
-### Proceso de Actualización del Changelog
-
-**IMPORTANTE**: Cuando actualices el changelog en `about.php`, sigue este proceso:
-
-1. **Lee primero `CHANGELOG.md`** para obtener la fecha exacta y los cambios completos
-2. **Compara las fechas** entre `CHANGELOG.md` y `about.php` para asegurar coherencia
-3. **Copia la estructura** de cambios desde `CHANGELOG.md` adaptándola al formato con emojis
-4. **Verifica la fecha** - debe ser idéntica en ambos archivos
-5. **Traduce los prefijos** al formato correspondiente (FIXED → sección 🔧 Correcciones, ADDED/IMPROVED → sección 🎁 Mejoras)
-
-**Ejemplo**:
-
-Si en `CHANGELOG.md` dice:
-```markdown
-## [1.2.2] - 2024-10-26
-### Fixed
-- Los ajustes se perdían al guardar desde diferentes páginas
-```
-
-En `about.php` debe quedar:
-```php
-<p class="wland-changelog__date"><?php _e('26 de Octubre, 2024', 'wland-chat'); ?></p>
-
-<div class="wland-changelog__section">
-    <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
-    <ul>
-        <li><?php _e('FIXED: Los ajustes se perdían al guardar desde diferentes páginas', 'wland-chat'); ?></li>
-    </ul>
-</div>
-```
-
-⚠️ **Nunca inventes fechas** - siempre consulta `CHANGELOG.md` como fuente de verdad.
-
----
-
-## 📚 Recursos
-
-### WordPress
-- **Settings API**: https://developer.wordpress.org/plugins/settings/
-- **Hooks Reference**: https://developer.wordpress.org/reference/hooks/
-- **Coding Standards**: https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
-
-### Diseño
-- **Bentō Design**: https://bento.me
-
-### Herramientas
-- **XAMPP**: https://www.apachefriends.org/
-- **PHP**: https://www.php.net/
-- **N8N**: https://n8n.io/
-
----
-
-## 📞 Soporte y Contacto
-
-- **Email**: carlos@braveslab.com
-- **GitHub Issues**: https://github.com/Carlos-Vera/Wland-Chat-iA/issues
-- **Documentación Usuario**: Ver [README.md](README.md)
-- **Historial de Cambios**: Ver [CHANGELOG.md](CHANGELOG.md)
-
----
-
-## 👥 Autores
-
-- **Carlos Vera** - Desarrollo principal - carlos@braveslab.com
-- **Mikel Marqués** - Contribuciones - hola@mikimonokia.com
-- **Claude (Anthropic)** - Asistencia en desarrollo v1.2.x
-
----
-
-**Wland Chat iA** - Documentación técnica v1.2.4
-
-© 2025 Braves Lab LLC. Todos los derechos reservados.

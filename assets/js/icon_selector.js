@@ -2,16 +2,16 @@
  * Icon Selector - Tabs Bentō
  * @since 1.2.3
  */
-(function() {
+(function () {
     'use strict';
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const tabs = document.querySelectorAll('.wland-icon-tab');
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.braves-icon-tab');
 
         if (!tabs.length) return;
 
-        tabs.forEach(function(tab) {
-            tab.addEventListener('click', function() {
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
                 const radio = this.querySelector('input[type="radio"]');
                 if (radio) {
                     radio.checked = true;

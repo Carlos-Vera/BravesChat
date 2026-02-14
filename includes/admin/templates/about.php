@@ -4,14 +4,14 @@
  *
  * Página informativa con changelog y créditos del plugin
  *
- * @package WlandChat
+ * @package BravesChat
  * @subpackage Admin\Templates
  * @since 1.2.2
  */
 
-use WlandChat\Admin\Admin_Header;
-use WlandChat\Admin\Admin_Sidebar;
-use WlandChat\Admin\Template_Helpers;
+use BravesChat\Admin\Admin_Header;
+use BravesChat\Admin\Admin_Sidebar;
+use BravesChat\Admin\Template_Helpers;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'wland-chat'));
+    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
 // Obtener instancias de componentes
@@ -27,8 +27,8 @@ $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
 ?>
 
-<div class="wrap wland-admin-wrap">
-    <div class="wland-admin-container">
+<div class="wrap braves-admin-wrap">
+    <div class="braves-admin-container">
 
         <?php
         // Renderizar header
@@ -38,51 +38,51 @@ $sidebar = Admin_Sidebar::get_instance();
         ));
         ?>
 
-        <div class="wland-admin-body">
+        <div class="braves-admin-body">
 
             <?php
             // Renderizar sidebar
             $sidebar->render($current_page);
             ?>
 
-            <div class="wland-admin-content">
+            <div class="braves-admin-content">
 
                 <!-- Page Header -->
-                <div class="wland-page-header">
-                    <h1 class="wland-page-title"><?php _e('Acerca de Wland Chat iA', 'wland-chat'); ?></h1>
-                    <p class="wland-page-description">
-                        <?php _e('Información del plugin, historial de cambios y créditos del equipo de desarrollo.', 'wland-chat'); ?>
+                <div class="braves-page-header">
+                    <h1 class="braves-page-title"><?php _e('Acerca de <strong>BravesChat iA</strong>', 'braves-chat'); ?></h1>
+                    <p class="braves-page-description">
+                        <?php _e('Información del plugin y historial de cambios.', 'braves-chat'); ?>
                     </p>
                 </div>
 
                 <!-- Plugin Info Section -->
-                <div class="wland-section">
-                    <h2 class="wland-section__title">
-                        <?php _e('Información del Plugin', 'wland-chat'); ?>
+                <div class="braves-section">
+                    <h2 class="braves-section__title">
+                        <?php _e('Información del Plugin', 'braves-chat'); ?>
                     </h2>
 
-                    <div class="wland-card-grid wland-card-grid--3-cols">
+                    <div class="braves-card-grid braves-card-grid--3-cols">
 
                         <!-- Card: Versión -->
-                        <a href="https://github.com/Carlos-Vera/Wland-Chat-iA" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                        <a href="https://github.com/Carlos-Vera/braveschat" target="_blank" style="text-decoration: none; color: inherit; display: block;">
                             <?php
                             Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('verified', '#023e8a'),
-                                'title' => __('Versión', 'wland-chat'),
-                                'description' => 'v' . WLAND_CHAT_VERSION,
+                                'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
+                                'title' => __('Versión', 'braves-chat'),
+                                'description' => 'v' . BRAVES_CHAT_VERSION,
                                 'footer' => 'GitHub Repository',
                             ));
                             ?>
                         </a>
 
                         <!-- Card: Autor -->
-                        <a href="https://braveslab.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                        <a href="mailto:carlos@braveslab.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
                             <?php
                             Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('logo_dev', '#023e8a'),
-                                'title' => __('Autor Principal', 'wland-chat'),
+                                'icon' => Template_Helpers::get_icon('logo_dev', '#0077b6'),
+                                'title' => __('Autor Principal', 'braves-chat'),
                                 'description' => 'Carlos Vera',
-                                'footer' => 'braveslab.com',
+                                'footer' => 'carlos@braveslab.com',
                             ));
                             ?>
                         </a>
@@ -91,8 +91,8 @@ $sidebar = Admin_Sidebar::get_instance();
                         <a href="https://braveslab.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
                             <?php
                             Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('business_center', '#023e8a'),
-                                'title' => __('Empresa', 'wland-chat'),
+                                'icon' => Template_Helpers::get_icon('business_center', '#0077b6'),
+                                'title' => __('Empresa', 'braves-chat'),
                                 'description' => 'BRAVES LAB LLC',
                                 'footer' => 'braveslab.com',
                             ));
@@ -102,309 +102,326 @@ $sidebar = Admin_Sidebar::get_instance();
                     </div>
                 </div>
 
-                <!-- Team Section -->
-                <div class="wland-section">
-                    <h2 class="wland-section__title">
-                        <?php _e('Equipo de Desarrollo', 'wland-chat'); ?>
-                    </h2>
-
-                    <div class="wland-about-team">
-                        <a href="mailto:carlos@braveslab.com" style="text-decoration: none; color: inherit; display: block;">
-                            <div class="wland-about-team__member">
-                                <h3 class="wland-about-team__name">Carlos Vera</h3>
-                                <p class="wland-about-team__role"><?php _e('Desarrollo Principal', 'wland-chat'); ?></p>
-                                <p class="wland-about-team__email">carlos@braveslab.com</p>
-                            </div>
-                        </a>
-
-                        <a href="mailto:hola@mikimonokia.com" style="text-decoration: none; color: inherit; display: block;">
-                            <div class="wland-about-team__member">
-                                <h3 class="wland-about-team__name">Mikel Marqués</h3>
-                                <p class="wland-about-team__role"><?php _e('Contribuciones', 'wland-chat'); ?></p>
-                                <p class="wland-about-team__email">hola@mikimonokia.com</p>
-                            </div>
-                        </a>
-
-                        <a href="https://claude.ai" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                            <div class="wland-about-team__member">
-                                <h3 class="wland-about-team__name">Claude (Anthropic)</h3>
-                                <p class="wland-about-team__role"><?php _e('Asistencia en Desarrollo v1.2.x', 'wland-chat'); ?></p>
-                                <p class="wland-about-team__email">claude.ai</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Changelog Section -->
-                <div class="wland-section">
-                    <h2 class="wland-section__title">
-                        <?php _e('Historial de Cambios', 'wland-chat'); ?>
+                <div class="braves-section">
+                    <h2 class="braves-section__title">
+                        <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
+
+                    <!-- Version 2.0.0 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--primary">v2.0.0</span>
+                                <?php _e('Lanzamiento Mayor - BravesChat iA 2.0', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('14 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🚀 Lanzamiento Mayor', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('MAJOR: Sistema reestructurado completo adoptando el nombre de "BravesChat iA"', 'braves-chat'); ?></li>
+                                    <li><?php _e('MAJOR: Refactorización profunda de namespaces a BravesChat y BravesChat\Admin', 'braves-chat'); ?></li>
+                                    <li><?php _e('MAJOR: Actualización de estructura de directorios y nombres de archivos principales', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('✨ Nuevas Funcionalidades UI/UX', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Funcionalidad de expansión del chat (botón de maximizar)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Auto-crecimiento del área de texto (textarea) al escribir múltiples líneas', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Enlace directo a la sección "About" desde la tarjeta de versión en el Dashboard', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Estado Minimizado de la burbuja tras interacción (pill shape)', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎨 Mejoras Visuales', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('IMPROVED: Unificación de identidad visual con colores corporativos "Braves Primary"', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Corrección de estilos en burbujas de chat (texto cortado, borders)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Actualización de tooltips predeterminados ("Habla con nuestro asistente IA")', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Icono de enviar mensaje actualizado a diseño personalizado (blanco)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Títulos de menú admin actualizados a "BravesChat iA"', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🐛 Correcciones y Estabilidad', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: Lógica del botón de enviar (estado habilitado/deshabilitado)', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Guardado de configuración en sección "Páginas Excluidas"', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Depuración de salida JSON en integración con n8n', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Renderizado de campos ocultos en formularios de configuración', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
 
                     <!-- Version 1.2.4 -->
-                    <div class="wland-changelog">
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--primary">v1.2.4</span>
-                                <?php _e('Tooltip Personalizable y Color de Icono', 'wland-chat'); ?>
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--primary">v1.2.4</span>
+                                <?php _e('Tooltip Personalizable y Color de Icono', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('17 de Noviembre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('17 de Noviembre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Campo de texto para personalizar el tooltip del botón flotante del chat', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Opción bubble_tooltip registrada en WordPress Settings API', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Card "Tooltip del Botón" en página de Apariencia (antes del selector de iconos)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Atributo title dinámico en botón flotante usando valor personalizado', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Color por defecto del icono SVG cambiado de #5B4CCC a #f2f2f2 (gris claro)', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Mejor organización de opciones en panel de Apariencia', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Tooltip ubicado estratégicamente antes del selector de iconos', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Campo de texto para personalizar el tooltip del botón flotante del chat', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Opción bubble_tooltip registrada en WordPress Settings API', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Card "Tooltip del Botón" en página de Apariencia (antes del selector de iconos)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Atributo title dinámico en botón flotante usando valor personalizado', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Color por defecto del icono SVG cambiado de #5B4CCC a #f2f2f2 (gris claro)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Mejor organización de opciones en panel de Apariencia', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Tooltip ubicado estratégicamente antes del selector de iconos', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔄 Detección Automática de Versiones', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔄 Detección Automática de Versiones', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sistema automático de detección de versiones anteriores del plugin al activar', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Desactivación automática de plugins antiguos si están activos', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Eliminación automática de directorios de versiones anteriores', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Preservación de configuraciones del usuario durante la migración', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Prevención de errores fatales por funciones redeclaradas', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema automático de detección de versiones anteriores del plugin al activar', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Desactivación automática de plugins antiguos si están activos', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Eliminación automática de directorios de versiones anteriores', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Preservación de configuraciones del usuario durante la migración', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Prevención de errores fatales por funciones redeclaradas', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Correcciones', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('FIXED: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Implementación de function_exists() check para prevenir redeclaraciones', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Fallback del color del icono corregido en appearance.php', 'wland-chat'); ?></li>
+                                    <li><?php _e('FIXED: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Implementación de function_exists() check para prevenir redeclaraciones', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Fallback del color del icono corregido en appearance.php', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                     <!-- Version 1.2.3 -->
-                    <div class="wland-changelog">
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--primary">v1.2.3</span>
-                                <?php _e('Personalización de Colores e Iconos SVG', 'wland-chat'); ?>
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--primary">v1.2.3</span>
+                                <?php _e('Personalización de Colores e Iconos SVG', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('26 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('26 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sistema completo de personalización de colores desde panel de Apariencia', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: 4 campos de color personalizables: Color de la Burbuja, Color Primario, Color de Fondo y Color de Texto', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Color picker nativo HTML5 con sincronización a input de texto hexadecimal', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Paleta de colores del tema de WordPress extraída desde theme.json (colapsable)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Paleta por defecto de 8 colores cuando el tema no define colores personalizados', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Sistema de selección de iconos SVG personalizables para botón flotante', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: 4 iconos SVG optimizados (Original/Robot, Círculo, Happy, Burbuja)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Selector estilo tabs Bentō en página de Apariencia', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Toggle buttons para expandir/colapsar paletas de colores con animación suave', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Color pickers con estilo Material Design list (inline-block, vertical-align: middle)', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Diseño tabs horizontal con fondo gris claro y selección con borde morado', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Iconos optimizados 32x32px desde viewBox 460x460', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Diseño responsive (2 columnas en móvil)', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema completo de personalización de colores desde panel de Apariencia', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: 4 campos de color personalizables: Color de la Burbuja, Color Primario, Color de Fondo y Color de Texto', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Color picker nativo HTML5 con sincronización a input de texto hexadecimal', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Paleta de colores del tema de WordPress extraída desde theme.json (colapsable)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Paleta por defecto de 8 colores cuando el tema no define colores personalizados', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema de selección de iconos SVG personalizables para botón flotante', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: 4 iconos SVG optimizados (Original/Robot, Círculo, Happy, Burbuja)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Selector estilo tabs Bentō en página de Apariencia', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Toggle buttons para expandir/colapsar paletas de colores con animación suave', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Color pickers con estilo Material Design list (inline-block, vertical-align: middle)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Diseño tabs horizontal con fondo gris claro y selección con borde morado', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Iconos optimizados 32x32px desde viewBox 460x460', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Diseño responsive (2 columnas en móvil)', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Correcciones', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('FIXED: Eliminada dependencia de Lottie Player (CDN externo)', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Errores de consola por animaciones Lottie no cargadas', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Error JavaScript cuando wp.i18n no está disponible', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Alineación del color picker y input text usando display: inline-block con vertical-align: middle', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Configuración JavaScript duplicada entre templates y class_frontend.php', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Templates modal.php y screen.php creaban variable conflictiva wlandChatConfig', 'wland-chat'); ?></li>
-                                    <li><?php _e('REMOVED: Gradiente del botón flotante - ahora usa color sólido', 'wland-chat'); ?></li>
-                                    <li><?php _e('REMOVED: Borde izquierdo de las burbujas de mensajes', 'wland-chat'); ?></li>
-                                    <li><?php _e('CHANGED: Templates usan img SVG en lugar de animación Lottie', 'wland-chat'); ?></li>
-                                    <li><?php _e('CHANGED: Icono por defecto cambiado a "Original" (robot-chat)', 'wland-chat'); ?></li>
+                                    <li><?php _e('FIXED: Eliminada dependencia de Lottie Player (CDN externo)', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Errores de consola por animaciones Lottie no cargadas', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Error JavaScript cuando wp.i18n no está disponible', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Alineación del color picker y input text usando display: inline-block con vertical-align: middle', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Configuración JavaScript duplicada entre templates y class_frontend.php', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Templates modal.php y screen.php creaban variable conflictiva bravesChatConfig', 'braves-chat'); ?></li>
+                                    <li><?php _e('REMOVED: Gradiente del botón flotante - ahora usa color sólido', 'braves-chat'); ?></li>
+                                    <li><?php _e('REMOVED: Borde izquierdo de las burbujas de mensajes', 'braves-chat'); ?></li>
+                                    <li><?php _e('CHANGED: Templates usan img SVG en lugar de animación Lottie', 'braves-chat'); ?></li>
+                                    <li><?php _e('CHANGED: Icono por defecto cambiado a "Original" (robot-chat)', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.2.2 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--success">v1.2.2</span>
-                                <?php _e('Correcciones y Mejoras UX', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v1.2.2</span>
+                                <?php _e('Correcciones y Mejoras UX', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('25 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('25 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔧 Correcciones', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Correcciones', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('FIXED: Los inputs de formulario no se renderizaban en las páginas de configuración', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: El método Admin_Content::render_card() no soportaba el parámetro content', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: wp_kses_post() eliminaba los elementos de formulario HTML', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Los ajustes se perdían al guardar desde diferentes páginas (Settings, Appearance, Availability, GDPR)', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: El icono del menú mostraba color gris en lugar de blanco cuando estaba activo', 'wland-chat'); ?></li>
-                                    <li><?php _e('FIXED: Script admin_settings.js no se cargaba en páginas Appearance, Availability y GDPR', 'wland-chat'); ?></li>
+                                    <li><?php _e('FIXED: Los inputs de formulario no se renderizaban en las páginas de configuración', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: El método Admin_Content::render_card() no soportaba el parámetro content', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: wp_kses_post() eliminaba los elementos de formulario HTML', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Los ajustes se perdían al guardar desde diferentes páginas (Settings, Appearance, Availability, GDPR)', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: El icono del menú mostraba color gris en lugar de blanco cuando estaba activo', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Script admin_settings.js no se cargaba en páginas Appearance, Availability y GDPR', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sistema de auto-ocultación para notificaciones de éxito con animación slide-up', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Campos ocultos en formularios para preservar ajustes de otras secciones', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: JavaScript para mantener clase wp-has-current-submenu en páginas del plugin', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Iconos de sidebar actualizados a versiones sólidas (Horarios, GDPR)', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Iconos de página About actualizados (Version: verified, Autor: person_pin, Empresa: business_center)', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Tarjetas informativas ahora son clicables con enlaces externos', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Todos los formularios ahora funcionales con diseño Bentō consistente', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Estilos CSS unificados en todas las páginas del admin', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Toggles estilo Bentō implementados en todos los checkboxes', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema de auto-ocultación para notificaciones de éxito con animación slide-up', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Campos ocultos en formularios para preservar ajustes de otras secciones', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: JavaScript para mantener clase wp-has-current-submenu en páginas del plugin', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Iconos de sidebar actualizados a versiones sólidas (Horarios, GDPR)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Iconos de página About actualizados (Version: verified, Autor: person_pin, Empresa: business_center)', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Tarjetas informativas ahora son clicables con enlaces externos', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Todos los formularios ahora funcionales con diseño Bentō consistente', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Estilos CSS unificados en todas las páginas del admin', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Toggles estilo Bentō implementados en todos los checkboxes', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.2.1 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--success">v1.2.1</span>
-                                <?php _e('Rediseño Completo del Admin', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v1.2.1</span>
+                                <?php _e('Rediseño Completo del Admin', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('24 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('24 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('⚙️ Características', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('⚙️ Características', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('Implementación completa del diseño Bentō', 'wland-chat'); ?></li>
-                                    <li><?php _e('Nueva arquitectura modular de componentes', 'wland-chat'); ?></li>
-                                    <li><?php _e('5 páginas de administración: Resumen, Ajustes, Apariencia, Horarios, GDPR', 'wland-chat'); ?></li>
-                                    <li><?php _e('Sidebar único compartido entre todas las páginas', 'wland-chat'); ?></li>
-                                    <li><?php _e('Sistema de Template Helpers para renderizado consistente', 'wland-chat'); ?></li>
+                                    <li><?php _e('Implementación completa del diseño Bentō', 'braves-chat'); ?></li>
+                                    <li><?php _e('Nueva arquitectura modular de componentes', 'braves-chat'); ?></li>
+                                    <li><?php _e('5 páginas de administración: Resumen, Ajustes, Apariencia, Horarios, GDPR', 'braves-chat'); ?></li>
+                                    <li><?php _e('Sidebar único compartido entre todas las páginas', 'braves-chat'); ?></li>
+                                    <li><?php _e('Sistema de Template Helpers para renderizado consistente', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.1.2 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--success">v1.1.2</span>
-                                <?php _e('Cambio de Marca', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v1.1.2</span>
+                                <?php _e('Cambio de Marca', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('23 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('23 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔁 Cambios', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔁 Cambios', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('CHANGED: Weblandia → BravesLab', 'wland-chat'); ?></li>
-                                    <li><?php _e('CHANGED: URLs actualizadas a braveslab.com', 'wland-chat'); ?></li>
-                                    <li><?php _e('CHANGED: Copyright actualizado a BRAVES LAB LLC', 'wland-chat'); ?></li>
+                                    <li><?php _e('CHANGED: Weblandia → BravesLab', 'braves-chat'); ?></li>
+                                    <li><?php _e('CHANGED: URLs actualizadas a braveslab.com', 'braves-chat'); ?></li>
+                                    <li><?php _e('CHANGED: Copyright actualizado a BRAVES LAB LLC', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.1.1 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--primary">v1.1.1</span>
-                                <?php _e('Sistema de Cookies y GDPR', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--primary">v1.1.1</span>
+                                <?php _e('Sistema de Cookies y GDPR', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('16 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('16 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sistema de cookies con fingerprinting del navegador', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Banner de consentimiento GDPR configurable', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Hash SHA-256 para identificación única', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Fallback a localStorage si cookies bloqueadas', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema de cookies con fingerprinting del navegador', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Banner de consentimiento GDPR configurable', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Hash SHA-256 para identificación única', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Fallback a localStorage si cookies bloqueadas', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.1.0 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--success">v1.1.0</span>
-                                <?php _e('Horarios y Páginas Excluidas', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v1.1.0</span>
+                                <?php _e('Horarios y Páginas Excluidas', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('1 de Octubre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('1 de Octubre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('⚙️ Características', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('⚙️ Características', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sistema de horarios de disponibilidad con zonas horarias', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Páginas excluidas configurables (selector múltiple)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Token de autenticación N8N (header X-N8N-Auth)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Mensaje personalizado fuera de horario', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema de horarios de disponibilidad con zonas horarias', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Páginas excluidas configurables (selector múltiple)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Token de autenticación N8N (header X-N8N-Auth)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Mensaje personalizado fuera de horario', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🎁 Mejoras', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎁 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('IMPROVED: Configuración del webhook más flexible', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Validación de URLs de webhook', 'wland-chat'); ?></li>
-                                    <li><?php _e('IMPROVED: Sanitización de inputs en Settings API', 'wland-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Configuración del webhook más flexible', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Validación de URLs de webhook', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Sanitización de inputs en Settings API', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                         <!-- Version 1.0.0 -->
-                        <div class="wland-changelog__version">
-                            <h3 class="wland-changelog__title">
-                                <span class="wland-badge wland-badge--success">v1.0.0</span>
-                                <?php _e('Lanzamiento Inicial', 'wland-chat'); ?>
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v1.0.0</span>
+                                <?php _e('Lanzamiento Inicial', 'braves-chat'); ?>
                             </h3>
-                            <p class="wland-changelog__date"><?php _e('15 de Septiembre, 2025', 'wland-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('15 de Septiembre, 2025', 'braves-chat'); ?></p>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🛠️ Funcionalidades Principales', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🛠️ Funcionalidades Principales', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Integración de chat con IA mediante bloque Gutenberg', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Configuración de webhook N8N', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Sistema de mensajes personalizables', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Dos modos de visualización: Modal y Pantalla completa', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Posicionamiento configurable (derecha, izquierda, centro)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Animación Lottie en botón de chat', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Integración de chat con IA mediante bloque Gutenberg', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Configuración de webhook N8N', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sistema de mensajes personalizables', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Dos modos de visualización: Modal y Pantalla completa', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Posicionamiento configurable (derecha, izquierda, centro)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Animación Lottie en botón de chat', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🧬 Arquitectura', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🧬 Arquitectura', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Estructura OOP con namespaces PHP (WlandChat)', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: WordPress Settings API para configuración', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: WordPress Customizer API para personalización en tiempo real', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Bloque Gutenberg con opciones personalizables', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Estructura OOP con namespaces PHP (BravesChat)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: WordPress Settings API para configuración', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: WordPress Customizer API para personalización en tiempo real', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Bloque Gutenberg con opciones personalizables', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🔒 Seguridad', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔒 Seguridad', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Sanitización completa de inputs', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Nonces en todos los formularios', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Verificación de capacidades de usuario', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Escapado de salidas (esc_html, esc_attr, esc_url)', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Sanitización completa de inputs', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Nonces en todos los formularios', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Verificación de capacidades de usuario', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Escapado de salidas (esc_html, esc_attr, esc_url)', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
 
-                            <div class="wland-changelog__section">
-                                <h4><?php _e('🇻🇪 i18n', 'wland-chat'); ?></h4>
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🇻🇪 i18n', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Preparado para internacionalización', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Text domain: wland-chat', 'wland-chat'); ?></li>
-                                    <li><?php _e('ADDED: Archivo .pot para traducciones', 'wland-chat'); ?></li>
+                                    <li><?php _e('ADDED: Preparado para internacionalización', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Text domain: braves-chat', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Archivo .pot para traducciones', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div><!-- .wland-admin-content -->
+            </div><!-- .braves-admin-content -->
 
-        </div><!-- .wland-admin-body -->
+        </div><!-- .braves-admin-body -->
 
-    </div><!-- .wland-admin-container -->
+    </div><!-- .braves-admin-container -->
 </div><!-- .wrap -->

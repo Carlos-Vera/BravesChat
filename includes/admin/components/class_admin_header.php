@@ -4,16 +4,27 @@
  *
  * Renderiza el header con logo y navegación superior
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
-namespace WlandChat\Admin;
+namespace BravesChat\Admin;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
+
+use function defined;
+use function wp_parse_args;
+use function esc_attr;
+use function esc_url;
+use function admin_url;
+use function esc_attr__;
+use function esc_html;
+use function file_exists;
+use function file_get_contents;
+use function esc_html__;
 
 class Admin_Header {
 
@@ -57,28 +68,31 @@ class Admin_Header {
         );
 
         $args = wp_parse_args($args, $defaults);
+        $custom_class = esc_attr($args['custom_class']);
 
-        ?>
-        <div class="wland-admin-header <?php echo esc_attr($args['custom_class']); ?>">
-            <div class="wland-admin-header__inner">
-                <?php if ($args['show_logo']): ?>
-                <div class="wland-admin-header__logo">
-                    <?php $this->render_logo(); ?>
-                </div>
-                <?php endif; ?>
+        echo '<div class="braves-admin-header ' . $custom_class . '">';
+        echo '<div class="braves-admin-header__inner">';
 
-                <?php if ($args['show_version']): ?>
-                <div class="wland-admin-header__version">
-                    <a href="<?php echo esc_url(admin_url('admin.php?page=wland-chat-about')); ?>"
-                       class="wland-badge wland-badge--primary wland-badge--clickable"
-                       title="<?php echo esc_attr__('Ver información del plugin', 'wland-chat'); ?>">
-                        <?php echo esc_html('v' . WLAND_CHAT_VERSION); ?>
-                    </a>
-                </div>
-                <?php endif; ?>
-            </div>
-        </div>
-        <?php
+        if ($args['show_logo']) {
+            echo '<div class="braves-admin-header__logo">';
+            $this->render_logo();
+            echo '</div>';
+        }
+
+        if ($args['show_version']) {
+            $admin_url = esc_url(admin_url('admin.php?page=braves-chat-about'));
+            $title = esc_attr__('Ver información del plugin', 'braves-chat');
+            $version = esc_html('v' . BRAVES_CHAT_VERSION);
+
+            echo '<div class="braves-admin-header__version">';
+            echo '<a href="' . $admin_url . '" class="braves-badge braves-badge--primary braves-badge--clickable" title="' . $title . '">';
+            echo $version;
+            echo '</a>';
+            echo '</div>';
+        }
+
+        echo '</div>';
+        echo '</div>';
     }
 
     /**
@@ -87,15 +101,15 @@ class Admin_Header {
      * @return void
      */
     private function render_logo() {
-        $logo_path = WLAND_CHAT_PLUGIN_DIR . 'assets/media/wland-logo.svg';
+        $logo_path = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/braves-logo.svg';
 
         if (file_exists($logo_path)) {
             // Renderizar SVG directamente
             echo file_get_contents($logo_path);
         } else {
             // Fallback a texto
-            echo '<span class="wland-admin-header__logo-text">';
-            echo esc_html__('Wland Chat iA', 'wland-chat');
+            echo '<span class="braves-admin-header__logo-text">';
+            echo esc_html__('BravesChat iA', 'braves-chat');
             echo '</span>';
         }
     }

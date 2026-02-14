@@ -2,19 +2,19 @@
  * Admin Settings Navigation
  * JavaScript para la navegación entre secciones en la página de ajustes
  *
- * @package WlandChat
- * @version 1.2.1
+ * @package BravesChat
+ * @version 1.2.4
  */
 
-(function() {
+(function () {
     'use strict';
 
     /**
      * Initialize settings navigation
      */
     function init_settings_navigation() {
-        const nav_links = document.querySelectorAll('.wland-settings-nav-link');
-        const sections = document.querySelectorAll('.wland-settings-section');
+        const nav_links = document.querySelectorAll('.braves-settings-nav-link');
+        const sections = document.querySelectorAll('.braves-settings-section');
 
         if (!nav_links.length || !sections.length) {
             return;
@@ -24,17 +24,17 @@
         show_section('general');
 
         // Agregar listeners a los links de navegación
-        nav_links.forEach(function(link) {
-            link.addEventListener('click', function(e) {
+        nav_links.forEach(function (link) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
 
                 const section_id = this.getAttribute('data-section');
 
                 // Actualizar estado activo en sidebar
-                nav_links.forEach(function(nav_link) {
-                    nav_link.parentElement.classList.remove('wland-admin-nav__item--active');
+                nav_links.forEach(function (nav_link) {
+                    nav_link.parentElement.classList.remove('braves-admin-nav__item--active');
                 });
-                this.parentElement.classList.add('wland-admin-nav__item--active');
+                this.parentElement.classList.add('braves-admin-nav__item--active');
 
                 // Mostrar sección correspondiente
                 show_section(section_id);
@@ -48,9 +48,9 @@
         });
 
         // Agregar listeners a los links de subsecciones
-        const sublinks = document.querySelectorAll('.wland-admin-nav__sublink');
-        sublinks.forEach(function(link) {
-            link.addEventListener('click', function(e) {
+        const sublinks = document.querySelectorAll('.braves-admin-nav__sublink');
+        sublinks.forEach(function (link) {
+            link.addEventListener('click', function (e) {
                 e.preventDefault();
 
                 const field_id = this.getAttribute('data-field');
@@ -58,33 +58,33 @@
 
                 if (field_element) {
                     // Primero mostrar la sección padre
-                    const parent_section = field_element.closest('.wland-settings-section');
+                    const parent_section = field_element.closest('.braves-settings-section');
                     if (parent_section) {
                         const section_id = parent_section.getAttribute('data-section');
 
                         // Actualizar navegación
                         const parent_link = document.querySelector('[data-section="' + section_id + '"]');
                         if (parent_link) {
-                            nav_links.forEach(function(nav_link) {
-                                nav_link.parentElement.classList.remove('wland-admin-nav__item--active');
+                            nav_links.forEach(function (nav_link) {
+                                nav_link.parentElement.classList.remove('braves-admin-nav__item--active');
                             });
-                            parent_link.parentElement.classList.add('wland-admin-nav__item--active');
+                            parent_link.parentElement.classList.add('braves-admin-nav__item--active');
                         }
 
                         show_section(section_id);
                     }
 
                     // Luego hacer scroll al campo
-                    setTimeout(function() {
+                    setTimeout(function () {
                         field_element.scrollIntoView({
                             behavior: 'smooth',
                             block: 'center'
                         });
 
                         // Highlight del campo
-                        field_element.classList.add('wland-field-highlight');
-                        setTimeout(function() {
-                            field_element.classList.remove('wland-field-highlight');
+                        field_element.classList.add('braves-field-highlight');
+                        setTimeout(function () {
+                            field_element.classList.remove('braves-field-highlight');
                         }, 2000);
                     }, 300);
                 }
@@ -102,10 +102,10 @@
                 // Actualizar navegación
                 const link = document.querySelector('[data-section="' + hash + '"]');
                 if (link) {
-                    nav_links.forEach(function(nav_link) {
-                        nav_link.parentElement.classList.remove('wland-admin-nav__item--active');
+                    nav_links.forEach(function (nav_link) {
+                        nav_link.parentElement.classList.remove('braves-admin-nav__item--active');
                     });
-                    link.parentElement.classList.add('wland-admin-nav__item--active');
+                    link.parentElement.classList.add('braves-admin-nav__item--active');
                 }
             }
         }
@@ -117,9 +117,9 @@
      * @param {string} section_id - ID de la sección a mostrar
      */
     function show_section(section_id) {
-        const sections = document.querySelectorAll('.wland-settings-section');
+        const sections = document.querySelectorAll('.braves-settings-section');
 
-        sections.forEach(function(section) {
+        sections.forEach(function (section) {
             if (section.getAttribute('data-section') === section_id) {
                 section.style.display = 'block';
             } else {
@@ -139,18 +139,18 @@
      * Auto-hide notices with flip animation
      */
     function init_notice_autohide() {
-        const notices = document.querySelectorAll('.wland-notice');
+        const notices = document.querySelectorAll('.braves-notice');
 
         if (notices.length === 0) {
             return; // No hay notificaciones
         }
 
-        notices.forEach(function(notice) {
-            setTimeout(function() {
-                notice.classList.add('wland-notice--hiding');
+        notices.forEach(function (notice) {
+            setTimeout(function () {
+                notice.classList.add('braves-notice--hiding');
 
                 // Remover del DOM después de la animación
-                setTimeout(function() {
+                setTimeout(function () {
                     notice.remove();
                 }, 500); // Duración de la animación slide-out
             }, 3000); // 3 segundos antes de empezar a ocultar
@@ -158,18 +158,80 @@
     }
 
     /**
+     * Initialize excluded pages buttons
+     */
+    function init_excluded_pages_buttons() {
+        const selectAllBtn = document.getElementById('braves-select-all-pages');
+        const deselectAllBtn = document.getElementById('braves-deselect-all-pages');
+        const selectBox = document.getElementById('braves_chat_excluded_pages');
+
+        if (selectAllBtn && selectBox) {
+            selectAllBtn.addEventListener('click', function () {
+                for (let i = 0; i < selectBox.options.length; i++) {
+                    selectBox.options[i].selected = true;
+                }
+            });
+        }
+
+        if (deselectAllBtn && selectBox) {
+            deselectAllBtn.addEventListener('click', function () {
+                for (let i = 0; i < selectBox.options.length; i++) {
+                    selectBox.options[i].selected = false;
+                }
+            });
+        }
+    }
+
+    /**
+     * Initialize skin visibility logic
+     */
+    function init_skin_logic() {
+        const skinSelect = document.getElementById('braves_chat_chat_skin');
+        if (!skinSelect) return;
+
+        function toggleSkinSettings() {
+            const skin = skinSelect.value;
+            const bravesSkinElements = document.querySelectorAll('.braves-skin-only');
+            const defaultSkinElements = document.querySelectorAll('.default-skin-only');
+
+            if (skin === 'braves') {
+                // Show Braves skin elements
+                bravesSkinElements.forEach(el => el.style.display = 'block');
+                // Hide Default skin elements
+                defaultSkinElements.forEach(el => el.style.display = 'none');
+            } else {
+                // Show Default skin elements
+                defaultSkinElements.forEach(el => el.style.display = 'block');
+                // Hide Braves skin elements
+                bravesSkinElements.forEach(el => el.style.display = 'none');
+            }
+        }
+
+        // Initial check
+        toggleSkinSettings();
+
+        // Listen for changes
+        skinSelect.addEventListener('change', toggleSkinSettings);
+    }
+
+    /**
      * Initialize on DOM ready
      */
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             init_settings_navigation();
+            init_excluded_pages_buttons();
+            init_skin_logic();
             // Pequeño delay para asegurar que todo el DOM esté listo
             setTimeout(init_notice_autohide, 100);
         });
     } else {
         init_settings_navigation();
+        init_excluded_pages_buttons();
+        init_skin_logic();
         // Pequeño delay para asegurar que todo el DOM esté listo
         setTimeout(init_notice_autohide, 100);
     }
+
 
 })();

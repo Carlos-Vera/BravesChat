@@ -1,12 +1,12 @@
 /**
- * Bloque de Gutenberg para Wland Chat iA
- * 
- * @package WlandChat
+ * Bloque de Gutenberg para Braves Chat iA
+ *
+ * @package BravesChat
  */
 
-(function(blocks, element, blockEditor, components, i18n) {
+(function (blocks, element, blockEditor, components, i18n) {
     'use strict';
-    
+
     var el = element.createElement;
     var __ = i18n.__;
     var InspectorControls = blockEditor.InspectorControls || wp.editor.InspectorControls;
@@ -18,67 +18,67 @@
     /**
      * Registrar el bloque
      */
-    blocks.registerBlockType('wland/chat-widget', {
-        title: __('Wland Chat iA', 'wland-chat'),
-        description: __('Widget de chat con IA de BravesLab para integración con N8N', 'wland-chat'),
+    blocks.registerBlockType('braves/chat-widget', {
+        title: __('Braves Chat iA', 'braves-chat'),
+        description: __('Widget de chat con IA de BravesLab para integración con N8N', 'braves-chat'),
         icon: 'format-chat',
         category: 'widgets',
         keywords: [
-            __('chat', 'wland-chat'),
-            __('ia', 'wland-chat'),
-            __('asistente', 'wland-chat'),
-            __('braveslab', 'wland-chat'),
-            __('ai', 'wland-chat')
+            __('chat', 'braves-chat'),
+            __('ia', 'braves-chat'),
+            __('asistente', 'braves-chat'),
+            __('braveslab', 'braves-chat'),
+            __('ai', 'braves-chat')
         ],
         supports: {
             html: false,
             multiple: false,
             reusable: true
         },
-        
+
         attributes: {
             webhookUrl: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultWebhookUrl || 'https://flow.braveslab.com/webhook/1427244e-a23c-4184-a536-d02622f36325/chat'
+                default: window.bravesChatBlock?.defaultWebhookUrl || 'https://flow.braveslab.com/webhook/1427244e-a23c-4184-a536-d02622f36325/chat'
             },
             headerTitle: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultHeaderTitle || 'BravesLab AI Assistant'
+                default: window.bravesChatBlock?.defaultHeaderTitle || 'BravesLab AI Assistant'
             },
             headerSubtitle: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultHeaderSubtitle || 'Artificial Intelligence Marketing Agency'
+                default: window.bravesChatBlock?.defaultHeaderSubtitle || 'Artificial Intelligence Marketing Agency'
             },
             welcomeMessage: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultWelcomeMessage || '¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?'
+                default: window.bravesChatBlock?.defaultWelcomeMessage || '¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?'
             },
             position: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultPosition || 'bottom-right'
+                default: window.bravesChatBlock?.defaultPosition || 'bottom-right'
             },
             displayMode: {
                 type: 'string',
-                default: window.wlandChatBlock?.defaultDisplayMode || 'modal'
+                default: window.bravesChatBlock?.defaultDisplayMode || 'modal'
             }
         },
 
         /**
          * Función de edición (en el editor de Gutenberg)
          */
-        edit: function(props) {
+        edit: function (props) {
             var attributes = props.attributes;
             var setAttributes = props.setAttributes;
 
             // Función para obtener el nombre legible de la posición
             function getPositionLabel(position) {
-                switch(position) {
+                switch (position) {
                     case 'bottom-right':
-                        return __('Abajo Derecha', 'wland-chat');
+                        return __('Abajo Derecha', 'braves-chat');
                     case 'bottom-left':
-                        return __('Abajo Izquierda', 'wland-chat');
+                        return __('Abajo Izquierda', 'braves-chat');
                     case 'center':
-                        return __('Centro', 'wland-chat');
+                        return __('Centro', 'braves-chat');
                     default:
                         return position;
                 }
@@ -86,99 +86,99 @@
 
             // Función para obtener el nombre legible del modo
             function getDisplayModeLabel(mode) {
-                switch(mode) {
+                switch (mode) {
                     case 'modal':
-                        return __('Modal', 'wland-chat');
+                        return __('Modal', 'braves-chat');
                     case 'fullscreen':
-                        return __('Pantalla Completa', 'wland-chat');
+                        return __('Pantalla Completa', 'braves-chat');
                     default:
                         return mode;
                 }
             }
 
-            return el('div', { className: 'wp-block-wland-chat-widget' },
+            return el('div', { className: 'wp-block-braves-chat-widget' },
                 // Panel de Inspector (sidebar derecho)
                 el(InspectorControls, {},
                     el(PanelBody, {
-                        title: __('Configuración del Chat', 'wland-chat'),
+                        title: __('Configuración del Chat', 'braves-chat'),
                         initialOpen: true
                     },
                         // Webhook URL
                         el(TextControl, {
-                            label: __('URL del Webhook', 'wland-chat'),
+                            label: __('URL del Webhook', 'braves-chat'),
                             value: attributes.webhookUrl,
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ webhookUrl: value });
                             },
-                            help: __('URL del webhook de N8N para procesar los mensajes', 'wland-chat'),
+                            help: __('URL del webhook de N8N para procesar los mensajes', 'braves-chat'),
                             type: 'url'
                         }),
-                        
+
                         // Título del Header
                         el(TextControl, {
-                            label: __('Título del Header', 'wland-chat'),
+                            label: __('Título del Header', 'braves-chat'),
                             value: attributes.headerTitle,
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ headerTitle: value });
                             },
-                            help: __('Título que aparecerá en la cabecera del chat', 'wland-chat')
+                            help: __('Título que aparecerá en la cabecera del chat', 'braves-chat')
                         }),
-                        
+
                         // Subtítulo del Header
                         el(TextControl, {
-                            label: __('Subtítulo del Header', 'wland-chat'),
+                            label: __('Subtítulo del Header', 'braves-chat'),
                             value: attributes.headerSubtitle,
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ headerSubtitle: value });
                             },
-                            help: __('Subtítulo descriptivo del chat', 'wland-chat')
+                            help: __('Subtítulo descriptivo del chat', 'braves-chat')
                         }),
-                        
+
                         // Mensaje de Bienvenida
                         el(TextareaControl, {
-                            label: __('Mensaje de Bienvenida', 'wland-chat'),
+                            label: __('Mensaje de Bienvenida', 'braves-chat'),
                             value: attributes.welcomeMessage,
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ welcomeMessage: value });
                             },
                             rows: 5,
-                            help: __('Primer mensaje que verá el usuario al abrir el chat', 'wland-chat')
+                            help: __('Primer mensaje que verá el usuario al abrir el chat', 'braves-chat')
                         }),
-                        
+
                         // Posición del Chat
                         el(SelectControl, {
-                            label: __('Posición del Chat', 'wland-chat'),
+                            label: __('Posición del Chat', 'braves-chat'),
                             value: attributes.position,
                             options: [
-                                { label: __('Abajo Derecha', 'wland-chat'), value: 'bottom-right' },
-                                { label: __('Abajo Izquierda', 'wland-chat'), value: 'bottom-left' },
-                                { label: __('Centro', 'wland-chat'), value: 'center' }
+                                { label: __('Abajo Derecha', 'braves-chat'), value: 'bottom-right' },
+                                { label: __('Abajo Izquierda', 'braves-chat'), value: 'bottom-left' },
+                                { label: __('Centro', 'braves-chat'), value: 'center' }
                             ],
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ position: value });
                             },
-                            help: __('Ubicación del botón de chat en la página', 'wland-chat')
+                            help: __('Ubicación del botón de chat en la página', 'braves-chat')
                         }),
-                        
+
                         // Modo de Visualización
                         el(SelectControl, {
-                            label: __('Modo de Visualización', 'wland-chat'),
+                            label: __('Modo de Visualización', 'braves-chat'),
                             value: attributes.displayMode,
                             options: [
-                                { label: __('Modal (Ventana emergente)', 'wland-chat'), value: 'modal' },
-                                { label: __('Pantalla completa', 'wland-chat'), value: 'fullscreen' }
+                                { label: __('Modal (Ventana emergente)', 'braves-chat'), value: 'modal' },
+                                { label: __('Pantalla completa', 'braves-chat'), value: 'fullscreen' }
                             ],
-                            onChange: function(value) {
+                            onChange: function (value) {
                                 setAttributes({ displayMode: value });
                             },
-                            help: __('Cómo se mostrará la ventana de chat', 'wland-chat')
+                            help: __('Cómo se mostrará la ventana de chat', 'braves-chat')
                         })
                     )
                 ),
-                
+
                 // Vista previa en el editor
                 el('div', {
-                    className: 'wland-chat-block-preview',
+                    className: 'braves-chat-block-preview',
                     style: {
                         border: '2px dashed #01B7AF',
                         borderRadius: '10px',
@@ -208,7 +208,7 @@
                             boxShadow: '0 4px 15px rgba(1, 183, 175, 0.3)'
                         }
                     }, '💬'),
-                    
+
                     // Título
                     el('h3', {
                         style: {
@@ -218,7 +218,7 @@
                             fontWeight: '600'
                         }
                     }, attributes.headerTitle),
-                    
+
                     // Subtítulo
                     el('p', {
                         style: {
@@ -228,7 +228,7 @@
                             fontWeight: '500'
                         }
                     }, attributes.headerSubtitle),
-                    
+
                     // Mensaje de bienvenida (preview)
                     el('div', {
                         style: {
@@ -251,10 +251,10 @@
                                 lineHeight: '1.6',
                                 color: '#242424'
                             }
-                        }, attributes.welcomeMessage.substring(0, 150) + 
-                           (attributes.welcomeMessage.length > 150 ? '...' : ''))
+                        }, attributes.welcomeMessage.substring(0, 150) +
+                        (attributes.welcomeMessage.length > 150 ? '...' : ''))
                     ),
-                    
+
                     // Información de configuración
                     el('div', {
                         style: {
@@ -269,33 +269,33 @@
                             maxWidth: '500px'
                         }
                     },
-                        el('div', { 
-                            style: { 
+                        el('div', {
+                            style: {
                                 marginBottom: '8px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center'
-                            } 
-                        }, 
-                            '📍 ', __('Posición:', 'wland-chat'), ' ',
-                            el('strong', { 
-                                style: { marginLeft: '5px' } 
+                            }
+                        },
+                            '📍 ', __('Posición:', 'braves-chat'), ' ',
+                            el('strong', {
+                                style: { marginLeft: '5px' }
                             }, getPositionLabel(attributes.position))
                         ),
-                        el('div', { 
-                            style: { 
+                        el('div', {
+                            style: {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center'
-                            } 
-                        }, 
-                            '🖥️ ', __('Modo:', 'wland-chat'), ' ',
-                            el('strong', { 
-                                style: { marginLeft: '5px' } 
+                            }
+                        },
+                            '🖥️ ', __('Modo:', 'braves-chat'), ' ',
+                            el('strong', {
+                                style: { marginLeft: '5px' }
                             }, getDisplayModeLabel(attributes.displayMode))
                         )
                     ),
-                    
+
                     // Nota informativa
                     el('p', {
                         style: {
@@ -304,7 +304,7 @@
                             color: '#666',
                             fontStyle: 'italic'
                         }
-                    }, __('Esta es una vista previa. El chat aparecerá en el frontend con la configuración indicada.', 'wland-chat'))
+                    }, __('Esta es una vista previa. El chat aparecerá en el frontend con la configuración indicada.', 'braves-chat'))
                 )
             );
         },
@@ -313,7 +313,7 @@
          * Función de guardado (no guardamos nada en el contenido)
          * El renderizado se hace en PHP
          */
-        save: function() {
+        save: function () {
             return null;
         }
     });

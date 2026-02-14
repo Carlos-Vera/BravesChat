@@ -4,16 +4,26 @@
  *
  * Renderiza la navegación lateral con tabs
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
-namespace WlandChat\Admin;
+namespace BravesChat\Admin;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
+
+use function defined;
+use function sanitize_text_field;
+use function __;
+use function admin_url;
+use function apply_filters;
+use function esc_url;
+use function esc_attr;
+use function esc_html;
+use function do_action;
 
 class Admin_Sidebar {
 
@@ -51,29 +61,28 @@ class Admin_Sidebar {
      */
     public function render($current_page = '') {
         if (empty($current_page)) {
-            $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : 'wland-chat-ia';
+            $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : 'braves-chat';
         }
 
         $menu_items = $this->get_menu_items();
 
-        ?>
-        <nav class="wland-admin-sidebar">
-            <div class="wland-admin-sidebar__inner">
-                <?php foreach ($menu_items as $item): ?>
-                    <?php $this->render_menu_item($item, $current_page); ?>
-                <?php endforeach; ?>
-            </div>
+        echo '<nav class="braves-admin-sidebar">';
+        echo '<div class="braves-admin-sidebar__inner">';
+        
+        foreach ($menu_items as $item) {
+            $this->render_menu_item($item, $current_page);
+        }
+        
+        echo '</div>'; // .braves-admin-sidebar__inner
 
-            <?php
-            /**
-             * Hook para agregar items adicionales al sidebar
-             *
-             * @param string $current_page Página actual
-             */
-            do_action('wland_chat_admin_sidebar_items', $current_page);
-            ?>
-        </nav>
-        <?php
+        /**
+         * Hook para agregar items adicionales al sidebar
+         *
+         * @param string $current_page Página actual
+         */
+        do_action('braves_chat_admin_sidebar_items', $current_page);
+        
+        echo '</nav>';
     }
 
     /**
@@ -85,37 +94,37 @@ class Admin_Sidebar {
         $items = array(
             array(
                 'id' => 'dashboard',
-                'label' => __('Dashboard', 'wland-chat'),
-                'url' => admin_url('admin.php?page=wland-chat-ia'),
-                'page_slug' => 'wland-chat-ia',
+                'label' => __('Dashboard', 'braves-chat'),
+                'url' => admin_url('admin.php?page=braves-chat'),
+                'page_slug' => 'braves-chat',
                 'icon' => $this->get_icon_svg('dashboard'),
             ),
             array(
                 'id' => 'settings',
-                'label' => __('Ajustes', 'wland-chat'),
-                'url' => admin_url('admin.php?page=wland-chat-settings'),
-                'page_slug' => 'wland-chat-settings',
+                'label' => __('Ajustes', 'braves-chat'),
+                'url' => admin_url('admin.php?page=braves-chat-settings'),
+                'page_slug' => 'braves-chat-settings',
                 'icon' => $this->get_icon_svg('settings'),
             ),
             array(
                 'id' => 'appearance',
-                'label' => __('Apariencia', 'wland-chat'),
-                'url' => admin_url('admin.php?page=wland-chat-appearance'),
-                'page_slug' => 'wland-chat-appearance',
+                'label' => __('Apariencia', 'braves-chat'),
+                'url' => admin_url('admin.php?page=braves-chat-appearance'),
+                'page_slug' => 'braves-chat-appearance',
                 'icon' => $this->get_icon_svg('appearance'),
             ),
             array(
                 'id' => 'availability',
-                'label' => __('Horarios', 'wland-chat'),
-                'url' => admin_url('admin.php?page=wland-chat-availability'),
-                'page_slug' => 'wland-chat-availability',
+                'label' => __('Horarios', 'braves-chat'),
+                'url' => admin_url('admin.php?page=braves-chat-availability'),
+                'page_slug' => 'braves-chat-availability',
                 'icon' => $this->get_icon_svg('availability'),
             ),
             array(
                 'id' => 'gdpr',
-                'label' => __('GDPR', 'wland-chat'),
-                'url' => admin_url('admin.php?page=wland-chat-gdpr'),
-                'page_slug' => 'wland-chat-gdpr',
+                'label' => __('GDPR', 'braves-chat'),
+                'url' => admin_url('admin.php?page=braves-chat-gdpr'),
+                'page_slug' => 'braves-chat-gdpr',
                 'icon' => $this->get_icon_svg('gdpr'),
             ),
         );
@@ -125,7 +134,7 @@ class Admin_Sidebar {
          *
          * @param array $items Items del menú
          */
-        return apply_filters('wland_chat_admin_menu_items', $items);
+        return apply_filters('braves_chat_admin_menu_items', $items);
     }
 
     /**
@@ -137,24 +146,25 @@ class Admin_Sidebar {
      */
     private function render_menu_item($item, $current_page) {
         $is_active = ($item['page_slug'] === $current_page);
-        $item_class = 'wland-admin-sidebar__item';
+        $item_class = 'braves-admin-sidebar__item';
 
         if ($is_active) {
-            $item_class .= ' wland-admin-sidebar__item--active';
+            $item_class .= ' braves-admin-sidebar__item--active';
         }
 
-        ?>
-        <a href="<?php echo esc_url($item['url']); ?>"
-           class="<?php echo esc_attr($item_class); ?>"
-           data-page="<?php echo esc_attr($item['page_slug']); ?>">
-            <span class="wland-admin-sidebar__icon">
-                <?php echo $item['icon']; ?>
-            </span>
-            <span class="wland-admin-sidebar__label">
-                <?php echo esc_html($item['label']); ?>
-            </span>
-        </a>
-        <?php
+        $url = esc_url($item['url']);
+        $class = esc_attr($item_class);
+        $page_slug = esc_attr($item['page_slug']);
+        $label = esc_html($item['label']);
+        
+        echo '<a href="' . $url . '" class="' . $class . '" data-page="' . $page_slug . '">';
+        echo '<span class="braves-admin-sidebar__icon">';
+        echo $item['icon'];
+        echo '</span>';
+        echo '<span class="braves-admin-sidebar__label">';
+        echo $label;
+        echo '</span>';
+        echo '</a>';
     }
 
     /**

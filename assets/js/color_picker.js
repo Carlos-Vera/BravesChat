@@ -1,35 +1,35 @@
 /**
- * Color Picker Sync - Wland Chat iA
+ * Color Picker Sync - Braves Chat iA
  *
  * Sincroniza input type="color" con input type="text" y paleta de colores predefinidos
  *
- * @package WlandChat
+ * @package BravesChat
  * @since 1.2.4
  */
 
-(function() {
+(function () {
     'use strict';
 
     /**
      * Inicializar sincronización de color pickers
      */
     function init_color_pickers() {
-        const color_pickers = document.querySelectorAll('.wland-color-picker');
+        const color_pickers = document.querySelectorAll('.braves-color-picker');
 
-        color_pickers.forEach(function(picker) {
-            const text_input = picker.parentElement.querySelector('.wland-color-text');
+        color_pickers.forEach(function (picker) {
+            const text_input = picker.parentElement.querySelector('.braves-color-text');
 
             if (!text_input) {
                 return;
             }
 
             // Sincronizar cuando cambia el color picker
-            picker.addEventListener('input', function() {
+            picker.addEventListener('input', function () {
                 text_input.value = picker.value.toUpperCase();
             });
 
             // Sincronizar cuando cambia el texto (opcional, pero útil)
-            text_input.addEventListener('input', function() {
+            text_input.addEventListener('input', function () {
                 const color = text_input.value.trim();
                 // Validar formato hexadecimal
                 if (/^#[0-9A-F]{6}$/i.test(color)) {
@@ -43,22 +43,22 @@
      * Inicializar botones de paleta de colores predefinidos
      */
     function init_color_presets() {
-        const preset_buttons = document.querySelectorAll('.wland-color-preset');
+        const preset_buttons = document.querySelectorAll('.braves-color-preset');
 
-        preset_buttons.forEach(function(button) {
+        preset_buttons.forEach(function (button) {
             // Agregar efecto hover
-            button.addEventListener('mouseenter', function() {
+            button.addEventListener('mouseenter', function () {
                 this.style.transform = 'scale(1.1)';
                 this.style.borderColor = '#9CA3AF';
             });
 
-            button.addEventListener('mouseleave', function() {
+            button.addEventListener('mouseleave', function () {
                 this.style.transform = 'scale(1)';
                 this.style.borderColor = '#E5E7EB';
             });
 
             // Aplicar color al hacer clic
-            button.addEventListener('click', function(e) {
+            button.addEventListener('click', function (e) {
                 e.preventDefault();
 
                 const color = this.getAttribute('data-color');
@@ -80,7 +80,7 @@
 
                 // Efecto visual de selección
                 this.style.transform = 'scale(0.95)';
-                setTimeout(function() {
+                setTimeout(function () {
                     button.style.transform = 'scale(1)';
                 }, 100);
             });
@@ -91,10 +91,10 @@
      * Inicializar toggles de paleta de colores
      */
     function init_palette_toggles() {
-        const toggle_buttons = document.querySelectorAll('.wland-palette-toggle');
+        const toggle_buttons = document.querySelectorAll('.braves-palette-toggle');
 
-        toggle_buttons.forEach(function(button) {
-            button.addEventListener('click', function(e) {
+        toggle_buttons.forEach(function (button) {
+            button.addEventListener('click', function (e) {
                 e.preventDefault();
 
                 const palette_id = this.getAttribute('data-palette-target');
@@ -105,18 +105,18 @@
                 }
 
                 // Toggle clases
-                const is_expanded = this.classList.contains('wland-palette-toggle--expanded');
+                const is_expanded = this.classList.contains('braves-palette-toggle--expanded');
 
                 if (is_expanded) {
                     // Colapsar
-                    this.classList.remove('wland-palette-toggle--expanded');
-                    palette.classList.remove('wland-color-palette--expanded');
-                    palette.classList.add('wland-color-palette--collapsed');
+                    this.classList.remove('braves-palette-toggle--expanded');
+                    palette.classList.remove('braves-color-palette--expanded');
+                    palette.classList.add('braves-color-palette--collapsed');
                 } else {
                     // Expandir
-                    this.classList.add('wland-palette-toggle--expanded');
-                    palette.classList.remove('wland-color-palette--collapsed');
-                    palette.classList.add('wland-color-palette--expanded');
+                    this.classList.add('braves-palette-toggle--expanded');
+                    palette.classList.remove('braves-color-palette--collapsed');
+                    palette.classList.add('braves-color-palette--expanded');
                 }
             });
         });

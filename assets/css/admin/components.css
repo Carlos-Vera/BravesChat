@@ -2,107 +2,112 @@
  * Componentes del Admin
  * Cards, Buttons, Toggles, Notices - Estilo Bentō
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
 /* ==================== CARD GRID (BENTO LAYOUT) ==================== */
-.wland-card-grid {
+.braves-card-grid {
     display: grid;
-    gap: var(--wland-card-gap);
-    margin-bottom: var(--wland-space-xl);
+    gap: var(--braves-card-gap);
+    margin-bottom: var(--braves-space-xl);
 }
 
-.wland-card-grid--2-cols {
+.braves-card-grid--2-cols {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.wland-card-grid--3-cols {
+.braves-card-grid--3-cols {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.wland-card-grid--4-cols {
+.braves-card-grid--4-cols {
     grid-template-columns: repeat(4, 1fr);
 }
 
 /* ==================== CARDS ==================== */
-.wland-card {
-    background: var(--wland-white);
-    border: 1px solid var(--wland-gray-200);
-    border-radius: var(--wland-radius-lg);
-    padding: var(--wland-space-xl);
-    box-shadow: var(--wland-shadow-sm);
-    transition: all var(--wland-transition-base);
+.braves-card {
+    background: var(--braves-white);
+    border: 1px solid var(--braves-gray-200);
+    border-radius: 24px;
+    /* More rounded for Bento feel */
+    padding: var(--braves-space-xl);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    /* Softer shadow */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    gap: var(--wland-space-md);
+    gap: var(--braves-space-md);
+    position: relative;
+    overflow: hidden;
 }
 
-.wland-card:hover {
-    box-shadow: var(--wland-shadow-md);
-    transform: translateY(-2px);
+.braves-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    transform: translateY(-4px);
 }
 
-.wland-card__icon {
+.braves-card__icon {
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.wland-card__icon svg {
+.braves-card__icon svg {
     width: 30px;
     height: 30px;
 }
 
-.wland-card__title {
-    font-size: var(--wland-text-lg);
-    font-weight: var(--wland-font-semibold);
-    color: var(--wland-gray-900);
+.braves-card__title {
+    font-size: var(--braves-text-lg);
+    font-weight: var(--braves-font-semibold);
+    color: var(--braves-gray-900);
     margin: 0;
-    line-height: var(--wland-leading-tight);
+    line-height: var(--braves-leading-tight);
 }
 
-.wland-card__subtitle {
-    font-size: var(--wland-text-sm);
-    color: var(--wland-gray-600);
+.braves-card__subtitle {
+    font-size: var(--braves-text-sm);
+    color: var(--braves-gray-600);
     margin: 0;
 }
 
-.wland-card__description {
-    font-size: var(--wland-text-base);
-    color: var(--wland-gray-700);
+.braves-card__description {
+    font-size: var(--braves-text-base);
+    color: var(--braves-gray-700);
     margin: 0;
-    line-height: var(--wland-leading-relaxed);
+    line-height: var(--braves-leading-relaxed);
     flex: 1;
 }
 
-.wland-card__action {
+.braves-card__action {
     margin-top: auto;
-    padding-top: var(--wland-space-sm);
+    padding-top: var(--braves-space-sm);
 }
 
-.wland-card__footer {
-    padding-top: var(--wland-space-md);
-    font-size: var(--wland-text-sm);
-    color: var(--wland-gray-600);
+.braves-card__footer {
+    padding-top: var(--braves-space-md);
+    font-size: var(--braves-text-sm);
+    color: var(--braves-gray-600);
 }
 
-.wland-card--compact {
-    padding: var(--wland-space-lg);
+.braves-card--compact {
+    padding: var(--braves-space-lg);
 }
 
 /* ==================== BUTTONS ==================== */
-.wland-button {
+.braves-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--wland-space-sm);
+    gap: var(--braves-space-sm);
     padding: 12px 32px;
-    font-size: var(--wland-text-base);
+    font-size: var(--braves-text-base);
     font-weight: 600;
-    font-family: var(--wland-font-sans);
+    font-family: var(--braves-font-sans);
     line-height: 1.5;
-    border-radius: 50px; /* Bordes completamente redondeados estilo Bentō */
+    border-radius: 50px;
+    /* Bordes completamente redondeados estilo Bentō */
     text-decoration: none;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -111,113 +116,113 @@
     white-space: nowrap;
 }
 
-.wland-button:focus {
+.braves-button:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(56, 88, 233, 0.15);
 }
 
 /* Button Primary */
-.wland-button--primary {
-    background: var(--wland-primary);
-    color: var(--wland-white);
+.braves-button--primary {
+    background: var(--braves-primary);
+    color: var(--braves-white);
     box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2);
 }
 
-.wland-button--primary:hover {
-    background: var(--wland-primary-hover);
-    color: var(--wland-white);
+.braves-button--primary:hover {
+    background: var(--braves-primary-hover);
+    color: var(--braves-white);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(56, 88, 233, 0.3);
 }
 
-.wland-button--primary:active {
+.braves-button--primary:active {
     transform: translateY(0);
     box-shadow: 0 1px 2px rgba(56, 88, 233, 0.2);
 }
 
 /* Button Secondary */
-.wland-button--secondary {
-    background: var(--wland-white);
-    color: var(--wland-gray-700);
-    border: 1px solid var(--wland-gray-300);
+.braves-button--secondary {
+    background: var(--braves-white);
+    color: var(--braves-gray-700);
+    border: 1px solid var(--braves-gray-300);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.wland-button--secondary:hover {
-    background: var(--wland-gray-50);
-    border-color: var(--wland-gray-400);
-    color: var(--wland-gray-900);
+.braves-button--secondary:hover {
+    background: var(--braves-gray-50);
+    border-color: var(--braves-gray-400);
+    color: var(--braves-gray-900);
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.wland-button--secondary:active {
+.braves-button--secondary:active {
     transform: translateY(0);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 /* Button Link */
-.wland-button--link {
+.braves-button--link {
     background: transparent;
-    color: var(--wland-primary);
+    color: var(--braves-primary);
     border: none;
-    padding: var(--wland-space-sm) var(--wland-space-md);
+    padding: var(--braves-space-sm) var(--braves-space-md);
     box-shadow: none;
 }
 
-.wland-button--link:hover {
-    color: var(--wland-primary-hover);
+.braves-button--link:hover {
+    color: var(--braves-primary-hover);
     text-decoration: underline;
     transform: none;
     box-shadow: none;
 }
 
 /* Button Outline */
-.wland-button--outline {
+.braves-button--outline {
     background: transparent;
-    color: var(--wland-primary);
-    border: 2px solid var(--wland-primary);
+    color: var(--braves-primary);
+    border: 2px solid var(--braves-primary);
     box-shadow: none;
 }
 
-.wland-button--outline:hover {
-    background: var(--wland-primary);
-    color: var(--wland-white);
+.braves-button--outline:hover {
+    background: var(--braves-primary);
+    color: var(--braves-white);
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2);
 }
 
-.wland-button--outline:active {
+.braves-button--outline:active {
     transform: translateY(0);
 }
 
-.wland-button__icon {
+.braves-button__icon {
     display: flex;
     align-items: center;
 }
 
-.wland-button__text {
+.braves-button__text {
     display: inline-block;
 }
 
 /* Button Group */
-.wland-button-group {
+.braves-button-group {
     display: flex;
-    gap: var(--wland-space-md);
+    gap: var(--braves-space-md);
     flex-wrap: wrap;
 }
 
 /* WordPress Submit Button Override - Estilo Bentō */
-.wland-button-group .button-primary,
-.wland-button-group input[type="submit"].button-primary {
+.braves-button-group .button-primary,
+.braves-button-group input[type="submit"].button-primary {
     padding: 12px 32px !important;
-    font-size: var(--wland-text-base) !important;
+    font-size: var(--braves-text-base) !important;
     font-weight: 600 !important;
     line-height: 1.5 !important;
     border-radius: 50px !important;
     border: none !important;
-    background: var(--wland-primary) !important;
-    color: var(--wland-white) !important;
+    background: var(--braves-primary) !important;
+    color: var(--braves-white) !important;
     box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2) !important;
     text-shadow: none !important;
     height: auto !important;
@@ -225,230 +230,232 @@
     cursor: pointer !important;
 }
 
-.wland-button-group .button-primary:hover,
-.wland-button-group input[type="submit"].button-primary:hover {
-    background: var(--wland-primary-hover) !important;
-    color: var(--wland-white) !important;
+.braves-button-group .button-primary:hover,
+.braves-button-group input[type="submit"].button-primary:hover {
+    background: var(--braves-primary-hover) !important;
+    color: var(--braves-white) !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(56, 88, 233, 0.3) !important;
 }
 
-.wland-button-group .button-primary:active,
-.wland-button-group input[type="submit"].button-primary:active {
+.braves-button-group .button-primary:active,
+.braves-button-group input[type="submit"].button-primary:active {
     transform: translateY(0);
     box-shadow: 0 1px 2px rgba(56, 88, 233, 0.2) !important;
 }
 
-.wland-button-group .button-primary:focus,
-.wland-button-group input[type="submit"].button-primary:focus {
+.braves-button-group .button-primary:focus,
+.braves-button-group input[type="submit"].button-primary:focus {
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(56, 88, 233, 0.15) !important;
 }
 
 /* ==================== BADGES ==================== */
-.wland-badge {
+.braves-badge {
     display: inline-flex;
     align-items: center;
-    padding: var(--wland-space-xs) var(--wland-space-md);
-    font-size: var(--wland-text-sm);
-    font-weight: var(--wland-font-medium);
-    border-radius: var(--wland-radius-full);
+    padding: var(--braves-space-xs) var(--braves-space-md);
+    font-size: var(--braves-text-sm);
+    font-weight: var(--braves-font-medium);
+    border-radius: var(--braves-radius-full);
     line-height: 1;
 }
 
-.wland-badge--primary {
-    background: var(--wland-primary-lighter);
-    color: var(--wland-primary);
+.braves-badge--primary {
+    background: var(--braves-primary-lighter);
+    color: var(--braves-primary);
 }
 
-.wland-badge--success {
-    background: var(--wland-success-light);
-    color: var(--wland-success);
+.braves-badge--success {
+    background: var(--braves-success-light);
+    color: var(--braves-success);
 }
 
-.wland-badge--warning {
-    background: var(--wland-warning-light);
-    color: var(--wland-warning);
+.braves-badge--warning {
+    background: var(--braves-warning-light);
+    color: var(--braves-warning);
 }
 
-.wland-badge--error {
-    background: var(--wland-error-light);
-    color: var(--wland-error);
+.braves-badge--error {
+    background: var(--braves-error-light);
+    color: var(--braves-error);
 }
 
 /* Badge clickeable */
-.wland-badge--clickable {
+.braves-badge--clickable {
     text-decoration: none;
     cursor: pointer;
-    transition: all var(--wland-transition-fast);
+    transition: all var(--braves-transition-fast);
 }
 
-.wland-badge--clickable:hover {
+.braves-badge--clickable:hover {
     transform: translateY(-1px);
-    box-shadow: var(--wland-shadow-sm);
+    box-shadow: var(--braves-shadow-sm);
 }
 
-.wland-badge--clickable.wland-badge--primary:hover {
-    background: var(--wland-primary-light);
-    color: var(--wland-white);
+.braves-badge--clickable.braves-badge--primary:hover {
+    background: var(--braves-primary-light);
+    color: var(--braves-white);
 }
 
 /* ==================== TOGGLES / SWITCHES ==================== */
-.wland-toggle {
-    margin-bottom: var(--wland-space-md);
+.braves-toggle {
+    margin-bottom: var(--braves-space-md);
 }
 
-.wland-toggle__control {
+.braves-toggle__control {
     display: flex;
     align-items: center;
 }
 
-.wland-toggle__input {
+.braves-toggle__input {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
 
-.wland-toggle__label {
+.braves-toggle__label {
     display: flex;
     align-items: center;
-    gap: var(--wland-space-md);
+    gap: var(--braves-space-md);
     cursor: pointer;
     user-select: none;
 }
 
-.wland-toggle__switch {
+.braves-toggle__switch {
     position: relative;
     width: 48px;
     height: 24px;
-    background: var(--wland-gray-300);
-    border-radius: var(--wland-radius-full);
-    transition: background var(--wland-transition-fast);
+    background: var(--braves-gray-300);
+    border-radius: var(--braves-radius-full);
+    transition: background var(--braves-transition-fast);
     flex-shrink: 0;
 }
 
-.wland-toggle__switch::before {
+.braves-toggle__switch::before {
     content: '';
     position: absolute;
     top: 2px;
     left: 2px;
     width: 20px;
     height: 20px;
-    background: var(--wland-white);
+    background: var(--braves-white);
     border-radius: 50%;
-    transition: transform var(--wland-transition-fast);
-    box-shadow: var(--wland-shadow-sm);
+    transition: transform var(--braves-transition-fast);
+    box-shadow: var(--braves-shadow-sm);
 }
 
-.wland-toggle__input:checked + .wland-toggle__label .wland-toggle__switch {
-    background: var(--wland-primary);
+.braves-toggle__input:checked+.braves-toggle__label .braves-toggle__switch {
+    background: var(--braves-primary);
 }
 
-.wland-toggle__input:checked + .wland-toggle__label .wland-toggle__switch::before {
+.braves-toggle__input:checked+.braves-toggle__label .braves-toggle__switch::before {
     transform: translateX(24px);
 }
 
-.wland-toggle__input:focus + .wland-toggle__label .wland-toggle__switch {
-    outline: 2px solid var(--wland-primary);
+.braves-toggle__input:focus+.braves-toggle__label .braves-toggle__switch {
+    outline: 2px solid var(--braves-primary);
     outline-offset: 2px;
 }
 
-.wland-toggle__text {
-    font-size: var(--wland-text-base);
-    font-weight: var(--wland-font-medium);
-    color: var(--wland-gray-900);
+.braves-toggle__text {
+    font-size: var(--braves-text-base);
+    font-weight: var(--braves-font-medium);
+    color: var(--braves-gray-900);
 }
 
-.wland-toggle__description {
-    margin: var(--wland-space-sm) 0 0 62px;
-    font-size: var(--wland-text-sm);
-    color: var(--wland-gray-600);
+.braves-toggle__description {
+    margin: var(--braves-space-sm) 0 0 62px;
+    font-size: var(--braves-text-sm);
+    color: var(--braves-gray-600);
 }
 
 /* ==================== TOGGLE WRAPPER (SIMPLIFIED) ==================== */
 /* Versión simplificada para uso en formularios */
-.wland-toggle-wrapper {
+.braves-toggle-wrapper {
     position: relative;
     display: inline-block;
 }
 
-.wland-toggle-input {
+.braves-toggle-input {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.wland-toggle-slider {
+.braves-toggle-slider {
     position: relative;
     display: inline-block;
     width: 48px;
     height: 24px;
-    background-color: var(--wland-gray-300);
-    border-radius: var(--wland-radius-full);
-    transition: background-color var(--wland-transition-fast);
+    background-color: var(--braves-gray-300);
+    border-radius: var(--braves-radius-full);
+    transition: background-color var(--braves-transition-fast);
     cursor: pointer;
 }
 
-.wland-toggle-slider::before {
+.braves-toggle-slider::before {
     content: '';
     position: absolute;
     top: 2px;
     left: 2px;
     width: 20px;
     height: 20px;
-    background-color: var(--wland-white);
+    background-color: var(--braves-white);
     border-radius: 50%;
-    transition: transform var(--wland-transition-fast);
-    box-shadow: var(--wland-shadow-sm);
+    transition: transform var(--braves-transition-fast);
+    box-shadow: var(--braves-shadow-sm);
 }
 
-.wland-toggle-input:checked + .wland-toggle-slider {
-    background-color: var(--wland-primary);
+.braves-toggle-input:checked+.braves-toggle-slider {
+    background-color: var(--braves-primary);
 }
 
-.wland-toggle-input:checked + .wland-toggle-slider::before {
+.braves-toggle-input:checked+.braves-toggle-slider::before {
     transform: translateX(24px);
 }
 
-.wland-toggle-input:focus + .wland-toggle-slider {
-    outline: 2px solid var(--wland-primary);
+.braves-toggle-input:focus+.braves-toggle-slider {
+    outline: 2px solid var(--braves-primary);
     outline-offset: 2px;
 }
 
-.wland-toggle-input:disabled + .wland-toggle-slider {
+.braves-toggle-input:disabled+.braves-toggle-slider {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
 /* ==================== NOTICES / ALERTS - Estilo Bentō ==================== */
-.wland-notice {
-    padding: var(--wland-space-lg);
-    border-radius: var(--wland-radius-lg);
-    margin-bottom: var(--wland-space-lg);
-    margin-top: var(--wland-space-lg);
+.braves-notice {
+    padding: var(--braves-space-lg);
+    border-radius: var(--braves-radius-lg);
+    margin-bottom: var(--braves-space-lg);
+    margin-top: var(--braves-space-lg);
     border: none;
-    box-shadow: var(--wland-shadow-md);
-    animation: wland-notice-fade-in 0.3s ease-out;
+    box-shadow: var(--braves-shadow-md);
+    animation: braves-notice-fade-in 0.3s ease-out;
 }
 
-@keyframes wland-notice-fade-in {
+@keyframes braves-notice-fade-in {
     from {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes wland-notice-slide-out {
+@keyframes braves-notice-slide-out {
     0% {
         opacity: 1;
         transform: translateY(0);
         max-height: 200px;
     }
+
     100% {
         opacity: 0;
         transform: translateY(-20px);
@@ -460,185 +467,187 @@
     }
 }
 
-.wland-notice--hiding {
-    animation: wland-notice-slide-out 0.5s ease-out forwards;
+.braves-notice--hiding {
+    animation: braves-notice-slide-out 0.5s ease-out forwards;
     overflow: hidden;
 }
 
-.wland-notice__content {
-    font-size: var(--wland-text-base);
-    line-height: var(--wland-leading-relaxed);
-    color: var(--wland-white);
+.braves-notice__content {
+    font-size: var(--braves-text-base);
+    line-height: var(--braves-leading-relaxed);
+    color: var(--braves-white);
     font-weight: 500;
 }
 
-.wland-notice--info {
-    background: var(--wland-info);
+.braves-notice--info {
+    background: var(--braves-info);
 }
 
-.wland-notice--success {
-    background: var(--wland-success);
+.braves-notice--success {
+    background: var(--braves-success);
 }
 
-.wland-notice--warning {
-    background: var(--wland-warning);
+.braves-notice--warning {
+    background: var(--braves-warning);
 }
 
-.wland-notice--error {
-    background: var(--wland-error);
+.braves-notice--error {
+    background: var(--braves-error);
 }
 
 /* ==================== ABOUT PAGE ==================== */
 /* Team section */
-.wland-about-team {
+.braves-about-team {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--wland-space-xl);
-    margin-top: var(--wland-space-lg);
+    gap: var(--braves-space-xl);
+    margin-top: var(--braves-space-lg);
 }
 
-.wland-about-team__member {
-    padding: var(--wland-space-xl);
-    background: var(--wland-white);
-    border: 1px solid var(--wland-gray-200);
-    border-radius: var(--wland-radius-lg);
-    box-shadow: var(--wland-shadow-sm);
-    transition: all var(--wland-transition-fast);
+.braves-about-team__member {
+    padding: var(--braves-space-xl);
+    background: var(--braves-white);
+    border: 1px solid var(--braves-gray-200);
+    border-radius: var(--braves-radius-lg);
+    box-shadow: var(--braves-shadow-sm);
+    transition: all var(--braves-transition-fast);
     cursor: pointer;
 }
 
-.wland-about-team__member:hover {
-    box-shadow: var(--wland-shadow-md);
+.braves-about-team__member:hover {
+    box-shadow: var(--braves-shadow-md);
     transform: translateY(-2px);
 }
 
 /* Clickeable cards */
-a:has(.wland-card),
-a:has(.wland-about-team__member) {
+a:has(.braves-card),
+a:has(.braves-about-team__member) {
     cursor: pointer;
     outline: none !important;
 }
 
-a:has(.wland-card):focus,
-a:has(.wland-about-team__member):focus,
-a:has(.wland-card):focus-visible,
-a:has(.wland-about-team__member):focus-visible {
+a:has(.braves-card):focus,
+a:has(.braves-about-team__member):focus,
+a:has(.braves-card):focus-visible,
+a:has(.braves-about-team__member):focus-visible {
     outline: none !important;
     box-shadow: none !important;
 }
 
-a:has(.wland-card) .wland-card:hover,
-a:has(.wland-about-team__member) .wland-about-team__member:hover {
+a:has(.braves-card) .braves-card:hover,
+a:has(.braves-about-team__member) .braves-about-team__member:hover {
     cursor: pointer;
 }
 
-.wland-about-team__name {
-    font-size: var(--wland-text-lg);
-    font-weight: var(--wland-font-semibold);
-    color: var(--wland-gray-900);
-    margin: 0 0 var(--wland-space-xs) 0;
+.braves-about-team__name {
+    font-size: var(--braves-text-lg);
+    font-weight: var(--braves-font-semibold);
+    color: var(--braves-gray-900);
+    margin: 0 0 var(--braves-space-xs) 0;
 }
 
-.wland-about-team__role {
-    font-size: var(--wland-text-sm);
-    color: var(--wland-gray-600);
-    margin: 0 0 var(--wland-space-sm) 0;
+.braves-about-team__role {
+    font-size: var(--braves-text-sm);
+    color: var(--braves-gray-600);
+    margin: 0 0 var(--braves-space-sm) 0;
 }
 
-.wland-about-team__email {
-    font-size: var(--wland-text-sm);
-    color: var(--wland-primary);
+.braves-about-team__email {
+    font-size: var(--braves-text-sm);
+    color: var(--braves-primary);
     margin: 0;
-    font-family: var(--wland-font-mono);
+    font-family: var(--braves-font-mono);
 }
 
 /* Changelog section */
-.wland-changelog {
+.braves-changelog {
     display: flex;
     flex-direction: column;
-    gap: var(--wland-space-2xl);
+    gap: var(--braves-space-2xl);
 }
 
-.wland-changelog__version {
-    padding: var(--wland-space-xl);
-    background: var(--wland-white);
-    border: 1px solid var(--wland-gray-200);
-    border-radius: var(--wland-radius-lg);
-    box-shadow: var(--wland-shadow-sm);
+.braves-changelog__version {
+    padding: var(--braves-space-xl);
+    background: var(--braves-white);
+    border: 1px solid var(--braves-gray-200);
+    border-radius: var(--braves-radius-lg);
+    box-shadow: var(--braves-shadow-sm);
 }
 
-.wland-changelog__title {
+.braves-changelog__title {
     display: flex;
     align-items: center;
-    gap: var(--wland-space-md);
-    font-size: var(--wland-text-xl);
-    font-weight: var(--wland-font-semibold);
-    color: var(--wland-gray-900);
-    margin: 0 0 var(--wland-space-xs) 0;
+    gap: var(--braves-space-md);
+    font-size: var(--braves-text-xl);
+    font-weight: var(--braves-font-semibold);
+    color: var(--braves-gray-900);
+    margin: 0 0 var(--braves-space-xs) 0;
 }
 
-.wland-changelog__date {
-    font-size: var(--wland-text-sm);
-    color: var(--wland-gray-600);
-    margin: 0 0 var(--wland-space-lg) 0;
+.braves-changelog__date {
+    font-size: var(--braves-text-sm);
+    color: var(--braves-gray-600);
+    margin: 0 0 var(--braves-space-lg) 0;
 }
 
-.wland-changelog__section {
-    margin-top: var(--wland-space-lg);
+.braves-changelog__section {
+    margin-top: var(--braves-space-lg);
 }
 
-.wland-changelog__section h4 {
-    font-size: var(--wland-text-base);
-    font-weight: var(--wland-font-semibold);
-    color: var(--wland-gray-900);
-    margin: 0 0 var(--wland-space-sm) 0;
+.braves-changelog__section h4 {
+    font-size: var(--braves-text-base);
+    font-weight: var(--braves-font-semibold);
+    color: var(--braves-gray-900);
+    margin: 0 0 var(--braves-space-sm) 0;
 }
 
-.wland-changelog__section ul {
+.braves-changelog__section ul {
     margin: 0;
-    padding-left: var(--wland-space-xl);
+    padding-left: var(--braves-space-xl);
 }
 
-.wland-changelog__section li {
-    margin-bottom: var(--wland-space-xs);
-    color: var(--wland-gray-700);
-    line-height: var(--wland-leading-relaxed);
+.braves-changelog__section li {
+    margin-bottom: var(--braves-space-xs);
+    color: var(--braves-gray-700);
+    line-height: var(--braves-leading-relaxed);
 }
 
 /* ==================== RESPONSIVE ==================== */
 @media screen and (max-width: 1024px) {
-    .wland-card-grid--3-cols,
-    .wland-card-grid--4-cols {
+
+    .braves-card-grid--3-cols,
+    .braves-card-grid--4-cols {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 640px) {
-    .wland-card-grid--2-cols,
-    .wland-card-grid--3-cols,
-    .wland-card-grid--4-cols {
+
+    .braves-card-grid--2-cols,
+    .braves-card-grid--3-cols,
+    .braves-card-grid--4-cols {
         grid-template-columns: 1fr;
     }
 
-    .wland-card {
-        padding: var(--wland-space-lg);
+    .braves-card {
+        padding: var(--braves-space-lg);
     }
 
-    .wland-button-group {
+    .braves-button-group {
         flex-direction: column;
     }
 
-    .wland-button {
+    .braves-button {
         justify-content: center;
     }
 
-    .wland-about-team {
+    .braves-about-team {
         grid-template-columns: 1fr;
     }
 }
 
 /* ==================== ICON TABS (SELECTOR) ==================== */
-.wland-icon-tabs {
+.braves-icon-tabs {
     display: flex;
     gap: 8px;
     padding: 4px;
@@ -646,19 +655,19 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     border-radius: 12px;
 }
 
-.wland-icon-tab {
+.braves-icon-tab {
     flex: 1;
     cursor: pointer;
     position: relative;
 }
 
-.wland-icon-tab input[type="radio"] {
+.braves-icon-tab input[type="radio"] {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
 
-.wland-icon-tab__content {
+.braves-icon-tab__content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -670,23 +679,23 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     border: 2px solid transparent;
 }
 
-.wland-icon-tab:hover .wland-icon-tab__content {
+.braves-icon-tab:hover .braves-icon-tab__content {
     background: #ffffff;
 }
 
-.wland-icon-tab input[type="radio"]:checked + .wland-icon-tab__content {
+.braves-icon-tab input[type="radio"]:checked+.braves-icon-tab__content {
     background: #ffffff;
     border-color: #5B4CCC;
     box-shadow: 0 2px 8px rgba(91, 76, 204, 0.15);
 }
 
-.wland-icon-tab__content img {
+.braves-icon-tab__content img {
     width: 32px;
     height: 32px;
     object-fit: contain;
 }
 
-.wland-icon-tab__content span {
+.braves-icon-tab__content span {
     font-size: 11px;
     font-weight: 500;
     color: #6b7280;
@@ -694,21 +703,22 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     line-height: 1.3;
 }
 
-.wland-icon-tab input[type="radio"]:checked + .wland-icon-tab__content span {
+.braves-icon-tab input[type="radio"]:checked+.braves-icon-tab__content span {
     color: #5B4CCC;
 }
 
 @media (max-width: 782px) {
-    .wland-icon-tabs {
+    .braves-icon-tabs {
         flex-wrap: wrap;
     }
-    .wland-icon-tab {
+
+    .braves-icon-tab {
         flex: 0 0 calc(50% - 4px);
     }
 }
 
 /* ==================== COLOR PICKER WRAPPER ==================== */
-.wland-color-picker-wrapper {
+.braves-color-picker-wrapper {
     position: relative;
     display: inline-flex;
     flex-direction: column;
@@ -716,7 +726,7 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     gap: 4px;
 }
 
-.wland-color-picker {
+.braves-color-picker {
     width: 40px !important;
     height: 40px !important;
     border: none !important;
@@ -729,30 +739,30 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     overflow: hidden !important;
 }
 
-.wland-color-picker::-webkit-color-swatch-wrapper {
+.braves-color-picker::-webkit-color-swatch-wrapper {
     padding: 0 !important;
 }
 
-.wland-color-picker::-webkit-color-swatch {
+.braves-color-picker::-webkit-color-swatch {
     border: none !important;
     border-radius: 6px !important;
 }
 
-.wland-color-picker::-moz-color-swatch {
+.braves-color-picker::-moz-color-swatch {
     border: none !important;
     border-radius: 6px !important;
 }
 
-.wland-color-picker:hover {
+.braves-color-picker:hover {
     transform: scale(1.05);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 
-.wland-color-picker:active {
+.braves-color-picker:active {
     transform: scale(0.98);
 }
 
-.wland-color-picker-label {
+.braves-color-picker-label {
     font-size: 10px;
     font-weight: 500;
     color: #6B7280;
@@ -762,7 +772,7 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
 }
 
 /* ==================== PALETTE TOGGLE BUTTON ==================== */
-.wland-palette-toggle {
+.braves-palette-toggle {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -777,72 +787,68 @@ a:has(.wland-about-team__member) .wland-about-team__member:hover {
     transition: all 0.2s ease;
 }
 
-.wland-palette-toggle:hover {
+.braves-palette-toggle:hover {
     background: #F3F4F6;
     border-color: #D1D5DB;
     color: #1F2937;
 }
 
-.wland-palette-toggle-icon {
+.braves-palette-toggle-icon {
     display: inline-block;
     transition: transform 0.2s ease;
     font-size: 10px;
     line-height: 1;
 }
 
-.wland-palette-toggle.wland-palette-toggle--expanded .wland-palette-toggle-icon {
+.braves-palette-toggle.braves-palette-toggle--expanded .braves-palette-toggle-icon {
     transform: rotate(90deg);
 }
 
 /* ==================== COLOR PALETTE PRESETS ==================== */
-.wland-color-palette {
+.braves-color-palette {
     overflow: hidden;
     max-height: 0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
-    margin: 0;
 }
 
-.wland-color-palette--collapsed {
+.braves-color-palette--collapsed {
     max-height: 0;
     opacity: 0;
-    margin: 0;
+    margin-top: 0;
 }
 
-.wland-color-palette--expanded {
-    max-height: 300px;
+.braves-color-palette--expanded {
+    max-height: 200px;
     opacity: 1;
     margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid #E5E7EB;
 }
 
-.wland-color-preset {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    width: 32px;
-    height: 32px;
+/* Botones de colores predefinidos */
+.braves-color-preset {
+    width: 40px;
+    height: 40px;
     border: 2px solid #E5E7EB;
     border-radius: 6px;
     cursor: pointer;
+    padding: 0;
     transition: all 0.2s ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    outline: none;
 }
 
-.wland-color-preset:hover {
+.braves-color-preset:hover {
     transform: scale(1.1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     border-color: #9CA3AF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.wland-color-preset:active {
+.braves-color-preset:active {
     transform: scale(0.95);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset;
 }
 
-.wland-color-preset:focus {
+.braves-color-preset:focus {
     outline: 2px solid #5B4CCC;
     outline-offset: 2px;
 }

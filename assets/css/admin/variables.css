@@ -2,108 +2,122 @@
  * Variables CSS para el Admin
  * Diseño Bentō moderno
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
 :root {
     /* ==================== COLORES PRINCIPALES ==================== */
-    --wland-primary: #023e8a;
-    --wland-primary-hover: #0077b6;
-    --wland-primary-light: #0096c7;
-    --wland-primary-lighter: #eff2fe;
+    --braves-primary: #0077b6;
+    --braves-primary-hover: #3c3c3c;
+    --braves-primary-light: #0096c7;
+    --braves-primary-lighter: #eff2fe;
 
     /* ==================== COLORES DE ESTADO ==================== */
-    --wland-success: #00a32a;
-    --wland-success-light: #e7f7ed;
-    --wland-warning: #f0b429;
-    --wland-warning-light: #fcf9e8;
-    --wland-error: #d63638;
-    --wland-error-light: #fcf0f1;
-    --wland-info: #3582c4;
-    --wland-info-light: #e5f5fa;
+    --braves-success: #00a32a;
+    --braves-success-light: #e7f7ed;
+    --braves-warning: #f0b429;
+    --braves-warning-light: #fcf9e8;
+    --braves-error: #d63638;
+    --braves-error-light: #fcf0f1;
+    --braves-info: #3582c4;
+    --braves-info-light: #e5f5fa;
 
     /* ==================== COLORES NEUTROS ==================== */
-    --wland-white: #ffffff;
-    --wland-black: #000000;
-    --wland-gray-50: #f9fafb;
-    --wland-gray-100: #f3f4f6;
-    --wland-gray-200: #e5e7eb;
-    --wland-gray-300: #d1d5db;
-    --wland-gray-400: #9ca3af;
-    --wland-gray-500: #6b7280;
-    --wland-gray-600: #4b5563;
-    --wland-gray-700: #374151;
-    --wland-gray-800: #1f2937;
-    --wland-gray-900: #111827;
+    --braves-white: #ffffff;
+    --braves-black: #000000;
+    --braves-gray-50: #f9fafb;
+    --braves-gray-100: #f3f4f6;
+    --braves-gray-200: #e5e7eb;
+    --braves-gray-300: #d1d5db;
+    --braves-gray-400: #9ca3af;
+    --braves-gray-500: #6b7280;
+    --braves-gray-600: #4b5563;
+    --braves-gray-700: #374151;
+    --braves-gray-800: #1f2937;
+    --braves-gray-900: #111827;
 
     /* ==================== TIPOGRAFÍA ==================== */
-    --wland-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    --wland-font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+    --braves-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --braves-font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
 
     /* Tamaños de fuente */
-    --wland-text-xs: 0.75rem;     /* 12px */
-    --wland-text-sm: 0.875rem;    /* 14px */
-    --wland-text-base: 1rem;      /* 16px */
-    --wland-text-lg: 1.125rem;    /* 18px */
-    --wland-text-xl: 1.25rem;     /* 20px */
-    --wland-text-2xl: 1.5rem;     /* 24px */
-    --wland-text-3xl: 1.875rem;   /* 30px */
+    --braves-text-xs: 0.75rem;
+    /* 12px */
+    --braves-text-sm: 0.875rem;
+    /* 14px */
+    --braves-text-base: 1rem;
+    /* 16px */
+    --braves-text-lg: 1.125rem;
+    /* 18px */
+    --braves-text-xl: 1.25rem;
+    /* 20px */
+    --braves-text-2xl: 1.5rem;
+    /* 24px */
+    --braves-text-3xl: 1.875rem;
+    /* 30px */
 
     /* Pesos de fuente */
-    --wland-font-normal: 400;
-    --wland-font-medium: 500;
-    --wland-font-semibold: 600;
-    --wland-font-bold: 700;
+    --braves-font-normal: 400;
+    --braves-font-medium: 500;
+    --braves-font-semibold: 600;
+    --braves-font-bold: 700;
 
     /* Line Heights */
-    --wland-leading-tight: 1.25;
-    --wland-leading-normal: 1.5;
-    --wland-leading-relaxed: 1.75;
+    --braves-leading-tight: 1.25;
+    --braves-leading-normal: 1.5;
+    --braves-leading-relaxed: 1.75;
 
     /* ==================== ESPACIADO ==================== */
-    --wland-space-xs: 0.25rem;    /* 4px */
-    --wland-space-sm: 0.5rem;     /* 8px */
-    --wland-space-md: 1rem;       /* 16px */
-    --wland-space-lg: 1.5rem;     /* 24px */
-    --wland-space-xl: 2rem;       /* 32px */
-    --wland-space-2xl: 2.5rem;    /* 40px */
-    --wland-space-3xl: 3rem;      /* 48px */
+    --braves-space-xs: 0.25rem;
+    /* 4px */
+    --braves-space-sm: 0.5rem;
+    /* 8px */
+    --braves-space-md: 1rem;
+    /* 16px */
+    --braves-space-lg: 1.5rem;
+    /* 24px */
+    --braves-space-xl: 2rem;
+    /* 32px */
+    --braves-space-2xl: 2.5rem;
+    /* 40px */
+    --braves-space-3xl: 3rem;
+    /* 48px */
 
     /* ==================== BORDER RADIUS ==================== */
-    --wland-radius-sm: 4px;
-    --wland-radius-md: 8px;
-    --wland-radius-lg: 12px;
-    --wland-radius-xl: 16px;
-    --wland-radius-full: 9999px;
+    --braves-radius-sm: 4px;
+    --braves-radius-md: 8px;
+    --braves-radius-lg: 12px;
+    --braves-radius-xl: 16px;
+    --braves-radius-full: 9999px;
 
     /* ==================== SOMBRAS ==================== */
-    --wland-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --wland-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --wland-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --wland-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --wland-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --braves-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --braves-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --braves-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --braves-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --braves-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
     /* ==================== TRANSICIONES ==================== */
-    --wland-transition-fast: 150ms ease-in-out;
-    --wland-transition-base: 250ms ease-in-out;
-    --wland-transition-slow: 350ms ease-in-out;
+    --braves-transition-fast: 150ms ease-in-out;
+    --braves-transition-base: 250ms ease-in-out;
+    --braves-transition-slow: 350ms ease-in-out;
 
     /* ==================== Z-INDEX ==================== */
-    --wland-z-base: 1;
-    --wland-z-dropdown: 1000;
-    --wland-z-sticky: 1020;
-    --wland-z-fixed: 1030;
-    --wland-z-modal-backdrop: 1040;
-    --wland-z-modal: 1050;
-    --wland-z-popover: 1060;
-    --wland-z-tooltip: 1070;
+    --braves-z-base: 1;
+    --braves-z-dropdown: 1000;
+    --braves-z-sticky: 1020;
+    --braves-z-fixed: 1030;
+    --braves-z-modal-backdrop: 1040;
+    --braves-z-modal: 1050;
+    --braves-z-popover: 1060;
+    --braves-z-tooltip: 1070;
 
     /* ==================== LAYOUT ==================== */
-    --wland-sidebar-width: 240px;
-    --wland-header-height: 80px;
-    --wland-card-gap: 24px;
-    --wland-container-max-width: 1400px;
+    --braves-sidebar-width: 240px;
+    --braves-header-height: 80px;
+    --braves-card-gap: 24px;
+    --braves-container-max-width: 1400px;
 
     /* ==================== BREAKPOINTS (para referencia) ==================== */
     /* sm: 640px */

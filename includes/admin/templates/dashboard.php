@@ -4,13 +4,13 @@
  *
  * Página principal moderno con diseño Bentō
  *
- * @package WlandChat
+ * @package BravesChat
  * @version 1.2.0
  */
 
-use WlandChat\Admin\Admin_Header;
-use WlandChat\Admin\Admin_Sidebar;
-use WlandChat\Admin\Template_Helpers;
+use BravesChat\Admin\Admin_Header;
+use BravesChat\Admin\Admin_Sidebar;
+use BravesChat\Admin\Template_Helpers;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'wland-chat'));
+    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
 // Obtener instancias de componentes
@@ -31,8 +31,8 @@ $config_status = Template_Helpers::get_config_status();
 
 ?>
 
-<div class="wrap wland-admin-wrap">
-    <div class="wland-admin-container">
+<div class="wrap braves-admin-wrap">
+    <div class="braves-admin-container">
 
         <?php
         // Renderizar header
@@ -42,32 +42,32 @@ $config_status = Template_Helpers::get_config_status();
         ));
         ?>
 
-        <div class="wland-admin-body">
+        <div class="braves-admin-body">
 
             <?php
             // Renderizar sidebar
             $sidebar->render($current_page);
             ?>
 
-            <div class="wland-admin-content">
+            <div class="braves-admin-content">
 
                 <!-- Page Header -->
-                <div class="wland-page-header">
-                    <h1 class="wland-page-title">
-                        <?php _e('Dashboard', 'wland-chat'); ?>
+                <div class="braves-page-header">
+                    <h1 class="braves-page-title">
+                        <?php _e('<strong>Dashboard</strong>', 'braves-chat'); ?>
                     </h1>
-                    <p class="wland-page-description">
-                        <?php _e('Una visión general de las funciones de Wland Chat iA para construir y personalizar tu chat.', 'wland-chat'); ?>
+                    <p class="braves-page-description">
+                        <?php _e('Una visión general de las funciones de <strong>BravesChat iA</strong> para construir y personalizar tu chat.', 'braves-chat'); ?>
                     </p>
                 </div>
 
                 <!-- Configuration Status Section -->
                 <?php if (!$config_status['is_configured']): ?>
-                <div class="wland-section wland-section--warning">
+                <div class="braves-section braves-section--warning">
                     <?php
                     Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'wland-chat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'wland-chat'),
+                        '<strong>' . __('Acción requerida:', 'braves-chat') . '</strong> ' .
+                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braves-chat'),
                         'warning'
                     );
                     ?>
@@ -75,17 +75,17 @@ $config_status = Template_Helpers::get_config_status();
                 <?php endif; ?>
 
                 <!-- Status Cards Grid -->
-                <div class="wland-card-grid wland-card-grid--3-cols">
+                <div class="braves-card-grid braves-card-grid--3-cols">
 
                     <!-- Chat Activo Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('chat', '#023e8a'),
-                        'title' => __('Chat Activo', 'wland-chat'),
+                        'icon' => Template_Helpers::get_icon('chat', '#0077b6'),
+                        'title' => __('Chat Activo', 'braves-chat'),
                         'description' => $config_status['is_configured']
-                            ? __('El chat está configurado y funcionando correctamente en tu sitio web.', 'wland-chat')
-                            : __('El chat aún no está configurado. Configura el webhook para empezar.', 'wland-chat'),
-                        'action_text' => __('Ver sitio web', 'wland-chat'),
+                            ? __('El chat está configurado y funcionando correctamente en tu sitio web.', 'braves-chat')
+                            : __('El chat aún no está configurado. Configura el webhook para empezar.', 'braves-chat'),
+                        'action_text' => __('Ver sitio web', 'braves-chat'),
                         'action_url' => home_url(),
                         'action_target' => '_blank',
                     ));
@@ -94,22 +94,22 @@ $config_status = Template_Helpers::get_config_status();
                     <!-- Configuración Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('settings', '#023e8a'),
-                        'title' => __('Configuración', 'wland-chat'),
-                        'description' => __('Personaliza la apariencia, mensajes y comportamiento del chat según tus necesidades.', 'wland-chat'),
-                        'action_text' => __('Ir a Ajustes', 'wland-chat'),
-                        'action_url' => admin_url('admin.php?page=wland-chat-settings'),
+                        'icon' => Template_Helpers::get_icon('settings', '#0077b6'),
+                        'title' => __('Configuración', 'braves-chat'),
+                        'description' => __('Personaliza la apariencia, mensajes y comportamiento del chat según tus necesidades.', 'braves-chat'),
+                        'action_text' => __('Ir a Ajustes', 'braves-chat'),
+                        'action_url' => admin_url('admin.php?page=braves-chat-settings'),
                     ));
                     ?>
 
                     <!-- Documentación Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('docs', '#023e8a'),
-                        'title' => __('Documentación', 'wland-chat'),
-                        'description' => __('Aprende cómo sacar el máximo provecho del plugin con nuestra documentación completa.', 'wland-chat'),
-                        'action_text' => __('Ver documentación', 'wland-chat'),
-                        'action_url' => 'https://github.com/Carlos-Vera/Wland-Chat-iA',
+                        'icon' => Template_Helpers::get_icon('docs', '#0077b6'),
+                        'title' => __('Documentación', 'braves-chat'),
+                        'description' => __('Aprende cómo sacar el máximo provecho del plugin con nuestra documentación completa.', 'braves-chat'),
+                        'action_text' => __('Ver documentación', 'braves-chat'),
+                        'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                         'action_target' => '_blank',
                     ));
                     ?>
@@ -117,22 +117,22 @@ $config_status = Template_Helpers::get_config_status();
                 </div>
 
                 <!-- Quick Actions Section -->
-                <div class="wland-section wland-section--actions">
-                    <h2 class="wland-section__title">
-                        <?php _e('Acciones Rápidas', 'wland-chat'); ?>
+                <div class="braves-section braves-section--actions">
+                    <h2 class="braves-section__title">
+                        <?php _e('Acciones Rápidas', 'braves-chat'); ?>
                     </h2>
 
-                    <div class="wland-button-group">
+                    <div class="braves-button-group">
                         <?php
                         Template_Helpers::quick_action(array(
-                            'text' => __('Personalizar Apariencia', 'wland-chat'),
+                            'text' => __('Personalizar Apariencia', 'braves-chat'),
                             'url' => admin_url('customize.php'),
                             'style' => 'secondary',
                         ));
 
                         Template_Helpers::quick_action(array(
-                            'text' => __('Configurar Webhook', 'wland-chat'),
-                            'url' => admin_url('admin.php?page=wland-chat-settings'),
+                            'text' => __('Configurar Webhook', 'braves-chat'),
+                            'url' => admin_url('admin.php?page=braves-chat-settings'),
                             'style' => 'secondary',
                         ));
                         ?>
@@ -140,49 +140,51 @@ $config_status = Template_Helpers::get_config_status();
                 </div>
 
                 <!-- System Info Cards -->
-                <div class="wland-section wland-section--info">
-                    <h2 class="wland-section__title">
-                        <?php _e('Estado del Sistema', 'wland-chat'); ?>
+                <div class="braves-section braves-section--info">
+                    <h2 class="braves-section__title">
+                        <?php _e('Estado del Sistema', 'braves-chat'); ?>
                     </h2>
 
-                    <div class="wland-card-grid wland-card-grid--2-cols">
+                    <div class="braves-card-grid braves-card-grid--2-cols">
 
                         <!-- Configuración General -->
                         <?php
                         $global_enabled_text = $config_status['global_enabled']
-                            ? __('Activo en todo el sitio', 'wland-chat')
-                            : __('Usar bloque Gutenberg', 'wland-chat');
+                            ? __('Activo en todo el sitio', 'braves-chat')
+                            : __('Usar bloque Gutenberg', 'braves-chat');
 
                         Template_Helpers::card(array(
-                            'title' => __('Modo de visualización', 'wland-chat'),
+                            'title' => __('Modo de visualización', 'braves-chat'),
                             'description' => sprintf(
-                                __('Modo: %s', 'wland-chat'),
+                                __('Modo: %s', 'braves-chat'),
                                 ucfirst($config_status['display_mode'])
                             ),
                             'footer' => $global_enabled_text,
-                            'custom_class' => 'wland-card--compact',
+                            'custom_class' => 'braves-card--compact',
                         ));
                         ?>
 
                         <!-- Versión del Plugin -->
-                        <?php
-                        Template_Helpers::card(array(
-                            'title' => __('Versión del Plugin', 'wland-chat'),
-                            'description' => 'Wland Chat iA v' . WLAND_CHAT_VERSION,
-                            'footer' => sprintf(
-                                __('Última actualización: %s', 'wland-chat'),
-                                date_i18n(get_option('date_format'))
-                            ),
-                            'custom_class' => 'wland-card--compact',
-                        ));
-                        ?>
+                        <a href="<?php echo admin_url('admin.php?page=braves-chat-about'); ?>" class="braves-card-link">
+                            <?php
+                            Template_Helpers::card(array(
+                                'title' => __('Versión del Plugin', 'braves-chat'),
+                                'description' => 'BravesChat iA v' . BRAVES_CHAT_VERSION,
+                                'footer' => sprintf(
+                                    __('Última actualización: %s', 'braves-chat'),
+                                    date_i18n(get_option('date_format'))
+                                ),
+                                'custom_class' => 'braves-card--compact',
+                            ));
+                            ?>
+                        </a>
 
                     </div>
                 </div>
 
-            </div><!-- .wland-admin-content -->
+            </div><!-- .braves-admin-content -->
 
-        </div><!-- .wland-admin-body -->
+        </div><!-- .braves-admin-body -->
 
-    </div><!-- .wland-admin-container -->
+    </div><!-- .braves-admin-container -->
 </div><!-- .wrap -->

@@ -1,25 +1,20 @@
 /**
- * Wland Chat iA - Redirect Handler
- * Version: 1.0.0
- * FUNCIONALIDAD: Parser JSON y sistema de redirecciones con contexto
- * CONVENCIONES: snake_case y JSDoc
- * PATRÓN: Clase reutilizable para Modal y Screen
+ * BravesChat Redirect Handler
+ *
+ * Gestiona el parseo de respuestas JSON, redirecciones y acciones personalizadas.
+ * Permite que el chat controle la navegación y el comportamiento del sitio.
+ *
+ * @package BravesChat
+ * @since 1.1.0
  */
 
 /**
- * Clase para manejar respuestas JSON del webhook con soporte para redirecciones
- * y acciones custom manteniendo el contexto de la conversación.
+ * Clase BravesRedirectHandler
  *
- * Estructura esperada del JSON:
- * {
- *   message: string,          // Mensaje a mostrar (requerido)
- *   redirect?: string,         // URL de redirección (opcional)
- *   delay?: number,           // Milisegundos de espera antes del redirect (default: 3000)
- *   action?: string,          // Acción custom a ejecutar (opcional)
- *   data?: object             // Datos adicionales para la acción (opcional)
- * }
+ * Procesa respuestas del webhook para extraer mensajes, redirecciones y acciones.
+ * Ejecuta la lógica de redirección con retrasos configurables.
  */
-class WlandRedirectHandler {
+class BravesRedirectHandler {
     /**
      * Constructor de RedirectHandler
      * @param {Object} config - Configuración del handler
@@ -30,14 +25,23 @@ class WlandRedirectHandler {
         this.on_message_callback = config.on_message_callback;
         this.on_error_callback = config.on_error_callback;
 
-        // Claves de sessionStorage
-        this.STORAGE_KEY_CONVERSATION = 'wland_chat_conversation_state';
-        this.STORAGE_KEY_REDIRECT_PENDING = 'wland_chat_redirect_pending';
+        // Claves de localStorage (cambiado de sessionStorage para persistencia permanente)
+        this.STORAGE_KEY_CONVERSATION_PREFIX = 'braves_chat_conversation_'; // Prefijo + session_id
+        this.STORAGE_KEY_REDIRECT_PENDING = 'braves_chat_redirect_pending';
 
         // Delay por defecto para redirecciones (3 segundos)
         this.DEFAULT_REDIRECT_DELAY = 3000;
 
-        console.log('[Wland Redirect Handler] Inicializado');
+        console.log('[BravesRedirectHandler] Inicializado');
+    }
+
+    /**
+     * Obtén la clave de conversación para un session_id específico
+     * @param {string} session_id - ID de la sesión  
+     * @returns {string} Clave de localStorage
+     */
+    get_conversation_key(session_id) {
+        return this.STORAGE_KEY_CONVERSATION_PREFIX + session_id;
     }
 
     /**
@@ -47,51 +51,62 @@ class WlandRedirectHandler {
      * @returns {Object} Objeto con mensaje procesado y metadata
      */
     parse_response(response_text) {
+        const result = {
+            message: '',
+            has_redirect: false,
+            redirect_url: '',
+            redirect_delay: 0,
+            has_action: false,
+            action_type: '',
+            action_data: {}
+        };
+
         try {
             // Intentar parsear JSON
             const data = JSON.parse(response_text);
-            console.log('[Wland Redirect Handler] JSON parseado correctamente:', data);
+            console.log('[BravesRedirectHandler] JSON parseado correctamente:', data);
 
-            // Validar estructura mínima
-            if (!data.message || typeof data.message !== 'string') {
-                console.warn('[Wland Redirect Handler] JSON válido pero sin campo "message", usando fallback');
-                return {
-                    message: response_text,
-                    is_json: false,
-                    has_redirect: false,
-                    has_action: false
-                };
+            // Extraer mensaje
+            if (data.message || data.text || data.output || data.response || data.content) {
+                result.message = data.message || data.text || data.output || data.response || data.content;
+            } else if (data.data) {
+                // Manejar casos con data.data
+                if (typeof data.data === 'string') {
+                    result.message = data.data;
+                } else if (data.data.message || data.data.text) {
+                    result.message = data.data.message || data.data.text;
+                }
+            } else {
+                // No message found, usar JSON stringificado
+                result.message = JSON.stringify(data);
             }
 
-            // Extraer campos del JSON
-            const result = {
-                message: data.message,
-                is_json: true,
-                has_redirect: !!(data.redirect && typeof data.redirect === 'string'),
-                has_action: !!(data.action && typeof data.action === 'string'),
-                redirect_url: data.redirect || null,
-                redirect_delay: data.delay || this.DEFAULT_REDIRECT_DELAY,
-                action_type: data.action || null,
-                action_data: data.data || null
-            };
+            // Extraer redirección
+            if (data.redirect_url && data.redirect_url.trim() !== '') {
+                result.has_redirect = true;
+                result.redirect_url = data.redirect_url.trim();
+                result.redirect_delay = parseInt(data.redirect_delay) || 0;
+            }
 
-            console.log('[Wland Redirect Handler] Respuesta procesada:', result);
-            return result;
+            // Extraer acción
+            if (data.action && typeof data.action === 'object') {
+                result.has_action = true;
+                result.action_type = data.action.type || '';
+                result.action_data = data.action.data || {};
+            }
 
+            console.log('[BravesRedirectHandler] Respuesta procesada:', result);
         } catch (json_error) {
             // JSON inválido - usar respuesta como texto simple
-            console.warn('[Wland Redirect Handler] JSON inválido, usando texto plano:', json_error.message);
-            return {
-                message: response_text,
-                is_json: false,
-                has_redirect: false,
-                has_action: false
-            };
+            console.warn('[BravesRedirectHandler]JSON inválido, usando texto plano:', json_error.message);
+            result.message = response_text;
         }
+
+        return result;
     }
 
     /**
-     * Guarda el estado de la conversación en sessionStorage
+     * Guarda el estado de la conversación en localStorage (CAMBIADO DE sessionStorage)
      * @param {Array} conversation_history - Historial de mensajes
      * @param {string} session_id - ID de la sesión actual
      * @returns {void}
@@ -105,35 +120,38 @@ class WlandRedirectHandler {
                 url: window.location.href
             };
 
-            sessionStorage.setItem(this.STORAGE_KEY_CONVERSATION, JSON.stringify(state));
-            console.log('[Wland Redirect Handler] Estado guardado:', state);
+            const key = this.get_conversation_key(session_id);
+            localStorage.setItem(key, JSON.stringify(state)); // ✅ localStorage en lugar de sessionStorage
+            console.log('[BravesRedirectHandler] Estado guardado en localStorage:', state);
         } catch (storage_error) {
-            console.error('[Wland Redirect Handler] Error guardando estado:', storage_error);
+            console.error('[BravesRedirectHandler] Error guardando estado:', storage_error);
         }
     }
 
     /**
-     * Recupera el estado de la conversación desde sessionStorage
+     * Recupera el estado de la conversación desde localStorage (CAMBIADO DE sessionStorage)
+     * @param {string} session_id - ID de la sesión actual
      * @returns {Object|null} Estado recuperado o null si no existe
      */
-    restore_conversation_state() {
+    restore_conversation_state(session_id) {
         try {
-            const state_json = sessionStorage.getItem(this.STORAGE_KEY_CONVERSATION);
+            const key = this.get_conversation_key(session_id);
+            const state_json = localStorage.getItem(key);  // ✅ localStorage en lugar de sessionStorage
 
             if (!state_json) {
-                console.log('[Wland Redirect Handler] No hay estado pendiente de recuperación');
+                console.log('[BravesRedirectHandler] No hay estado pendiente para session_id:', session_id);
                 return null;
             }
 
             const state = JSON.parse(state_json);
-            console.log('[Wland Redirect Handler] Estado recuperado:', state);
+            console.log('[BravesRedirectHandler] Estado recuperado de localStorage:', state);
 
-            // Limpiar después de recuperar
-            sessionStorage.removeItem(this.STORAGE_KEY_CONVERSATION);
+            // NO limpiamos después de recuperar - queremos que persista
+            // sessionStorage.removeItem(key); ❌ REMOVIDO
 
             return state;
         } catch (restore_error) {
-            console.error('[Wland Redirect Handler] Error recuperando estado:', restore_error);
+            console.error('[BravesRedirectHandler] Error recuperando estado:', restore_error);
             return null;
         }
     }
@@ -147,7 +165,7 @@ class WlandRedirectHandler {
      * @returns {void}
      */
     execute_redirect(url, delay, conversation_history, session_id) {
-        console.log(`[Wland Redirect Handler] Redirección programada a "${url}" en ${delay}ms`);
+        console.log(`[BravesRedirectHandler] Redirección programada a "${url}" en ${delay}ms`);
 
         // Guardar estado antes de redirigir
         this.save_conversation_state(conversation_history, session_id);
@@ -166,8 +184,14 @@ class WlandRedirectHandler {
 
         // Ejecutar redirección después del delay
         setTimeout(() => {
-            console.log('[Wland Redirect Handler] Ejecutando redirección a:', url);
+            console.log('[BravesRedirectHandler] Ejecutando redirección a:', url);
             window.location.href = url;
+
+            // Disparar evento
+            const event = new CustomEvent('braves_chat_redirect_executed', {
+                detail: { url: url }
+            });
+            document.dispatchEvent(event);
         }, delay);
     }
 
@@ -178,7 +202,7 @@ class WlandRedirectHandler {
      * @returns {void}
      */
     execute_custom_action(action_type, action_data) {
-        console.log('[Wland Redirect Handler] Ejecutando acción custom:', action_type, action_data);
+        console.log('[BravesRedirectHandler] Ejecutando acción custom:', action_type, action_data);
 
         try {
             switch (action_type) {
@@ -203,10 +227,10 @@ class WlandRedirectHandler {
                     break;
 
                 default:
-                    console.warn(`[Wland Redirect Handler] Acción desconocida: "${action_type}"`);
+                    console.warn(`[BravesRedirectHandler] Acción desconocida: "${action_type}"`);
 
                     // Disparar evento custom para que el desarrollador pueda manejarlo
-                    const custom_event = new CustomEvent('wland_chat_custom_action', {
+                    const custom_event = new CustomEvent('braves_chat_custom_action', {
                         detail: {
                             action: action_type,
                             data: action_data
@@ -214,8 +238,15 @@ class WlandRedirectHandler {
                     });
                     document.dispatchEvent(custom_event);
             }
+
+            // Disparar evento genérico de acción ejecutada
+            const event = new CustomEvent('braves_chat_action_executed', {
+                detail: { type: action_type, data: action_data }
+            });
+            document.dispatchEvent(event);
+
         } catch (action_error) {
-            console.error('[Wland Redirect Handler] Error ejecutando acción:', action_error);
+            console.error('[BravesRedirectHandler] Error ejecutando acción:', action_error);
             if (this.on_error_callback) {
                 this.on_error_callback(`Error ejecutando acción "${action_type}": ${action_error.message}`);
             }
@@ -236,11 +267,11 @@ class WlandRedirectHandler {
 
         window.open(
             url,
-            'wland_modal',
+            'braves_modal',
             `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
         );
 
-        console.log('[Wland Redirect Handler] Modal abierto:', url);
+        console.log('[BravesRedirectHandler] Modal abierto:', url);
     }
 
     /**
@@ -249,13 +280,13 @@ class WlandRedirectHandler {
      * @returns {void}
      */
     action_trigger_event(data) {
-        const event_name = data?.event_name || 'wland_custom_event';
+        const event_name = data?.event_name || 'braves_custom_event';
         const event_detail = data?.detail || {};
 
         const event = new CustomEvent(event_name, { detail: event_detail });
         document.dispatchEvent(event);
 
-        console.log('[Wland Redirect Handler] Evento disparado:', event_name, event_detail);
+        console.log('[BravesRedirectHandler] Evento disparado:', event_name, event_detail);
     }
 
     /**
@@ -264,10 +295,10 @@ class WlandRedirectHandler {
      * @returns {void}
      */
     action_close_chat(data) {
-        const event = new CustomEvent('wland_chat_close_requested', { detail: data });
+        const event = new CustomEvent('braves_chat_close_requested', { detail: data });
         document.dispatchEvent(event);
 
-        console.log('[Wland Redirect Handler] Solicitud de cierre del chat');
+        console.log('[BravesRedirectHandler] Solicitud de cierre del chat');
     }
 
     /**
@@ -282,7 +313,7 @@ class WlandRedirectHandler {
             window.location.reload();
         }, delay);
 
-        console.log(`[Wland Redirect Handler] Página se recargará en ${delay}ms`);
+        console.log(`[BravesRedirectHandler] Página se recargará en ${delay}ms`);
     }
 
     /**
@@ -295,7 +326,7 @@ class WlandRedirectHandler {
         const behavior = data?.behavior || 'smooth';
 
         if (!selector) {
-            console.warn('[Wland Redirect Handler] scroll_to requiere un selector');
+            console.warn('[BravesRedirectHandler] scroll_to requiere un selector');
             return;
         }
 
@@ -303,9 +334,9 @@ class WlandRedirectHandler {
 
         if (element) {
             element.scrollIntoView({ behavior: behavior, block: 'start' });
-            console.log('[Wland Redirect Handler] Scroll a:', selector);
+            console.log('[BravesRedirectHandler] Scroll a:', selector);
         } else {
-            console.warn(`[Wland Redirect Handler] Elemento no encontrado: ${selector}`);
+            console.warn(`[BravesRedirectHandler] Elemento no encontrado: ${selector}`);
         }
     }
 
@@ -318,7 +349,7 @@ class WlandRedirectHandler {
 
         if (was_pending) {
             sessionStorage.removeItem(this.STORAGE_KEY_REDIRECT_PENDING);
-            console.log('[Wland Redirect Handler] Se completó un redirect pendiente');
+            console.log('[BravesRedirectHandler] Se completó un redirect pendiente');
         }
 
         return was_pending;
@@ -326,4 +357,4 @@ class WlandRedirectHandler {
 }
 
 // Exportar para uso global
-window.WlandRedirectHandler = WlandRedirectHandler;
+window.BravesRedirectHandler = BravesRedirectHandler;
