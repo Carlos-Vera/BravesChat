@@ -1,12 +1,42 @@
-# Braves Chat iA
+# BravesChat iA 2.0 🤖
 
-Plugin WordPress profesional para integrar chat con inteligencia artificial con N8N mediante bloques Gutenberg.
+> **La solución definitiva para integrar Agentes de IA en WordPress.**
 
-**Versión actual**: 1.2.4
+Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
+
+**Versión actual**: 2.0.0
+
+---
+
+## ¿Por qué BravesChat iA?
+
+BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado para agencias y negocios que necesitan más que un simple widget:
+
+### 🧠 Integración Total con N8N
+*   **Webhooks Bidireccionales**: Conecta flujos complejos de n8n fácilmente recibiendo y enviando datos JSON estructurados.
+*   **Contexto Persistente**: Nuestro sistema de **Fingerprinting** único permite mantener la memoria de la conversación del usuario (Session ID) incluso si recarga la página o cambia de pestaña, sin necesidad de registro.
+*   **Seguridad API**: Soporte para Tokens de Autenticación (`X-N8N-Auth`) para proteger tus webhooks.
+
+### 🎨 Experiencia de Usuario (UX) Premium
+*   **Nuevo Modo Expandible (v2.0)**: Botón de maximizar para ofrecer una experiencia de escritura cómoda en conversaciones largas.
+*   **Smart Input (v2.0)**: El área de texto crece automáticamente al escribir párrafos largos.
+*   **Estado Minimizado Inteligente (v2.0)**: Si el usuario ya interactuó, el chat se reduce a una "píldora" discreta para mejorar la navegación sin perder accesibilidad.
+*   **Diseño Personalizable**: Elige colores (con soporte de temas `theme.json`), iconos SVG y posición.
+
+### 🛡️ Privacidad y Control Total
+*   **GDPR Compliance Nativo**: Banner de consentimiento de cookies integrado y configurable. Bloquea la sesión hasta que el usuario acepta.
+*   **Horarios Comerciales**: Define días y horas de activación con soporte completo de Zonas Horarias.
+*   **Control Granular**: Excluye el chat en páginas específicas o úsalo solo donde quieras mediante el **Bloque Gutenberg**.
+
+### 💻 Panel de Administración Moderno
+*   Diseño **Bentō UI** limpio y organizado.
+*   Gestión centralizada de todas las configuraciones con validación en tiempo real.
+*   Previsualización de colores y ajustes.
+
+---
 
 ## 📋 Tabla de Contenidos
 
-- [Características](#características)
 - [Requisitos](#requisitos)
 - [Instalación](#instalación)
 - [Configuración](#️-configuración)
@@ -27,53 +57,6 @@ Plugin WordPress profesional para integrar chat con inteligencia artificial con 
 - [Soporte](#soporte)
 
 ---
-
-## Características
-
-### Funcionalidades Principales
-- **Bloque Gutenberg** para personalizar en cualquier página o entrada
-- **Integración con N8N** mediante webhooks configurables
-- **Sistema de Cookies con Fingerprinting** para identificación única de usuarios
-- **Compliance GDPR** con banner de consentimiento configurable
-- **Horarios de disponibilidad** con zonas horarias
-- **Páginas excluidas** mediante selector múltiple
-- **Dos modos de visualización**: Modal y Pantalla completa
-- **Animación Lottie** en el botón de chat
-- **Responsive** y optimizado para móviles
-- **Accesibilidad** siguiendo estándares WCAG
-
-### Panel de Administración (v1.2.x)
-
-Desde la versión 1.2.0, el panel de administración ha sido completamente rediseñado con una arquitectura modular y diseño Bentō moderno:
-
-- **5 páginas de configuración**: Resumen, Ajustes, Apariencia, Horarios, GDPR
-- **Página "Acerca de" oculta** (v1.2.2.3): Accesible desde el badge de versión en el header
-- **Navegación mediante sidebar compartido** entre todas las páginas
-- **Diseño consistente de tarjetas Bento** en todas las interfaces
-- **Formularios funcionales** integrados con WordPress Settings API (v1.2.2)
-- **Toggles estilo Bento** en todos los checkboxes (v1.2.2.2)
-- **Arquitectura de componentes** con patrón Singleton
-- **Sistema modular de CSS** (variables, base, components, dashboard)
-- **Template Helpers** para renderizado consistente
-
-Para documentación técnica completa, consulta [CLAUDE.md](CLAUDE.md)
-
-#### Página "Acerca de" (Nueva en v1.2.2.3)
-
-Accede a información detallada del plugin haciendo clic en el **badge de versión** (esquina superior derecha del header):
-
-- **Información del Plugin**: Versión actual, autor principal, empresa
-- **Equipo de Desarrollo**: Créditos completos de Carlos Vera, Mikel Marqués y Claude
-- **Historial de Cambios**: Changelog detallado con todas las versiones
-- **Enlaces Útiles**: GitHub repository, BravesLab website, soporte técnico
-
-### Configuración Avanzada
-- URL del webhook personalizable
-- Textos completamente editables
-- Selector de páginas excluidas
-- Horarios de inicio y fin
-- Zonas horarias internacionales
-- Mensajes personalizados fuera de horario
 
 ## Requisitos
 
@@ -205,7 +188,7 @@ displayMode: 'modal' // 'fullscreen'
 
 ### Estructura del Plugin
 
-Para documentación técnica completa sobre arquitectura, componentes, clases PHP, sistema de CSS y guías de desarrollo, consulta [CLAUDE.md](CLAUDE.md).
+Para documentación técnica completa sobre arquitectura, componentes, clases PHP, sistema de CSS y guías de desarrollo.
 
 ```
 braves-chat-ia/
@@ -261,7 +244,6 @@ braves-chat-ia/
 │   ├── braves-chat.pot                        # Plantilla de traducción
 │   └── braves-chat-es_ES.po                   # Traducción al español
 ├── CHANGELOG.md                               # Historial completo de cambios
-├── CLAUDE.md                                  # Documentación técnica para desarrollo
 ├── README.md                                  # Este archivo (documentación general)
 └── LICENSE                                    # Licencia comercial
 ```
@@ -512,68 +494,6 @@ braves_chat_gdpr_consent:    accepted
 
 Ver historial completo de cambios y detalles técnicos en [CHANGELOG.md](CHANGELOG.md).
 
-### Versión Actual: 1.2.4 (17 de Noviembre, 2025)
-
-**🎨 Personalización del Tooltip y Color de Icono**:
-- Added: Campo personalizable para el tooltip del botón flotante desde el panel de Apariencia
-- Added: Color por defecto del icono SVG cambiado a gris claro (#f2f2f2)
-- Added: Tooltip ubicado estratégicamente antes del selector de iconos en la UI
-- Added: Input text con `width: 100%` para consistencia visual
-
-**🔄 Detección y Reemplazo Automático de Versiones Antiguas**:
-- Added: Sistema automático de detección de versiones anteriores del plugin al activar
-- Added: Desactivación automática de plugins antiguos si están activos
-- Added: Eliminación automática de directorios de versiones anteriores
-- Added: Preservación de configuraciones del usuario durante la migración
-- Added: Prevención de errores fatales por funciones redeclaradas
-
-**🐛 Correcciones Críticas**:
-- Fixed: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente
-- Fixed: Implementación de `function_exists()` check para prevenir redeclaraciones
-- Fixed: Fallback del color del icono corregido en appearance.php
-
-### Versión Anterior: 1.2.3 (26 de Octubre, 2025)
-
-**🎨 Nuevas Funcionalidades**:
-- Added: Sistema de personalización de colores desde el panel de Apariencia
-- Added: 4 campos de color personalizables: Color de la Burbuja, Color Primario, Color de Fondo y Color de Texto
-- Added: Color picker nativo HTML5 con input de texto hexadecimal sincronizado
-- Added: Paleta de colores del tema de WordPress (colapsable)
-- Added: Paleta por defecto de 8 colores cuando el tema no define colores personalizados
-- Added: Helpers PHP para manipular colores: `lighten_color()` y `darken_color()`
-- Added: CSS dinámico inyectado en el frontend para aplicar colores personalizados
-
-**🐛 Correcciones Críticas**:
-- Fixed: Configuración JavaScript duplicada entre templates y class_frontend.php causaba inconsistencias
-- Fixed: Los templates modal.php y screen.php creaban variable `bravesChatConfig` conflictiva con `BravesChatConfig`
-- Fixed: JavaScript intentaba leer configuración de múltiples objetos con propiedades diferentes (camelCase vs snake_case)
-- Fixed: Eliminada variable duplicada en templates - ahora usa únicamente `BravesChatConfig` desde PHP
-- Fixed: Alineación del color picker y input text usando `display: inline-block` con `vertical-align: middle`
-
-**✨ Mejoras**:
-- Improved: Unificación de configuración JavaScript - solo se usa `BravesChatConfig` pasado desde `class_frontend.php`
-- Improved: Logs de debug mejorados para troubleshooting (muestra objeto completo y valores de auth_token)
-- Improved: Eliminados emojis de todos los logs de consola en archivos JavaScript
-- Improved: Lectura simplificada de configuración en braves_chat_block_modal.js y braves_chat_block_screen.js
-- Improved: Toggle buttons para expandir/colapsar paletas de colores con animación suave
-- Added: Propiedad `is_available` ahora se lee correctamente desde configuración PHP
-
-**🗑️ Limpieza**:
-- Removed: Bloque `<script>` duplicado en modal.php que creaba `bravesChatConfig`
-- Removed: Bloque `<script>` duplicado en screen.php que creaba `bravesChatConfig`
-- Removed: Emojis de todos los console.log en archivos JavaScript del frontend
-- Removed: Gradiente del botón flotante - ahora usa color sólido
-- Removed: Borde izquierdo de las burbujas de mensajes
-
-### Versiones Anteriores
-
-- **1.2.2**: Correcciones de formularios admin y sistema de auto-ocultación de notificaciones
-- **1.2.1**: Rediseño de Settings con diseño Bentō
-- **1.2.0**: Refactorización completa del admin con diseño Bentō
-- **1.1.2**: Cambio de marca a BravesLab
-- **1.1.1**: Sistema de cookies con fingerprinting y GDPR
-- **1.0.0**: Versión inicial
-
 ## Autor
 
 - **Carlos Vera** - [GitHub](https://github.com/Carlos-Vera) - carlos@braveslab.com
@@ -696,7 +616,6 @@ Para soporte, consultas o reportar problemas:
 
 - **BravesLab** por el desarrollo, diseño y financiación del proyecto
 - **Carlos Vera** por la visión y dirección técnica
-- **Mikel Marqués** por las contribuciones al código
 - **La comunidad de WordPress** por los estándares y mejores prácticas
 - **N8N** por la plataforma de automatización que permite la integración con IA
 - **Lottie (Airbnb)** por las animaciones del botón de chat
