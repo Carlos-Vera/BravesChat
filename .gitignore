@@ -10,4 +10,8 @@ wland-chat-ia-v2.php
 **/.claude.json
 **/.mcp.json
 .mcp.json
-test_plugin.php
+UI-UX-BravesChat.md
+.agent/*
+GEMINI.md
+CLAUDE.md
+menu-icon.svg
