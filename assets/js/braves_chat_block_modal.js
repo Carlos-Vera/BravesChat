@@ -899,7 +899,10 @@ class BravesChatModal {
                 const last_message = messages[messages.length - 1];
                 const bubble = last_message.querySelector('.message-bubble');
                 if (bubble) {
-                    bubble.textContent += text;
+                    // Obtener texto actual, añadir nuevo y re-renderizar markdown
+                    // Esto asegura que formatos que cruzan chunks se rendericen bien
+                    const current_text = bubble.textContent;
+                    bubble.innerHTML = this.parse_markdown(current_text + text);
                     this.scroll_to_bottom();
                     return;
                 }
@@ -912,7 +915,8 @@ class BravesChatModal {
 
         const bubble_div = document.createElement('div');
         bubble_div.className = 'message-bubble';
-        bubble_div.textContent = text;
+        // Usar innerHTML con parseo de Markdown para permitir enlaces
+        bubble_div.innerHTML = this.parse_markdown(text);
 
         const time_div = document.createElement('div');
         time_div.className = 'message-time';
@@ -1027,7 +1031,8 @@ class BravesChatModal {
         }
 
         let buffer = '';
-        let full_content = '';
+        let full_content = ''; // Contenido total recibido (para logs y final)
+        let visible_content = ''; // Contenido actualmente visible (para typing)
         let fragment_count = 0;
 
         try {
@@ -1118,8 +1123,14 @@ class BravesChatModal {
                             // Iterar sobre cada letra del contenido recibido
                             for (let i = 0; i < content.length; i++) {
                                 const char = content[i];
-                                const text_node = document.createTextNode(char);
-                                bubble_div.insertBefore(text_node, cursor_span);
+
+                                // ACUMULAR TEXTO VISIBLE Y ACTUALIZAR DOM EN TIEMPO REAL
+                                // Esto permite que el markdown se "transforme" a medida que se escribe
+                                visible_content += char;
+                                const parsed_html = this.parse_markdown(visible_content);
+
+                                bubble_div.innerHTML = parsed_html;
+                                bubble_div.appendChild(cursor_span);
 
                                 // Scroll suave
                                 this.scroll_to_bottom();
@@ -1164,6 +1175,21 @@ class BravesChatModal {
 
             console.log('✅ Streaming finalizado - cursor permanece visible');
 
+            // Renderizar Markdown final para asegurar enlaces y formato correcto
+            if (this.current_stream_message_element && full_content) {
+                try {
+                    const parsed_html = this.parse_markdown(full_content);
+                    // Mantener el cursor
+                    const cursor = this.current_stream_message_element.querySelector('.typing-cursor');
+                    this.current_stream_message_element.innerHTML = parsed_html;
+                    if (cursor) {
+                        this.current_stream_message_element.appendChild(cursor);
+                    }
+                } catch (e) {
+                    console.error('Error al renderizar Markdown final:', e);
+                }
+            }
+
             if (this.chat_input) {
                 this.chat_input.disabled = false;
             }
@@ -1178,6 +1204,44 @@ class BravesChatModal {
         }
 
         return full_content;
+    }
+
+    /**
+     * Parsea texto Markdown simple a HTML para el chat
+     * Soporta: enlaces [text](url), negrita **text**, cursiva *text*, saltos de línea
+     * Escapa caracteres HTML para prevenir XSS antes de parsear
+     * @param {string} text - Texto en formato Markdown
+     * @returns {string} - HTML seguro y formateado
+     */
+    parse_markdown(text) {
+        if (!text) return '';
+
+        // 1. Escapar HTML base para prevenir XSS (seguridad)
+        // Convertimos caracteres peligrosos en entidades HTML
+        let html = text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+        // 2. Parsear enlaces: [texto](url)
+        // Renderiza como <a href="url" target="_blank">texto</a>
+        html = html.replace(
+            /\[([^\]]+)\]\(([^)]+)\)/g,
+            '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">$1</a>'
+        );
+
+        // 3. Parsear negrita: **texto**
+        html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+        // 4. Parsear cursiva: *texto*
+        html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+        // 5. Convertir saltos de línea (newlines) en <br>
+        html = html.replace(/\n/g, '<br>');
+
+        return html;
     }
 
     /**
