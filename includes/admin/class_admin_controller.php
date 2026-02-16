@@ -321,6 +321,14 @@ class Admin_Controller {
             BRAVES_CHAT_VERSION
         );
 
+        // Fuente Montserrat (Local) - Misma que frontend
+        wp_enqueue_style(
+            'braves-chat-fonts',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/braves_fonts.css',
+            array(),
+            BRAVES_CHAT_VERSION
+        );
+
         wp_enqueue_style(
             'braves-admin-components',
             BRAVES_CHAT_PLUGIN_URL . 'assets/css/admin/components.css',

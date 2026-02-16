@@ -38,7 +38,7 @@
     --braves-gray-900: #111827;
 
     /* ==================== TIPOGRAFÍA ==================== */
-    --braves-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --braves-font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     --braves-font-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
 
     /* Tamaños de fuente */
