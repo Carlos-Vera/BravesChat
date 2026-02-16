@@ -1,10 +1,10 @@
-# BravesChat iA 2.0 🤖
+# BravesChat iA 2.1.0 🤖
 
 > **La solución definitiva para integrar Agentes de IA en WordPress.**
 
 Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
 
-**Versión actual**: 2.0.0
+**Versión actual**: 2.1.0
 
 ---
 
@@ -18,13 +18,16 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
 *   **Seguridad API**: Soporte para Tokens de Autenticación (`X-N8N-Auth`) para proteger tus webhooks.
 
 ### 🎨 Experiencia de Usuario (UX) Premium
-*   **Nuevo Modo Expandible (v2.0)**: Botón de maximizar para ofrecer una experiencia de escritura cómoda en conversaciones largas.
-*   **Smart Input (v2.0)**: El área de texto crece automáticamente al escribir párrafos largos.
-*   **Estado Minimizado Inteligente (v2.0)**: Si el usuario ya interactuó, el chat se reduce a una "píldora" discreta para mejorar la navegación sin perder accesibilidad.
+*   **Control de Ritmo (v2.1)**: Ajusta la **velocidad de escritura** de tu asistente para una experiencia más natural y humana.
+*   **Tipografía Montserrat (v2.1)**: Integrada localmente para una legibilidad perfecta, diseño premium y cumplimiento total de privacidad (sin conexiones externas).
+*   **Scroll Inteligente (v2.1)**: El chat se desliza automáticamente para seguir la conversación sin interrupciones visuales.
+*   **Nuevo Modo Expandible**: Botón de maximizar para ofrecer una experiencia de escritura cómoda en conversaciones largas.
+*   **Smart Input**: El área de texto crece automáticamente al escribir párrafos largos.
+*   **Estado Minimizado Inteligente**: Si el usuario ya interactuó, el chat se reduce a una "píldora" discreta para mejorar la navegación sin perder accesibilidad.
 *   **Diseño Personalizable**: Elige colores (con soporte de temas `theme.json`), iconos SVG y posición.
 
 ### 🛡️ Privacidad y Control Total
-*   **GDPR Compliance Nativo**: Banner de consentimiento de cookies integrado y configurable. Bloquea la sesión hasta que el usuario acepta.
+*   **GDPR Compliance Nativo**: Banner de consentimiento de cookies integrado y configurable, ahora con soporte para **HTML y Markdown (v2.1)** para incluir enlaces a tus políticas.
 *   **Horarios Comerciales**: Define días y horas de activación con soporte completo de Zonas Horarias.
 *   **Control Granular**: Excluye el chat en páginas específicas o úsalo solo donde quieras mediante el **Bloque Gutenberg**.
 
