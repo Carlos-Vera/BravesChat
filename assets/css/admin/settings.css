@@ -332,6 +332,49 @@
     outline-offset: 2px;
 }
 
+/* ==================== RANGE SLIDER TOOLTIP ==================== */
+.braves-range-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.braves-range-tooltip {
+    position: absolute;
+    top: -35px;
+    /* Adjust based on height */
+    left: 0;
+    transform: translateX(-50%);
+    background-color: var(--braves-gray-900);
+    color: var(--braves-white);
+    padding: 4px 8px;
+    border-radius: var(--braves-radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 100;
+}
+
+.braves-range-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--braves-gray-900) transparent transparent transparent;
+}
+
+.braves-range-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* ==================== RESPONSIVE ==================== */
 @media screen and (max-width: 782px) {
 

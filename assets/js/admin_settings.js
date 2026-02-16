@@ -215,6 +215,98 @@
     }
 
     /**
+     * Initialize range sliders with tooltips
+     */
+    function init_range_sliders() {
+        const ranges = document.querySelectorAll('.braves-range');
+
+        ranges.forEach(range => {
+            // Buscar el contenedor padre (wrapper) para encontrar el input numérico relacionado
+            const wrapper = range.closest('.braves-range-wrapper');
+            const container = range.closest('.braves-range-container');
+
+            if (!container || !wrapper) return;
+
+            const tooltip = container.querySelector('.braves-range-tooltip');
+            const tooltipValue = container.querySelector('.braves-range-tooltip-value');
+            // Buscar el input numérico dentro del wrapper
+            const numberInput = wrapper.querySelector('input[type="number"]');
+
+            if (!tooltip || !tooltipValue) return;
+
+            // Función para actualizar posición y valor
+            const updateTooltip = () => {
+                const val = range.value;
+                const min = range.min ? parseFloat(range.min) : 0;
+                const max = range.max ? parseFloat(range.max) : 100;
+                const newVal = Number(((val - min) * 100) / (max - min));
+
+                // Actualizar valor del tooltip
+                tooltipValue.textContent = val;
+
+                // Calcular posición
+                const thumbWidth = 16;
+                const rangeWidth = range.getBoundingClientRect().width;
+                // Evitar división por cero si el elemento no es visible aún
+                if (rangeWidth > 0) {
+                    const tooltipPos = newVal * (rangeWidth - thumbWidth) / rangeWidth + (thumbWidth / 2 / rangeWidth * 100);
+                    tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+                }
+            };
+
+            // Sincronizar Range -> Number Input
+            range.addEventListener('input', () => {
+                updateTooltip();
+                tooltip.classList.add('visible');
+                if (numberInput) {
+                    numberInput.value = range.value;
+                }
+            });
+
+            // Sincronizar Number Input -> Range
+            if (numberInput) {
+                numberInput.addEventListener('input', () => {
+                    let val = parseInt(numberInput.value);
+                    const min = parseInt(range.min);
+                    const max = parseInt(range.max);
+
+                    // Validar límites
+                    if (val < min) val = min;
+                    if (val > max) val = max;
+
+                    range.value = val;
+                    updateTooltip();
+                });
+            }
+
+            range.addEventListener('mousedown', () => {
+                updateTooltip();
+                tooltip.classList.add('visible');
+            });
+
+            range.addEventListener('touchstart', () => {
+                updateTooltip();
+                tooltip.classList.add('visible');
+            });
+
+            range.addEventListener('mouseup', () => {
+                tooltip.classList.remove('visible');
+            });
+
+            range.addEventListener('touchend', () => {
+                tooltip.classList.remove('visible');
+            });
+
+            range.addEventListener('blur', () => {
+                tooltip.classList.remove('visible');
+            });
+
+            // Inicializar
+            updateTooltip();
+        });
+    }
+
+    /**
      * Initialize on DOM ready
      */
     if (document.readyState === 'loading') {
@@ -222,6 +314,7 @@
             init_settings_navigation();
             init_excluded_pages_buttons();
             init_skin_logic();
+            init_range_sliders();
             // Pequeño delay para asegurar que todo el DOM esté listo
             setTimeout(init_notice_autohide, 100);
         });
@@ -229,6 +322,7 @@
         init_settings_navigation();
         init_excluded_pages_buttons();
         init_skin_logic();
+        init_range_sliders();
         // Pequeño delay para asegurar que todo el DOM esté listo
         setTimeout(init_notice_autohide, 100);
     }

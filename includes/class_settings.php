@@ -115,6 +115,7 @@ class Settings {
             'header_title',
             'header_subtitle',
             'welcome_message',
+            'typing_speed',
             'position',
             'display_mode',
             'chat_icon',
@@ -349,6 +350,21 @@ class Settings {
             'braves_chat_general_section'
         );
         // ========== FIN TAREA 2A ==========
+
+        // Typing Speed
+        register_setting('braves_chat_settings', $this->option_prefix . 'typing_speed', array(
+            'type' => 'integer',
+            'sanitize_callback' => 'absint',
+            'default' => 30
+        ));
+
+        add_settings_field(
+            'typing_speed',
+            __('Velocidad de Escritura', 'braves-chat'),
+            array($this, 'typing_speed_callback'),
+            'braves_chat_settings',
+            'braves_chat_general_section'
+        );
         
         // Header Title
         register_setting('braves_chat_settings', $this->option_prefix . 'header_title', array(
@@ -650,7 +666,7 @@ class Settings {
         // GDPR Message
         register_setting('braves_chat_settings', $this->option_prefix . 'gdpr_message', array(
             'type' => 'string',
-            'sanitize_callback' => 'sanitize_textarea_field',
+            'sanitize_callback' => 'wp_kses_post',
             'default' => __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat')
         ));
 
