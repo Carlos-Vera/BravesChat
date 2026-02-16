@@ -524,6 +524,9 @@ class BravesChatModal {
         this.chat_input.style.height = 'auto';
         this.auto_resize_textarea(this.chat_input);
 
+        // Focus inmediato para permitir seguir escribiendo si se desea
+        this.chat_input.focus();
+
         this.toggle_send_button();
 
         // Guardar en historial
@@ -1195,6 +1198,11 @@ class BravesChatModal {
             }
             if (this.send_button) {
                 this.send_button.disabled = false;
+            }
+
+            // Focus al terminar el streaming para que el usuario pueda escribir inmediatamente
+            if (this.chat_input) {
+                this.chat_input.focus();
             }
             this.toggle_send_button();
 
