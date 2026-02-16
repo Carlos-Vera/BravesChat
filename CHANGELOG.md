@@ -6,7 +6,9 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [1.2.4](#124---2025-01-17) - **Actual** - Sistema completo reestructurado
+- [2.1.0](#210---2026-02-16) - **Actual** - Fix y mejoras del sistema
+- [2.0.0](#200---2026-02-14) - Sistema completo reestructurado, nuevas funcionalidades, rebranding GDPR y mejoras críticas
+- [1.2.4](#124---2025-01-17) - Modificaciones UX/UI y mejoras críticas
 - [1.2.3](#123---2025-10-26) - Fix wp.i18n y mejora de compatibilidad JS
 - [1.2.2](#122---2025-10-25) - Corrección crítica de inputs en formularios
 - [1.2.1](#121---2025-10-24) - Rediseño completo del admin con Bentō
@@ -15,6 +17,24 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.0] - 2026-02-16
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Slider de control de velocidad de escritura con tooltip dinámico en tiempo real.
+- **ADDED**: Soporte para HTML y Markdown en el mensaje del banner GDPR.
+- **ADDED**: Tipografía Montserrat implementada localmente para cumplimiento GDPR y mejora de performance.
+
+### 🎨 Mejoras Visuales y UX
+- **IMPROVED**: Refinamiento general de la UI del administrador (diseño Bentō).
+- **IMPROVED**: Unificación de estilos con variables CSS global `--braves-*`.
+- **IMPROVED**: Scroll automático del chat al enviar mensajes para asegurar visibilidad del último contenido.
+
+### 🐛 Correcciones
+- **FIXED**: Comportamiento del scroll cuando el usuario envía múltiples mensajes consecutivos.
+- **FIXED**: Estilos del contenedor del banner GDPR para evitar cortes en móviles.
 
 ---
 

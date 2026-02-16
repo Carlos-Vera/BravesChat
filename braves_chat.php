@@ -2,8 +2,8 @@
 /**
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
- * Description: Integración profesional de chat con IA mediante bloque Gutenberg, con horarios personalizables y páginas excluidas. Backend refactorizado con diseño Bentō moderno.
- * Version: 2.0.0
+ * Description: Plugin profesional de chat con integración a N8N, con horarios personalizables y páginas excluidas. Backend refactorizado con diseño moderno.
+ * Version: 2.1.0
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braves-chat
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.0.0');
+define('BRAVES_CHAT_VERSION', '2.1.0');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
