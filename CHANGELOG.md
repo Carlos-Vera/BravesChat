@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.0](#210---2026-02-16) - **Actual** - Fix y mejoras del sistema
+- [2.1.1](#211---2026-02-16) - **Actual** - Fix Markdown y foco del input
+- [2.1.0](#210---2026-02-16) - Fix y mejoras del sistema
 - [2.0.0](#200---2026-02-14) - Sistema completo reestructurado, nuevas funcionalidades, rebranding GDPR y mejoras críticas
 - [1.2.4](#124---2025-01-17) - Modificaciones UX/UI y mejoras críticas
 - [1.2.3](#123---2025-10-26) - Fix wp.i18n y mejora de compatibilidad JS
@@ -17,6 +18,14 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.1] - 2026-02-16
+
+### 🎨 Mejoras UX
+- **IMPROVED**: Renderizado incremental de Markdown en tiempo real para una experiencia de escritura más fluida.
+- **FIXED**: El foco del input se mantiene activo tras enviar un mensaje para facilitar la escritura continua.
 
 ---
 

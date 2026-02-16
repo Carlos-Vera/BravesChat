@@ -108,6 +108,49 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
+                    <!-- Version 2.1.1 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.1.1</span>
+                                <?php _e('Mejoras UX y Fixes', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('16 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎨 Mejoras de Experiencia', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('IMPROVED: Renderizado incremental de Markdown en tiempo real', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Mantenimiento del foco en el input tras enviar mensaje', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <!-- Version 2.1.0 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--primary">v2.1.0</span>
+                                <?php _e('Nuevas Funcionalidades y Mejoras', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('16 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('✨ Nuevas Funcionalidades', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Slider de control de velocidad de escritura', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Soporte HTML/Markdown en banner GDPR', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Tipografía Montserrat local', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                             <div class="braves-changelog__section">
+                                <h4><?php _e('🐛 Correcciones', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: Scroll automático y estilos GDPR', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     <!-- Version 2.0.0 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">

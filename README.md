@@ -4,7 +4,7 @@
 
 Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
 
-**Versión actual**: 2.1.0
+**Versión actual**: 2.1.1
 
 ---
 
