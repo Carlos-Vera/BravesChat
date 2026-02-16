@@ -710,12 +710,28 @@ class BravesChatScreen {
 
     /**
      * Hace scroll hasta el final del área de mensajes
+     * Versión robusta con múltiples intentos para asegurar el scroll tras renderizado
      * @returns {void}
      */
     scroll_to_bottom() {
-        setTimeout(() => {
+        if (!this.chat_messages) return;
+
+        const perform_scroll = () => {
             this.chat_messages.scrollTop = this.chat_messages.scrollHeight;
-        }, 100);
+        };
+
+        // Intento inmediato
+        perform_scroll();
+
+        // Intento con requestAnimationFrame (siguiente frame de renderizado)
+        requestAnimationFrame(() => {
+            perform_scroll();
+
+            // Intentos adicionales para cubrir asincronía de renderizado/teclado
+            setTimeout(perform_scroll, 50);
+            setTimeout(perform_scroll, 150);
+            setTimeout(perform_scroll, 300);
+        });
     }
 
     /**

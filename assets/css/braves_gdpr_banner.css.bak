@@ -1,0 +1,370 @@
+/**
+ * Braves Chat - GDPR Modal (Braves Style)
+ *
+ * Modal centrado para consentimiento de cookies
+ *
+ * @package BravesChat
+ * @since 1.1.0
+ */
+
+/* Animación de entrada del modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animación del overlay */
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* === SKIN ESPECÍFICO: BRAVES === */
+/* Overlay oscuro de fondo */
+body .braves-skin-braves .braves-gdpr-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999998;
+    display: none;
+    animation: overlayFadeIn 0.3s ease-out;
+}
+
+body .braves-skin-braves .braves-gdpr-overlay.active {
+    display: block;
+}
+
+/* Modal centrado */
+body .braves-skin-braves .braves-gdpr-banner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    color: #000000;
+    padding: 40px;
+    z-index: 9999999;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-out;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    border-radius: 16px;
+    max-width: 450px;
+    width: 90%;
+    display: none;
+}
+
+body .braves-skin-braves .braves-gdpr-banner.active {
+    display: block;
+}
+
+/* Título del modal */
+body .braves-skin-braves .braves-gdpr-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+/* Lista de condiciones */
+body .braves-skin-braves .braves-gdpr-conditions {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+body .braves-skin-braves .braves-gdpr-conditions li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666666;
+}
+
+body .braves-skin-braves .braves-gdpr-conditions li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #000000;
+    font-weight: 600;
+}
+
+/* Link a política de privacidad */
+body .braves-skin-braves .braves-gdpr-privacy-link {
+    color: #0066cc;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+body .braves-skin-braves .braves-gdpr-privacy-link:hover {
+    color: #004499;
+}
+
+/* Contenedor de botones */
+body .braves-skin-braves .braves-gdpr-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* Botón "Estoy de acuerdo" (negro) */
+body .braves-skin-braves .braves-gdpr-accept {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+body .braves-skin-braves .braves-gdpr-accept:hover {
+    background: #333333;
+    transform: translateY(-1px);
+}
+
+body .braves-skin-braves .braves-gdpr-accept:active {
+    transform: translateY(0);
+}
+
+/* Botón "Cerrar" (blanco con borde) */
+body .braves-skin-braves .braves-gdpr-reject {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+body .braves-skin-braves .braves-gdpr-reject:hover {
+    background: #f5f5f5;
+}
+
+body .braves-skin-braves .braves-gdpr-reject:active {
+    background: #e0e0e0;
+}
+
+/* === ESTILO DEFAULT (BANNER INFERIOR) === */
+/* Banner inferior para otros skins */
+.braves-gdpr-banner:not(.braves-skin-braves .braves-gdpr-banner) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    color: #ffffff;
+    padding: 20px;
+    z-index: 999999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Contenido del banner (default) */
+.braves-gdpr-content:not(.braves-skin-braves .braves-gdpr-content) {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Mensaje de texto (default) */
+.braves-gdpr-message:not(.braves-skin-braves .braves-gdpr-message) {
+    flex: 1;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #ffffff;
+    min-width: 250px;
+}
+
+/* Botón de aceptar (default) */
+.braves-gdpr-accept:not(.braves-skin-braves .braves-gdpr-accept) {
+    background: #0073aa;
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.braves-gdpr-accept:not(.braves-skin-braves .braves-gdpr-accept):hover {
+    background: #005a87;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive: móviles */
+@media (max-width: 768px) {
+    body .braves-skin-braves .braves-gdpr-banner {
+        padding: 30px 20px;
+        max-width: 90%;
+    }
+
+    body .braves-skin-braves .braves-gdpr-buttons {
+        flex-direction: column;
+    }
+
+    body .braves-skin-braves .braves-gdpr-accept,
+    body .braves-skin-braves .braves-gdpr-reject {
+        width: 100%;
+    }
+}
+
+/* Accesibilidad: reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+
+    body .braves-skin-braves .braves-gdpr-banner,
+    body .braves-skin-braves .braves-gdpr-overlay {
+        animation: none;
+    }
+
+    body .braves-skin-braves .braves-gdpr-accept:hover,
+    body .braves-skin-braves .braves-gdpr-reject:hover {
+        transform: none;
+    }
+}
+
+/* Focus visible para accesibilidad con teclado */
+body .braves-skin-braves .braves-gdpr-accept:focus-visible,
+body .braves-skin-braves .braves-gdpr-reject:focus-visible {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+}
+
+/* In-Chat GDPR Notice Styles */
+.braves-chat-gdpr-notice {
+    margin: 20px 0;
+    padding: 0 10px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.braves-gdpr-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #E5E7EB;
+    text-align: left;
+}
+
+.braves-gdpr-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.braves-gdpr-card p {
+    margin: 0 0 20px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4B5563;
+}
+
+.braves-gdpr-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.braves-btn-cancel,
+.braves-btn-accept {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    outline: none;
+}
+
+.braves-btn-cancel {
+    background: transparent;
+    color: #6B7280;
+}
+
+.braves-btn-cancel:hover {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.braves-btn-accept {
+    background: #000000;
+    color: #FFFFFF;
+}
+
+.braves-btn-accept:hover {
+    background: #1F2937;
+    transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modificaciones para tema oscuro si es necesario */
+.dark-mode .braves-gdpr-card {
+    background: #1F2937;
+    border-color: #374151;
+}
+
+.dark-mode .braves-gdpr-card h3 {
+    color: #F9FAFB;
+}
+
+.dark-mode .braves-gdpr-card p {
+    color: #D1D5DB;
+}
+
+.dark-mode .braves-btn-accept {
+    background: #FFFFFF;
+    color: #000000;
+}

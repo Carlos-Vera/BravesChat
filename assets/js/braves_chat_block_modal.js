@@ -42,8 +42,9 @@ class BravesChatModal {
 
         // CONFIGURABLE: Delay entre fragmentos (en milisegundos)
         // Ajusta este valor para controlar la velocidad de aparición del texto
-        // Valores recomendados: 30-100ms (30=rápido, 100=pausado)
-        this.streaming_delay_ms = 50; // Default: 50ms entre fragmentos
+        // Valores recomendados: 30-100ms
+        this.messages = [];
+        this.typing_speed = (window.BravesChatConfig && window.BravesChatConfig.typing_speed) ? parseInt(window.BravesChatConfig.typing_speed) : 30;
 
         // Inicializar session_id de forma asíncrona
         this.generate_session_id().then(session_id => {
@@ -100,6 +101,20 @@ class BravesChatModal {
         document.addEventListener('braves_chat_close_requested', () => {
             this.close_window();
         });
+
+        // SAFE RENDER: Verificar GDPR al inicio y ocultar contenido si es necesario
+        // Esto previene que se vea el contenido "detrás" del aviso
+        if (window.bravesFingerprint &&
+            window.bravesFingerprint.gdpr_config &&
+            window.bravesFingerprint.gdpr_config.enabled &&
+            !window.bravesFingerprint.has_gdpr_consent()) {
+
+            console.log('[BravesChat Modal] Init: GDPR activo y sin consentimiento. Bloqueando UI preventivamente.');
+            if (this.chat_window) this.chat_window.classList.add('braves-gdpr-locked');
+            if (this.chat_messages) this.chat_messages.style.display = 'none';
+            const inputWrapper = document.getElementById('chat-input-wrapper');
+            if (inputWrapper) inputWrapper.style.display = 'none';
+        }
 
         console.log('Chat Modal inicializado correctamente');
     }
@@ -177,7 +192,8 @@ class BravesChatModal {
         document.addEventListener('click', (e) => {
             if (this.is_open &&
                 this.chat_window && !this.chat_window.contains(e.target) &&
-                this.chat_toggle && !this.chat_toggle.contains(e.target)) {
+                this.chat_toggle && !this.chat_toggle.contains(e.target) &&
+                !e.target.closest('.braves-chat-gdpr-notice')) {
                 this.close_window();
             }
         });
@@ -274,15 +290,152 @@ class BravesChatModal {
      * Abre la ventana del chat
      * @returns {void}
      */
+    /**
+     * Abre la ventana del chat
+     * @returns {void}
+     */
     open_window() {
         this.chat_container.classList.remove('chat-closed');
         this.chat_container.classList.add('chat-open');
         this.is_open = true;
 
-        // Focus en el input
+        console.log('[BravesChat Modal] Intentando abrir ventana de chat...');
+
+        // Verificar si bravesFingerprint existe
+        if (!window.bravesFingerprint) {
+            console.error('[BravesChat Modal] window.bravesFingerprint no está definido');
+            // Si no está definido, permitir abrir por seguridad
+            setTimeout(() => {
+                if (this.chat_input) this.chat_input.focus();
+            }, 300);
+            return;
+        }
+
+        console.log('[BravesChat Modal] GDPR Config:', window.bravesFingerprint.gdpr_config);
+        console.log('[BravesChat Modal] Has Consent:', window.bravesFingerprint.has_gdpr_consent());
+
+        // Verificar GDPR antes de permitir interacción
+        if (window.bravesFingerprint.gdpr_config.enabled && !window.bravesFingerprint.has_gdpr_consent()) {
+            console.log('[BravesChat Modal] GDPR activo y sin consentimiento. Mostrando aviso.');
+            this.show_in_chat_gdpr();
+        } else {
+            console.log('[BravesChat Modal] GDPR inactivo o ya con consentimiento.');
+            // Asegurarnos de que la UI esté desbloqueada
+            if (this.chat_window) this.chat_window.classList.remove('braves-gdpr-locked');
+            if (this.chat_messages) this.chat_messages.style.display = '';
+            const inputWrapper = document.getElementById('chat-input-wrapper');
+            if (inputWrapper) inputWrapper.style.display = '';
+
+            // Focus en el input si ya hay consentimiento
+            setTimeout(() => {
+                if (this.chat_input) this.chat_input.focus();
+            }, 300);
+        }
+    }
+
+    /**
+     * Muestra el aviso GDPR dentro del chat
+     * Bloquea el input hasta que se acepte
+     */
+    show_in_chat_gdpr() {
+        // Bloquear UI añadiendo clase al contenedor principal
+        if (this.chat_window) {
+            this.chat_window.classList.add('braves-gdpr-locked');
+        }
+        // Force hide content via JS to ensure no flash
+        if (this.chat_messages) this.chat_messages.style.display = 'none';
+        const inputWrapper = document.getElementById('chat-input-wrapper');
+        if (inputWrapper) inputWrapper.style.display = 'none';
+
+        // Crear elemento del mensaje GDPR
+        const gdprId = 'braves-chat-gdpr-notice';
+        if (document.getElementById(gdprId)) return;
+
+        const notice = document.createElement('div');
+        notice.id = gdprId;
+        notice.className = 'braves-chat-gdpr-notice braves-gdpr-global-overlay';
+        notice.innerHTML = `
+            <div class="braves-gdpr-card">
+                <h3>${__('Términos y condiciones', 'braves-chat')}</h3>
+                <p>${window.bravesFingerprint.gdpr_config.message || __('Al hacer clic en «Aceptar» y cada vez que interactúo con este agente de IA, doy mi consentimiento para que se graben, almacenen y compartan mis comunicaciones con terceros proveedores de servicios, tal y como se describe en la Política de privacidad. Si no desea que se graben sus conversaciones, le rogamos que se abstenga de utilizar este servicio.', 'braves-chat')}</p>
+                <div class="braves-gdpr-actions">
+                    <button class="braves-btn-cancel" id="braves-gdpr-cancel-btn">${__('Cancelar', 'braves-chat')}</button>
+                    <button class="braves-btn-accept" id="braves-gdpr-accept-btn">${window.bravesFingerprint.gdpr_config.accept_text || __('Aceptar', 'braves-chat')}</button>
+                </div>
+            </div>
+        `;
+
+        // Insertar en document.body para que sea un overlay independiente del chat
+        document.body.appendChild(notice);
+
+        // Bind events
         setTimeout(() => {
-            this.chat_input.focus();
-        }, 300);
+            const acceptBtn = notice.querySelector('#braves-gdpr-accept-btn');
+            const cancelBtn = notice.querySelector('#braves-gdpr-cancel-btn');
+
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.handle_gdpr_consent(true, notice);
+                });
+            }
+
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.handle_gdpr_consent(false, notice);
+                });
+            }
+        }, 100);
+    }
+
+    /**
+     * Maneja la respuesta al aviso GDPR
+     * @param {boolean} accepted - True si el usuario aceptó
+     * @param {HTMLElement} noticeElement - El elemento del aviso
+     */
+    handle_gdpr_consent(accepted, noticeElement) {
+        if (accepted) {
+            // Guardar consentimiento
+            if (window.bravesFingerprint) {
+                window.bravesFingerprint.save_gdpr_consent();
+
+                // Inicializar sesión ahora que tenemos consentimiento
+                window.bravesFingerprint.get_or_create_session().then(sessionId => {
+                    this.session_id = sessionId;
+                    console.log('Sesión iniciada tras consentimiento GDPR:', this.session_id);
+                });
+            }
+
+            // Quitar aviso
+            if (noticeElement) noticeElement.remove();
+
+            // Desbloquear UI
+            if (this.chat_window) {
+                this.chat_window.classList.remove('braves-gdpr-locked');
+            }
+            if (this.chat_messages) this.chat_messages.style.display = '';
+            const inputWrapper = document.getElementById('chat-input-wrapper');
+            if (inputWrapper) inputWrapper.style.display = '';
+
+            // Desbloquear input y focus
+            if (this.chat_input) {
+                this.chat_input.disabled = false;
+                this.chat_input.focus();
+            }
+            if (this.send_button) {
+                this.send_button.disabled = false;
+            }
+            // Revisar estado del botón de enviar
+            this.toggle_send_button();
+
+        } else {
+            // Usuario canceló - cerrar chat
+            this.close_window();
+            // Opcional: mostrar mensaje de que es necesario aceptar para usar el chat
+        }
     }
 
     /**
@@ -801,12 +954,28 @@ class BravesChatModal {
 
     /**
      * Hace scroll hasta el final del área de mensajes
+     * Versión robusta con múltiples intentos para asegurar el scroll tras renderizado
      * @returns {void}
      */
     scroll_to_bottom() {
-        setTimeout(() => {
+        if (!this.chat_messages) return;
+
+        const perform_scroll = () => {
             this.chat_messages.scrollTop = this.chat_messages.scrollHeight;
-        }, 100);
+        };
+
+        // Intento inmediato
+        perform_scroll();
+
+        // Intento con requestAnimationFrame (siguiente frame de renderizado)
+        requestAnimationFrame(() => {
+            perform_scroll();
+
+            // Intentos adicionales para cubrir asincronía de renderizado/teclado
+            setTimeout(perform_scroll, 50);
+            setTimeout(perform_scroll, 150);
+            setTimeout(perform_scroll, 300);
+        });
     }
 
     /**
@@ -945,17 +1114,33 @@ class BravesChatModal {
                         if (content) {
                             full_content += content;
 
-                            // Mostrar fragmento INMEDIATAMENTE
-                            const text_node = document.createTextNode(content);
-                            bubble_div.insertBefore(text_node, cursor_span);
+                            // EFECTO DE ESCRITURA CARÁCTER POR CARÁCTER
+                            // Iterar sobre cada letra del contenido recibido
+                            for (let i = 0; i < content.length; i++) {
+                                const char = content[i];
+                                const text_node = document.createTextNode(char);
+                                bubble_div.insertBefore(text_node, cursor_span);
 
-                            console.log(`   → Mostrado: "${content}"`);
+                                // Scroll suave
+                                this.scroll_to_bottom();
 
-                            // Scroll suave
-                            this.scroll_to_bottom();
+                                // Calcular delay basado en la configuración + variación aleatoria
+                                // Variación de ±30% para dar efecto humano
+                                const random_variation = (Math.random() * 0.6) + 0.7; // 0.7 a 1.3
+                                let delay = this.typing_speed * random_variation;
 
-                            // Delay artificial para efecto natural de escritura
-                            await new Promise(resolve => setTimeout(resolve, this.streaming_delay_ms));
+                                // Pausas naturales en puntuación
+                                if (['.', '!', '?', '\n'].includes(char)) {
+                                    delay += 150; // Pausa más larga al finalizar frases
+                                } else if ([',', ';', ':'].includes(char)) {
+                                    delay += 70;  // Pausa media en comas
+                                }
+
+                                await new Promise(resolve => setTimeout(resolve, delay));
+
+                                // Verificar si el usuario canceló durante la escritura
+                                if (!this.streaming_active) break;
+                            }
                         } else {
                             console.log(`      ⚠️ No se encontró contenido en este fragmento`);
                         }

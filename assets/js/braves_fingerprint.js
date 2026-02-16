@@ -33,8 +33,17 @@ class BravesFingerprint {
             message: '',
             accept_text: 'Aceptar',
             cookie_name: this.cookie_name,
+            accept_text: 'Aceptar',
+            cookie_name: this.cookie_name,
             cookie_duration: 31536000 // segundos
         };
+
+        // Procesar Markdown en el mensaje
+        if (this.gdpr_config.message) {
+            this.gdpr_config.message_html = this.parse_markdown(this.gdpr_config.message);
+        } else {
+            this.gdpr_config.message_html = '';
+        }
 
         // Inicializar
         this.init();
@@ -97,7 +106,11 @@ class BravesFingerprint {
         const isBraves = chatContainer && chatContainer.classList.contains('braves-skin-braves');
 
         if (isBraves) {
-            this.show_braves_modal();
+            // En skin Braves, NO mostramos banner automático.
+            // Se manejará dentro del chat al abrirlo (ver braves_chat_block_modal.js)
+            // this.show_braves_modal();
+            console.log('[BravesFingerprint] Skin Braves detectado - GDPR se gestionará en el chat');
+            return;
         } else {
             this.show_default_banner();
         }
@@ -123,11 +136,12 @@ class BravesFingerprint {
 
         modal.innerHTML = `
             <h3 class="braves-gdpr-title">Antes de comenzar</h3>
-            <ul class="braves-gdpr-conditions">
-                <li>Usaremos cookies para mejorar su experiencia</li>
-                <li>Su información se procesará de forma segura</li>
-                <li>Puede revisar nuestra <a href="#" class="braves-gdpr-privacy-link">política de privacidad</a></li>
-            </ul>
+            <div class="braves-gdpr-message-content">
+                ${this.gdpr_config.message_html}
+            </div>
+            <div class="braves-gdpr-privacy-link-container">
+                 <a href="#" class="braves-gdpr-privacy-link">Política de privacidad</a>
+            </div>
             <div class="braves-gdpr-buttons">
                 <button class="braves-gdpr-accept" id="braves-gdpr-accept-btn">
                     Estoy de acuerdo
@@ -211,7 +225,8 @@ class BravesFingerprint {
         banner.className = 'braves-gdpr-banner';
         banner.innerHTML = `
             <div class="braves-gdpr-content">
-                <p class="braves-gdpr-message">${this.gdpr_config.message}</p>
+            <div class="braves-gdpr-content">
+                <div class="braves-gdpr-message">${this.gdpr_config.message_html}</div>
                 <button class="braves-gdpr-accept" id="braves-gdpr-accept-btn">
                     ${this.gdpr_config.accept_text}
                 </button>
@@ -630,6 +645,42 @@ class BravesFingerprint {
         }
 
         console.log('[BravesFingerprint] Sesión limpiada');
+    }
+
+    /**
+     * Parsear Markdown simple a HTML
+     * 
+     * Soporta:
+     * - **negrita**
+     * - *cursiva*
+     * - [enlace](url)
+     * - Saltos de línea
+     * 
+     * @param {string} text - Texto en Markdown
+     * @return {string} HTML seguro
+     */
+    parse_markdown(text) {
+        if (!text) return '';
+
+        let html = text;
+
+        // Escapar HTML existente para seguridad (aunque ya viene saneado del backend, doble seguridad)
+        // html = html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        // NOTA: No escapamos aquí porque wp_kses_post en backend ya permite HTML seguro y queremos soportarlo.
+
+        // Bold: **text**
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Italic: *text*
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+        // Link: [text](url)
+        html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+
+        // Newlines a <br>
+        html = html.replace(/\n/g, '<br>');
+
+        return html;
     }
 }
 
