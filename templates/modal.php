@@ -20,11 +20,16 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
 <div id="<?php echo esc_attr($unique_id); ?>" class="braveslab-chat-widget-container position-<?php echo esc_attr($position); ?>">
     <div id="braveslab-chat-container" class="chat-closed braves-skin-<?php echo esc_attr($chat_skin); ?>">
         <button id="chat-toggle" title="<?php echo esc_attr($bubble_tooltip); ?>">
-            <?php if ($chat_skin === 'braves' && !empty($bubble_image)): ?>
+            <?php if ($chat_skin === 'braves'): ?>
                 <div class="braves-bubble-content">
                     <div class="braves-bubble-header">
-                        <img id="chat-bubble-image" src="<?php echo esc_url($bubble_image); ?>" alt="Chat" width="60" height="60">
-                        <span class="braves-bubble-text"><?php echo esc_html($bubble_text); ?></span>
+                        <?php 
+                        $img_src = !empty($bubble_image) ? $bubble_image : $icon_path;
+                        // Asegurar que haya texto fallback si la opción está vacía
+                        $final_bubble_text = !empty(trim($bubble_text)) ? $bubble_text : __('¿Necesitas ayuda?', 'braves-chat');
+                        ?>
+                        <img id="chat-bubble-image" src="<?php echo esc_url($img_src); ?>" alt="Chat" width="60" height="60">
+                        <span class="braves-bubble-text"><?php echo esc_html($final_bubble_text); ?></span>
                     </div>
                     <div class="braves-bubble-cta">
                         <svg class="braves-bubble-cta-icon" width="24" height="24" viewBox="0 0 1624 1877" version="1.1" xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -87,19 +92,13 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                 </div>
             </div>
 
-            <?php
-            // DESHABILITADO: El indicador de escritura ahora se muestra como cursor circular dentro del mensaje
-            // con el nuevo sistema de streaming. Este indicador antiguo ya no es necesario.
-            /*
-            <div class="typing-indicator" id="typing-indicator">
+            <div class="typing-indicator" id="typing-indicator" style="display: none;">
                 <div class="typing-dots">
                      <div class="typing-dot"></div>
                     <div class="typing-dot"></div>
                     <div class="typing-dot"></div>
                 </div>
             </div>
-            */
-            ?>
             
             <div id="chat-input-wrapper">
                 <div id="chat-input-container">
@@ -112,7 +111,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     ></textarea>
                     
                     <button id="send-button" disabled aria-label="<?php esc_attr_e('Enviar mensaje', 'braves-chat'); ?>">
-                        <svg width="24" height="24" viewBox="0 0 1624 1877" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                        <svg width="20" height="20" viewBox="0 0 1624 1877" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                             <g transform="matrix(1,0,0,1,-11388.375,-2119.869508)">
                                 <g id="Enviar" transform="matrix(3.529117,0,0,4.079728,11388.375,2119.869508)">
                                     <rect x="0" y="0" width="460" height="460" style="fill:none;"/>
