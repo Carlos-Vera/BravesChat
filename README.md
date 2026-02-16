@@ -26,7 +26,7 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
 *   **Estado Minimizado Inteligente**: Si el usuario ya interactuó, el chat se reduce a una "píldora" discreta para mejorar la navegación sin perder accesibilidad.
 *   **Diseño Personalizable**: Elige colores (con soporte de temas `theme.json`), iconos SVG y posición.
 
-[Frontend estados BravesChat iA](https://braveslab.com/branding/git/estados-braveschat.avif)
+<image src="https://braveslab.com/branding/git/estados-braveschat.avif" alt="Frontend estados BravesChat iA">
 
 ### 🛡️ Privacidad y Control Total
 *   **GDPR Compliance Nativo**: Banner de consentimiento de cookies integrado y configurable, ahora con soporte para **HTML y Markdown (v2.1)** para incluir enlaces a tus políticas.
@@ -38,7 +38,7 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
 *   Gestión centralizada de todas las configuraciones con validación en tiempo real.
 *   Previsualización de colores y ajustes.
 
-[Backend BravesChat iA | Apariencia](https://braveslab.com/branding/git/Backend-Apariencia.webp)
+<image src="https://braveslab.com/branding/git/Backend-Apariencia.webp" alt="Backend BravesChat iA | Apariencia">
 
 ---
 
