@@ -151,7 +151,8 @@ $option_prefix = 'braves_chat_';
                                       style="width: 100%;"
                                       placeholder="<?php echo esc_attr(__('Este sitio utiliza cookies...', 'braves-chat')); ?>"><?php echo esc_textarea($gdpr_message); ?></textarea>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mensaje que se mostrará en el banner de cookies explicando el uso de cookies para la sesión del chat.', 'braves-chat'); ?>
+                                <?php _e('Mensaje que se mostrará en el banner de cookies.<br>
+                                Soporta <b>HTML</b> y <b>Markdown</b> (negrita**, *cursiva*, [enlaces](url)).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $message_content = ob_get_clean();

@@ -213,13 +213,12 @@ if (empty($theme_colors)) {
                                 'title' => __('Imagen de Burbuja', 'braves-chat'),
                                 'description' => __('Reemplaza el icono por defecto con tu propia imagen.', 'braves-chat'),
                                 'content' => $bubble_content,
-                                'custom_class' => 'braves-skin-only',
                             ));
                             ?>
 
                             <!-- Card: Texto de Burbuja -->
                             <?php
-                            $bubble_text = get_option($option_prefix . 'bubble_text', __('Chat de voz', 'braves-chat'));
+                            $bubble_text = get_option($option_prefix . 'bubble_text', __('¿Necesitas ayuda?', 'braves-chat'));
 
                             ob_start();
                             ?>
@@ -229,7 +228,7 @@ if (empty($theme_colors)) {
                                    value="<?php echo esc_attr($bubble_text); ?>"
                                    class="braves-input"
                                    style="width: 100%;"
-                                   placeholder="<?php echo esc_attr(__('Chat de voz', 'braves-chat')); ?>">
+                                   placeholder="<?php echo esc_attr(__('¿Necesitas ayuda?', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
                                 <?php _e('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braves-chat'); ?>
                             </p>
@@ -240,7 +239,7 @@ if (empty($theme_colors)) {
                                 'title' => __('Texto de Burbuja', 'braves-chat'),
                                 'description' => __('Mensaje que acompaña el botón del chat.', 'braves-chat'),
                                 'content' => $bubble_text_content,
-                                'custom_class' => 'braves-skin-only',
+                                //'custom_class' => 'braves-skin-only',
                             ));
                             ?>
 
