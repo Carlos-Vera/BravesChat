@@ -114,6 +114,14 @@ class Frontend {
             BRAVES_CHAT_VERSION
         );
 
+        // Fuente Montserrat (Local)
+        wp_enqueue_style(
+            'braves-chat-fonts',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/braves_fonts.css',
+            array(),
+            BRAVES_CHAT_VERSION
+        );
+
         $display_mode = get_option('braves_chat_display_mode', 'modal');
 
         // CSS condicional según modo de visualización
@@ -164,6 +172,7 @@ class Frontend {
             'isAvailable'   => $chat_config['is_available'],
             'skin'          => $chat_config['skin'],
             'bubbleImage'   => $chat_config['bubble_image'],
+            'typing_speed'  => (int) get_option('braves_chat_typing_speed', 30),
         ));
 
         // Configurar traducciones para JavaScript
