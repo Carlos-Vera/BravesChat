@@ -108,10 +108,13 @@ function braves_chat_delete_user_meta() {
 }
 
 // Ejecutar limpieza
-braves_chat_delete_plugin_options();
-braves_chat_delete_plugin_files();
-braves_chat_delete_post_meta();
-braves_chat_delete_user_meta();
+// braves_chat_delete_plugin_options();
+// braves_chat_delete_plugin_files();
+// braves_chat_delete_post_meta();
+// braves_chat_delete_user_meta();
+
+// NOTA: Se ha comentado la limpieza para preservar configuraciones y datos al desinstalar.
+// Esto permite recuperar la configuración si el plugin se reinstala posteriormente.
 
 // Limpiar caché
 wp_cache_flush();

@@ -7,6 +7,46 @@
  * @since 1.1.0
  */
 
+/* ============================================
+   ISOLATION LAYER - GDPR BANNER
+   ============================================ */
+/* Reset for GDPR elements to prevent theme interference */
+body .braves-gdpr-overlay,
+body .braves-gdpr-banner,
+body .braves-gdpr-overlay *,
+body .braves-gdpr-banner *,
+body .braves-chat-gdpr-notice,
+body .braves-chat-gdpr-notice * {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+/* Reset buttons in GDPR banner */
+body .braves-gdpr-banner button,
+body .braves-chat-gdpr-notice button {
+    all: unset;
+    box-sizing: border-box;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Reset text elements */
+body .braves-gdpr-banner h1,
+body .braves-gdpr-banner h2,
+body .braves-gdpr-banner h3,
+body .braves-gdpr-banner h4,
+body .braves-gdpr-banner p,
+body .braves-chat-gdpr-notice h3,
+body .braves-chat-gdpr-notice p {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
 /* Animación de entrada del modal */
 @keyframes fadeIn {
     from {
@@ -127,15 +167,24 @@ body .braves-skin-braves .braves-gdpr-buttons {
 /* Botón "Estoy de acuerdo" (negro) */
 body .braves-skin-braves .braves-gdpr-accept {
     background: #000000;
+    background-color: #000000;
     color: #ffffff;
     border: none;
+    border-width: 0;
     padding: 12px 32px;
+    margin: 0;
     font-size: 14px;
     font-weight: 600;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     border-radius: 24px;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    line-height: 1.4;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    display: inline-block;
 }
 
 body .braves-skin-braves .braves-gdpr-accept:hover {
@@ -150,15 +199,24 @@ body .braves-skin-braves .braves-gdpr-accept:active {
 /* Botón "Cerrar" (blanco con borde) */
 body .braves-skin-braves .braves-gdpr-reject {
     background: #ffffff;
+    background-color: #ffffff;
     color: #000000;
     border: 1px solid #000000;
+    border-width: 1px;
     padding: 12px 32px;
+    margin: 0;
     font-size: 14px;
     font-weight: 600;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     border-radius: 24px;
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
+    line-height: 1.4;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    display: inline-block;
 }
 
 body .braves-skin-braves .braves-gdpr-reject:hover {
@@ -352,27 +410,38 @@ body #braveslab-chat-container #chat-window.braves-gdpr-locked {
 .braves-btn-cancel,
 .braves-btn-accept {
     padding: 10px 20px;
+    margin: 0;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     cursor: pointer;
     transition: all 0.2s ease;
     border: none;
+    border-width: 0;
     outline: none;
+    line-height: 1.4;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    display: inline-block;
 }
 
 .braves-btn-cancel {
     background: transparent;
+    background-color: transparent;
     color: #6B7280;
 }
 
 .braves-btn-cancel:hover {
     background: #F3F4F6;
+    background-color: #F3F4F6;
     color: #374151;
 }
 
 .braves-btn-accept {
     background: #000000;
+    background-color: #000000;
     color: #FFFFFF;
 }
 

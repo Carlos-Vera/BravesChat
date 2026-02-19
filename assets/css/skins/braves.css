@@ -1,9 +1,37 @@
 /**
  * Braves Skin for Braves Chat
- * 
+ *
  * Theme: Black & White / Minimalist
  * Updated to match new reference design
  */
+
+/* ========================================
+   ISOLATION LAYER - BRAVES SKIN
+   ======================================== */
+/* Additional isolation for Braves skin elements */
+body .braves-skin-braves,
+body .braves-skin-braves *,
+body .braves-skin-braves *::before,
+body .braves-skin-braves *::after {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
+/* Reset buttons specifically for Braves skin */
+body .braves-skin-braves button {
+    all: unset;
+    box-sizing: border-box;
+    font-family: inherit;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Reset inputs for Braves skin */
+body .braves-skin-braves input,
+body .braves-skin-braves textarea {
+    all: unset;
+    box-sizing: border-box;
+    font-family: inherit;
+}
 
 /* ========================================
    GLOBAL OVERRIDES & VARIABLES

@@ -3,7 +3,7 @@
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
  * Description: Plugin profesional de chat con integración a N8N, con horarios personalizables y páginas excluidas. Backend refactorizado con diseño moderno.
- * Version: 2.1.1
+ * Version: 2.1.2
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braves-chat
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.1.1');
+define('BRAVES_CHAT_VERSION', '2.1.2');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
@@ -127,24 +127,31 @@ class BravesChat {
      * @return void
      */
     public function activate() {
-        // Establecer opciones por defecto
-        $defaults = array(
-            'webhook_url' => 'https://flow.braveslab.com/webhook/1427244e-a23c-4184-a536-d02622f36325/chat',
-            'header_title' => __('Braves Chat', 'braves-chat'),
-            'header_subtitle' => __('Artificial Intelligence Marketing Agency', 'braves-chat'),
-            'welcome_message' => __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braves-chat'),
-            'position' => 'bottom-right',
-            'excluded_pages' => array(),
-            'availability_enabled' => false,
-            'availability_start' => '09:00',
-            'availability_end' => '18:00',
-            'availability_timezone' => 'Europe/Madrid',
-            'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'),
-            'display_mode' => 'modal',
-            'gdpr_enabled' => false,
-            'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat'),
-            'gdpr_accept_text' => __('Aceptar', 'braves-chat'),
-        );
+        // Cargar valores por defecto desde archivo de configuración
+        $config_file = BRAVES_CHAT_PLUGIN_DIR . 'config/defaults.php';
+
+        if (file_exists($config_file)) {
+            $defaults = include $config_file;
+        } else {
+            // Fallback: valores genéricos si no existe config/defaults.php
+            $defaults = array(
+                'webhook_url' => '',
+                'header_title' => __('Chat de Soporte', 'braves-chat'),
+                'header_subtitle' => __('Estamos aquí para ayudarte', 'braves-chat'),
+                'welcome_message' => __('¡Hola! ¿En qué podemos ayudarte hoy?', 'braves-chat'),
+                'position' => 'bottom-right',
+                'excluded_pages' => array(),
+                'availability_enabled' => false,
+                'availability_start' => '09:00',
+                'availability_end' => '18:00',
+                'availability_timezone' => 'UTC',
+                'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'),
+                'display_mode' => 'modal',
+                'gdpr_enabled' => false,
+                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat'),
+                'gdpr_accept_text' => __('Aceptar', 'braves-chat'),
+            );
+        }
         
         foreach ($defaults as $key => $value) {
             if (false === get_option('braves_chat_' . $key)) {

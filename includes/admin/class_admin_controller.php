@@ -77,6 +77,7 @@ class Admin_Controller {
         add_action('admin_menu', array($this, 'register_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('admin_head', array($this, 'add_menu_icon_active_styles'));
+        add_filter('admin_title', array($this, 'filter_admin_title'), 10, 2);
     }
 
     /**
@@ -440,6 +441,48 @@ class Admin_Controller {
      */
     public function get_component($name) {
         return isset($this->components[$name]) ? $this->components[$name] : null;
+    }
+
+    /**
+     * Filtrar el título de admin para agregar títulos dinámicos por sección
+     *
+     * @param string $admin_title Título actual del admin
+     * @param string $title Título de la página
+     * @return string Título filtrado
+     */
+    public function filter_admin_title($admin_title, $title) {
+        $screen = get_current_screen();
+
+        // Solo aplicar en páginas de BravesChat
+        if (!$screen || strpos($screen->id, 'braves-chat') === false) {
+            return $admin_title;
+        }
+
+        // Mapeo de páginas a títulos
+        $page_titles = array(
+            'toplevel_page_braves-chat' => __('Resumen', 'braves-chat'),
+            'admin_page_braves-chat-settings' => __('Ajustes', 'braves-chat'),
+            'admin_page_braves-chat-appearance' => __('Apariencia', 'braves-chat'),
+            'admin_page_braves-chat-availability' => __('Horarios', 'braves-chat'),
+            'admin_page_braves-chat-gdpr' => __('GDPR', 'braves-chat'),
+            'admin_page_braves-chat-about' => __('Acerca de', 'braves-chat'),
+        );
+
+        // Obtener título de la sección actual
+        $section_title = isset($page_titles[$screen->id]) ? $page_titles[$screen->id] : '';
+
+        if ($section_title) {
+            // Obtener el nombre del sitio
+            $site_name = get_bloginfo('name', 'display');
+
+            // Formato: "BravesChat | Sección | Nombre del Sitio"
+            return sprintf('BravesChat | %s | %s', $section_title, $site_name);
+        }
+
+        // Limpiar cualquier carácter HTML o símbolo no deseado del inicio
+        $admin_title = preg_replace('/^[<>\s]+/', '', $admin_title);
+
+        return $admin_title;
     }
 }
 

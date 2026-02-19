@@ -108,6 +108,45 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
+                    <!-- Version 2.1.2 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.1.2</span>
+                                <?php _e('Aislamiento CSS y Mejoras de Compatibilidad', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('20 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎨 Mejoras de Interfaz', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('IMPROVED: Sistema completo de aislamiento CSS (Isolation Layer) para prevenir conflictos con temas', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Reset exhaustivo de estilos de botones, inputs y elementos de texto en todos los modos', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Protección contra bleeding de CSS de temas externos en Modal, Fullscreen y GDPR Banner', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Forzado de tipografía Montserrat en todos los elementos del chat', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🐛 Correcciones', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: Posicionamiento del chat en modo centrado (position-center)', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Ventana del chat centrada cuando la burbuja está en el centro', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Posicionamiento bottom-left corregido para modo modal', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Eliminación de cursores de escritura múltiples en streaming', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Backend', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Filtro admin_title para títulos dinámicos por sección', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Títulos de pestañas personalizados: "BravesChat | Sección | Sitio"', 'braves-chat'); ?></li>
+                                    <li><?php _e('CHANGED: Script de desinstalación preserva configuraciones al desinstalar', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     <!-- Version 2.1.1 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">

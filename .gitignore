@@ -1,5 +1,4 @@
 **/.DS_Store
-wland-chat-ia-v2.php
 **/*-old.php
 **/*-old.css
 **/*-old.js
@@ -9,9 +8,14 @@ wland-chat-ia-v2.php
 **/mcp.json
 **/.claude.json
 **/.mcp.json
-.mcp.json
-UI-UX-BravesChat.md
-.agent/*
-GEMINI.md
-CLAUDE.md
-menu-icon.svg
+**/UX-UI-Convenciones.md
+**/.agent/*
+**/.agents/*
+**/GEMINI.md
+**/CLAUDE.md
+**/menu-icon.svg
+**/Knowledge/*
+**/.github/workflows/*
+
+# Configuración de valores por defecto (contiene datos específicos de cada instalación)
+config/defaults.php

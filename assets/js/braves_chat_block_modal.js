@@ -997,6 +997,12 @@ class BravesChatModal {
 
         console.log('📡 Iniciando streaming real de n8n...');
 
+        // REMOVED: Eliminar cursores anteriores para que solo el último mensaje tenga el dot palpitante
+        if (this.chat_messages) {
+            const existing_cursors = this.chat_messages.querySelectorAll('.typing-cursor');
+            existing_cursors.forEach(cursor => cursor.remove());
+        }
+
         // Crear mensaje vacío con cursor circular
         const message_div = document.createElement('div');
         message_div.className = 'message bot';

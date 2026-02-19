@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.1](#211---2026-02-16) - **Actual** - Fix Markdown y foco del input
+- [2.1.2](#212---2026-02-20) - **Actual** - Aislamiento CSS y mejoras de compatibilidad
+- [2.1.1](#211---2026-02-16) - Fix Markdown y foco del input
 - [2.1.0](#210---2026-02-16) - Fix y mejoras del sistema
 - [2.0.0](#200---2026-02-14) - Sistema completo reestructurado, nuevas funcionalidades, rebranding GDPR y mejoras críticas
 - [1.2.4](#124---2025-01-17) - Modificaciones UX/UI y mejoras críticas
@@ -18,6 +19,27 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.2] - 2026-02-20
+
+### 🎨 Mejoras de Interfaz
+- **IMPROVED**: Sistema completo de aislamiento CSS (Isolation Layer) para prevenir conflictos con temas de WordPress.
+- **IMPROVED**: Reset exhaustivo de estilos de botones, inputs y elementos de texto en todos los modos.
+- **IMPROVED**: Protección contra bleeding de CSS de temas externos en Modal, Fullscreen y GDPR Banner.
+- **IMPROVED**: Forzado de tipografía Montserrat en todos los elementos del chat.
+
+### 🐛 Correcciones
+- **FIXED**: Posicionamiento del chat en modo centrado (position-center) ahora correctamente alineado.
+- **FIXED**: Ventana del chat centrada cuando la burbuja está en el centro.
+- **FIXED**: Posicionamiento bottom-left corregido para modo modal.
+- **FIXED**: Eliminación de cursores de escritura múltiples en streaming (solo el último mensaje muestra el cursor palpitante).
+
+### 🔧 Backend
+- **ADDED**: Filtro `admin_title` para títulos dinámicos por sección en el panel de administración.
+- **ADDED**: Títulos de pestañas del navegador personalizados: "BravesChat | Sección | Nombre del Sitio".
+- **CHANGED**: Script de desinstalación ahora preserva configuraciones al desinstalar (funciones comentadas).
 
 ---
 
