@@ -1,10 +1,10 @@
-# BravesChat iA 2.1.0 🤖
+# BravesChat iA 2.1.2 🤖
 
 > **La solución definitiva para integrar Agentes de IA en WordPress.**
 
 Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
 
-**Versión actual**: 2.1.1
+**Versión actual**: 2.1.2
 
 ---
 
@@ -18,6 +18,8 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
 *   **Seguridad API**: Soporte para Tokens de Autenticación (`X-N8N-Auth`) para proteger tus webhooks.
 
 ### 🎨 Experiencia de Usuario (UX) Premium
+*   **Aislamiento CSS Completo (v2.1.2)**: Implementación avanzada con Shadow DOM y prefijos únicos que garantiza compatibilidad total con cualquier tema de WordPress sin conflictos de estilos.
+*   **Skins Avanzados (v2.1.2)**: Nuevo diseño "Braves" con header transparente, avatares personalizados y separadores visuales para mejorar la experiencia conversacional.
 *   **Control de Ritmo (v2.1)**: Ajusta la **velocidad de escritura** de tu asistente para una experiencia más natural y humana.
 *   **Tipografía Montserrat (v2.1)**: Integrada localmente para una legibilidad perfecta, diseño premium y cumplimiento total de privacidad (sin conexiones externas).
 *   **Scroll Inteligente (v2.1)**: El chat se desliza automáticamente para seguir la conversación sin interrupciones visuales.
@@ -664,4 +666,4 @@ El chat funciona en todos los navegadores modernos:
 
 ---
 
-**Versión**: 1.2.3 | **Autor**: Carlos Vera @ BravesLab | **Licencia**: Comercial
+**Versión**: 2.1.2 | **Autor**: Carlos Vera @ BravesLab | **Licencia**: Comercial
