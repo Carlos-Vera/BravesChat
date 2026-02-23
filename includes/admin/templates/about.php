@@ -108,6 +108,26 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
+                    <!-- Version 2.1.3 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.1.3</span>
+                                <?php _e('Fix Release Automatizado con GitHub Actions', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('23 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Backend / CI', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: El workflow de GitHub Actions no se ejecutaba porque .gitignore excluía el directorio .github/workflows/', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: Eliminada regla **/.github/workflows/* del .gitignore para que el workflow quede trackeado en git', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Workflow release.yml ahora genera automáticamente braveschat.zip al hacer push de un tag v*', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Version 2.1.2 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">

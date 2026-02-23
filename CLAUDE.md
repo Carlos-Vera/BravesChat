@@ -2,7 +2,7 @@
 
 ## 📋 Información General
 - **Nombre:** BravesChat
-- **Versión:** 2.1.2
+- **Versión:** 2.1.3
 - **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR y personalización avanzada.
 - **Autor:** Carlos Vera (BravesLab)
 - **Repositorio:** Carlos-Vera/BravesChat
@@ -84,7 +84,7 @@ No se requiere compilación (Vanilla JS/CSS).
 2.  **Versiones:** SemVer (MAJOR.MINOR.PATCH).
 3.  **Commits:** Conventional Commits (e.g., `feat: nueva opción de color`, `fix: error en safari`).
 4.  **Release Automatizado:**
-    - Al crear un tag que empiece por `v` (e.g., `v2.1.2`), un GitHub Action genera automáticamente `braveschat.zip`.
+    - Al crear un tag que empiece por `v` (e.g., `v2.1.3`), un GitHub Action genera automáticamente `braveschat.zip`.
     - Este ZIP contiene la carpeta `braveschat/` en la raíz, asegurando actualizaciones limpias en WordPress.
     - El ZIP se adjunta automáticamente al Release en GitHub.
 

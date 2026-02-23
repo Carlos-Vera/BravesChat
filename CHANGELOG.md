@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.2](#212---2026-02-20) - **Actual** - Aislamiento CSS y mejoras de compatibilidad
+- [2.1.3](#213---2026-02-23) - **Actual** - Fix release automatizado con GitHub Actions
+- [2.1.2](#212---2026-02-20) - Aislamiento CSS y mejoras de compatibilidad
 - [2.1.1](#211---2026-02-16) - Fix Markdown y foco del input
 - [2.1.0](#210---2026-02-16) - Fix y mejoras del sistema
 - [2.0.0](#200---2026-02-14) - Sistema completo reestructurado, nuevas funcionalidades, rebranding GDPR y mejoras críticas
@@ -19,6 +20,15 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.3] - 2026-02-23
+
+### 🔧 Backend / CI
+- **FIXED**: El workflow de GitHub Actions (`release.yml`) no se ejecutaba porque `.gitignore` excluía el directorio `.github/workflows/`.
+- **FIXED**: Eliminada la regla `**/.github/workflows/*` del `.gitignore` para que el workflow quede correctamente trackeado en git.
+- **ADDED**: Workflow `release.yml` ahora commiteado y disponible en GitHub, generando automáticamente `braveschat.zip` al hacer push de un tag `v*`.
 
 ---
 
