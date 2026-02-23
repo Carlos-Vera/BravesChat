@@ -50,3 +50,4 @@ jobs:
       with:
         files: braveschat.zip
         generate_release_notes: true
+        name: "BravesChat ${{ github.ref_name }}"
