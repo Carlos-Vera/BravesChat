@@ -15,7 +15,6 @@
 **/CLAUDE.md
 **/menu-icon.svg
 **/Knowledge/*
-**/.github/workflows/*
 
 # Configuración de valores por defecto (contiene datos específicos de cada instalación)
 config/defaults.php

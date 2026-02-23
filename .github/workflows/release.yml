@@ -1,0 +1,52 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Archive plugin
+      run: |
+        # Definir el nombre del directorio final
+        PLUGIN_SLUG="braveschat"
+        
+        # Crear directorio temporal para la estructura
+        mkdir -p dist/$PLUGIN_SLUG
+        
+        # Copiar todos los archivos excepto los ignorados a la carpeta del plugin
+        rsync -av --progress ./ dist/$PLUGIN_SLUG/ \
+          --exclude dist \
+          --exclude .git \
+          --exclude .github \
+          --exclude .gitignore \
+          --exclude .DS_Store \
+          --exclude "*.zip" \
+          --exclude "node_modules" \
+          --exclude "tests" \
+          --exclude ".agent" \
+          --exclude ".agents" \
+          --exclude "CLAUDE.md" \
+          --exclude "GEMINI.md" \
+          --exclude "UX-UI-Convenciones.md"
+
+        # Crear el zip
+        cd dist
+        zip -r ../$PLUGIN_SLUG.zip $PLUGIN_SLUG
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: braveschat.zip
+        generate_release_notes: true
