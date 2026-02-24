@@ -2,8 +2,8 @@
 
 ## 📋 Información General
 - **Nombre:** BravesChat
-- **Versión:** 2.1.3
-- **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR y personalización avanzada.
+- **Versión:** 2.1.4
+- **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR, personalización avanzada y estadísticas de conversaciones.
 - **Autor:** Carlos Vera (BravesLab)
 - **Repositorio:** Carlos-Vera/BravesChat
 
@@ -59,7 +59,13 @@ El plugin sigue el patrón **Singleton** para sus clases principales, asegurando
 - **Fingerprinting:** Identificación única de usuario sin datos personales (`braves_fingerprint.js`).
 - **Cookies:** `braves_chat_session` (Duración: 1 año).
 
-### 6. Experiencia de Usuario (UX)
+### 6. Estadísticas (v2.1.4)
+- **Webhook:** Consulta a N8N que extrae el historial de conversaciones desde Postgres.
+- **Configuración:** URL del webhook + API Key propios (opciones `braves_chat_stats_webhook_url` / `braves_chat_stats_api_key`).
+- **Tabla:** Columnas Session ID, Email, Último Mensaje, Fecha/Hora.
+- **CSV:** Exportación con todos los campos: `session_id`, `client_mail`, `last_message`, `updated_at`, `chat_history`, `metadata`, `user_height`.
+
+### 7. Experiencia de Usuario (UX)
 - **Markdown:** Soporte para renderizado de Markdown en mensajes del bot (enlaces, negritas, listas).
 - **Typing Indicator:** Animación de puntos suspensivos y velocidad de escritura configurable.
 - **Persistencia:** Historial de chat guardado en `localStorage` (o transitorio si no hay consentimiento).
