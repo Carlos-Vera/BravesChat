@@ -1,12 +1,12 @@
 <?php
 /**
- * Statistics Page Template
+ * Historial Page Template
  *
- * Página de Estadísticas – historial de conversaciones desde N8N/Postgres
+ * Historial de conversaciones desde N8N/Postgres
  *
  * @package BravesChat
  * @subpackage Admin\Templates
- * @since 2.2.0
+ * @since 2.1.4
  */
 
 use BravesChat\Admin\Admin_Header;
@@ -17,25 +17,26 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Verificar permisos
 if (!current_user_can('manage_options')) {
     wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
-// Obtener instancias de componentes
 $header  = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
 
-// Opciones de estadísticas
-$stats_webhook_url = get_option('braves_chat_stats_webhook_url', '');
-$stats_api_key     = get_option('braves_chat_stats_api_key', '');
+// Obtener estado de configuración (igual que otros templates)
+$config_status = Template_Helpers::get_config_status();
 
-// Detectar si se guardaron los ajustes
-$settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
+// Prefijo de opciones
+$option_prefix = 'braves_chat_';
+
+// Leer configuración de historial
+$stats_webhook_url = get_option($option_prefix . 'stats_webhook_url', '');
+$stats_api_key     = get_option($option_prefix . 'stats_api_key', '');
 
 // Obtener datos del webhook si hay URL configurada
-$conversations    = array();
-$fetch_error      = '';
+$conversations = array();
+$fetch_error   = '';
 
 if (!empty($stats_webhook_url)) {
     $response = wp_remote_get($stats_webhook_url, array(
@@ -52,7 +53,14 @@ if (!empty($stats_webhook_url)) {
         $data = json_decode($body, true);
 
         if (is_array($data)) {
-            $conversations = $data;
+            // N8N envuelve cada item bajo una clave "json"
+            foreach ($data as $item) {
+                if (isset($item['json']) && is_array($item['json'])) {
+                    $conversations[] = $item['json'];
+                } else {
+                    $conversations[] = $item;
+                }
+            }
         } else {
             $fetch_error = __('La respuesta del webhook no es un JSON válido.', 'braves-chat');
         }
@@ -78,138 +86,75 @@ if (!empty($stats_webhook_url)) {
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><?php _e('<strong>Estadísticas</strong>', 'braves-chat'); ?></h1>
+                    <h1 class="braves-page-title"><?php _e('<strong>Historial</strong>', 'braves-chat'); ?></h1>
                     <p class="braves-page-description">
-                        <?php _e('Historial de conversaciones obtenido desde tu base de datos a través de N8N.', 'braves-chat'); ?>
+                        <?php _e('Historial de conversaciones registradas en tu base de datos.', 'braves-chat'); ?>
                     </p>
                 </div>
 
-                <!-- Success Notice -->
-                <?php if ($settings_updated): ?>
-                <div class="braves-section">
-                    <?php
-                    Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'braves-chat'),
-                        'success'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
+                <?php if (empty($stats_webhook_url)): ?>
 
-                <!-- Configuración del Webhook de Estadísticas -->
-                <form action="options.php" method="post">
-                    <?php
-                    settings_fields('braves_chat_settings');
-                    \BravesChat\Settings::get_instance()->render_hidden_fields(array(
-                        'stats_webhook_url',
-                        'stats_api_key',
-                    ));
-                    ?>
-
+                    <!-- Sin configuración -->
                     <div class="braves-section">
-                        <h2 class="braves-section__title">
-                            <?php _e('Configuración', 'braves-chat'); ?>
-                        </h2>
-
-                        <div class="braves-card-grid braves-card-grid--2-cols">
-
-                            <!-- Card: URL Webhook de Estadísticas -->
-                            <?php ob_start(); ?>
-                            <input type="url"
-                                   id="braves_chat_stats_webhook_url"
-                                   name="braves_chat_stats_webhook_url"
-                                   value="<?php echo esc_attr($stats_webhook_url); ?>"
-                                   class="braves-input"
-                                   style="width: 100%;"
-                                   placeholder="https://flow.braveslab.com/webhook/...">
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('URL del webhook de N8N que consulta las conversaciones en Postgres.', 'braves-chat'); ?>
-                            </p>
-                            <?php
-                            Template_Helpers::card(array(
-                                'title'       => __('URL Webhook de Estadísticas', 'braves-chat'),
-                                'description' => __('Endpoint de N8N para recuperar el historial de conversaciones.', 'braves-chat'),
-                                'content'     => ob_get_clean(),
-                            ));
-                            ?>
-
-                            <!-- Card: API Key -->
-                            <?php ob_start(); ?>
-                            <input type="password"
-                                   id="braves_chat_stats_api_key"
-                                   name="braves_chat_stats_api_key"
-                                   value="<?php echo esc_attr($stats_api_key); ?>"
-                                   class="braves-input"
-                                   style="width: 100%;"
-                                   autocomplete="new-password"
-                                   placeholder="••••••••••••••••">
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Clave de autenticación enviada en el header x-api-key al webhook.', 'braves-chat'); ?>
-                            </p>
-                            <?php
-                            Template_Helpers::card(array(
-                                'title'       => __('API Key', 'braves-chat'),
-                                'description' => __('Clave para autenticar las peticiones al webhook de estadísticas.', 'braves-chat'),
-                                'content'     => ob_get_clean(),
-                            ));
-                            ?>
-
-                        </div>
+                        <?php
+                        Template_Helpers::notice(
+                            '<strong>' . __('Webhook no configurado:', 'braves-chat') . '</strong> ' .
+                            sprintf(
+                                __('Configura la URL del webhook de historial en <a href="%s">Ajustes</a>.', 'braves-chat'),
+                                esc_url(admin_url('admin.php?page=braves-chat-settings'))
+                            ),
+                            'warning'
+                        );
+                        ?>
                     </div>
 
-                    <!-- Save Button -->
-                    <div class="braves-section braves-section--actions">
-                        <div class="braves-button-group">
-                            <?php submit_button(
-                                __('Guardar Configuración', 'braves-chat'),
-                                'primary braves-button braves-button--primary',
-                                'submit',
-                                false
-                            ); ?>
-                        </div>
+                <?php elseif (!empty($fetch_error)): ?>
+
+                    <!-- Error al obtener datos -->
+                    <div class="braves-section">
+                        <?php
+                        Template_Helpers::notice(
+                            '<strong>' . __('Error al obtener los datos:', 'braves-chat') . '</strong> ' . esc_html($fetch_error),
+                            'error'
+                        );
+                        ?>
                     </div>
 
-                </form>
+                <?php elseif (empty($conversations)): ?>
 
-                <!-- Tabla de Conversaciones -->
-                <?php if (!empty($stats_webhook_url)): ?>
-                <div class="braves-section" style="margin-top: 30px;">
-                    <h2 class="braves-section__title">
-                        <?php _e('Conversaciones', 'braves-chat'); ?>
-                    </h2>
+                    <!-- Sin conversaciones -->
+                    <div class="braves-section">
+                        <?php
+                        Template_Helpers::notice(
+                            __('No hay conversaciones registradas todavía.', 'braves-chat'),
+                            'info'
+                        );
+                        ?>
+                    </div>
 
-                    <?php if (!empty($fetch_error)): ?>
-                        <div class="notice notice-error inline">
-                            <p>
-                                <strong><?php _e('Error al obtener los datos:', 'braves-chat'); ?></strong>
-                                <?php echo esc_html($fetch_error); ?>
-                            </p>
-                        </div>
-                    <?php elseif (empty($conversations)): ?>
-                        <div class="notice notice-info inline">
-                            <p><?php _e('No hay conversaciones registradas todavía.', 'braves-chat'); ?></p>
-                        </div>
-                    <?php else: ?>
+                <?php else: ?>
 
-                        <div style="margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
-                            <span style="font-size: 13px; color: #666;">
+                    <!-- Tabla de conversaciones -->
+                    <div class="braves-section">
+                        <div class="braves-section__header" style="display: flex; align-items: center; justify-content: space-between;">
+                            <h2 class="braves-section__title" style="margin: 0;">
                                 <?php printf(
-                                    _n('%d conversación encontrada.', '%d conversaciones encontradas.', count($conversations), 'braves-chat'),
+                                    _n('%d conversación', '%d conversaciones', count($conversations), 'braves-chat'),
                                     count($conversations)
                                 ); ?>
-                            </span>
+                            </h2>
                             <button type="button" id="braves-export-csv" class="button button-secondary">
                                 <?php _e('Descargar CSV', 'braves-chat'); ?>
                             </button>
                         </div>
 
-                        <table id="braves-stats-table" class="wp-list-table widefat fixed striped">
+                        <table id="braves-stats-table" class="wp-list-table widefat fixed striped" style="margin-top: 12px;">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 180px;"><?php _e('Session ID', 'braves-chat'); ?></th>
-                                    <th scope="col" style="width: 200px;"><?php _e('Email', 'braves-chat'); ?></th>
+                                    <th scope="col" style="width: 160px;"><?php _e('Session ID', 'braves-chat'); ?></th>
+                                    <th scope="col" style="width: 190px;"><?php _e('Email', 'braves-chat'); ?></th>
                                     <th scope="col"><?php _e('Último Mensaje', 'braves-chat'); ?></th>
-                                    <th scope="col" style="width: 160px;"><?php _e('Fecha / Hora', 'braves-chat'); ?></th>
+                                    <th scope="col" style="width: 150px;"><?php _e('Fecha / Hora', 'braves-chat'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -222,23 +167,16 @@ if (!empty($stats_webhook_url)) {
                                     $user_height  = isset($row['user_height'])  ? $row['user_height']  : '';
                                     $updated_at   = isset($row['updated_at'])   ? $row['updated_at']   : '';
 
-                                    // Formatear fecha legible
                                     $date_formatted = '';
                                     if (!empty($updated_at)) {
                                         $ts = strtotime($updated_at);
-                                        if ($ts) {
-                                            $date_formatted = date_i18n('d/m/Y H:i', $ts);
-                                        } else {
-                                            $date_formatted = esc_html($updated_at);
-                                        }
+                                        $date_formatted = $ts ? date_i18n('d/m/Y H:i', $ts) : $updated_at;
                                     }
                                 ?>
-                                <tr
-                                    data-chat-history="<?php echo esc_attr($chat_history); ?>"
+                                <tr data-chat-history="<?php echo esc_attr($chat_history); ?>"
                                     data-metadata="<?php echo esc_attr($metadata); ?>"
-                                    data-user-height="<?php echo esc_attr($user_height); ?>"
-                                >
-                                    <td style="word-break: break-all; font-family: monospace; font-size: 12px;">
+                                    data-user-height="<?php echo esc_attr($user_height); ?>">
+                                    <td style="font-family: monospace; font-size: 11px; word-break: break-all;">
                                         <?php echo esc_html($session_id); ?>
                                     </td>
                                     <td><?php echo esc_html($client_mail); ?></td>
@@ -252,9 +190,8 @@ if (!empty($stats_webhook_url)) {
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+                    </div>
 
-                    <?php endif; ?>
-                </div>
                 <?php endif; ?>
 
             </div><!-- .braves-admin-content -->
@@ -273,28 +210,15 @@ if (!empty($stats_webhook_url)) {
         var table = document.getElementById('braves-stats-table');
         if (!table) return;
 
-        var rows  = [];
-        var today = new Date();
+        var rows    = [];
+        var today   = new Date();
         var dateStr = today.getFullYear()
             + String(today.getMonth() + 1).padStart(2, '0')
             + String(today.getDate()).padStart(2, '0');
 
-        // Cabecera CSV (columnas visibles + extra)
-        rows.push([
-            'session_id',
-            'client_mail',
-            'last_message',
-            'updated_at',
-            'chat_history',
-            'metadata',
-            'user_height'
-        ]);
+        rows.push(['session_id', 'client_mail', 'last_message', 'updated_at', 'chat_history', 'metadata', 'user_height']);
 
-        // Filas de datos
-        var tbody = table.querySelector('tbody');
-        var trows = tbody ? tbody.querySelectorAll('tr') : [];
-
-        trows.forEach(function(tr) {
+        table.querySelectorAll('tbody tr').forEach(function(tr) {
             var cells = tr.querySelectorAll('td');
             rows.push([
                 cells[0] ? cells[0].textContent.trim() : '',
@@ -307,23 +231,20 @@ if (!empty($stats_webhook_url)) {
             ]);
         });
 
-        // Convertir a CSV
-        var csvContent = rows.map(function(row) {
+        var csv = rows.map(function(row) {
             return row.map(function(cell) {
-                var val = String(cell).replace(/"/g, '""');
-                return '"' + val + '"';
+                return '"' + String(cell).replace(/"/g, '""') + '"';
             }).join(',');
         }).join('\r\n');
 
-        // Descargar
-        var blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
+        var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
         var url  = URL.createObjectURL(blob);
-        var link = document.createElement('a');
-        link.href     = url;
-        link.download = 'braveschat_estadisticas_' + dateStr + '.csv';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        var a    = document.createElement('a');
+        a.href     = url;
+        a.download = 'braveschat_historial_' + dateStr + '.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
         URL.revokeObjectURL(url);
     });
 })();
