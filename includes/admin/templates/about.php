@@ -108,6 +108,28 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
+                    <!-- Version 2.1.4 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.1.4</span>
+                                <?php _e('Pestaña de Estadísticas', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('24 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('✨ Nuevas Funcionalidades', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: Nueva pestaña "Estadísticas" en el sidebar del panel de administración', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Tabla de historial de conversaciones obtenida desde webhook N8N / Postgres', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Configuración propia con URL del webhook y API Key (header x-api-key)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Exportación del historial completo a CSV (session_id, email, último mensaje, fecha, chat_history, metadata, user_height)', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Opciones braves_chat_stats_webhook_url y braves_chat_stats_api_key', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Version 2.1.3 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">
