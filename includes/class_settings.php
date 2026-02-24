@@ -137,6 +137,8 @@ class Settings {
             'chat_skin',
             'bubble_image',
             'header_status_text',
+            'stats_webhook_url',
+            'stats_api_key',
         );
 
         foreach ($all_fields as $field) {
@@ -692,6 +694,19 @@ class Settings {
             'braves_chat_settings',
             'braves_chat_gdpr_section'
         );
+
+        // ==================== ESTADÍSTICAS ====================
+        register_setting('braves_chat_settings', $this->option_prefix . 'stats_webhook_url', array(
+            'type'              => 'string',
+            'sanitize_callback' => 'esc_url_raw',
+            'default'           => '',
+        ));
+
+        register_setting('braves_chat_settings', $this->option_prefix . 'stats_api_key', array(
+            'type'              => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'           => '',
+        ));
     }
     
     // ==================== CALLBACKS DE SECCIONES ====================
