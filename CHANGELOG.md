@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.3](#213---2026-02-23) - **Actual** - Fix release automatizado con GitHub Actions
+- [2.1.4](#214---2026-02-24) - **Actual** - Pestaña "Estadísticas" con historial de conversaciones
+- [2.1.3](#213---2026-02-23) - Fix release automatizado con GitHub Actions
 - [2.1.2](#212---2026-02-20) - Aislamiento CSS y mejoras de compatibilidad
 - [2.1.1](#211---2026-02-16) - Fix Markdown y foco del input
 - [2.1.0](#210---2026-02-16) - Fix y mejoras del sistema
@@ -20,6 +21,30 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.4] - 2026-02-24
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Nueva pestaña **"Estadísticas"** en el sidebar del panel de administración (icono de gráfico de barras).
+- **ADDED**: Tabla de historial de conversaciones obtenida en tiempo real desde un webhook N8N que consulta Postgres.
+- **ADDED**: Sección de configuración propia con campo URL del webhook y API Key (header `x-api-key`).
+- **ADDED**: Exportación del historial a **CSV** con todos los campos: `session_id`, `client_mail`, `last_message`, `updated_at`, `chat_history`, `metadata`, `user_height`.
+- **ADDED**: Opciones `braves_chat_stats_webhook_url` y `braves_chat_stats_api_key` registradas en `braves_chat_settings`.
+- **ADDED**: Título de pestaña del navegador: "BravesChat | Estadísticas | [Sitio]".
+
+### 🔧 Técnico
+- **CHANGED**: `class_admin_sidebar.php` — ítem "Estadísticas" + SVG de barras.
+- **CHANGED**: `class_admin_controller.php` — submenu `braves-chat-stats`, método `render_stats_page()`, listas de páginas Braves actualizadas.
+- **CHANGED**: `class_settings.php` — registro de dos nuevas opciones + preservación en `render_hidden_fields()`.
+- **ADDED**: Template `includes/admin/templates/statistics.php` con formulario de configuración, tabla y script de exportación CSV.
+
+### 📋 Archivos Modificados
+- `includes/admin/components/class_admin_sidebar.php`
+- `includes/admin/class_admin_controller.php`
+- `includes/class_settings.php`
+- `includes/admin/templates/statistics.php` _(nuevo)_
 
 ---
 
