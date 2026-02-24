@@ -64,40 +64,40 @@ $sidebar = Admin_Sidebar::get_instance();
                     <div class="braves-card-grid braves-card-grid--3-cols">
 
                         <!-- Card: Versión -->
-                        <a href="https://github.com/Carlos-Vera/braveschat" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                            <?php
-                            Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
-                                'title' => __('Versión', 'braves-chat'),
-                                'description' => 'v' . BRAVES_CHAT_VERSION,
-                                'footer' => 'GitHub Repository',
-                            ));
-                            ?>
-                        </a>
+                        <?php
+                        Template_Helpers::card(array(
+                            'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
+                            'title' => __('Versión', 'braves-chat'),
+                            'description' => 'v' . BRAVES_CHAT_VERSION,
+                            'action_text' => 'GitHub Repository',
+                            'action_url' => 'https://github.com/Carlos-Vera/braveschat',
+                            'action_target' => '_blank',
+                        ));
+                        ?>
 
                         <!-- Card: Autor -->
-                        <a href="mailto:carlos@braveslab.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                            <?php
-                            Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('logo_dev', '#0077b6'),
-                                'title' => __('Autor Principal', 'braves-chat'),
-                                'description' => 'Carlos Vera',
-                                'footer' => 'carlos@braveslab.com',
-                            ));
-                            ?>
-                        </a>
+                        <?php
+                        Template_Helpers::card(array(
+                            'icon' => Template_Helpers::get_icon('logo_dev', '#0077b6'),
+                            'title' => __('Autor Principal', 'braves-chat'),
+                            'description' => 'Carlos Vera',
+                            'action_text' => 'carlos@braveslab.com',
+                            'action_url' => 'mailto:carlos@braveslab.com',
+                            'action_target' => '_blank',
+                        ));
+                        ?>
 
                         <!-- Card: Empresa -->
-                        <a href="https://braveslab.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                            <?php
-                            Template_Helpers::card(array(
-                                'icon' => Template_Helpers::get_icon('business_center', '#0077b6'),
-                                'title' => __('Empresa', 'braves-chat'),
-                                'description' => 'BRAVES LAB LLC',
-                                'footer' => 'braveslab.com',
-                            ));
-                            ?>
-                        </a>
+                        <?php
+                        Template_Helpers::card(array(
+                            'icon' => Template_Helpers::get_icon('business_center', '#0077b6'),
+                            'title' => __('Empresa', 'braves-chat'),
+                            'description' => 'BRAVES LAB LLC',
+                            'action_text' => 'braveslab.com',
+                            'action_url' => 'https://braveslab.com',
+                            'action_target' => '_blank',
+                        ));
+                        ?>
 
                     </div>
                 </div>
