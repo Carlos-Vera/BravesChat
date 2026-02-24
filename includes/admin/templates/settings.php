@@ -99,7 +99,9 @@ $option_prefix = 'braves_chat_';
                         'webhook_url',
                         'n8n_auth_token',
                         'excluded_pages',
-                        'typing_speed'
+                        'typing_speed',
+                        'stats_webhook_url',
+                        'stats_api_key',
                     ));
                     ?>
 
@@ -285,6 +287,64 @@ $option_prefix = 'braves_chat_';
                                 'title' => __('Velocidad de Escritura', 'braves-chat'),
                                 'description' => __('Velocidad de la animación de texto (ms por carácter).', 'braves-chat'),
                                 'content' => $speed_content,
+                            ));
+                            ?>
+
+                        </div>
+                    </div>
+
+                    <!-- Configuración de Historial Section -->
+                    <div class="braves-section">
+                        <h2 class="braves-section__title">
+                            <?php _e('Configuración de Historial', 'braves-chat'); ?>
+                        </h2>
+
+                        <div class="braves-card-grid braves-card-grid--2-cols">
+
+                            <!-- Card: URL Webhook de Historial -->
+                            <?php
+                            $stats_webhook_url = get_option($option_prefix . 'stats_webhook_url', '');
+                            ob_start();
+                            ?>
+                            <input type="url"
+                                   id="<?php echo esc_attr($option_prefix . 'stats_webhook_url'); ?>"
+                                   name="<?php echo esc_attr($option_prefix . 'stats_webhook_url'); ?>"
+                                   value="<?php echo esc_attr($stats_webhook_url); ?>"
+                                   class="braves-input"
+                                   style="width: 100%;"
+                                   placeholder="https://flow.braveslab.com/webhook/...">
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('URL del webhook de N8N que consulta el historial de conversaciones en Postgres.', 'braves-chat'); ?>
+                            </p>
+                            <?php
+                            Template_Helpers::card(array(
+                                'title'       => __('URL Webhook de Historial', 'braves-chat'),
+                                'description' => __('Endpoint de N8N para recuperar las conversaciones registradas.', 'braves-chat'),
+                                'content'     => ob_get_clean(),
+                            ));
+                            ?>
+
+                            <!-- Card: API Key del Historial -->
+                            <?php
+                            $stats_api_key = get_option($option_prefix . 'stats_api_key', '');
+                            ob_start();
+                            ?>
+                            <input type="password"
+                                   id="<?php echo esc_attr($option_prefix . 'stats_api_key'); ?>"
+                                   name="<?php echo esc_attr($option_prefix . 'stats_api_key'); ?>"
+                                   value="<?php echo esc_attr($stats_api_key); ?>"
+                                   class="braves-input"
+                                   style="width: 100%;"
+                                   autocomplete="new-password"
+                                   placeholder="••••••••••••••••">
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php _e('Clave de autenticación enviada en el header x-api-key al webhook de historial.', 'braves-chat'); ?>
+                            </p>
+                            <?php
+                            Template_Helpers::card(array(
+                                'title'       => __('API Key de Historial', 'braves-chat'),
+                                'description' => __('Clave para autenticar las peticiones al webhook de historial.', 'braves-chat'),
+                                'content'     => ob_get_clean(),
                             ));
                             ?>
 
