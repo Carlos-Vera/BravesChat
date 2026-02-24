@@ -214,8 +214,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('Estadísticas', 'braves-chat'),
-            __('Estadísticas', 'braves-chat'),
+            __('Historial', 'braves-chat'),
+            __('Historial', 'braves-chat'),
             'manage_options',
             'braves-chat-stats',
             array($this, 'render_stats_page')
@@ -486,7 +486,7 @@ class Admin_Controller {
             'admin_page_braves-chat-availability' => __('Horarios', 'braves-chat'),
             'admin_page_braves-chat-gdpr' => __('GDPR', 'braves-chat'),
             'admin_page_braves-chat-about' => __('Acerca de', 'braves-chat'),
-            'admin_page_braves-chat-stats' => __('Estadísticas', 'braves-chat'),
+            'admin_page_braves-chat-stats' => __('Historial', 'braves-chat'),
         );
 
         // Obtener título de la sección actual
