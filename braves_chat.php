@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
- * Description: Plugin profesional de chat con integración a N8N, con horarios personalizables y páginas excluidas. Backend refactorizado con diseño moderno.
+ * Description: Chat profesional con integración nativa a N8N, Diseñado para ofrecer una experiencia de usuario moderna y un backend ultra rápido.
  * Version: 2.1.4
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
