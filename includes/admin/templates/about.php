@@ -128,10 +128,8 @@ $sidebar = Admin_Sidebar::get_instance();
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
                     <!-- Version 2.1.3 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.3</span>
@@ -148,10 +146,8 @@ $sidebar = Admin_Sidebar::get_instance();
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
                     <!-- Version 2.1.2 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.2</span>
@@ -190,7 +186,6 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.1.1 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.1</span>
@@ -206,6 +201,7 @@ $sidebar = Admin_Sidebar::get_instance();
                                 </ul>
                             </div>
                         </div>
+
 
                     <!-- Version 2.1.0 -->
                     <div class="braves-changelog">
