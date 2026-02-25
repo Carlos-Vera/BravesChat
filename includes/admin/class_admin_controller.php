@@ -89,7 +89,7 @@ class Admin_Controller {
         $screen = get_current_screen();
 
         // Solo aplicar en páginas del plugin que NO activan wp-has-current-submenu automáticamente
-        $braves_pages = array('admin_page_braves-chat-settings', 'admin_page_braves-chat-appearance', 'admin_page_braves-chat-availability', 'admin_page_braves-chat-gdpr', 'admin_page_braves-chat-about', 'admin_page_braves-chat-stats');
+        $braves_pages = array('admin_page_braves-chat-settings', 'admin_page_braves-chat-appearance', 'admin_page_braves-chat-availability', 'admin_page_braves-chat-gdpr', 'admin_page_braves-chat-about', 'admin_page_braves-chat-history');
 
         if (!$screen || !in_array($screen->id, $braves_pages)) {
             return;
@@ -217,8 +217,8 @@ class Admin_Controller {
             __('Historial', 'braves-chat'),
             __('Historial', 'braves-chat'),
             'manage_options',
-            'braves-chat-stats',
-            array($this, 'render_stats_page')
+            'braves-chat-history',
+            array($this, 'render_history_page')
         );
     }
 
@@ -302,13 +302,13 @@ class Admin_Controller {
     }
 
     /**
-     * Renderizar página de Estadísticas
+     * Renderizar página de Historial
      *
      * @return void
      */
-    public function render_stats_page() {
-        $current_page = 'braves-chat-stats';
-        include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/statistics.php';
+    public function render_history_page() {
+        $current_page = 'braves-chat-history';
+        include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/history.php';
     }
 
     /**
@@ -427,7 +427,7 @@ class Admin_Controller {
             'admin_page_braves-chat-availability',
             'admin_page_braves-chat-gdpr',
             'admin_page_braves-chat-about',
-            'admin_page_braves-chat-stats',
+            'admin_page_braves-chat-history',
         );
 
         return in_array($hook, $braves_pages);
@@ -486,7 +486,7 @@ class Admin_Controller {
             'admin_page_braves-chat-availability' => __('Horarios', 'braves-chat'),
             'admin_page_braves-chat-gdpr' => __('GDPR', 'braves-chat'),
             'admin_page_braves-chat-about' => __('Acerca de', 'braves-chat'),
-            'admin_page_braves-chat-stats' => __('Historial', 'braves-chat'),
+            'admin_page_braves-chat-history' => __('Historial', 'braves-chat'),
         );
 
         // Obtener título de la sección actual
