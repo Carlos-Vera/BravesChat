@@ -5,6 +5,10 @@
 **/*-v2.php
 **/*-v2.css
 **/*-v2.js
+**/menu-icon.svg
+**/Knowledge/*
+
+# Configuraciones de Agentes
 **/mcp.json
 **/.claude.json
 **/.mcp.json
@@ -13,8 +17,8 @@
 **/.agents/*
 **/GEMINI.md
 **/CLAUDE.md
-**/menu-icon.svg
-**/Knowledge/*
+.claude/*
+
 
 # Configuración de valores por defecto (contiene datos específicos de cada instalación)
 config/defaults.php
