@@ -174,7 +174,7 @@ class Admin_Content {
             $action_text = esc_html($args['action_text']);
             
             echo '<div class="braves-card__action">';
-            echo '<a href="' . $action_url . '" class="braves-button braves-button--link" target="' . $action_target . '">';
+            echo '<a href="' . $action_url . '" target="' . $action_target . '">';
             echo $action_text;
             echo '</a>';
             echo '</div>';
