@@ -16,7 +16,8 @@
 .admin_page_braves-chat-appearance,
 .admin_page_braves-chat-availability,
 .admin_page_braves-chat-gdpr,
-.admin_page_braves-chat-about {
+.admin_page_braves-chat-about,
+.admin_page_braves-chat-history {
     background-color: #f3f6fc;
     --wp-components-color-accent: #3858e9;
     --wp-components-color-accent-darker-10: #2145e6;
@@ -58,7 +59,8 @@ a.braves-card-link:focus {
 .admin_page_braves-chat-appearance ul#adminmenu li.toplevel_page_braves-chat>a,
 .admin_page_braves-chat-availability ul#adminmenu li.toplevel_page_braves-chat>a,
 .admin_page_braves-chat-gdpr ul#adminmenu li.toplevel_page_braves-chat>a,
-.admin_page_braves-chat-about ul#adminmenu li.toplevel_page_braves-chat>a {
+.admin_page_braves-chat-about ul#adminmenu li.toplevel_page_braves-chat>a,
+.admin_page_braves-chat-history ul#adminmenu li.toplevel_page_braves-chat>a {
     background-color: #2271b1;
     color: #fff;
 }
@@ -70,7 +72,8 @@ ul#adminmenu>li.menu-top.toplevel_page_braves-chat>a.current:after,
 .admin_page_braves-chat-appearance ul#adminmenu>li.toplevel_page_braves-chat>a:after,
 .admin_page_braves-chat-availability ul#adminmenu>li.toplevel_page_braves-chat>a:after,
 .admin_page_braves-chat-gdpr ul#adminmenu>li.toplevel_page_braves-chat>a:after,
-.admin_page_braves-chat-about ul#adminmenu>li.toplevel_page_braves-chat>a:after {
+.admin_page_braves-chat-about ul#adminmenu>li.toplevel_page_braves-chat>a:after,
+.admin_page_braves-chat-history ul#adminmenu>li.toplevel_page_braves-chat>a:after {
     border-right-color: #f3f6fc;
     right: 0;
     border: 8px solid transparent;
@@ -89,7 +92,8 @@ ul#adminmenu>li.menu-top.toplevel_page_braves-chat>a.current:after,
 .admin_page_braves-chat-appearance #wpcontent,
 .admin_page_braves-chat-availability #wpcontent,
 .admin_page_braves-chat-gdpr #wpcontent,
-.admin_page_braves-chat-about #wpcontent {
+.admin_page_braves-chat-about #wpcontent,
+.admin_page_braves-chat-history #wpcontent {
     padding-left: 0 !important;
 }
 
@@ -104,7 +108,9 @@ ul#adminmenu>li.menu-top.toplevel_page_braves-chat>a.current:after,
 .admin_page_braves-chat-gdpr #wpfooter,
 .admin_page_braves-chat-gdpr .notice:not(.braves-notice),
 .admin_page_braves-chat-about #wpfooter,
-.admin_page_braves-chat-about .notice:not(.braves-notice) {
+.admin_page_braves-chat-about .notice:not(.braves-notice),
+.admin_page_braves-chat-history #wpfooter,
+.admin_page_braves-chat-history .notice:not(.braves-notice) {
     display: none;
 }
 
@@ -113,7 +119,8 @@ ul#adminmenu>li.menu-top.toplevel_page_braves-chat>a.current:after,
 .admin_page_braves-chat-appearance #wpbody-content,
 .admin_page_braves-chat-availability #wpbody-content,
 .admin_page_braves-chat-gdpr #wpbody-content,
-.admin_page_braves-chat-about #wpbody-content {
+.admin_page_braves-chat-about #wpbody-content,
+.admin_page_braves-chat-history #wpbody-content {
     padding-bottom: 0;
 }
 
