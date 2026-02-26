@@ -73,12 +73,19 @@ class Admin_Content {
             'action_target' => '_self',
             'footer' => '',
             'custom_class' => '',
+            'is_link_card' => false,
         );
 
         $args = wp_parse_args($args, $defaults);
         $custom_class = esc_attr($args['custom_class']);
-
-        echo '<div class="braves-card ' . $custom_class . '">';
+        if ($args['is_link_card'] && !empty($args['action_url'])) {
+            $custom_class .= ' braves-card--clickable';
+            $action_url = esc_url($args['action_url']);
+            $action_target = esc_attr($args['action_target']);
+            echo '<a href="' . $action_url . '" target="' . $action_target . '" class="braves-card ' . $custom_class . '">';
+        } else {
+            echo '<div class="braves-card ' . $custom_class . '">';
+        }
         
         if (!empty($args['icon'])) {
             echo '<div class="braves-card__icon">';
@@ -168,15 +175,20 @@ class Admin_Content {
             echo '</div>';
         }
 
-        if (!empty($args['action_text']) && !empty($args['action_url'])) {
-            $action_url = esc_url($args['action_url']);
-            $action_target = esc_attr($args['action_target']);
-            $action_text = esc_html($args['action_text']);
-            
+        if (!empty($args['action_text'])) {
             echo '<div class="braves-card__action">';
-            echo '<a href="' . $action_url . '" target="' . $action_target . '">';
-            echo $action_text;
-            echo '</a>';
+            if ($args['is_link_card']) {
+                $action_text = esc_html($args['action_text']);
+                echo '<span class="braves-card__action-text">' . $action_text . '</span>';
+            } elseif (!empty($args['action_url'])) {
+                $action_url = esc_url($args['action_url']);
+                $action_target = esc_attr($args['action_target']);
+                $action_text = esc_html($args['action_text']);
+                
+                echo '<a href="' . $action_url . '" target="' . $action_target . '">';
+                echo $action_text;
+                echo '</a>';
+            }
             echo '</div>';
         }
 
@@ -186,7 +198,11 @@ class Admin_Content {
             echo '</div>';
         }
 
-        echo '</div>';
+        if ($args['is_link_card'] && !empty($args['action_url'])) {
+            echo '</a>';
+        } else {
+            echo '</div>';
+        }
     }
 
     /**
