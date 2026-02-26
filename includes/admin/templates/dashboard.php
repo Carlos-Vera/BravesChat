@@ -88,6 +88,7 @@ $config_status = Template_Helpers::get_config_status();
                         'action_text' => __('Ver sitio web', 'braves-chat'),
                         'action_url' => home_url(),
                         'action_target' => '_blank',
+                        'is_link_card' => true,
                     ));
                     ?>
 
@@ -99,6 +100,7 @@ $config_status = Template_Helpers::get_config_status();
                         'description' => __('Personaliza la apariencia, mensajes y comportamiento del chat según tus necesidades.', 'braves-chat'),
                         'action_text' => __('Ir a Ajustes', 'braves-chat'),
                         'action_url' => admin_url('admin.php?page=braves-chat-settings'),
+                        'is_link_card' => true,
                     ));
                     ?>
 
@@ -111,6 +113,7 @@ $config_status = Template_Helpers::get_config_status();
                         'action_text' => __('Ver documentación', 'braves-chat'),
                         'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                         'action_target' => '_blank',
+                        'is_link_card' => true,
                     ));
                     ?>
 
@@ -165,19 +168,19 @@ $config_status = Template_Helpers::get_config_status();
                         ?>
 
                         <!-- Versión del Plugin -->
-                        <a href="<?php echo admin_url('admin.php?page=braves-chat-about'); ?>" class="braves-card-link">
-                            <?php
-                            Template_Helpers::card(array(
-                                'title' => __('Versión del Plugin', 'braves-chat'),
-                                'description' => 'BravesChat iA v' . BRAVES_CHAT_VERSION,
-                                'footer' => sprintf(
-                                    __('Última actualización: %s', 'braves-chat'),
-                                    date_i18n(get_option('date_format'))
-                                ),
-                                'custom_class' => 'braves-card--compact',
-                            ));
-                            ?>
-                        </a>
+                        <?php
+                        Template_Helpers::card(array(
+                            'title' => __('Versión del Plugin', 'braves-chat'),
+                            'description' => 'BravesChat iA v' . BRAVES_CHAT_VERSION,
+                            'footer' => sprintf(
+                                __('Última actualización: %s', 'braves-chat'),
+                                date_i18n(get_option('date_format'))
+                            ),
+                            'action_url' => admin_url('admin.php?page=braves-chat-about'),
+                            'is_link_card' => true,
+                            'custom_class' => 'braves-card--compact',
+                        ));
+                        ?>
 
                     </div>
                 </div>
