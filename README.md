@@ -1,10 +1,10 @@
-# BravesChat iA 2.1.2 🤖
+# BravesChat iA 2.2.0 🤖
 
 > **La solución definitiva para integrar Agentes de IA en WordPress.**
 
 Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
 
-**Versión actual**: 2.1.2
+**Versión actual**: 2.2.0
 
 ---
 
@@ -36,6 +36,12 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
 *   **Horarios Comerciales**: Define días y horas de activación con soporte completo de Zonas Horarias.
 *   **Control Granular**: Excluye el chat en páginas específicas o úsalo solo donde quieras mediante el **Bloque Gutenberg**.
 
+### 📊 Historial de Conversaciones (v2.2.0)
+*   **Visor Completo**: Consulta cada conversación con burbujas de chat, etiquetas de remitente y renderizado de Markdown.
+*   **Tabla Resumen**: Lista de sesiones ordenada por fecha, con extracto del último mensaje del usuario.
+*   **Exportación CSV**: Descarga el historial completo con un clic para analizar en Excel o tu CRM.
+*   **Filtrado Inteligente**: Se ocultan automáticamente los mensajes internos del agente (tool calls, razonamiento interno) para mostrar solo la conversación real.
+
 ### 💻 Panel de Administración Moderno
 *   Diseño **Bentō UI** limpio y organizado.
 *   Gestión centralizada de todas las configuraciones con validación en tiempo real.
@@ -54,6 +60,7 @@ BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado p
   - [Apariencia](#2-apariencia)
   - [Horarios](#3-horarios)
   - [GDPR](#4-gdpr-compliance-de-cookies)
+  - [Historial](#5-historial-de-conversaciones)
 - [Uso del Bloque Gutenberg](#uso-del-bloque)
 - [Desarrollo](#-desarrollo)
 - [Sistema de Cookies](#sistema-de-cookies-con-fingerprinting)
@@ -159,6 +166,18 @@ Configura el banner de consentimiento de cookies:
 - **Mensaje del Banner**: Texto informativo sobre el uso de cookies
 - **Texto del Botón de Aceptar**: Etiqueta del botón (ejemplo: "Aceptar", "Entendido", "Acepto")
 
+### 5. Historial de Conversaciones
+
+**Ubicación**: Braves Chat iA > Historial
+
+Consulta y exporta el historial completo de conversaciones:
+
+- **Configuración del Webhook**: URL del webhook de N8N que consulta tu base de datos (Postgres u otro)
+- **API Key**: Clave de autenticación enviada como header `x-api-key`
+- **Tabla de sesiones**: Columnas Session ID, Nombre del cliente, Último mensaje y Fecha/Hora
+- **Visor de conversación**: Haz clic en cualquier fila para ver el hilo completo con burbujas de chat
+- **Exportación CSV**: Botón para descargar el historial con todos los campos: `session_id`, `client_name`, `updated_at`, `chat_history`
+
 ### Guardar Cambios
 
 Todas las páginas incluyen un botón **"Guardar cambios"** al final del formulario. Los cambios se guardan en la base de datos de WordPress usando la Settings API.
@@ -218,6 +237,7 @@ braves-chat-ia/
 │   │       ├── appearance.php                 # Página Apariencia (títulos, posición, modo)
 │   │       ├── availability.php               # Página Horarios (disponibilidad)
 │   │       ├── gdpr.php                       # Página GDPR (consentimiento cookies)
+│   │       ├── history.php                    # Página Historial de conversaciones (v2.2.0)
 │   │       └── about.php                      # Página Acerca de (oculta, accesible desde versión)
 │   ├── class_settings.php                     # Registro de opciones con WordPress Settings API
 │   ├── class_frontend.php                     # Renderizado del chat en frontend
@@ -666,4 +686,4 @@ El chat funciona en todos los navegadores modernos:
 
 ---
 
-**Versión**: 2.1.2 | **Autor**: Carlos Vera @ BravesLab | **Licencia**: Comercial
+**Versión**: 2.2.0 | **Autor**: Carlos Vera @ BravesLab | **Licencia**: Comercial
