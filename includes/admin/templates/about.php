@@ -111,8 +111,24 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
-                    <!-- Version 2.2.0 -->
+                    <!-- Version 2.2.1 -->
                     <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.2.1</span>
+                                <?php _e('Panel Limpio:<i>administra sin distracciones</i>', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('26 de Febrero, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Mejoras', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('FIXED: Avisos de otros plugins ya no aparecen en tu panel de control de BravesChat, dejando una interfaz limpia y enfocada.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <!-- Version 2.2.0 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.2.0</span>

@@ -78,6 +78,7 @@ class Admin_Controller {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('admin_head', array($this, 'add_menu_icon_active_styles'));
         add_filter('admin_title', array($this, 'filter_admin_title'), 10, 2);
+        add_action('current_screen', array($this, 'suppress_other_notices'));
     }
 
     /**
@@ -419,6 +420,29 @@ class Admin_Controller {
      * @param string $hook Página actual
      * @return bool
      */
+    /**
+     * Suprimir notices de otros plugins en páginas de BravesChat
+     *
+     * @param WP_Screen $screen
+     * @return void
+     */
+    public function suppress_other_notices($screen) {
+        $braves_screens = array(
+            'toplevel_page_braves-chat',
+            'admin_page_braves-chat-settings',
+            'admin_page_braves-chat-appearance',
+            'admin_page_braves-chat-availability',
+            'admin_page_braves-chat-gdpr',
+            'admin_page_braves-chat-about',
+            'admin_page_braves-chat-history',
+        );
+
+        if (in_array($screen->id, $braves_screens)) {
+            remove_all_actions('admin_notices');
+            remove_all_actions('all_admin_notices');
+        }
+    }
+
     private function is_braves_admin_page($hook) {
         $braves_pages = array(
             'toplevel_page_braves-chat',
