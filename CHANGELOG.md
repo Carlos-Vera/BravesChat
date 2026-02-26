@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.4](#214---2026-02-24) - **Actual** - Pestaña "Estadísticas" con historial de conversaciones
+- [2.1.5](#215---2026-02-25) - **Actual** - Página "Historial" con visor de conversaciones completo
+- [2.1.4](#214---2026-02-24) - Pestaña "Estadísticas" con historial de conversaciones
 - [2.1.3](#213---2026-02-23) - Fix release automatizado con GitHub Actions
 - [2.1.2](#212---2026-02-20) - Aislamiento CSS y mejoras de compatibilidad
 - [2.1.1](#211---2026-02-16) - Fix Markdown y foco del input
@@ -21,6 +22,33 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.1.5] - 2026-02-25
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Página **"Historial"** reemplaza "Estadísticas" con visor completo de conversaciones por sesión.
+- **ADDED**: Modal de conversación con burbujas de chat, etiquetas de remitente ("Agente" / nombre del usuario) y renderizado de Markdown (negrita, cursiva, enlaces).
+- **ADDED**: Agrupación de mensajes por `session_id`: cada fila de la tabla representa una conversación completa.
+- **ADDED**: Exportación CSV limpia con columnas: `Session ID`, `Client Name`, `Updated At`, `Chat History JSON`.
+
+### 🔧 Mejoras UX/UI
+- **IMPROVED**: Orden de la tabla: conversaciones de más reciente a más antigua.
+- **IMPROVED**: Orden del modal: mensajes en orden cronológico natural (más antiguo arriba).
+- **IMPROVED**: Columna "Session ID" eliminada de la tabla (sigue visible en el modal).
+- **IMPROVED**: Extracto de la tabla muestra el último mensaje del usuario, limpio de prefijos N8N.
+
+### 🛡️ Filtrado de contenido interno del agente
+- **FIXED**: Se ocultan tool calls (`Calling {tool} with input:`), respuestas JSON de herramientas (`[{"response":"..."}]`, `{"response":"..."}`), razonamiento interno (`Plan:`, `Thought:`, `Notes:`, `There was an error`, `Name:`), y mensajes con `tool_calls` no vacíos.
+- **FIXED**: Se extraen y muestran correctamente las respuestas de herramientas de búsqueda (`{"response":"..."}`).
+- **FIXED**: Prefijos N8N eliminados de mensajes del usuario: "Mensaje del usuario:" y "Su id de sesión: hash" (corte en primer `\n`).
+- **FIXED**: Timestamp de la sesión extraído de resultados del CRM tool antes de ocultarlos.
+
+### 📋 Archivos Modificados
+- `includes/admin/templates/history.php` _(nuevo — reemplaza statistics.php)_
+- `includes/admin/components/class_admin_sidebar.php`
+- `includes/admin/class_admin_controller.php`
 
 ---
 
