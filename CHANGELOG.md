@@ -6,8 +6,9 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.1.5](#215---2026-02-25) - **Actual** - Página "Historial" con visor de conversaciones completo
-- [2.1.4](#214---2026-02-24) - Pestaña "Estadísticas" con historial de conversaciones
+- [2.2.0](#220---2026-02-26) - **Actual** - Visor completo de conversaciones y estadísticas combinados
+- [2.1.5](#215---2026-02-25) - Página "Historial" con visor completo
+- [2.1.4](#214---2026-02-24) - Pestaña "Estadísticas" con historial
 - [2.1.3](#213---2026-02-23) - Fix release automatizado con GitHub Actions
 - [2.1.2](#212---2026-02-20) - Aislamiento CSS y mejoras de compatibilidad
 - [2.1.1](#211---2026-02-16) - Fix Markdown y foco del input
@@ -22,6 +23,15 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.2.0] - 2026-02-26
+
+### 🚀 Lanzamiento Menor - BravesChat iA 2.2
+- **MAJOR**: Unificación de la documentación interna, consolidando cambios de versiones 2.1.4 y 2.1.5 dentro del plugin.
+- **ADDED**: Visor completo de conversaciones y estadísticas.
+- Se mantienen los registros individuales en la documentación general (CHANGELOG.md).
 
 ---
 
