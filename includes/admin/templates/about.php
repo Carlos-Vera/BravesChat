@@ -72,6 +72,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
+                            'is_link_card' => true,
                         ));
                         ?>
 
@@ -84,6 +85,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'action_text' => 'carlos@braveslab.com',
                             'action_url' => 'mailto:carlos@braveslab.com',
                             'action_target' => '_blank',
+                            'is_link_card' => true,
                         ));
                         ?>
 
@@ -96,6 +98,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'action_text' => 'braveslab.com',
                             'action_url' => 'https://braveslab.com',
                             'action_target' => '_blank',
+                            'is_link_card' => true,
                         ));
                         ?>
 
@@ -108,23 +111,29 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
-                    <!-- Version 2.1.4 -->
+                    <!-- Version 2.2.0 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
-                                <span class="braves-badge braves-badge--success">v2.1.4</span>
-                                <?php _e('Pestaña de Estadísticas', 'braves-chat'); ?>
+                                <span class="braves-badge braves-badge--success">v2.2.0</span>
+                                <?php _e('Historial de Conversaciones:<i>conoce lo que piensan tus clientes</i>', 'braves-chat'); ?>
                             </h3>
-                            <p class="braves-changelog__date"><?php _e('24 de Febrero, 2026', 'braves-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('26 de Febrero, 2026', 'braves-chat'); ?></p>
 
                             <div class="braves-changelog__section">
                                 <h4><?php _e('✨ Nuevas Funcionalidades', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: Nueva pestaña "Estadísticas" en el sidebar del panel de administración', 'braves-chat'); ?></li>
-                                    <li><?php _e('ADDED: Tabla de historial de conversaciones obtenida desde webhook N8N / Postgres', 'braves-chat'); ?></li>
-                                    <li><?php _e('ADDED: Configuración propia con URL del webhook y API Key (header x-api-key)', 'braves-chat'); ?></li>
-                                    <li><?php _e('ADDED: Exportación del historial completo a CSV (session_id, email, último mensaje, fecha, chat_history, metadata, user_height)', 'braves-chat'); ?></li>
-                                    <li><?php _e('ADDED: Opciones braves_chat_stats_webhook_url y braves_chat_stats_api_key', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: New <strong>Historial</strong>: accede a todas las conversaciones que tu agente ha tenido con tus visitantes.', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Abre cualquier conversación con un clic y lee cada mensaje tal y como ocurrió, en una interfaz de chat clara y fácil de seguir.', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Exporta el historial completo a <strong>CSV</strong> con un clic para analizarlo en Excel, importarlo a tu CRM o compartirlo con tu equipo.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🎨 Mejoras de Experiencia', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('IMPROVED: Los mensajes de tus clientes se muestran exactamente como los escribieron, sin textos irrelevantes que dificulten la lectura.', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: Cada fila agrupa en su interior todos los mensajes de la conversación, para que puedas entender el contexto completo.', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
