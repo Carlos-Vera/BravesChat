@@ -47,6 +47,22 @@
     transform: translateY(-4px);
 }
 
+a.braves-card.braves-card--clickable {
+    display: flex;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+a.braves-card.braves-card--clickable:focus-visible {
+    outline: 2px solid var(--braves-primary);
+    outline-offset: 4px;
+}
+
+a.braves-card.braves-card--clickable:hover {
+    border-color: var(--braves-primary);
+    box-shadow: 0 10px 20px -3px rgba(0, 119, 182, 0.15), 0 4px 6px -2px rgba(0, 119, 182, 0.1);
+}
+
 .braves-card__icon {
     display: flex;
     align-items: center;
