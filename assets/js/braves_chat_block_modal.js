@@ -1243,7 +1243,7 @@ class BravesChatModal {
         // Renderiza como <a href="url" target="_blank">texto</a>
         html = html.replace(
             /\[([^\]]+)\]\(([^)]+)\)/g,
-            '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">$1</a>'
+            '<a href="$2" style="color: inherit; text-decoration: underline;">$1</a>'
         );
 
         // 3. Parsear negrita: **texto**
