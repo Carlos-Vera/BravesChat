@@ -640,7 +640,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     try {
                         var chatHistory = JSON.parse(chatHistoryRaw);
                         if (Array.isArray(chatHistory) && chatHistory.length > 0) {
-                            chatHistory = chatHistory.reverse(); // Orden cronológico: más antiguo arriba
                             chatHistory.forEach(function(msg) {
                                 var role = (msg.role || msg.type || '').trim().toLowerCase();
                                 var isUser = (role === 'human' || role === 'user');
