@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.2.1](#221---2026-02-26) - **Actual** - Correcciones de compatibilidad y mejoras de UI
+- [2.2.2](#222---2026-03-04) - **Actual** - Protección contra exportación no autorizada del plugin
+- [2.2.1](#221---2026-02-26) - Correcciones de compatibilidad y mejoras de UI
 - [2.2.0](#220---2026-02-26) - Visor completo de conversaciones y estadísticas combinados
 - [2.1.5](#215---2026-02-25) - Página "Historial" con visor completo
 - [2.1.4](#214---2026-02-24) - Pestaña "Estadísticas" con historial
@@ -24,6 +25,13 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.2.2] - 2026-03-04
+
+### 🔧 Mejoras
+- **ADDED**: Nueva clase `Protection` que detecta plugins de exportación ZIP instalados y muestra un aviso de advertencia en el panel de administración de WordPress.
 
 ---
 

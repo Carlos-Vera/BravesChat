@@ -111,6 +111,23 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
+                    <!-- Version 2.2.2 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.2.2</span>
+                                <?php _e('Tu Licencia, Protegida: <i>siempre segura y bajo tu control</i>', 'braves-chat'); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php _e('4 de Marzo, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php _e('🔧 Mejoras', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php _e('ADDED: BravesChat detecta automáticamente si hay plugins de exportación ZIP instalados y te avisa antes de que tu licencia pueda verse comprometida.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     <!-- Version 2.2.1 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">
