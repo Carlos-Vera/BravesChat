@@ -3,7 +3,7 @@
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
  * Description: Chat profesional con integración nativa a N8N, Diseñado para ofrecer una experiencia de usuario moderna y un backend ultra rápido.
- * Version: 2.2.1
+ * Version: 2.2.2
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braves-chat
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.2.1');
+define('BRAVES_CHAT_VERSION', '2.2.2');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
@@ -93,6 +93,7 @@ class BravesChat {
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_customizer.php';
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_block.php';
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_frontend.php';
+        require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_protection.php';
     }
 
     /**
@@ -280,6 +281,7 @@ class BravesChat {
         Customizer::get_instance();
         Block::get_instance();
         Frontend::get_instance();
+        Protection::get_instance();
     }
 
     /**
