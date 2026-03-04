@@ -407,47 +407,49 @@ body #braveslab-chat-container #chat-window.braves-gdpr-locked {
     gap: 12px;
 }
 
-.braves-btn-cancel,
-.braves-btn-accept {
-    padding: 10px 20px;
-    margin: 0;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: none;
-    border-width: 0;
-    outline: none;
-    line-height: 1.4;
-    text-decoration: none;
-    text-transform: none;
-    letter-spacing: normal;
-    display: inline-block;
+body .braves-chat-gdpr-notice .braves-btn-cancel,
+body .braves-chat-gdpr-notice .braves-btn-accept {
+    padding: 10px 20px !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    border-width: 0 !important;
+    outline: none !important;
+    line-height: 1.4 !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    display: inline-block !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
 }
 
-.braves-btn-cancel {
-    background: transparent;
-    background-color: transparent;
-    color: #6B7280;
+body .braves-chat-gdpr-notice .braves-btn-cancel {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #6B7280 !important;
 }
 
-.braves-btn-cancel:hover {
-    background: #F3F4F6;
-    background-color: #F3F4F6;
-    color: #374151;
+body .braves-chat-gdpr-notice .braves-btn-cancel:hover {
+    background: #F3F4F6 !important;
+    background-color: #F3F4F6 !important;
+    color: #374151 !important;
 }
 
-.braves-btn-accept {
-    background: #000000;
-    background-color: #000000;
-    color: #FFFFFF;
+body .braves-chat-gdpr-notice .braves-btn-accept {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
 }
 
-.braves-btn-accept:hover {
-    background: #1F2937;
-    transform: translateY(-1px);
+body .braves-chat-gdpr-notice .braves-btn-accept:hover {
+    background: #1F2937 !important;
+    transform: translateY(-1px) !important;
 }
 
 @keyframes fadeIn {
@@ -463,20 +465,20 @@ body #braveslab-chat-container #chat-window.braves-gdpr-locked {
 }
 
 /* Modificaciones para tema oscuro si es necesario */
-.dark-mode .braves-gdpr-card {
-    background: #1F2937;
-    border-color: #374151;
+body .dark-mode .braves-gdpr-card {
+    background: #1F2937 !important;
+    border-color: #374151 !important;
 }
 
-.dark-mode .braves-gdpr-card h3 {
-    color: #F9FAFB;
+body .dark-mode .braves-gdpr-card h3 {
+    color: #F9FAFB !important;
 }
 
-.dark-mode .braves-gdpr-card p {
-    color: #D1D5DB;
+body .dark-mode .braves-gdpr-card p {
+    color: #D1D5DB !important;
 }
 
-.dark-mode .braves-btn-accept {
-    background: #FFFFFF;
-    color: #000000;
+body .dark-mode .braves-chat-gdpr-notice .braves-btn-accept {
+    background: #FFFFFF !important;
+    color: #000000 !important;
 }
