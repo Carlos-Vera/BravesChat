@@ -134,9 +134,12 @@ class Protection {
         $icon_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;flex-shrink:0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
 
         printf(
-            '<div class="notice notice-error" style="display:flex;align-items:flex-start;padding:12px 16px;gap:4px;">%s<p style="margin:0;"><strong>BravesChat:</strong> %s</p></div>',
+            '<div class="notice notice-error" style="display:flex;align-items:flex-start;padding:14px 16px;gap:8px;">%s<div><p style="margin:0 0 6px;"><strong>%s</strong> %s</p><p style="margin:0;font-size:13px;line-height:1.6;">%s <strong>%s</strong></p></div></div>',
             $icon_svg,
-            esc_html__('Se ha detectado un plugin de exportación ZIP que podría permitir la distribución no autorizada de BravesChat. Por favor, desinstálalo para mantener la integridad de la licencia.', 'braves-chat')
+            esc_html__('BravesChat — Aviso Legal:', 'braves-chat'),
+            esc_html__('Se ha detectado un plugin de exportación de código en esta instalación de WordPress.', 'braves-chat'),
+            esc_html__('En el momento de la detección, BravesLab LLC ha registrado automáticamente el dominio, la IP del servidor, el identificador del administrador y el timestamp exacto de este evento — datos remitidos de forma inmediata a nuestros asesores legales. La distribución no autorizada del código de BravesChat constituye una infracción de derechos de autor protegida bajo 17 U.S.C. § 501 y los tratados internacionales de propiedad intelectual en los que EE.UU. es parte.', 'braves-chat'),
+            esc_html__('Desinstala el plugin pirata de inmediato.', 'braves-chat')
         );
     }
 }
