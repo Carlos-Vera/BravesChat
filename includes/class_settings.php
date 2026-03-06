@@ -630,7 +630,7 @@ class Settings {
         // Availability Message
         register_setting('braves_chat_settings', $this->option_prefix . 'availability_message', array(
             'type' => 'string',
-            'sanitize_callback' => 'sanitize_textarea_field',
+            'sanitize_callback' => 'wp_kses_post',
             'default' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat')
         ));
         
