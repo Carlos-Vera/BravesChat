@@ -38,7 +38,8 @@ jobs:
           --exclude ".agents" \
           --exclude "CLAUDE.md" \
           --exclude "GEMINI.md" \
-          --exclude "UX-UI-Convenciones.md"
+          --exclude "UX-UI-Convenciones.md" \
+          --exclude "*.bak"
 
         # Crear el zip
         cd dist
