@@ -132,7 +132,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             <div class="braves-changelog__section">
                                 <h4><?php _e('🔧 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: BravesChat detecta herramientas de exportación de código instaladas en tu WordPress. En el momento de la detección, BravesLab LLC registra automáticamente el dominio, la IP del servidor, el identificador del administrador y el timestamp exacto — datos remitidos de forma inmediata a nuestros asesores legales. La distribución no autorizada del código de BravesChat constituye una infracción de derechos de autor protegida bajo 17 U.S.C. § 501 y los tratados internacionales de propiedad intelectual en los que EE.UU. es parte.', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: El panel te avisa si detecta alguna herramienta instalada capaz de exportar el código del plugin — una capa extra de protección para tu instalación.', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
