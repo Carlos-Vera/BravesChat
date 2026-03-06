@@ -225,28 +225,25 @@ $option_prefix = 'braves_chat_';
                             <!-- Card: Mensaje Fuera de Horario -->
                             <?php
                             $availability_message = get_option($option_prefix . 'availability_message', __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'));
-
-                            ob_start();
                             ?>
-                            <textarea id="<?php echo esc_attr($option_prefix . 'availability_message'); ?>"
-                                      name="<?php echo esc_attr($option_prefix . 'availability_message'); ?>"
-                                      rows="4"
-                                      class="braves-textarea"
-                                      style="width: 100%;"
-                                      placeholder="<?php echo esc_attr(__('Mensaje fuera de horario de atención', 'braves-chat')); ?>"><?php echo esc_textarea($availability_message); ?></textarea>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braves-chat'); ?>
-                            </p>
-                            <?php
-                            $message_content = ob_get_clean();
-
-                            Template_Helpers::card(array(
-                                'title' => __('Mensaje Fuera de Horario', 'braves-chat'),
-                                'description' => __('Texto que verán los usuarios fuera del horario de atención.', 'braves-chat'),
-                                'content' => $message_content,
-                                'custom_class' => 'braves-card--full-width',
-                            ));
-                            ?>
+                            <div class="braves-card braves-card--full-width">
+                                <h3 class="braves-card__title"><?php esc_html_e('Mensaje Fuera de Horario', 'braves-chat'); ?></h3>
+                                <p class="braves-card__description"><?php esc_html_e('Texto que verán los usuarios fuera del horario de atención.', 'braves-chat'); ?></p>
+                                <div class="braves-card__content">
+                                    <?php
+                                    wp_editor($availability_message, 'braves_chat_availability_message', array(
+                                        'textarea_name' => $option_prefix . 'availability_message',
+                                        'media_buttons' => false,
+                                        'teeny'         => true,
+                                        'textarea_rows' => 6,
+                                        'quicktags'     => true,
+                                    ));
+                                    ?>
+                                    <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                        <?php _e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braves-chat'); ?>
+                                    </p>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

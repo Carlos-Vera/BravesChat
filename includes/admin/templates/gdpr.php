@@ -141,29 +141,25 @@ $option_prefix = 'braves_chat_';
                             <!-- Card: Mensaje del Banner -->
                             <?php
                             $gdpr_message = get_option($option_prefix . 'gdpr_message', __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat'));
-
-                            ob_start();
                             ?>
-                            <textarea id="<?php echo esc_attr($option_prefix . 'gdpr_message'); ?>"
-                                      name="<?php echo esc_attr($option_prefix . 'gdpr_message'); ?>"
-                                      rows="4"
-                                      class="braves-textarea"
-                                      style="width: 100%;"
-                                      placeholder="<?php echo esc_attr(__('Este sitio utiliza cookies...', 'braves-chat')); ?>"><?php echo esc_textarea($gdpr_message); ?></textarea>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mensaje que se mostrará en el banner de cookies.<br>
-                                Soporta <b>HTML</b> y <b>Markdown</b> (negrita**, *cursiva*, [enlaces](url)).', 'braves-chat'); ?>
-                            </p>
-                            <?php
-                            $message_content = ob_get_clean();
-
-                            Template_Helpers::card(array(
-                                'title' => __('Mensaje del Banner', 'braves-chat'),
-                                'description' => __('Texto informativo sobre el uso de cookies en el chat.', 'braves-chat'),
-                                'content' => $message_content,
-                                'custom_class' => 'braves-card--full-width',
-                            ));
-                            ?>
+                            <div class="braves-card braves-card--full-width">
+                                <h3 class="braves-card__title"><?php esc_html_e('Mensaje del Banner', 'braves-chat'); ?></h3>
+                                <p class="braves-card__description"><?php esc_html_e('Texto informativo sobre el uso de cookies en el chat.', 'braves-chat'); ?></p>
+                                <div class="braves-card__content">
+                                    <?php
+                                    wp_editor($gdpr_message, 'braves_chat_gdpr_message', array(
+                                        'textarea_name' => $option_prefix . 'gdpr_message',
+                                        'media_buttons' => false,
+                                        'teeny'         => true,
+                                        'textarea_rows' => 6,
+                                        'quicktags'     => true,
+                                    ));
+                                    ?>
+                                    <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                        <?php _e('Mensaje que se mostrará en el banner de cookies. Puedes usar negritas, cursivas y enlaces.', 'braves-chat'); ?>
+                                    </p>
+                                </div>
+                            </div>
 
                             <!-- Card: Texto del Botón de Aceptar -->
                             <?php
