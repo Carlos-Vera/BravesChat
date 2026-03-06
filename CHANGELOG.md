@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.2.2](#222---2026-03-04) - **Actual** - Protección contra exportación no autorizada del plugin
+- [2.2.3](#223---2026-03-05) - **Actual** - Modal de plugin y editor de texto enriquecido
+- [2.2.2](#222---2026-03-04) - Protección contra exportación no autorizada del plugin
 - [2.2.1](#221---2026-02-26) - Correcciones de compatibilidad y mejoras de UI
 - [2.2.0](#220---2026-02-26) - Visor completo de conversaciones y estadísticas combinados
 - [2.1.5](#215---2026-02-25) - Página "Historial" con visor completo
@@ -25,6 +26,17 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.2.3] - 2026-03-05
+
+### 🎨 Mejoras de Experiencia
+- **ADDED**: Modal "Ver detalles" en la lista de plugins de WordPress con información completa, FAQ, instalación y compatibilidad de BravesChat.
+
+### 🔧 Mejoras
+- **IMPROVED**: Editor de texto enriquecido (TinyMCE) para mensajes GDPR y mensajes fuera de horario, permitiendo usuarios formatear texto con negritas, cursivas, listas y enlaces sin necesidad de HTML.
+- **IMPROVED**: Sanitización de mensajes usando `wp_kses_post()` para soportar correctamente HTML formateado desde el editor.
 
 ---
 

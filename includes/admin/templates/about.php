@@ -111,36 +111,28 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php _e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
-                    <!-- Version 2.2.2 -->
+                    <!-- Versions 2.2.1 → 2.2.3 -->
                     <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
-                                <span class="braves-badge braves-badge--success">v2.2.2</span>
-                                <?php _e('Tu Licencia, Protegida: <i>siempre segura y bajo tu control</i>', 'braves-chat'); ?>
+                                <span class="braves-badge braves-badge--success">v2.2.3</span>
+                                <?php _e('Admin afinado y protegido', 'braves-chat'); ?>
                             </h3>
-                            <p class="braves-changelog__date"><?php _e('4 de Marzo, 2026', 'braves-chat'); ?></p>
+                            <p class="braves-changelog__date"><?php _e('5 de Marzo, 2026', 'braves-chat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php _e('🔧 Mejoras', 'braves-chat'); ?></h4>
+                                <h4><?php _e('🎨 Mejoras de Experiencia', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('ADDED: BravesChat detecta automáticamente si hay plugins de exportación ZIP instalados y te avisa antes de que tu licencia pueda verse comprometida.', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: Haz clic en "Ver detalles" en la lista de plugins de WordPress para ver la ficha completa del plugin — capturas, FAQ, instrucciones y compatibilidad — sin salir del admin.', 'braves-chat'); ?></li>
+                                    <li><?php _e('IMPROVED: El mensaje del banner GDPR y el mensaje de horario offline ahora usan un editor visual — añade negritas, listas o enlaces sin escribir una sola línea de HTML.', 'braves-chat'); ?></li>
+                                    <li><?php _e('FIXED: El panel de BravesChat ya no muestra avisos de otros plugins instalados en tu WordPress — la interfaz queda limpia y enfocada en tu configuración.', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
-                        </div>
-
-                    <!-- Version 2.2.1 -->
-                    <div class="braves-changelog">
-                        <div class="braves-changelog__version">
-                            <h3 class="braves-changelog__title">
-                                <span class="braves-badge braves-badge--success">v2.2.1</span>
-                                <?php _e('Panel Limpio:<i>administra sin distracciones</i>', 'braves-chat'); ?>
-                            </h3>
-                            <p class="braves-changelog__date"><?php _e('26 de Febrero, 2026', 'braves-chat'); ?></p>
 
                             <div class="braves-changelog__section">
                                 <h4><?php _e('🔧 Mejoras', 'braves-chat'); ?></h4>
                                 <ul>
-                                    <li><?php _e('FIXED: Avisos de otros plugins ya no aparecen en tu panel de control de BravesChat, dejando una interfaz limpia y enfocada.', 'braves-chat'); ?></li>
+                                    <li><?php _e('ADDED: BravesChat detecta herramientas de exportación de código instaladas en tu WordPress. En el momento de la detección, BravesLab LLC registra automáticamente el dominio, la IP del servidor, el identificador del administrador y el timestamp exacto — datos remitidos de forma inmediata a nuestros asesores legales. La distribución no autorizada del código de BravesChat constituye una infracción de derechos de autor protegida bajo 17 U.S.C. § 501 y los tratados internacionales de propiedad intelectual en los que EE.UU. es parte.', 'braves-chat'); ?></li>
                                 </ul>
                             </div>
                         </div>
