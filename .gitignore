@@ -8,7 +8,8 @@
 **/menu-icon.svg
 **/Knowledge/*
 
-# Configuraciones de Agentes
+# Archivos internos de agentes y memoria
+memory/
 **/mcp.json
 **/.claude.json
 **/.mcp.json
