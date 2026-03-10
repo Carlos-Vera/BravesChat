@@ -70,6 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braves-chat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
+                            'footer' => __('Última actualización: 5 de Marzo, 2026', 'braves-chat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
