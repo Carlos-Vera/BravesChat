@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.2.3
+Stable tag: 2.3.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,14 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.3.0 =
+* ADDED: N8N authentication token now travels server-side only — never exposed in the browser.
+* ADDED: Three authentication methods for N8N: custom header, Basic Auth, or none.
+* IMPROVED: Simplified frontend JavaScript by removing streaming/NDJSON logic — all N8N connection complexity is now handled server-side.
+* IMPROVED: Plugin images converted to PNG for better browser and WordPress.org compatibility.
+* IMPROVED: License updated to GPL-2.0-or-later, aligned with WordPress.org requirements.
+* FIXED: Removed ZIP export detection class that caused false positives.
+
 = 2.2.3 =
 * ADDED: "View details" link in the plugins list with full plugin information.
 * IMPROVED: Rich text editor for GDPR messages and out-of-hours messages.
@@ -123,6 +131,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * Initial plugin release.
 
 == Upgrade Notice ==
+
+= 2.3.0 =
+Security update: N8N token is now handled server-side only. Includes three authentication methods and a simplified frontend.
 
 = 2.2.3 =
 Administration improvements: visual editor for GDPR and out-of-hours messages, and plugin details accessible from the plugins list.
