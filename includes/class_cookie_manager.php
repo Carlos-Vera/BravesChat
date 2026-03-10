@@ -136,7 +136,7 @@ class BravesCookieManager {
      */
     private function get_session_from_cookie() {
         if (isset($_COOKIE[self::COOKIE_NAME])) {
-            $session_id = sanitize_text_field($_COOKIE[self::COOKIE_NAME]);
+            $session_id = sanitize_text_field( wp_unslash( $_COOKIE[self::COOKIE_NAME] ) );
 
             // Validar formato (debe ser un hash de 64 caracteres hexadecimales)
             if (preg_match('/^[a-f0-9]{64}$/i', $session_id)) {
@@ -182,7 +182,7 @@ class BravesCookieManager {
      */
     private function generate_server_fingerprint() {
         $components = array(
-            isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '',
+            isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '',
             $this->get_client_ip(),
             time(),
             wp_generate_password(20, false) // Salt aleatorio
@@ -213,7 +213,7 @@ class BravesCookieManager {
 
         foreach ($ip_headers as $header) {
             if (isset($_SERVER[$header]) && !empty($_SERVER[$header])) {
-                $ip = $_SERVER[$header];
+                $ip = sanitize_text_field( wp_unslash( $_SERVER[$header] ) );
 
                 // Si es X-Forwarded-For, puede contener múltiples IPs
                 if (strpos($ip, ',') !== false) {
