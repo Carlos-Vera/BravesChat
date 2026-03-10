@@ -24,6 +24,7 @@ use function esc_url;
 use function esc_attr;
 use function esc_html;
 use function do_action;
+use function wp_kses;
 
 class Admin_Sidebar {
 
@@ -167,12 +168,83 @@ class Admin_Sidebar {
         
         echo '<a href="' . $url . '" class="' . $class . '" data-page="' . $page_slug . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $url is esc_url(); $class and $page_slug are esc_attr().
         echo '<span class="braves-admin-sidebar__icon">';
-        echo wp_kses_post( $item['icon'] ); // Icon SVG from internal hardcoded array, safe.
+        echo wp_kses( $item['icon'], $this->get_svg_kses_allowed() );
         echo '</span>';
         echo '<span class="braves-admin-sidebar__label">';
         echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $label is esc_html().
         echo '</span>';
         echo '</a>';
+    }
+
+    /**
+     * Obtener lista de tags SVG permitidos para wp_kses
+     *
+     * @return array
+     */
+    private function get_svg_kses_allowed() {
+        return array(
+            'svg'      => array(
+                'width'       => true,
+                'height'      => true,
+                'viewbox'     => true,
+                'fill'        => true,
+                'xmlns'       => true,
+                'class'       => true,
+                'aria-hidden' => true,
+                'role'        => true,
+                'focusable'   => true,
+                'style'       => true,
+            ),
+            'path'     => array(
+                'd'               => true,
+                'fill'            => true,
+                'stroke'          => true,
+                'stroke-width'    => true,
+                'fill-rule'       => true,
+                'clip-rule'       => true,
+                'stroke-linecap'  => true,
+                'stroke-linejoin' => true,
+            ),
+            'circle'   => array(
+                'cx'     => true,
+                'cy'     => true,
+                'r'      => true,
+                'fill'   => true,
+                'stroke' => true,
+            ),
+            'rect'     => array(
+                'x'      => true,
+                'y'      => true,
+                'width'  => true,
+                'height' => true,
+                'fill'   => true,
+                'rx'     => true,
+                'ry'     => true,
+            ),
+            'g'        => array(
+                'fill'      => true,
+                'stroke'    => true,
+                'transform' => true,
+            ),
+            'polygon'  => array(
+                'points' => true,
+                'fill'   => true,
+            ),
+            'polyline' => array(
+                'points'       => true,
+                'fill'         => true,
+                'stroke'       => true,
+                'stroke-width' => true,
+            ),
+            'line'     => array(
+                'x1'           => true,
+                'y1'           => true,
+                'x2'           => true,
+                'y2'           => true,
+                'stroke'       => true,
+                'stroke-width' => true,
+            ),
+        );
     }
 
     /**
