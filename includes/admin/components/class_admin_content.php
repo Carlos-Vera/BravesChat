@@ -82,14 +82,14 @@ class Admin_Content {
             $custom_class .= ' braves-card--clickable';
             $action_url = esc_url($args['action_url']);
             $action_target = esc_attr($args['action_target']);
-            echo '<a href="' . $action_url . '" target="' . $action_target . '" class="braves-card ' . $custom_class . '">';
+            echo '<a href="' . $action_url . '" target="' . $action_target . '" class="braves-card ' . $custom_class . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $action_url and $action_target are pre-escaped; $custom_class is esc_attr().
         } else {
-            echo '<div class="braves-card ' . $custom_class . '">';
+            echo '<div class="braves-card ' . $custom_class . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $custom_class is esc_attr().
         }
-        
+
         if (!empty($args['icon'])) {
             echo '<div class="braves-card__icon">';
-            echo $args['icon'];
+            echo wp_kses_post( $args['icon'] ); // Icon SVG/HTML from internal hardcoded source.
             echo '</div>';
         }
 
@@ -179,14 +179,14 @@ class Admin_Content {
             echo '<div class="braves-card__action">';
             if ($args['is_link_card']) {
                 $action_text = esc_html($args['action_text']);
-                echo '<span class="braves-card__action-text">' . $action_text . '</span>';
+                echo '<span class="braves-card__action-text">' . $action_text . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $action_text is esc_html().
             } elseif (!empty($args['action_url'])) {
-                $action_url = esc_url($args['action_url']);
+                $action_url    = esc_url($args['action_url']);
                 $action_target = esc_attr($args['action_target']);
-                $action_text = esc_html($args['action_text']);
-                
-                echo '<a href="' . $action_url . '" target="' . $action_target . '">';
-                echo $action_text;
+                $action_text   = esc_html($args['action_text']);
+
+                echo '<a href="' . $action_url . '" target="' . $action_target . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- all vars pre-escaped.
+                echo $action_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $action_text is esc_html().
                 echo '</a>';
             }
             echo '</div>';
@@ -228,15 +228,15 @@ class Admin_Content {
             $button_class .= ' ' . $args['custom_class'];
         }
         
-        $url = esc_url($args['url']);
-        $class = esc_attr($button_class);
+        $url    = esc_url($args['url']);
+        $class  = esc_attr($button_class);
         $target = esc_attr($args['target']);
 
-        echo '<a href="' . $url . '" class="' . $class . '" target="' . $target . '">';
-        
+        echo '<a href="' . $url . '" class="' . $class . '" target="' . $target . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- all vars pre-escaped.
+
         if (!empty($args['icon'])) {
             echo '<span class="braves-button__icon">';
-            echo $args['icon'];
+            echo wp_kses_post( $args['icon'] ); // Icon SVG/HTML from internal hardcoded source.
             echo '</span>';
         }
         
@@ -263,7 +263,7 @@ class Admin_Content {
         $args = wp_parse_args($args, $defaults);
         $custom_class = esc_attr($args['custom_class']);
 
-        echo '<div class="braves-section ' . $custom_class . '">';
+        echo '<div class="braves-section ' . $custom_class . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $custom_class is esc_attr().
 
         if (!empty($args['title'])) {
             echo '<div class="braves-section__header">';
@@ -314,10 +314,10 @@ class Admin_Content {
         $value = esc_attr($args['value']);
         $checked = checked($args['checked'], true, false);
 
-        echo '<div class="braves-toggle ' . $custom_class . '">';
+        echo '<div class="braves-toggle ' . $custom_class . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $custom_class is esc_attr().
         echo '<div class="braves-toggle__control">';
-        echo '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . $checked . ' class="braves-toggle__input" />';
-        echo '<label for="' . $id . '" class="braves-toggle__label">';
+        echo '<input type="checkbox" id="' . $id . '" name="' . $name . '" value="' . $value . '" ' . $checked . ' class="braves-toggle__input" />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- all vars pre-escaped; $checked is from checked().
+        echo '<label for="' . $id . '" class="braves-toggle__label">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $id is esc_attr().
         echo '<span class="braves-toggle__switch"></span>';
         
         if (!empty($args['label'])) {

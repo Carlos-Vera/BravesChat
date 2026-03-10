@@ -61,7 +61,8 @@ class Admin_Sidebar {
      */
     public function render($current_page = '') {
         if (empty($current_page)) {
-            $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : 'braves-chat';
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading the current admin page slug for navigation highlighting; no data is modified.
+            $current_page = isset($_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : 'braves-chat';
         }
 
         $menu_items = $this->get_menu_items();
@@ -164,12 +165,12 @@ class Admin_Sidebar {
         $page_slug = esc_attr($item['page_slug']);
         $label = esc_html($item['label']);
         
-        echo '<a href="' . $url . '" class="' . $class . '" data-page="' . $page_slug . '">';
+        echo '<a href="' . $url . '" class="' . $class . '" data-page="' . $page_slug . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $url is esc_url(); $class and $page_slug are esc_attr().
         echo '<span class="braves-admin-sidebar__icon">';
-        echo $item['icon'];
+        echo wp_kses_post( $item['icon'] ); // Icon SVG from internal hardcoded array, safe.
         echo '</span>';
         echo '<span class="braves-admin-sidebar__label">';
-        echo $label;
+        echo $label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $label is esc_html().
         echo '</span>';
         echo '</a>';
     }

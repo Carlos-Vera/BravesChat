@@ -19,9 +19,10 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
+    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
 // Obtener instancias de componentes
 $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
@@ -30,7 +31,8 @@ $sidebar = Admin_Sidebar::get_instance();
 $config_status = Template_Helpers::get_config_status();
 
 // Detectar si se guardaron los ajustes
-$settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Settings API sets this query arg; nonce is verified by options.php.
+$settings_updated = isset($_GET['settings-updated']) && sanitize_text_field( wp_unslash( $_GET['settings-updated'] ) ) === 'true';
 
 // Prefijo de opciones
 $option_prefix = 'braves_chat_';
@@ -58,9 +60,9 @@ $option_prefix = 'braves_chat_';
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><?php _e('<strong>Horarios</strong>', 'braves-chat'); ?></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('Horarios', 'braves-chat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php _e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'braves-chat'); ?>
+                        <?php esc_html_e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'braves-chat'); ?>
                     </p>
                 </div>
 
@@ -106,7 +108,7 @@ $option_prefix = 'braves_chat_';
                     <!-- Horarios Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php _e('Configuración de Horarios', 'braves-chat'); ?>
+                            <?php esc_html_e('Configuración de Horarios', 'braves-chat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -127,7 +129,7 @@ $option_prefix = 'braves_chat_';
                                 <span class="braves-toggle-slider"></span>
                             </label>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Activar restricción por horarios de atención', 'braves-chat'); ?>
+                                <?php esc_html_e('Activar restricción por horarios de atención', 'braves-chat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
@@ -159,7 +161,7 @@ $option_prefix = 'braves_chat_';
                                 <?php endforeach; ?>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Zona horaria de referencia para los horarios configurados.', 'braves-chat'); ?>
+                                <?php esc_html_e('Zona horaria de referencia para los horarios configurados.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $timezone_content = ob_get_clean();
@@ -185,7 +187,7 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Hora de inicio del horario de atención (formato 24h).', 'braves-chat'); ?>
+                                <?php esc_html_e('Hora de inicio del horario de atención (formato 24h).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $start_content = ob_get_clean();
@@ -210,7 +212,7 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Hora de fin del horario de atención (formato 24h).', 'braves-chat'); ?>
+                                <?php esc_html_e('Hora de fin del horario de atención (formato 24h).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $end_content = ob_get_clean();
@@ -240,7 +242,7 @@ $option_prefix = 'braves_chat_';
                                     ));
                                     ?>
                                     <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                        <?php _e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braves-chat'); ?>
+                                        <?php esc_html_e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braves-chat'); ?>
                                     </p>
                                 </div>
                             </div>

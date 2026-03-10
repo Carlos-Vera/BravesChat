@@ -19,9 +19,10 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
+    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
 // Obtener instancias de componentes
 $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
@@ -30,7 +31,8 @@ $sidebar = Admin_Sidebar::get_instance();
 $config_status = Template_Helpers::get_config_status();
 
 // Detectar si se guardaron los ajustes
-$settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Settings API sets this query arg; nonce is verified by options.php.
+$settings_updated = isset($_GET['settings-updated']) && sanitize_text_field( wp_unslash( $_GET['settings-updated'] ) ) === 'true';
 
 // Prefijo de opciones
 $option_prefix = 'braves_chat_';
@@ -58,9 +60,9 @@ $option_prefix = 'braves_chat_';
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><?php _e('<strong>GDPR</strong>', 'braves-chat'); ?></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('GDPR', 'braves-chat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php _e('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR.<br/>El sistema utiliza cookies persistentes con fingerprinting del navegador.', 'braves-chat'); ?>
+                        <?php echo wp_kses_post( __('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR.<br/>El sistema utiliza cookies persistentes con fingerprinting del navegador.', 'braves-chat') ); ?>
                     </p>
                 </div>
 
@@ -104,7 +106,7 @@ $option_prefix = 'braves_chat_';
                     <!-- GDPR Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php _e('Compliance GDPR / Cookies', 'braves-chat'); ?>
+                            <?php esc_html_e('Compliance GDPR / Cookies', 'braves-chat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -125,7 +127,7 @@ $option_prefix = 'braves_chat_';
                                 <span class="braves-toggle-slider"></span>
                             </label>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mostrar banner de consentimiento de cookies. El consentimiento se guarda en localStorage.', 'braves-chat'); ?>
+                                <?php esc_html_e('Mostrar banner de consentimiento de cookies. El consentimiento se guarda en localStorage.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
@@ -156,7 +158,7 @@ $option_prefix = 'braves_chat_';
                                     ));
                                     ?>
                                     <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                        <?php _e('Mensaje que se mostrará en el banner de cookies. Puedes usar negritas, cursivas y enlaces.', 'braves-chat'); ?>
+                                        <?php esc_html_e('Mensaje que se mostrará en el banner de cookies. Puedes usar negritas, cursivas y enlaces.', 'braves-chat'); ?>
                                     </p>
                                 </div>
                             </div>
@@ -175,7 +177,7 @@ $option_prefix = 'braves_chat_';
                                    style="width: 100%;"
                                    placeholder="<?php echo esc_attr(__('Aceptar', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braves-chat'); ?>
+                                <?php esc_html_e('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braves-chat'); ?>
                             </p>
                             <?php
                             $button_content = ob_get_clean();
