@@ -43,6 +43,7 @@ jobs:
           --exclude "UX-UI-Convenciones.md" \
           --exclude "WORDPRESS_ORG_PLAN.md" \
           --exclude "errores.md" \
+          --exclude "memory" \
           --exclude "*.bak"
 
         # Crear el zip
