@@ -198,8 +198,8 @@ if (empty($theme_colors)) {
                                     id="<?php echo esc_attr($option_prefix . 'chat_skin'); ?>"
                                     class="braves-select"
                                     style="width: 100%;">
-                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Default (Color)', 'braves-chat'); ?></option>
-                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Braves (B&W Minimal)', 'braves-chat'); ?></option>
+                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Básica', 'braves-chat'); ?></option>
+                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Braves', 'braves-chat'); ?></option>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
                                 <?php esc_html_e('Selecciona el diseño visual del chat.', 'braves-chat'); ?>
