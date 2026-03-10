@@ -25,6 +25,7 @@ use function esc_html;
 use function file_exists;
 use function file_get_contents;
 use function esc_html__;
+use function get_option;
 
 class Admin_Header {
 
@@ -80,11 +81,13 @@ class Admin_Header {
         }
 
         if ($args['show_version']) {
-            $admin_url = esc_url(admin_url('admin.php?page=braves-chat-about'));
-            $title = esc_attr__('Ver información del plugin', 'braves-chat');
-            $version = esc_html('v' . BRAVES_CHAT_VERSION);
+            $admin_url    = esc_url(admin_url('admin.php?page=braves-chat-about'));
+            $title        = esc_attr__('Ver información del plugin', 'braves-chat');
+            $version      = esc_html('v' . BRAVES_CHAT_VERSION);
+            $display_mode = esc_html(get_option('braves_chat_display_mode', 'modal'));
 
             echo '<div class="braves-admin-header__version">';
+            echo '<em class="braves-header__mode-label">' . $display_mode . '</em>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $display_mode is esc_html().
             echo '<a href="' . $admin_url . '" class="braves-badge braves-badge--primary braves-badge--clickable" title="' . $title . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $admin_url is esc_url(); $title is esc_attr__().
             echo $version; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $version is esc_html().
             echo '</a>';
