@@ -11,6 +11,7 @@ if (!defined('ABSPATH')) {
 ?>
 
 <?php
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables injected by Frontend class.
 // Obtener el icono seleccionado y tooltip
 $chat_icon = get_option('braves_chat_chat_icon', 'robot-chat');
 $icon_path = BRAVES_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . '.svg';
