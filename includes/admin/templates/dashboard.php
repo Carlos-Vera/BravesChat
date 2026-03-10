@@ -19,9 +19,10 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
+    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
 // Obtener instancias de componentes
 $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
@@ -54,10 +55,10 @@ $config_status = Template_Helpers::get_config_status();
                 <!-- Page Header -->
                 <div class="braves-page-header">
                     <h1 class="braves-page-title">
-                        <?php _e('<strong>Dashboard</strong>', 'braves-chat'); ?>
+                        <strong><?php esc_html_e('Dashboard', 'braves-chat'); ?></strong>
                     </h1>
                     <p class="braves-page-description">
-                        <?php _e('Una visión general de las funciones de <strong>BravesChat iA</strong> para construir y personalizar tu chat.', 'braves-chat'); ?>
+                        <?php echo wp_kses_post( __('Una visión general de las funciones de <strong>BravesChat iA</strong> para construir y personalizar tu chat.', 'braves-chat') ); ?>
                     </p>
                 </div>
 
@@ -122,7 +123,7 @@ $config_status = Template_Helpers::get_config_status();
                 <!-- Quick Actions Section -->
                 <div class="braves-section braves-section--actions">
                     <h2 class="braves-section__title">
-                        <?php _e('Acciones Rápidas', 'braves-chat'); ?>
+                        <?php esc_html_e('Acciones Rápidas', 'braves-chat'); ?>
                     </h2>
 
                     <div class="braves-button-group">
@@ -142,48 +143,6 @@ $config_status = Template_Helpers::get_config_status();
                     </div>
                 </div>
 
-                <!-- System Info Cards -->
-                <div class="braves-section braves-section--info">
-                    <h2 class="braves-section__title">
-                        <?php _e('Estado del Sistema', 'braves-chat'); ?>
-                    </h2>
-
-                    <div class="braves-card-grid braves-card-grid--2-cols">
-
-                        <!-- Configuración General -->
-                        <?php
-                        $global_enabled_text = $config_status['global_enabled']
-                            ? __('Activo en todo el sitio', 'braves-chat')
-                            : __('Usar bloque Gutenberg', 'braves-chat');
-
-                        Template_Helpers::card(array(
-                            'title' => __('Modo de visualización', 'braves-chat'),
-                            'description' => sprintf(
-                                __('Modo: %s', 'braves-chat'),
-                                ucfirst($config_status['display_mode'])
-                            ),
-                            'footer' => $global_enabled_text,
-                            'custom_class' => 'braves-card--compact',
-                        ));
-                        ?>
-
-                        <!-- Versión del Plugin -->
-                        <?php
-                        Template_Helpers::card(array(
-                            'title' => __('Versión del Plugin', 'braves-chat'),
-                            'description' => 'BravesChat iA v' . BRAVES_CHAT_VERSION,
-                            'footer' => sprintf(
-                                __('Última actualización: %s', 'braves-chat'),
-                                date_i18n(get_option('date_format'))
-                            ),
-                            'action_url' => admin_url('admin.php?page=braves-chat-about'),
-                            'is_link_card' => true,
-                            'custom_class' => 'braves-card--compact',
-                        ));
-                        ?>
-
-                    </div>
-                </div>
 
             </div><!-- .braves-admin-content -->
 

@@ -19,9 +19,10 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(__('No tienes permisos para acceder a esta página.', 'braves-chat'));
+    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braves-chat'));
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
 // Obtener instancias de componentes
 $header = Admin_Header::get_instance();
 $sidebar = Admin_Sidebar::get_instance();
@@ -30,7 +31,8 @@ $sidebar = Admin_Sidebar::get_instance();
 $config_status = Template_Helpers::get_config_status();
 
 // Detectar si se guardaron los ajustes
-$settings_updated = isset($_GET['settings-updated']) && $_GET['settings-updated'] === 'true';
+// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Settings API sets this query arg; nonce is verified by options.php.
+$settings_updated = isset($_GET['settings-updated']) && sanitize_text_field( wp_unslash( $_GET['settings-updated'] ) ) === 'true';
 
 // Prefijo de opciones
 $option_prefix = 'braves_chat_';
@@ -88,9 +90,9 @@ if (empty($theme_colors)) {
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><?php _e('<strong>Apariencia</strong>', 'braves-chat'); ?></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('Apariencia', 'braves-chat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php _e('Personaliza el aspecto visual del chat: títulos, mensajes, posición y modo de visualización.', 'braves-chat'); ?>
+                        <?php esc_html_e('Personaliza el aspecto visual del chat: títulos, mensajes, posición y modo de visualización.', 'braves-chat'); ?>
                     </p>
                 </div>
 
@@ -147,10 +149,44 @@ if (empty($theme_colors)) {
                     <!-- Apariencia del Chat Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php _e('Apariencia del Chat', 'braves-chat'); ?>
+                            <?php esc_html_e('Apariencia del Chat', 'braves-chat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
+
+                            <!-- Card: Modo de Visualización -->
+                            <?php
+                            $current_mode = get_option($option_prefix . 'display_mode', 'modal');
+                            $modes = array(
+                                'modal' => __('Modal (ventana flotante)', 'braves-chat'),
+                                'fullscreen' => __('Pantalla completa', 'braves-chat'),
+                            );
+
+                            ob_start();
+                            ?>
+                            <select name="<?php echo esc_attr($option_prefix . 'display_mode'); ?>"
+                                    id="<?php echo esc_attr($option_prefix . 'display_mode'); ?>"
+                                    class="braves-select"
+                                    style="width: 100%;">
+                                <?php foreach ($modes as $value => $label): ?>
+                                    <option value="<?php echo esc_attr($value); ?>"
+                                            <?php selected($current_mode, $value); ?>>
+                                        <?php echo esc_html($label); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php esc_html_e('Modo de presentación del chat al abrirse.', 'braves-chat'); ?>
+                            </p>
+                            <?php
+                            $mode_content = ob_get_clean();
+
+                            Template_Helpers::card(array(
+                                'title' => __('Modo de Visualización', 'braves-chat'),
+                                'description' => __('Cómo se mostrará el chat al abrirse.', 'braves-chat'),
+                                'content' => $mode_content,
+                            ));
+                            ?>
 
                             <!-- Card: Skin del Chat -->
                             <?php
@@ -162,11 +198,11 @@ if (empty($theme_colors)) {
                                     id="<?php echo esc_attr($option_prefix . 'chat_skin'); ?>"
                                     class="braves-select"
                                     style="width: 100%;">
-                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Default (Color)', 'braves-chat'); ?></option>
-                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Braves (B&W Minimal)', 'braves-chat'); ?></option>
+                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Básica', 'braves-chat'); ?></option>
+                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Braves', 'braves-chat'); ?></option>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Selecciona el diseño visual del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Selecciona el diseño visual del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $skin_content = ob_get_clean();
@@ -198,13 +234,13 @@ if (empty($theme_colors)) {
                                 </div>
                                 
                                 <button type="button" class="button braves-upload-media" data-title="<?php esc_attr_e('Seleccionar imagen', 'braves-chat'); ?>" data-button="<?php esc_attr_e('Usar imagen', 'braves-chat'); ?>">
-                                    <?php _e('Subir imagen', 'braves-chat'); ?>
+                                    <?php esc_html_e('Subir imagen', 'braves-chat'); ?>
                                 </button>
-                                <button type="button" class="button braves-remove-media" style="margin-left: 5px;"><?php _e('Quitar imagen', 'braves-chat'); ?></button>
+                                <button type="button" class="button braves-remove-media" style="margin-left: 5px;"><?php esc_html_e('Quitar imagen', 'braves-chat'); ?></button>
                             </div>
                             <p class="braves-field-help" style="margin-top: 5px;">
-                                <?php _e('Sube una imagen personalizada (1:1) para el botón flotante.<br/>
-                                Solo visible en el skin Braves.', 'braves-chat'); ?>
+                                <?php echo wp_kses_post( __('Sube una imagen personalizada (1:1) para el botón flotante.<br/>
+                                Solo visible en el skin Braves.', 'braves-chat') ); ?>
                             </p>
                             <?php
                             $bubble_content = ob_get_clean();
@@ -230,7 +266,7 @@ if (empty($theme_colors)) {
                                    style="width: 100%;"
                                    placeholder="<?php echo esc_attr(__('¿Necesitas ayuda?', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braves-chat'); ?>
+                                <?php esc_html_e('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braves-chat'); ?>
                             </p>
                             <?php
                             $bubble_text_content = ob_get_clean();
@@ -257,7 +293,7 @@ if (empty($theme_colors)) {
                                    style="width: 100%;"
                                    placeholder="<?php echo esc_attr(__('BravesLab AI Assistant', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Título principal que aparece en la cabecera del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Título principal que aparece en la cabecera del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $header_title_content = ob_get_clean();
@@ -283,7 +319,7 @@ if (empty($theme_colors)) {
                                    style="width: 100%;"
                                    placeholder="<?php echo esc_attr(__('Chateando con Charlie', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Texto que aparece con animación al lado del avatar cuando se abre el chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Texto que aparece con animación al lado del avatar cuando se abre el chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $header_status_text_content = ob_get_clean();
@@ -309,7 +345,7 @@ if (empty($theme_colors)) {
                                    style="width: 100%;"
                                    placeholder="<?php echo esc_attr(__('Artificial Intelligence Marketing Agency', 'braves-chat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Subtítulo que aparece debajo del título principal.', 'braves-chat'); ?>
+                                <?php esc_html_e('Subtítulo que aparece debajo del título principal.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $header_subtitle_content = ob_get_clean();
@@ -334,7 +370,7 @@ if (empty($theme_colors)) {
                                       style="width: 100%;"
                                       placeholder="<?php echo esc_attr(__('¡Hola! ¿Cómo podemos ayudarte?', 'braves-chat')); ?>"><?php echo esc_textarea($welcome_message); ?></textarea>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Mensaje inicial que verá el usuario al abrir el chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Mensaje inicial que verá el usuario al abrir el chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $welcome_message_content = ob_get_clean();
@@ -370,7 +406,7 @@ if (empty($theme_colors)) {
                                 <?php endforeach; ?>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Posición del widget de chat en la pantalla.', 'braves-chat'); ?>
+                                <?php esc_html_e('Posición del widget de chat en la pantalla.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $position_content = ob_get_clean();
@@ -379,40 +415,6 @@ if (empty($theme_colors)) {
                                 'title' => __('Posición del Chat', 'braves-chat'),
                                 'description' => __('Dónde aparecerá el botón del chat en la pantalla.', 'braves-chat'),
                                 'content' => $position_content,
-                            ));
-                            ?>
-
-                            <!-- Card: Modo de Visualización -->
-                            <?php
-                            $current_mode = get_option($option_prefix . 'display_mode', 'modal');
-                            $modes = array(
-                                'modal' => __('Modal (ventana flotante)', 'braves-chat'),
-                                'fullscreen' => __('Pantalla completa', 'braves-chat'),
-                            );
-
-                            ob_start();
-                            ?>
-                            <select name="<?php echo esc_attr($option_prefix . 'display_mode'); ?>"
-                                    id="<?php echo esc_attr($option_prefix . 'display_mode'); ?>"
-                                    class="braves-select"
-                                    style="width: 100%;">
-                                <?php foreach ($modes as $value => $label): ?>
-                                    <option value="<?php echo esc_attr($value); ?>"
-                                            <?php selected($current_mode, $value); ?>>
-                                        <?php echo esc_html($label); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php _e('Modo de presentación del chat al abrirse.', 'braves-chat'); ?>
-                            </p>
-                            <?php
-                            $mode_content = ob_get_clean();
-
-                            Template_Helpers::card(array(
-                                'title' => __('Modo de Visualización', 'braves-chat'),
-                                'description' => __('Cómo se mostrará el chat al abrirse.', 'braves-chat'),
-                                'content' => $mode_content,
                             ));
                             ?>
 
@@ -431,7 +433,7 @@ if (empty($theme_colors)) {
                                    style="width: 100%;"
                             />
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Texto que aparecerá al pasar el cursor sobre el botón flotante.', 'braves-chat'); ?>
+                                <?php esc_html_e('Texto que aparecerá al pasar el cursor sobre el botón flotante.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $tooltip_content = ob_get_clean();
@@ -510,7 +512,7 @@ if (empty($theme_colors)) {
                             <div style="margin-bottom: 12px;">
                                 <button type="button" class="braves-palette-toggle" data-palette-target="icon-color-palette">
                                     <span class="braves-palette-toggle-icon">▶</span>
-                                    <span><?php _e('Colores del tema', 'braves-chat'); ?></span>
+                                    <span><?php esc_html_e('Colores del tema', 'braves-chat'); ?></span>
                                 </button>
                             </div>
 
@@ -530,7 +532,7 @@ if (empty($theme_colors)) {
                             </div>
 
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Color del icono SVG en el botón flotante del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Color del icono SVG en el botón flotante del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $icon_color_content = ob_get_clean();
@@ -548,7 +550,7 @@ if (empty($theme_colors)) {
                     <!-- Personalización de Colores Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php _e('Colores Personalizados', 'braves-chat'); ?>
+                            <?php esc_html_e('Colores Personalizados', 'braves-chat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -580,7 +582,7 @@ if (empty($theme_colors)) {
                             <div style="margin-bottom: 12px;">
                                 <button type="button" class="braves-palette-toggle" data-palette-target="bubble-color-palette">
                                     <span class="braves-palette-toggle-icon">▶</span>
-                                    <span><?php _e('Colores del tema', 'braves-chat'); ?></span>
+                                    <span><?php esc_html_e('Colores del tema', 'braves-chat'); ?></span>
                                 </button>
                             </div>
 
@@ -600,7 +602,7 @@ if (empty($theme_colors)) {
                             </div>
 
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Color del botón flotante (burbuja) del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Color del botón flotante (burbuja) del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $bubble_color_content = ob_get_clean();
@@ -639,7 +641,7 @@ if (empty($theme_colors)) {
                             <div style="margin-bottom: 12px;">
                                 <button type="button" class="braves-palette-toggle" data-palette-target="primary-color-palette">
                                     <span class="braves-palette-toggle-icon">▶</span>
-                                    <span><?php _e('Colores del tema', 'braves-chat'); ?></span>
+                                    <span><?php esc_html_e('Colores del tema', 'braves-chat'); ?></span>
                                 </button>
                             </div>
 
@@ -659,7 +661,7 @@ if (empty($theme_colors)) {
                             </div>
 
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Color del header y mensajes del asistente.', 'braves-chat'); ?>
+                                <?php esc_html_e('Color del header y mensajes del asistente.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $primary_color_content = ob_get_clean();
@@ -698,7 +700,7 @@ if (empty($theme_colors)) {
                             <div style="margin-bottom: 12px;">
                                 <button type="button" class="braves-palette-toggle" data-palette-target="background-color-palette">
                                     <span class="braves-palette-toggle-icon">▶</span>
-                                    <span><?php _e('Colores del tema', 'braves-chat'); ?></span>
+                                    <span><?php esc_html_e('Colores del tema', 'braves-chat'); ?></span>
                                 </button>
                             </div>
 
@@ -728,7 +730,7 @@ if (empty($theme_colors)) {
                             </div>
 
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Color de fondo de la ventana del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('Color de fondo de la ventana del chat.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $background_color_content = ob_get_clean();
@@ -767,7 +769,7 @@ if (empty($theme_colors)) {
                             <div style="margin-bottom: 12px;">
                                 <button type="button" class="braves-palette-toggle" data-palette-target="text-color-palette">
                                     <span class="braves-palette-toggle-icon">▶</span>
-                                    <span><?php _e('Colores del tema', 'braves-chat'); ?></span>
+                                    <span><?php esc_html_e('Colores del tema', 'braves-chat'); ?></span>
                                 </button>
                             </div>
 
@@ -798,7 +800,7 @@ if (empty($theme_colors)) {
                             </div>
 
                             <p class="braves-field-help" style="margin-top: 12px; font-size: 13px; color: #666;">
-                                <?php _e('Color del texto de los mensajes.', 'braves-chat'); ?>
+                                <?php esc_html_e('Color del texto de los mensajes.', 'braves-chat'); ?>
                             </p>
                             <?php
                             $text_color_content = ob_get_clean();

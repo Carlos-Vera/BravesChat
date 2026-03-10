@@ -1,5 +1,8 @@
 /**
- * Bloque de Gutenberg para Braves Chat iA
+ * Bloque de Gutenberg para BravesChat
+ *
+ * Bloque de pantalla completa: se coloca en la página donde se quiere
+ * mostrar el chat embebido. Usa la configuración global del plugin.
  *
  * @package BravesChat
  */
@@ -11,16 +14,11 @@
     var __ = i18n.__;
     var InspectorControls = blockEditor.InspectorControls || wp.editor.InspectorControls;
     var PanelBody = components.PanelBody;
-    var TextControl = components.TextControl;
-    var SelectControl = components.SelectControl;
     var TextareaControl = components.TextareaControl;
 
-    /**
-     * Registrar el bloque
-     */
     blocks.registerBlockType('braves/chat-widget', {
-        title: __('Braves Chat iA', 'braves-chat'),
-        description: __('Widget de chat con IA de BravesLab para integración con N8N', 'braves-chat'),
+        title: __('BravesChat — Pantalla Completa', 'braves-chat'),
+        description: __('Muestra el chat de BravesChat en pantalla completa en esta página. Configura el webhook, colores y título desde el panel del plugin.', 'braves-chat'),
         icon: 'format-chat',
         category: 'widgets',
         keywords: [
@@ -28,7 +26,7 @@
             __('ia', 'braves-chat'),
             __('asistente', 'braves-chat'),
             __('braveslab', 'braves-chat'),
-            __('ai', 'braves-chat')
+            __('fullscreen', 'braves-chat')
         ],
         supports: {
             html: false,
@@ -37,282 +35,103 @@
         },
 
         attributes: {
-            webhookUrl: {
-                type: 'string',
-                default: window.bravesChatBlock?.defaultWebhookUrl || 'https://flow.braveslab.com/webhook/1427244e-a23c-4184-a536-d02622f36325/chat'
-            },
-            headerTitle: {
-                type: 'string',
-                default: window.bravesChatBlock?.defaultHeaderTitle || 'BravesLab AI Assistant'
-            },
-            headerSubtitle: {
-                type: 'string',
-                default: window.bravesChatBlock?.defaultHeaderSubtitle || 'Artificial Intelligence Marketing Agency'
-            },
             welcomeMessage: {
                 type: 'string',
-                default: window.bravesChatBlock?.defaultWelcomeMessage || '¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?'
-            },
-            position: {
-                type: 'string',
-                default: window.bravesChatBlock?.defaultPosition || 'bottom-right'
-            },
-            displayMode: {
-                type: 'string',
-                default: window.bravesChatBlock?.defaultDisplayMode || 'modal'
+                default: window.bravesChatBlock ? window.bravesChatBlock.defaultWelcomeMessage : ''
             }
         },
 
-        /**
-         * Función de edición (en el editor de Gutenberg)
-         */
         edit: function (props) {
-            var attributes = props.attributes;
+            var welcomeMessage = props.attributes.welcomeMessage;
             var setAttributes = props.setAttributes;
 
-            // Función para obtener el nombre legible de la posición
-            function getPositionLabel(position) {
-                switch (position) {
-                    case 'bottom-right':
-                        return __('Abajo Derecha', 'braves-chat');
-                    case 'bottom-left':
-                        return __('Abajo Izquierda', 'braves-chat');
-                    case 'center':
-                        return __('Centro', 'braves-chat');
-                    default:
-                        return position;
-                }
-            }
-
-            // Función para obtener el nombre legible del modo
-            function getDisplayModeLabel(mode) {
-                switch (mode) {
-                    case 'modal':
-                        return __('Modal', 'braves-chat');
-                    case 'fullscreen':
-                        return __('Pantalla Completa', 'braves-chat');
-                    default:
-                        return mode;
-                }
-            }
+            var previewText = welcomeMessage
+                ? (welcomeMessage.length > 160 ? welcomeMessage.substring(0, 160) + '...' : welcomeMessage)
+                : __('(Usa el mensaje configurado en el panel del plugin)', 'braves-chat');
 
             return el('div', { className: 'wp-block-braves-chat-widget' },
-                // Panel de Inspector (sidebar derecho)
+
+                // Sidebar — solo mensaje de bienvenida
                 el(InspectorControls, {},
                     el(PanelBody, {
-                        title: __('Configuración del Chat', 'braves-chat'),
+                        title: __('Mensaje de bienvenida', 'braves-chat'),
                         initialOpen: true
                     },
-                        // Webhook URL
-                        el(TextControl, {
-                            label: __('URL del Webhook', 'braves-chat'),
-                            value: attributes.webhookUrl,
-                            onChange: function (value) {
-                                setAttributes({ webhookUrl: value });
-                            },
-                            help: __('URL del webhook de N8N para procesar los mensajes', 'braves-chat'),
-                            type: 'url'
-                        }),
-
-                        // Título del Header
-                        el(TextControl, {
-                            label: __('Título del Header', 'braves-chat'),
-                            value: attributes.headerTitle,
-                            onChange: function (value) {
-                                setAttributes({ headerTitle: value });
-                            },
-                            help: __('Título que aparecerá en la cabecera del chat', 'braves-chat')
-                        }),
-
-                        // Subtítulo del Header
-                        el(TextControl, {
-                            label: __('Subtítulo del Header', 'braves-chat'),
-                            value: attributes.headerSubtitle,
-                            onChange: function (value) {
-                                setAttributes({ headerSubtitle: value });
-                            },
-                            help: __('Subtítulo descriptivo del chat', 'braves-chat')
-                        }),
-
-                        // Mensaje de Bienvenida
                         el(TextareaControl, {
-                            label: __('Mensaje de Bienvenida', 'braves-chat'),
-                            value: attributes.welcomeMessage,
+                            label: __('Mensaje de bienvenida', 'braves-chat'),
+                            value: welcomeMessage,
                             onChange: function (value) {
                                 setAttributes({ welcomeMessage: value });
                             },
                             rows: 5,
-                            help: __('Primer mensaje que verá el usuario al abrir el chat', 'braves-chat')
-                        }),
-
-                        // Posición del Chat
-                        el(SelectControl, {
-                            label: __('Posición del Chat', 'braves-chat'),
-                            value: attributes.position,
-                            options: [
-                                { label: __('Abajo Derecha', 'braves-chat'), value: 'bottom-right' },
-                                { label: __('Abajo Izquierda', 'braves-chat'), value: 'bottom-left' },
-                                { label: __('Centro', 'braves-chat'), value: 'center' }
-                            ],
-                            onChange: function (value) {
-                                setAttributes({ position: value });
-                            },
-                            help: __('Ubicación del botón de chat en la página', 'braves-chat')
-                        }),
-
-                        // Modo de Visualización
-                        el(SelectControl, {
-                            label: __('Modo de Visualización', 'braves-chat'),
-                            value: attributes.displayMode,
-                            options: [
-                                { label: __('Modal (Ventana emergente)', 'braves-chat'), value: 'modal' },
-                                { label: __('Pantalla completa', 'braves-chat'), value: 'fullscreen' }
-                            ],
-                            onChange: function (value) {
-                                setAttributes({ displayMode: value });
-                            },
-                            help: __('Cómo se mostrará la ventana de chat', 'braves-chat')
+                            help: __('Primer mensaje que verá el usuario en esta página. Si lo dejas vacío se usará el mensaje global del plugin.', 'braves-chat')
                         })
                     )
                 ),
 
-                // Vista previa en el editor
-                el('div', {
-                    className: 'braves-chat-block-preview',
-                    style: {
-                        border: '2px dashed #01B7AF',
-                        borderRadius: '10px',
-                        padding: '30px',
-                        textAlign: 'center',
-                        backgroundColor: '#CEF2EF',
-                        color: '#242424',
-                        minHeight: '300px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }
-                },
-                    // Icono del chat
-                    el('div', {
-                        style: {
-                            width: '70px',
-                            height: '70px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, #01B7AF 0%, #5DD5C7 100%)',
-                            margin: '0 auto 20px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontSize: '32px',
-                            boxShadow: '0 4px 15px rgba(1, 183, 175, 0.3)'
-                        }
-                    }, '💬'),
+                // Preview card en el editor
+                el('div', { className: 'braves-block-card' },
 
-                    // Título
-                    el('h3', {
-                        style: {
-                            margin: '0 0 10px 0',
-                            color: '#01B7AF',
-                            fontSize: '22px',
-                            fontWeight: '600'
-                        }
-                    }, attributes.headerTitle),
-
-                    // Subtítulo
-                    el('p', {
-                        style: {
-                            margin: '0 0 25px 0',
-                            fontSize: '15px',
-                            opacity: '0.9',
-                            fontWeight: '500'
-                        }
-                    }, attributes.headerSubtitle),
-
-                    // Mensaje de bienvenida (preview)
-                    el('div', {
-                        style: {
-                            backgroundColor: 'white',
-                            borderRadius: '15px',
-                            padding: '20px',
-                            marginTop: '15px',
-                            marginBottom: '20px',
-                            border: '1px solid rgba(1, 183, 175, 0.2)',
-                            textAlign: 'left',
-                            maxWidth: '500px',
-                            width: '100%',
-                            boxShadow: '0 2px 8px rgba(1, 183, 175, 0.1)'
-                        }
-                    },
-                        el('p', {
-                            style: {
-                                margin: 0,
-                                fontSize: '14px',
-                                lineHeight: '1.6',
-                                color: '#242424'
-                            }
-                        }, attributes.welcomeMessage.substring(0, 150) +
-                        (attributes.welcomeMessage.length > 150 ? '...' : ''))
-                    ),
-
-                    // Información de configuración
-                    el('div', {
-                        style: {
-                            marginTop: '20px',
-                            padding: '15px',
-                            backgroundColor: 'rgba(1, 183, 175, 0.1)',
-                            borderRadius: '8px',
-                            fontSize: '13px',
-                            fontWeight: '600',
-                            color: '#01B7AF',
-                            width: '100%',
-                            maxWidth: '500px'
-                        }
-                    },
-                        el('div', {
-                            style: {
-                                marginBottom: '8px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }
-                        },
-                            '📍 ', __('Posición:', 'braves-chat'), ' ',
-                            el('strong', {
-                                style: { marginLeft: '5px' }
-                            }, getPositionLabel(attributes.position))
+                    // Header
+                    el('div', { className: 'braves-block-card__header' },
+                        el('div', { className: 'braves-block-card__brand' },
+                            el('div', { className: 'braves-block-card__icon' },
+                                el('svg', {
+                                    width: '16', height: '16',
+                                    viewBox: '0 0 24 24', fill: 'none',
+                                    stroke: 'currentColor', strokeWidth: '2',
+                                    strokeLinecap: 'round', strokeLinejoin: 'round'
+                                },
+                                    el('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
+                                )
+                            ),
+                            el('span', { className: 'braves-block-card__name' }, 'BravesChat')
                         ),
-                        el('div', {
-                            style: {
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }
-                        },
-                            '🖥️ ', __('Modo:', 'braves-chat'), ' ',
-                            el('strong', {
-                                style: { marginLeft: '5px' }
-                            }, getDisplayModeLabel(attributes.displayMode))
+                        el('span', { className: 'braves-block-card__badge' },
+                            __('Pantalla Completa', 'braves-chat')
                         )
                     ),
 
-                    // Nota informativa
-                    el('p', {
-                        style: {
-                            marginTop: '20px',
-                            fontSize: '12px',
-                            color: '#666',
-                            fontStyle: 'italic'
-                        }
-                    }, __('Esta es una vista previa. El chat aparecerá en el frontend con la configuración indicada.', 'braves-chat'))
+                    // Body — burbuja con mensaje de bienvenida
+                    el('div', { className: 'braves-block-card__body' },
+                        el('div', { className: 'braves-block-card__message-wrap' },
+                            el('div', { className: 'braves-block-card__avatar' },
+                                el('svg', {
+                                    width: '16', height: '16',
+                                    viewBox: '0 0 24 24', fill: 'none',
+                                    stroke: '#ffffff', strokeWidth: '2',
+                                    strokeLinecap: 'round', strokeLinejoin: 'round'
+                                },
+                                    el('path', { d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z' })
+                                )
+                            ),
+                            el('div', { className: 'braves-block-card__bubble' },
+                                el('p', { className: 'braves-block-card__bubble-text' }, previewText)
+                            )
+                        )
+                    ),
+
+                    // Footer — nota informativa
+                    el('div', { className: 'braves-block-card__footer' },
+                        el('svg', {
+                            width: '13', height: '13',
+                            viewBox: '0 0 24 24', fill: 'none',
+                            stroke: 'currentColor', strokeWidth: '2',
+                            strokeLinecap: 'round', strokeLinejoin: 'round',
+                            style: { flexShrink: 0 }
+                        },
+                            el('circle', { cx: '12', cy: '12', r: '10' }),
+                            el('line', { x1: '12', y1: '8', x2: '12', y2: '12' }),
+                            el('line', { x1: '12', y1: '16', x2: '12.01', y2: '16' })
+                        ),
+                        el('span', {},
+                            __('Webhook, título, colores y posición se configuran desde el panel de BravesChat.', 'braves-chat')
+                        )
+                    )
                 )
             );
         },
 
-        /**
-         * Función de guardado (no guardamos nada en el contenido)
-         * El renderizado se hace en PHP
-         */
         save: function () {
             return null;
         }

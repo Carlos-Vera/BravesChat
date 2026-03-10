@@ -179,6 +179,17 @@ class Helpers {
         
         $attributes = wp_parse_args($attributes, $defaults);
         
+        // Asegurar que valores vacíos (guardados en gutenberg) tomen los defaults
+        if (empty($attributes['bubbleImage'])) {
+            $attributes['bubbleImage'] = $defaults['bubbleImage'];
+        }
+        if (empty($attributes['chatSkin'])) {
+            $attributes['chatSkin'] = $defaults['chatSkin'];
+        }
+        if (empty($attributes['bubbleText'])) {
+            $attributes['bubbleText'] = $defaults['bubbleText'];
+        }
+        
         return array(
             'webhookUrl'      => esc_url($attributes['webhookUrl']),
             'headerTitle'     => sanitize_text_field($attributes['headerTitle']),
@@ -225,9 +236,11 @@ class Helpers {
         $log_message = '[Braves Chat] ' . $message;
 
         if ($data !== null) {
-            $log_message .= ' | Data: ' . print_r($data, true);
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+            $log_message .= ' | Data: ' . print_r($data, true); // Only runs when WP_DEBUG is true
         }
 
-        error_log($log_message);
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+        error_log($log_message); // Only runs when WP_DEBUG is true
     }
 }

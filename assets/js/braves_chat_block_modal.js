@@ -547,213 +547,37 @@ class BravesChatModal {
         this.show_typing_indicator();
 
         try {
-            // Validar webhook URL
-            if (!this.webhook_url || this.webhook_url.trim() === '') {
-                throw new Error('WEBHOOK_NOT_CONFIGURED: La URL del webhook no está configurada en los ajustes del plugin.');
-            }
-
-            // Preparar headers con autenticación
-            const headers = {
-                'Content-Type': 'application/json',
-            };
-
-            // Solo añadir header de autenticación si existe el token
-            if (this.auth_token && this.auth_token.trim() !== '') {
-                headers['X-N8N-Auth'] = this.auth_token;
-                console.log('Header de autenticación añadido');
-            } else {
-                console.log('No se añadió header de autenticación (token vacío)');
-            }
-
-            // Preparar payload para N8N Chat (espera chatInput)
-            const payload = {
-                chatInput: message,
-                sessionId: this.session_id
-            };
-
-            console.log('Payload enviado:', payload);
-            console.log('🌐 Enviando petición a:', this.webhook_url);
-            console.log('Headers:', headers);
-
-            // Enviar al webhook con autenticación
-            const response = await fetch(this.webhook_url, {
+            // Enviar mensaje via AJAX de WordPress (el token se gestiona en el servidor)
+            const response = await fetch(BravesChatConfig.ajaxUrl, {
                 method: 'POST',
-                headers: headers,
-                body: JSON.stringify(payload),
-                mode: 'cors'
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'braves_chat_send_message',
+                    nonce: BravesChatConfig.nonce,
+                    chatInput: message,
+                    sessionId: this.session_id
+                })
             });
 
-            console.log('Respuesta recibida:');
-            console.log('   - Status:', response.status);
-            console.log('   - Status Text:', response.statusText);
-            console.log('   - Headers:', Object.fromEntries(response.headers.entries()));
-
-            // NUEVO: Detectar streaming de n8n
-            const content_type = response.headers.get('content-type') || '';
-
-            // Estrategia flexible: Si response.body existe, intentar usar streaming
-            // n8n puede enviar streaming con Content-Type application/json
-            const has_stream_headers =
-                content_type.includes('text/event-stream') ||
-                content_type.includes('application/x-ndjson') ||
-                content_type.includes('application/stream+json');
-
-            // Intentar usar streaming si:
-            // 1. Tiene headers de streaming, O
-            // 2. Tiene response.body disponible (probar siempre)
-            const is_streaming = !!response.body && (has_stream_headers || true); // Siempre intentar si body existe
-
-            console.log('🔍 Content-Type:', content_type);
-            console.log('🔍 ¿Tiene response.body?', !!response.body);
-            console.log('🔍 ¿Headers de streaming?', has_stream_headers);
-            console.log('🔍 ¿Usar streaming?', is_streaming);
-
-            // Capturar el cuerpo de la respuesta antes de verificar (solo si NO es streaming)
-            let response_text = '';
-            if (!is_streaming) {
-                try {
-                    response_text = await response.text();
-                    console.log('   - Body (raw):', response_text);
-                } catch (text_error) {
-                    console.error('Error al leer el cuerpo de la respuesta:', text_error);
-                }
-            }
-
             if (!response.ok) {
-                // Error del servidor - construir mensaje descriptivo
-                let error_details = `ERROR HTTP ${response.status}: ${response.statusText}`;
-
-                if (response.status === 401) {
-                    error_details = 'ERROR 401 UNAUTHORIZED: Token de autenticación inválido o expirado.';
-                } else if (response.status === 403) {
-                    error_details = 'ERROR 403 FORBIDDEN: Acceso denegado. Verifica el token de autenticación.';
-                } else if (response.status === 404) {
-                    error_details = 'ERROR 404 NOT FOUND: La URL del webhook no existe.';
-                } else if (response.status === 500) {
-                    error_details = 'ERROR 500 INTERNAL SERVER ERROR: Error en el servidor N8N.';
-                } else if (response.status === 502) {
-                    error_details = 'ERROR 502 BAD GATEWAY: El servidor N8N no responde.';
-                } else if (response.status === 503) {
-                    error_details = 'ERROR 503 SERVICE UNAVAILABLE: El servidor N8N está temporalmente no disponible.';
-                }
-
-                console.error('❌', error_details);
-                console.error('   Respuesta del servidor:', response_text);
-
-                throw new Error(error_details + (response_text ? `\n\nRespuesta: ${response_text.substring(0, 200)}` : ''));
+                throw new Error(`ERROR HTTP ${response.status}: ${response.statusText}`);
             }
 
-            // ===== BIFURCACIÓN: STREAMING vs FALLBACK =====
+            const wp_result = await response.json();
+
+            if (!wp_result.success) {
+                throw new Error(wp_result.data?.message || 'Error al conectar con el webhook.');
+            }
+
+            // Ocultar indicador de escritura
+            this.hide_typing_indicator();
+
+            // Extraer la respuesta de N8N del resultado AJAX
+            const data = wp_result.data;
             let bot_message;
 
-            if (is_streaming) {
-                // ✅ USAR STREAMING REAL DE N8N
-                console.log('📡 Procesando streaming real de n8n...');
-                try {
-                    bot_message = await this.stream_from_reader(response.body);
-                } catch (stream_error) {
-                    console.error('❌ Error en streaming:', stream_error);
-                    throw stream_error;
-                }
-            } else {
-                // ⚠️ FALLBACK: Procesar respuesta completa
-                console.log('📄 Procesando respuesta completa (sin streaming)...');
-
-                // Intentar parsear JSON (Single object or Streamed/NDJSON)
-                let data;
-                try {
-                    // First attempt: Standard JSON parse
-                    data = JSON.parse(response_text);
-                    console.log('JSON parseado correctamente (Single object):', data);
-                } catch (json_error) {
-                    console.warn('JSON.parse falló, intentando parsear como Streamed/NDJSON...');
-
-                    // Fallback: Handle concatenated JSON objects (e.g. {"type":"begin"}...{"type":"item"})
-                    try {
-                        // Extract all potential JSON objects using regex
-                        // Matches { ... } blocks, non-greedy
-                        const json_objects = [];
-                        let match;
-                        let brace_count = 0;
-                        let start_index = -1;
-
-                        for (let i = 0; i < response_text.length; i++) {
-                            const char = response_text[i];
-                            if (char === '{') {
-                                if (brace_count === 0) start_index = i;
-                                brace_count++;
-                            } else if (char === '}') {
-                                brace_count--;
-                                if (brace_count === 0 && start_index !== -1) {
-                                    const json_str = response_text.substring(start_index, i + 1);
-                                    try {
-                                        const obj = JSON.parse(json_str);
-                                        json_objects.push(obj);
-                                    } catch (e) {
-                                        // Ignore invalid segments
-                                    }
-                                    start_index = -1;
-                                }
-                            }
-                        }
-
-                        if (json_objects.length > 0) {
-                            console.log(`Se encontraron ${json_objects.length} objetos JSON en la respuesta.`);
-
-                            // Strategy: Concatenar TODOS los fragmentos con contenido
-                            // Prioritize objects with 'content', 'output', 'text', 'message', 'response'
-
-                            // Filter for relevant items if it's an N8N stream
-                            const relevant_items = json_objects.filter(obj =>
-                                obj.content || obj.output || obj.text || obj.message || obj.response ||
-                                (obj.data && (typeof obj.data === 'string' || obj.data.text))
-                            );
-
-                            if (relevant_items.length > 0) {
-                                // Concatenar TODOS los fragmentos de contenido
-                                let full_content = '';
-                                relevant_items.forEach(obj => {
-                                    if (obj.content) full_content += obj.content;
-                                    else if (obj.output) full_content += obj.output;
-                                    else if (obj.text) full_content += obj.text;
-                                    else if (obj.message) full_content += obj.message;
-                                    else if (obj.response) full_content += obj.response;
-                                    else if (obj.data && typeof obj.data === 'string') full_content += obj.data;
-                                    else if (obj.data && obj.data.text) full_content += obj.data.text;
-                                });
-
-                                console.log(`✅ Se concatenaron ${relevant_items.length} fragmentos de contenido`);
-                                console.log(`📝 Longitud total: ${full_content.length} caracteres`);
-                                console.log(`📄 Vista previa: ${full_content.substring(0, 150)}...`);
-
-                                // Crear objeto con el contenido concatenado
-                                // Preservar otros campos del último objeto (redirect, action, etc.)
-                                data = {
-                                    ...relevant_items[relevant_items.length - 1],
-                                    content: full_content
-                                };
-                            } else {
-                                // Fallback to the very last object if no specific content fields found
-                                data = json_objects[json_objects.length - 1];
-                            }
-
-                            console.log('Objeto JSON final seleccionado:', data);
-                        } else {
-                            throw new Error('No se pudieron extraer objetos JSON válidos.');
-                        }
-                    } catch (stream_error) {
-                        console.error('Error al parsear Stream/NDJSON:', stream_error);
-                        console.error('   Respuesta recibida:', response_text);
-                        throw new Error(`JSON_PARSE_ERROR: La respuesta del servidor no es JSON válido.\n\nRespuesta: ${response_text.substring(0, 200)}`);
-                    }
-                }
-
-
-                // Ocultar indicador de escritura
-                this.hide_typing_indicator();
-
-                // Extraer bot_message de data (sin parsear redirecciones aún)
-                let bot_message;
+            {
+                // Extraer mensaje del objeto de respuesta de N8N
 
                 if (data.content) {
                     bot_message = data.content;
@@ -782,8 +606,8 @@ class BravesChatModal {
                     throw new Error(`RESPONSE_FORMAT_ERROR: No se encontró el mensaje en la respuesta.\n\nCampos disponibles: ${Object.keys(data).join(', ')}\n\nRespuesta completa: ${JSON.stringify(data).substring(0, 200)}`);
                 }
 
-                // Mostrar mensaje directamente (sin streaming artificial)
-                this.add_message(bot_message, 'bot');
+                // Mostrar mensaje con efecto de escritura simulado
+                await this.stream_message_simulated(bot_message);
             }
             // FIN de bifurcación (streaming vs fallback)
 
@@ -1262,6 +1086,104 @@ class BravesChatModal {
      * Cancela el streaming actual
      * @returns {void}
      */
+    /**
+     * Muestra un mensaje con efecto de escritura carácter a carácter (streaming simulado).
+     * Replica el comportamiento visual de stream_from_reader() pero con el texto
+     * ya completo recibido desde el proxy AJAX, sin necesidad de un ReadableStream.
+     *
+     * @param {string} text - Texto completo a mostrar con efecto de escritura.
+     * @returns {Promise<void>}
+     */
+    async stream_message_simulated(text) {
+        // Cancelar streaming anterior si existe
+        this.cancel_streaming();
+
+        // Limpiar cursores anteriores para que sólo el mensaje actual tenga el cursor
+        if (this.chat_messages) {
+            this.chat_messages.querySelectorAll('.typing-cursor').forEach(c => c.remove());
+        }
+
+        // Crear burbuja vacía con cursor pulsante
+        const message_div = document.createElement('div');
+        message_div.className = 'message bot';
+
+        const bubble_div = document.createElement('div');
+        bubble_div.className = 'message-bubble';
+
+        const cursor_span = document.createElement('span');
+        cursor_span.className = 'typing-cursor';
+        bubble_div.appendChild(cursor_span);
+
+        const time_div = document.createElement('div');
+        time_div.className = 'message-time';
+        const now = new Date();
+        time_div.textContent = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+
+        message_div.appendChild(bubble_div);
+        message_div.appendChild(time_div);
+        this.chat_messages.appendChild(message_div);
+
+        this.current_stream_message_element = bubble_div;
+        this.streaming_active = true;
+
+        if (this.chat_input)  this.chat_input.disabled  = true;
+        if (this.send_button) this.send_button.disabled = true;
+
+        let visible_content = '';
+
+        try {
+            for (let i = 0; i < text.length; i++) {
+                if (!this.streaming_active) {
+                    // Usuario canceló — mostrar el resto de golpe
+                    visible_content = text;
+                    bubble_div.innerHTML = this.parse_markdown(visible_content);
+                    bubble_div.appendChild(cursor_span);
+                    break;
+                }
+
+                const char = text[i];
+                visible_content += char;
+
+                // Renderizar Markdown en tiempo real
+                bubble_div.innerHTML = this.parse_markdown(visible_content);
+                bubble_div.appendChild(cursor_span);
+
+                this.scroll_to_bottom();
+
+                // Delay con variación aleatoria ±30% para efecto humano
+                const random_variation = (Math.random() * 0.6) + 0.7;
+                let delay = this.typing_speed * random_variation;
+
+                // Pausas naturales en puntuación
+                if (['.', '!', '?', '\n'].includes(char)) {
+                    delay += 150;
+                } else if ([',', ';', ':'].includes(char)) {
+                    delay += 70;
+                }
+
+                await new Promise(resolve => {
+                    this.streaming_timeout_id = setTimeout(resolve, delay);
+                });
+            }
+        } finally {
+            // Renderizar Markdown final completo para asegurar formato correcto
+            if (this.current_stream_message_element) {
+                bubble_div.innerHTML = this.parse_markdown(text);
+                // Mantener cursor visible al final (el agente sigue "activo")
+                bubble_div.appendChild(cursor_span);
+            }
+
+            if (this.chat_input)  this.chat_input.disabled  = false;
+            if (this.send_button) this.send_button.disabled = false;
+            if (this.chat_input)  this.chat_input.focus();
+            this.toggle_send_button();
+
+            this.streaming_active = false;
+            this.current_stream_message_element = null;
+            this.scroll_to_bottom();
+        }
+    }
+
     cancel_streaming() {
         if (this.streaming_timeout_id) {
             clearTimeout(this.streaming_timeout_id);

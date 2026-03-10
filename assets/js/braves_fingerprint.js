@@ -103,7 +103,7 @@ class BravesFingerprint {
 
         // Detectar el skin actual
         const chatContainer = document.getElementById('braveslab-chat-container');
-        const isBraves = chatContainer && chatContainer.classList.contains('braves-skin-braves');
+        const isBraves = chatContainer && (chatContainer.classList.contains('braves-skin-braves') || chatContainer.closest('.braves-skin-braves'));
 
         if (isBraves) {
             // En skin Braves, NO mostramos banner automático.

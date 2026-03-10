@@ -1,5 +1,7 @@
 # BravesChat Plugin - Documentación Técnica
 
+## Bucle de mejora automatica: Cada vez que corrijas un error en el código actualiza el archivo errores.md, en el especifica que error haz correjido y como.
+
 ## 📋 Información General
 - **Nombre:** BravesChat
 - **Versión:** 2.2.3

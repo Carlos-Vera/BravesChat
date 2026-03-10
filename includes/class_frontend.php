@@ -79,9 +79,17 @@ class Frontend {
         // Verificar si está habilitado globalmente O si hay un bloque en la página
         $global_enable = get_option('braves_chat_global_enable', false);
         $has_block = $this->page_has_chat_block();
-        
+
         if (!$global_enable && !$has_block) {
             // Desencolar assets si no cumple las condiciones
+            $this->dequeue_all_assets();
+            return;
+        }
+
+        // El modo pantalla completa solo funciona vía bloque de Gutenberg:
+        // no se carga en páginas que no lo tengan aunque global_enable esté activo.
+        $display_mode_setting = get_option('braves_chat_display_mode', 'modal');
+        if ($display_mode_setting === 'fullscreen' && !$has_block) {
             $this->dequeue_all_assets();
             return;
         }
@@ -122,19 +130,26 @@ class Frontend {
             BRAVES_CHAT_VERSION
         );
 
-        $display_mode = get_option('braves_chat_display_mode', 'modal');
+        // Si hay un bloque en la página, siempre carga assets de screen (el bloque es siempre fullscreen).
+        // Si no hay bloque, usa el modo configurado globalmente.
+        if ($has_block) {
+            $asset_mode = 'screen';
+        } else {
+            $display_mode = get_option('braves_chat_display_mode', 'modal');
+            $asset_mode = ($display_mode === 'fullscreen') ? 'screen' : $display_mode;
+        }
 
         // CSS condicional según modo de visualización
         wp_enqueue_style(
             'braves-chat-frontend',
-            BRAVES_CHAT_PLUGIN_URL . 'assets/css/braves_chat_block_' . $display_mode . '.css',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/braves_chat_block_' . $asset_mode . '.css',
             array(),
             BRAVES_CHAT_VERSION
         );
 
         // CSS del Skin seleccionado
         $chat_config = Helpers::get_chat_config();
-        if ($chat_config['skin'] !== 'default') {
+        if ($chat_config['skin'] !== 'default' && $asset_mode !== 'screen') {
             wp_enqueue_style(
                 'braves-chat-skin-' . $chat_config['skin'],
                 BRAVES_CHAT_PLUGIN_URL . 'assets/css/skins/' . $chat_config['skin'] . '.css',
@@ -155,7 +170,7 @@ class Frontend {
         // JS condicional según modo de visualización (depende de redirect_handler)
         wp_enqueue_script(
             'braves-chat-frontend',
-            BRAVES_CHAT_PLUGIN_URL . 'assets/js/braves_chat_block_' . $display_mode . '.js',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/js/braves_chat_block_' . $asset_mode . '.js',
             array('wp-i18n', 'braves-chat-redirect-handler'),
             BRAVES_CHAT_VERSION,
             true
@@ -165,14 +180,12 @@ class Frontend {
         $chat_config = Helpers::get_chat_config();
 
         wp_localize_script('braves-chat-frontend', 'BravesChatConfig', array(
-            'ajaxUrl'       => admin_url('admin-ajax.php'),
-            'nonce'         => wp_create_nonce('braves_chat_nonce'),
-            'webhook_url'   => $chat_config['webhook_url'],
-            'auth_token'    => get_option('braves_chat_n8n_auth_token', ''),
-            'isAvailable'   => $chat_config['is_available'],
-            'skin'          => $chat_config['skin'],
-            'bubbleImage'   => $chat_config['bubble_image'],
-            'typing_speed'  => (int) get_option('braves_chat_typing_speed', 30),
+            'ajaxUrl'      => admin_url('admin-ajax.php'),
+            'nonce'        => wp_create_nonce('braves_chat_nonce'),
+            'isAvailable'  => $chat_config['is_available'],
+            'skin'         => $chat_config['skin'],
+            'bubbleImage'  => $chat_config['bubble_image'],
+            'typing_speed' => (int) get_option('braves_chat_typing_speed', 30),
         ));
 
         // Configurar traducciones para JavaScript
@@ -215,8 +228,14 @@ class Frontend {
      */
     public function render_global_chat() {
         $global_enable = get_option('braves_chat_global_enable', false);
-        
+
         if (!$global_enable) {
+            return;
+        }
+
+        // El modo pantalla completa solo se activa vía bloque de Gutenberg,
+        // nunca de forma global (cada página con bloque lo renderiza por sí sola).
+        if (get_option('braves_chat_display_mode', 'modal') === 'fullscreen') {
             return;
         }
         
@@ -241,7 +260,7 @@ class Frontend {
             'bubbleText'      => get_option('braves_chat_bubble_text', 'Chat de voz'),
         );
         
-        echo self::render_chat_widget($attributes);
+        echo self::render_chat_widget($attributes); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render_chat_widget() builds safe internal HTML.
     }
     
     /**
@@ -325,6 +344,12 @@ class Frontend {
             return;
         }
 
+        // No inyectar colores en páginas sin bloque cuando el modo es fullscreen
+        $display_mode_setting = get_option('braves_chat_display_mode', 'modal');
+        if ($display_mode_setting === 'fullscreen' && !$has_block) {
+            return;
+        }
+
         // Obtener colores personalizados
         $bubble_color = get_option('braves_chat_bubble_color', '#01B7AF');
         $icon_color = get_option('braves_chat_icon_color', '#ffffff');
@@ -403,6 +428,11 @@ class Frontend {
             }
             <?php endif; ?>
 
+            <?php 
+            // Modo display para el widget global o bloques (en el plugin usa modo o modal/fullscreen)
+            $display_mode_global = get_option('braves_chat_display_mode', 'modal');
+            ?>
+            <?php if ($display_mode_global !== 'fullscreen') : ?>
             /* Color de fondo del chat */
             body #braveslab-chat-container #chat-window {
                 background: <?php echo esc_attr($background_color); ?> !important;
@@ -411,26 +441,43 @@ class Frontend {
             body #braveslab-chat-container #chat-messages {
                 background: <?php echo esc_attr($background_color); ?> !important;
             }
+            <?php endif; ?>
 
+            <?php if ($display_mode_global !== 'fullscreen') : ?>
             /* Color de mensajes del bot (sin borde izquierdo) */
             body #braveslab-chat-container .message.bot .message-bubble {
                 background: transparent !important;
                 border-left: none !important;
                 color: <?php echo esc_attr($text_color); ?> !important;
             }
+            <?php else : ?>
+            /* Color de mensajes del bot (sin borde izquierdo) */
+            body #braveslab-chat-container .message.bot .message-bubble {
+                background: transparent !important;
+                border-left: none !important;
+            }
+            <?php endif; ?>
 
+            <?php if ($display_mode_global !== 'fullscreen') : ?>
             /* Color de mensajes del usuario (sin borde izquierdo) */
             body #braveslab-chat-container .message.user .message-bubble {
                 background: <?php echo esc_attr($primary_color); ?> !important;
                 color: white !important;
                 border-left: none !important;
             }
+            <?php endif; ?>
 
             /* Caja de escritura - input */
+            <?php if ($display_mode_global !== 'fullscreen') : ?>
             body #braveslab-chat-container #chat-input {
                 color: <?php echo esc_attr($text_color); ?> !important;
                 border-color: <?php echo esc_attr($primary_color); ?>40 !important;
             }
+            <?php else : ?>
+            body #braveslab-chat-container #chat-input {
+                border-color: <?php echo esc_attr($primary_color); ?>40 !important;
+            }
+            <?php endif; ?>
 
             body #braveslab-chat-container #chat-input:focus {
                 border-color: <?php echo esc_attr($primary_color); ?> !important;
