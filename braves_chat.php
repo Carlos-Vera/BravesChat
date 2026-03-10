@@ -10,11 +10,8 @@
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
- * License: Commercial
- * License URI: LICENSE
- *
- * GitHub Plugin URI: Carlos-Vera/BravesChat
- * GitHub Branch: main
+ * License: GPL-2.0-or-later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 namespace BravesChat;
@@ -93,7 +90,7 @@ class BravesChat {
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_customizer.php';
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_block.php';
         require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_frontend.php';
-        require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_protection.php';
+        require_once BRAVES_CHAT_PLUGIN_DIR . 'includes/class_ajax_handler.php';
     }
 
     /**
@@ -118,9 +115,8 @@ class BravesChat {
         // Agregar enlaces en la página de plugins
         add_filter('plugin_action_links_' . plugin_basename(BRAVES_CHAT_PLUGIN_FILE), array($this, 'add_action_links'));
 
-        // Información del plugin para el popup "Ver detalles" en la lista de plugins
+        // Enlace "Ver detalles" en la lista de plugins (requiere slug aprobado en WP.org)
         if (is_admin()) {
-            add_filter('plugins_api', array($this, 'plugin_api_info'), 10, 3);
             add_filter('plugin_row_meta', array($this, 'add_plugin_row_meta'), 10, 2);
         }
     }
@@ -260,17 +256,15 @@ class BravesChat {
     /**
      * Cargar archivos de traducción del plugin
      *
-     * Carga los archivos .mo/.po del directorio /languages
+     * WordPress carga automáticamente las traducciones para plugins alojados en el repositorio.
+     * El uso de load_plugin_textdomain() está deprecado desde WordPress 6.7.
      *
      * @since 1.0.0
      * @return void
      */
     public function load_textdomain() {
-        load_plugin_textdomain(
-            'braves-chat',
-            false,
-            dirname(plugin_basename(BRAVES_CHAT_PLUGIN_FILE)) . '/languages'
-        );
+        // WordPress automatically loads translations for plugins hosted on the repository.
+        // Calling load_plugin_textdomain() is no longer necessary as of WordPress 6.7.
     }
 
     /**
@@ -287,7 +281,7 @@ class BravesChat {
         Customizer::get_instance();
         Block::get_instance();
         Frontend::get_instance();
-        Protection::get_instance();
+        Ajax_Handler::get_instance();
     }
 
     /**
@@ -333,7 +327,7 @@ class BravesChat {
         $url = add_query_arg(
             array(
                 'tab'       => 'plugin-information',
-                'plugin'    => 'braveschat',
+                'plugin'    => 'braves-chat',
                 'TB_iframe' => 'true',
                 'width'     => '772',
                 'height'    => '800',
@@ -352,201 +346,6 @@ class BravesChat {
         return $links;
     }
 
-    /**
-     * Proporcionar información del plugin para el popup "Ver detalles"
-     *
-     * @since 2.2.3
-     * @param false|object $result Resultado actual (false = no interceptado aún).
-     * @param string       $action Acción solicitada ('plugin_information', etc.).
-     * @param object       $args   Argumentos de la solicitud ($args->slug).
-     * @return false|object Datos del plugin o $result sin modificar.
-     */
-    public function plugin_api_info($result, $action, $args) {
-        if ($action !== 'plugin_information' || !isset($args->slug) || $args->slug !== 'braveschat') {
-            return $result;
-        }
-
-        $plugin = new \stdClass();
-
-        $plugin->name            = 'BravesChat';
-        $plugin->slug            = 'braveschat';
-        $plugin->version         = BRAVES_CHAT_VERSION;
-        $plugin->author          = '<a href="https://braveslab.com">Carlos Vera &ndash; BRAVES LAB LLC</a>';
-        $plugin->author_profile  = 'https://braveslab.com';
-        $plugin->homepage        = 'https://braveslab.com/plugins/braveschat';
-        $plugin->requires        = '5.8';
-        $plugin->tested          = '6.9.1';
-        $plugin->requires_php    = '7.4';
-        $plugin->compatibility   = array(
-            'woocommerce' => array(
-                'tested'  => '10.5.3',
-                'requires' => '3.0',
-            ),
-        );
-        $plugin->rating          = 100;
-        $plugin->num_ratings     = 5;
-        $plugin->active_installs = 5;
-        $plugin->last_updated    = '2026-03-05';
-        $plugin->added           = '2025-09-15';
-
-        $plugin->banners = array(
-            'low'  => BRAVES_CHAT_PLUGIN_URL . 'assets/media/banner-772x250.webp',
-            'high' => BRAVES_CHAT_PLUGIN_URL . 'assets/media/banner-1544x500.webp',
-        );
-
-        $plugin->sections = array(
-            'description' => '
-<p><strong><a href="https://braveslab.com/plugins/braveschat" target="_blank" rel="noreferer noopener">BravesChat</a></strong> es el puente entre tu WordPress y tus flujos de <strong>N8N</strong>: conecta cualquier agente de IA que hayas construido con tus visitantes, sin código adicional y en minutos.</p>
-
-<h3>Diseñado para la comunidad N8N</h3>
-<ul>
-    <li><strong>Webhook listo para N8N:</strong> Apunta BravesChat a la URL de tu workflow y empieza a recibir mensajes al instante. Soporta token de autenticación en cabecera (<code>X-N8N-Auth</code>) para proteger tus endpoints.</li>
-    <li><strong>Payload completo en cada mensaje:</strong> Cada petición incluye el mensaje actual, el historial de la conversación, el fingerprint del usuario y los metadatos de la página — todo lo que tus nodos de N8N necesitan para personalizar la respuesta.</li>
-    <li><strong>Respuestas con Markdown:</strong> Los mensajes de tu agente se renderizan con formato enriquecido — negritas, listas, enlaces y código — sin configuración extra.</li>
-    <li><strong>Historial de conversaciones con exportación CSV:</strong> Consulta todas las sesiones desde el panel de WordPress y expórtalas a tu CRM, hoja de cálculo o base de datos con un clic.</li>
-</ul>
-
-<h3>Listo para producción</h3>
-<ul>
-    <li><strong>Horario de atención configurable:</strong> Define cuándo está activo el chat y muestra un mensaje personalizado fuera de ese horario — ideal si tu agente depende de un humano en el loop.</li>
-    <li><strong>Cumplimiento GDPR integrado:</strong> Banner de consentimiento que bloquea el chat hasta la aceptación del usuario. Montserrat cargada localmente, sin peticiones externas.</li>
-    <li><strong>Personalización total de marca:</strong> Colores, textos, posición, skin y modo de visualización (widget flotante o pantalla completa) adaptables sin tocar código.</li>
-    <li><strong>Compatible con WooCommerce 10.5+:</strong> Funciona en tiendas WooCommerce sin conflictos, permitiendo asistencia conversacional durante todo el proceso de compra.</li>
-</ul>',
-
-            'installation' => '
-<h3>Instalación manual</h3>
-<ol>
-    <li>Descarga el archivo <code>braveschat.zip</code> desde GitHub Releases.</li>
-    <li>En tu panel de WordPress, ve a <strong>Plugins &rarr; Añadir nuevo &rarr; Subir plugin</strong>.</li>
-    <li>Selecciona el archivo ZIP y haz clic en <strong>Instalar ahora</strong>.</li>
-    <li>Activa el plugin desde la lista de plugins instalados.</li>
-</ol>
-<h3>Configuración inicial</h3>
-<ol>
-    <li>Ve a <strong>BravesChat iA &rarr; Ajustes</strong> en el menú lateral del admin.</li>
-    <li>Introduce la URL de tu webhook de N8N.</li>
-    <li>Personaliza título, subtítulo y mensaje de bienvenida.</li>
-    <li>Ajusta colores y skin en la sección <strong>Apariencia</strong>.</li>
-    <li>Configura GDPR y Horarios según tus necesidades.</li>
-    <li>Guarda y prueba el chat desde el frontend.</li>
-</ol>',
-
-            'faq' => '
-<h4>¿Necesito una cuenta en N8N para usar BravesChat?</h4>
-<p>Sí. BravesChat actúa como el widget de chat en tu WordPress, pero la inteligencia y las respuestas las gestiona tu propio flujo de trabajo en N8N. Puedes usar N8N Cloud o tu instancia self-hosted.</p>
-
-<h4>¿Funciona con cualquier agente de IA en N8N?</h4>
-<p>Sí. BravesChat envía el mensaje y el historial de la conversación a la URL de webhook que configures. El agente puede estar conectado a OpenAI, Claude, Gemini, Ollama o cualquier modelo que tu flujo soporte — BravesChat no impone restricciones.</p>
-
-<h4>¿Qué datos se envían al webhook en cada mensaje?</h4>
-<p>Cada petición incluye: el mensaje del usuario, el historial completo de la conversación, el fingerprint único del usuario, la URL de la página actual y metadatos del sitio. Puedes usar cualquiera de estos datos en tus nodos de N8N para personalizar la respuesta.</p>
-
-<h4>¿El historial se guarda en la base de datos de WordPress?</h4>
-<p>No. El historial de la sesión se guarda en el <code>localStorage</code> del navegador del usuario. El historial completo de conversaciones que ves en el panel de administración se obtiene directamente desde tu fuente de datos en N8N (por ejemplo, PostgreSQL) a través de un webhook separado.</p>
-
-<h4>¿Puedo ocultar el chat en ciertas páginas?</h4>
-<p>Sí. En la sección Ajustes puedes especificar las páginas donde el widget no debe aparecer.</p>
-
-<h4>¿Es compatible con WooCommerce?</h4>
-<p>Sí, BravesChat es compatible con WooCommerce 10.5+ y no genera conflictos con el proceso de compra ni con los estilos de la tienda.</p>
-
-<h4>¿El plugin cumple con el RGPD / GDPR?</h4>
-<p>Sí. Puedes activar un banner de consentimiento que bloquea el chat hasta que el usuario acepta. El fingerprinting de usuario no recoge datos personales. La tipografía Montserrat se carga localmente, sin peticiones a Google Fonts.</p>
-
-<h4>¿Puedo usar BravesChat sin N8N?</h4>
-<p>Técnicamente sí: el webhook puede apuntar a cualquier endpoint HTTP que devuelva JSON con el campo <code>output</code>. Sin embargo, el plugin está optimizado y documentado para flujos de N8N.</p>',
-
-            'changelog' => '
-<h4>v2.2.3 &mdash; 5 de marzo, 2026</h4>
-<ul>
-    <li>ADDED: Modal "Ver detalles" en la lista de plugins con información completa del plugin.</li>
-    <li>IMPROVED: Editor de texto enriquecido (TinyMCE) para mensajes GDPR y mensajes fuera de horario.</li>
-</ul>
-
-<h4>v2.2.2 &mdash; 4 de marzo, 2026</h4>
-<ul><li>ADDED: Protección de licencia — detecta plugins de exportación ZIP instalados.</li></ul>
-
-<h4>v2.2.1 &mdash; 26 de febrero, 2026</h4>
-<ul><li>FIXED: Los avisos de otros plugins ya no aparecen dentro del panel de BravesChat.</li></ul>
-
-<h4>v2.2.0 &mdash; 26 de febrero, 2026</h4>
-<ul>
-    <li>ADDED: Visor completo de historial de conversaciones con modal por sesión.</li>
-    <li>ADDED: Exportación del historial a CSV con todos los campos relevantes.</li>
-    <li>IMPROVED: Conversaciones ordenadas de más reciente a más antigua.</li>
-</ul>
-
-<h4>v2.1.2 &mdash; 20 de febrero, 2026</h4>
-<ul><li>IMPROVED: Sistema de aislamiento CSS para prevenir conflictos con temas.</li></ul>
-
-<h4>v2.1.1 &mdash; 16 de febrero, 2026</h4>
-<ul><li>IMPROVED: Renderizado incremental de Markdown en tiempo real.</li></ul>
-
-<h4>v2.1.0 &mdash; 16 de febrero, 2026</h4>
-<ul>
-    <li>ADDED: Slider de velocidad de escritura configurable.</li>
-    <li>ADDED: Soporte HTML/Markdown en el mensaje del banner GDPR.</li>
-    <li>ADDED: Montserrat cargada localmente (cumplimiento GDPR).</li>
-</ul>
-
-<h4>v2.0.0 &mdash; 14 de febrero, 2026</h4>
-<ul>
-    <li>MAJOR: Reestructuración completa del sistema con nuevo namespace BravesChat.</li>
-    <li>ADDED: Botón de maximizar, auto-crecimiento del textarea, estado minimizado.</li>
-</ul>',
-
-            'screenshots' => '
-<ol>
-    <li>
-        <img src="' . BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-1.webp" alt="Widget de chat en el frontend" />
-        <p>Widget flotante en el frontend — skin Braves con avatar y header personalizado.</p>
-    </li>
-    <li>
-        <img src="' . BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-2.webp" alt="Panel de administración" />
-        <p>Panel de administración — vista Dashboard con acceso rápido a todas las secciones.</p>
-    </li>
-    <li>
-        <img src="' . BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-3.webp" alt="Ajustes del plugin" />
-        <p>Ajustes — configuración del webhook de N8N, textos y comportamiento del chat.</p>
-    </li>
-    <li>
-        <img src="' . BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-4.webp" alt="Personalización de apariencia" />
-        <p>Apariencia — personalización de colores, posición, skin e icono del widget.</p>
-    </li>
-    <li>
-        <img src="' . BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-5.webp" alt="Historial de conversaciones" />
-        <p>Historial de conversaciones — visor de sesiones con exportación a CSV.</p>
-    </li>
-</ol>',
-
-        );
-
-        $plugin->screenshots = array(
-            array(
-                'src'     => BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-1.webp',
-                'caption' => 'Widget de chat flotante en el frontend — skin Braves con avatar y header personalizado.',
-            ),
-            array(
-                'src'     => BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-2.webp',
-                'caption' => 'Panel de administración — vista Dashboard con acceso rápido a todas las secciones.',
-            ),
-            array(
-                'src'     => BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-3.webp',
-                'caption' => 'Ajustes — configuración del webhook de N8N, textos y comportamiento del chat.',
-            ),
-            array(
-                'src'     => BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-4.webp',
-                'caption' => 'Apariencia — personalización de colores, posición, skin e icono del widget.',
-            ),
-            array(
-                'src'     => BRAVES_CHAT_PLUGIN_URL . 'assets/media/screenshot-5.webp',
-                'caption' => 'Historial de conversaciones — visor de sesiones con exportación a CSV.',
-            ),
-        );
-
-        return $plugin;
-    }
 }
 
 /**
