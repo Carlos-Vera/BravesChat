@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braves-chat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Última actualización: 5 de Marzo, 2026', 'braves-chat'),
+                            'footer' => __('Última actualización: 10 de Marzo, 2026', 'braves-chat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -113,8 +113,41 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php esc_html_e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
-                    <!-- Versions 2.2.1 → 2.2.3 -->
+                    <!-- Version 2.3.0 -->
                     <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.3.0</span>
+                                <?php echo wp_kses_post( __('Seguridad reforzada', 'braves-chat') ); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php esc_html_e('10 de Marzo, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('✨ Nuevas Funcionalidades', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('ADDED: El token de autenticación de N8N ya no se expone en el HTML — viaja siempre en el servidor, invisible para cualquier visitante.', 'braves-chat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Soporte para tres métodos de autenticación hacia N8N: cabecera personalizada, Basic Auth o sin autenticación.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('IMPROVED: El modo de visualización activo (modal o pantalla completa) ahora aparece en la cabecera del panel para referencia rápida.', 'braves-chat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El bloque de Gutenberg muestra un preview rediseñado con el estilo del panel: cabecera, cuerpo y pie de página con branding del chat.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('🔧 Mejoras', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('IMPROVED: El plugin ahora se distribuye con licencia GPL-2.0, compatible con WordPress.org.', 'braves-chat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las imágenes del plugin (banners, capturas) ahora son PNG para máxima compatibilidad.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    <!-- Versions 2.2.1 → 2.2.3 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.2.3</span>
