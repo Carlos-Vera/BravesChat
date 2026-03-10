@@ -5,6 +5,7 @@
 /.distignore
 /.agents
 /.claude
+/memory
 /node_modules
 /vendor
 *.md
@@ -19,3 +20,6 @@ package-lock.json
 phpcs.xml
 phpunit.xml
 .editorconfig
+.DS_Store
+*.bak
+config/defaults.php
