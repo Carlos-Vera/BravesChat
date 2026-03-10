@@ -143,46 +143,6 @@ $config_status = Template_Helpers::get_config_status();
                     </div>
                 </div>
 
-                <!-- System Info Cards -->
-                <div class="braves-section braves-section--info">
-                    <h2 class="braves-section__title">
-                        <?php esc_html_e('Estado del Sistema', 'braves-chat'); ?>
-                    </h2>
-
-                    <div class="braves-card-grid braves-card-grid--2-cols">
-
-                        <!-- Configuración General -->
-                        <?php
-                        $global_enabled_text = $config_status['global_enabled']
-                            ? __('Activo en todo el sitio', 'braves-chat')
-                            : __('Usar bloque Gutenberg', 'braves-chat');
-
-                        // translators: %s is the display mode name (e.g. "modal" or "fullscreen").
-                        $braves_mode_description = sprintf( __('Modo: %s', 'braves-chat'), ucfirst($config_status['display_mode']) );
-                        Template_Helpers::card(array(
-                            'title' => __('Modo de visualización', 'braves-chat'),
-                            'description' => $braves_mode_description,
-                            'footer' => $global_enabled_text,
-                            'custom_class' => 'braves-card--compact',
-                        ));
-                        ?>
-
-                        <!-- Versión del Plugin -->
-                        <?php
-                        // translators: %s is the date of the last plugin update.
-                        $braves_version_footer = sprintf( __('Última actualización: %s', 'braves-chat'), date_i18n(get_option('date_format')) );
-                        Template_Helpers::card(array(
-                            'title' => __('Versión del Plugin', 'braves-chat'),
-                            'description' => 'BravesChat iA v' . BRAVES_CHAT_VERSION,
-                            'footer' => $braves_version_footer,
-                            'action_url' => admin_url('admin.php?page=braves-chat-about'),
-                            'is_link_card' => true,
-                            'custom_class' => 'braves-card--compact',
-                        ));
-                        ?>
-
-                    </div>
-                </div>
 
             </div><!-- .braves-admin-content -->
 
