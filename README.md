@@ -1,689 +1,275 @@
-# BravesChat iA 2.2.0 🤖
+# BravesChat iA
 
-> **La solución definitiva para integrar Agentes de IA en WordPress.**
+> Conecta tu WordPress con agentes de IA en N8N.
 
-Conecta tu WordPress con **n8n** y despliega asistentes inteligentes con una interfaz **Premium**, **Segura** y altamente **Personalizable**.
+BravesChat es un plugin de chat para WordPress diseñado para integrarse con flujos de trabajo en **N8N**. Despliega un asistente inteligente en tu web con una interfaz personalizable, segura y lista para producción.
 
-**Versión actual**: 2.2.0
-
----
-
-## ¿Por qué BravesChat iA?
-
-BravesChat no es solo un chat, es una **consola de IA** para tu web. Diseñado para agencias y negocios que necesitan más que un simple widget:
-
-### 🧠 Integración Total con N8N
-*   **Webhooks Bidireccionales**: Conecta flujos complejos de n8n fácilmente recibiendo y enviando datos JSON estructurados.
-*   **Contexto Persistente**: Nuestro sistema de **Fingerprinting** único permite mantener la memoria de la conversación del usuario (Session ID) incluso si recarga la página o cambia de pestaña, sin necesidad de registro.
-*   **Seguridad API**: Soporte para Tokens de Autenticación (`X-N8N-Auth`) para proteger tus webhooks.
-
-### 🎨 Experiencia de Usuario (UX) Premium
-*   **Aislamiento CSS Completo (v2.1.2)**: Implementación avanzada con Shadow DOM y prefijos únicos que garantiza compatibilidad total con cualquier tema de WordPress sin conflictos de estilos.
-*   **Skins Avanzados (v2.1.2)**: Nuevo diseño "Braves" con header transparente, avatares personalizados y separadores visuales para mejorar la experiencia conversacional.
-*   **Control de Ritmo (v2.1)**: Ajusta la **velocidad de escritura** de tu asistente para una experiencia más natural y humana.
-*   **Tipografía Montserrat (v2.1)**: Integrada localmente para una legibilidad perfecta, diseño premium y cumplimiento total de privacidad (sin conexiones externas).
-*   **Scroll Inteligente (v2.1)**: El chat se desliza automáticamente para seguir la conversación sin interrupciones visuales.
-*   **Nuevo Modo Expandible**: Botón de maximizar para ofrecer una experiencia de escritura cómoda en conversaciones largas.
-*   **Smart Input**: El área de texto crece automáticamente al escribir párrafos largos.
-*   **Estado Minimizado Inteligente**: Si el usuario ya interactuó, el chat se reduce a una "píldora" discreta para mejorar la navegación sin perder accesibilidad.
-*   **Diseño Personalizable**: Elige colores (con soporte de temas `theme.json`), iconos SVG y posición.
-
-<img src="imagen-estados.webp" alt="Frontend estados BravesChat iA">
-
-
-### 🛡️ Privacidad y Control Total
-*   **GDPR Compliance Nativo**: Banner de consentimiento de cookies integrado y configurable, ahora con soporte para **HTML y Markdown (v2.1)** para incluir enlaces a tus políticas.
-*   **Horarios Comerciales**: Define días y horas de activación con soporte completo de Zonas Horarias.
-*   **Control Granular**: Excluye el chat en páginas específicas o úsalo solo donde quieras mediante el **Bloque Gutenberg**.
-
-### 📊 Historial de Conversaciones (v2.2.0)
-*   **Visor Completo**: Consulta cada conversación con burbujas de chat, etiquetas de remitente y renderizado de Markdown.
-*   **Tabla Resumen**: Lista de sesiones ordenada por fecha, con extracto del último mensaje del usuario.
-*   **Exportación CSV**: Descarga el historial completo con un clic para analizar en Excel o tu CRM.
-*   **Filtrado Inteligente**: Se ocultan automáticamente los mensajes internos del agente (tool calls, razonamiento interno) para mostrar solo la conversación real.
-
-### 💻 Panel de Administración Moderno
-*   Diseño **Bentō UI** limpio y organizado.
-*   Gestión centralizada de todas las configuraciones con validación en tiempo real.
-*   Previsualización de colores y ajustes.
-
-<img src="backend-apariencia.webp" alt="Backend BravesChat iA | Apariencia">
+**Versión actual**: 2.3.0 · [Ver changelog](CHANGELOG.md) · [Repositorio](https://github.com/Carlos-Vera/braveschat)
 
 ---
 
-## 📋 Tabla de Contenidos
+## ¿Por qué BravesChat?
 
-- [Requisitos](#requisitos)
-- [Instalación](#instalación)
-- [Configuración](#️-configuración)
-  - [Ajustes](#1-ajustes-configuración-general)
-  - [Apariencia](#2-apariencia)
-  - [Horarios](#3-horarios)
-  - [GDPR](#4-gdpr-compliance-de-cookies)
-  - [Historial](#5-historial-de-conversaciones)
-- [Uso del Bloque Gutenberg](#uso-del-bloque)
-- [Desarrollo](#-desarrollo)
-- [Sistema de Cookies](#sistema-de-cookies-con-fingerprinting)
-- [Seguridad](#-seguridad)
-- [Internacionalización](#internacionalización-i18n)
-- [FAQ](#-preguntas-frecuentes-faq)
-- [Solución de Problemas](#-solución-de-problemas)
-- [Changelog](#changelog)
-- [Compatibilidad](#-compatibilidad)
-- [Licencia](#licencia)
-- [Soporte](#soporte)
+### 🔒 Seguridad real con N8N
+- **Token server-side**: El token de autenticación de N8N nunca llega al navegador. Cada mensaje pasa por WordPress, que añade las credenciales en el servidor antes de reenviar la petición.
+- **Tres métodos de autenticación**: Cabecera personalizada (`X-N8N-Auth`), Basic Auth o sin autenticación.
+- **Fingerprinting sin datos personales**: Identificación única de sesión mediante hash SHA-256, sin nombre, email ni IP.
+
+### 🎨 Experiencia de usuario cuidada
+- **Dos modos**: Modal flotante o pantalla completa — según cómo quieras integrar el chat en tu web.
+- **Skins**: Diseño "Default" y "Braves" con header transparente y avatares.
+- **Markdown**: Los mensajes del agente soportan negritas, listas, enlaces y más.
+- **Ritmo de escritura**: Controla la velocidad de escritura para una experiencia más natural.
+- **Tipografía Montserrat**: Cargada localmente, sin conexiones externas.
+
+### 📊 Historial de conversaciones
+- Consulta todas las conversaciones que tu agente ha tenido con tus visitantes.
+- Abre cualquier sesión y lee el hilo completo con burbujas de chat.
+- Exporta a CSV con un clic.
+
+### ⚙️ Panel de administración
+- Interfaz limpia y organizada inspirada en el diseño Bentō.
+- Editor visual TinyMCE para mensajes GDPR y mensajes fuera de horario.
+- Configuración centralizada, configura desde el panel tanto para el chat como la versión pantalla completa.
+
+---
+
+## Nuestra promesa
+
+**BravesChat es gratuito ahora y lo será para siempre.** Conectar tu WordPress con un agente de N8N con seguridad y un estilo bien cuidado no debería costar nada — y eso no va a cambiar.
+
+En el futuro lanzaremos un add-ons de pago con funcionalidades avanzadas para quienes quieran ir más lejos. Pero el plugin base seguirá siendo 100% libre, sin límites artificiales ni funciones bloqueadas.
 
 ---
 
 ## Requisitos
 
-- WordPress 5.8 o superior
-- PHP 7.4 o superior
-- Gutenberg (incluido en WordPress 5.0+)
+- WordPress 5.8+
+- PHP 7.4+
+- Un flujo activo en N8N con webhook configurado
+
+---
 
 ## Instalación
 
-### Método 1: Desde el archivo ZIP
-1. Descarga el plugin como archivo ZIP
-2. Ve a **Plugins > Añadir nuevo** en tu WordPress
-3. Haz clic en **Subir plugin**
-4. Selecciona el archivo ZIP descargado
-5. Haz clic en **Instalar ahora**
-6. Activa el plugin
+### Desde WordPress.org *(próximamente)*
+1. Ve a **Plugins → Añadir nuevo** en tu WordPress.
+2. Busca **BravesChat**.
+3. Instala y activa.
 
-### Método 2: Instalación manual
-1. Descomprime el archivo ZIP
-2. Sube la carpeta `braves-chat-ia` a `/wp-content/plugins/`
-3. Activa el plugin desde el menú **Plugins** de WordPress
+### Desde el archivo ZIP
+1. Descarga el ZIP desde la [BravesChat iA](https://github.com/Carlos-Vera/braveschat/releases).
+2. Ve a **Plugins → Añadir nuevo → Subir plugin**.
+3. Selecciona el ZIP y activa.
 
-### Método 3: Desde GitHub
+### Desde GitHub
 ```bash
 cd wp-content/plugins/
-git clone https://github.com/Carlos-Vera/braveschat.git braves-chat-ia
+git clone https://github.com/Carlos-Vera/braveschat.git braves-chat
 ```
 
-## ⚙️ Configuración
+---
 
-### Acceso al Panel de Administración
+## Configuración
 
-Después de activar el plugin, encontrarás el menú **"Braves Chat iA"** en el panel lateral de WordPress.
+Tras activar el plugin encontrarás el menú **BravesChat iA** en el panel de WordPress.
 
-### 1. Ajustes (Configuración General)
+### Ajustes
+Parámetros fundamentales del chat:
+- **URL del Webhook** — La URL de tu webhook en N8N.
+- **Token de autenticación** — Se envía exclusivamente desde el servidor, nunca al navegador.
+- **Mostrar en toda la web** — Toggle global.
+- **Páginas excluidas** — Páginas donde no mostrar el chat.
 
-**Ubicación**: Braves Chat iA > Ajustes
+### Apariencia
+- Título, subtítulo y mensaje de bienvenida.
+- Posición: inferior derecha / inferior izquierda.
+- Modo de visualización: modal o pantalla completa.
+- Colores: primario, fondo, texto, burbuja, icono.
+- Icono: selección de SVGs o imagen personalizada.
+- Skin: Default o Braves.
 
-Configura los parámetros fundamentales del chat:
+### Horarios
+- Hora de inicio y fin (formato 24h).
+- Zona horaria configurable.
+- Mensaje automático fuera de horario (con editor visual).
 
-- **Mostrar en toda la web**: Toggle para habilitar/deshabilitar el chat globalmente
-- **URL del Webhook**: Introduce la URL de tu webhook de N8N (ejemplo: `https://flow.braveslab.com/webhook/...`)
-- **Token de Autenticación N8N**: Token secreto opcional para autenticar las peticiones (header `X-N8N-Auth`)
-- **Páginas Excluidas**: Selecciona páginas donde NO mostrar el chat (mantén Ctrl/Cmd para selección múltiple)
+### GDPR
+- Banner de consentimiento antes de crear cualquier cookie.
+- Mensaje personalizable con editor visual (negritas, listas, enlaces).
+- Texto del botón de aceptación configurable.
 
-### 2. Apariencia
+### Historial
+- URL del webhook de consulta en N8N (conectado a tu base de datos).
+- API Key de autenticación.
+- Tabla de sesiones: Session ID, email, último mensaje, fecha.
+- Visor de conversación por sesión.
+- Exportación CSV completa.
 
-**Ubicación**: Braves Chat iA > Apariencia
+---
 
-Personaliza el aspecto visual del chat:
+## Bloque de Gutenberg
 
-- **Título de la Cabecera**: Título principal del chat (default: "BravesLab AI Assistant")
-- **Subtítulo de la Cabecera**: Subtítulo descriptivo (default: "Artificial Intelligence Marketing Agency")
-- **Mensaje de Bienvenida**: Mensaje inicial que verá el usuario
-- **Posición del Chat**:
-  - Abajo a la derecha (default)
-  - Abajo a la izquierda
-  - Centro
-- **Modo de Visualización**:
-  - Modal (ventana flotante) - default
-  - Pantalla completa
-- **Tooltip del Botón**: Mensaje que aparece al pasar el cursor sobre el botón flotante (default: "Habla con nuestro asistente IA")
-- **Icono del Botón**: Selecciona entre 4 iconos SVG (Original, Círculo, Happy, Burbuja)
-- **Color del Icono**: Color del icono SVG (default: #f2f2f2)
-- **Colores Personalizados**:
-  - Color de la Burbuja (botón flotante)
-  - Color Primario (header y mensajes del asistente)
-  - Color de Fondo (ventana del chat)
-  - Color de Texto (mensajes)
+El bloque **"BravesChat — Pantalla Completa"** te permite mostrar el chat embebido en una página concreta.
 
-### 3. Horarios
+1. Edita una página en Gutenberg.
+2. Añade el bloque buscando **"BravesChat"**.
+3. Opcional: personaliza el mensaje de bienvenida específico para esa página.
 
-**Ubicación**: Braves Chat iA > Horarios
+El bloque lee automáticamente la configuración global del plugin (webhook, colores, título). No necesitas duplicar ajustes.
 
-Configura la disponibilidad del chat por horario:
+---
 
-- **Habilitar Horarios**: Toggle para activar restricciones de horario
-- **Hora de Inicio**: Formato 24h (ejemplo: 09:00)
-- **Hora de Fin**: Formato 24h (ejemplo: 18:00)
-- **Zona Horaria**: Selecciona tu zona horaria (Europe/Madrid, America/New_York, etc.)
-- **Mensaje Fuera de Horario**: Mensaje personalizado cuando el chat no está disponible
-
-### 4. GDPR (Compliance de Cookies)
-
-**Ubicación**: Braves Chat iA > GDPR
-
-Configura el banner de consentimiento de cookies:
-
-- **Habilitar Banner GDPR**: Toggle para mostrar/ocultar banner de consentimiento
-- **Mensaje del Banner**: Texto informativo sobre el uso de cookies
-- **Texto del Botón de Aceptar**: Etiqueta del botón (ejemplo: "Aceptar", "Entendido", "Acepto")
-
-### 5. Historial de Conversaciones
-
-**Ubicación**: Braves Chat iA > Historial
-
-Consulta y exporta el historial completo de conversaciones:
-
-- **Configuración del Webhook**: URL del webhook de N8N que consulta tu base de datos (Postgres u otro)
-- **API Key**: Clave de autenticación enviada como header `x-api-key`
-- **Tabla de sesiones**: Columnas Session ID, Nombre del cliente, Último mensaje y Fecha/Hora
-- **Visor de conversación**: Haz clic en cualquier fila para ver el hilo completo con burbujas de chat
-- **Exportación CSV**: Botón para descargar el historial con todos los campos: `session_id`, `client_name`, `updated_at`, `chat_history`
-
-### Guardar Cambios
-
-Todas las páginas incluyen un botón **"Guardar cambios"** al final del formulario. Los cambios se guardan en la base de datos de WordPress usando la Settings API.
-
-## Uso del Bloque
-
-### Agregar el Bloque en Gutenberg
-
-1. Edita una página o entrada
-2. Haz clic en el botón **+** para agregar un bloque
-3. Busca **"Braves Chat iA"**
-4. Haz clic para insertarlo
-
-### Personalizar el Bloque
-
-En el panel lateral derecho encontrarás:
-- **URL del Webhook**: Específica para esta instancia
-- **Título del Header**: Personalizado por bloque
-- **Subtítulo del Header**: Personalizado por bloque
-- **Mensaje de Bienvenida**: Personalizado por bloque
-- **Posición del Chat**: Abajo derecha, izquierda o centro
-- **Modo de Visualización**: Modal o pantalla completa
-
-### Opciones Disponibles
-
-```php
-// Valores por defecto del bloque
-webhookUrl: 'URL configurada en ajustes'
-headerTitle: 'BravesLab AI Assistant'
-headerSubtitle: 'Artificial Intelligence Marketing Agency'
-welcomeMessage: '¡Hola! Soy el asistente de BravesLab...'
-position: 'bottom-right' // 'bottom-left', 'center'
-displayMode: 'modal' // 'fullscreen'
-```
-
-## 🔧 Desarrollo
-
-### Estructura del Plugin
-
-Para documentación técnica completa sobre arquitectura, componentes, clases PHP, sistema de CSS y guías de desarrollo.
+## Estructura del plugin
 
 ```
-braves-chat-ia/
-├── braves_chat.php                            # Archivo principal del plugin (entry point)
-├── uninstall.php                              # Script de desinstalación limpia
+braves-chat/
+├── braves_chat.php                        # Entrada del plugin
+├── uninstall.php                          # Limpieza al desinstalar
 ├── includes/
-│   ├── admin/                                 # Sistema de administración Bentō (v1.2.x)
-│   │   ├── class_admin_controller.php         # Controlador principal, registra páginas y assets
-│   │   ├── class_template_helpers.php         # Helpers estáticos para renderizado rápido
-│   │   ├── components/                        # Componentes reutilizables (Singleton)
-│   │   │   ├── class_admin_header.php         # Header con logo y versión
-│   │   │   ├── class_admin_sidebar.php        # Sidebar de navegación (5 secciones)
-│   │   │   └── class_admin_content.php        # Renderizado de cards Bentō, toggles, etc.
-│   │   └── templates/                         # Plantillas de páginas admin
-│   │       ├── dashboard.php                  # Página Resumen con métricas
-│   │       ├── settings.php                   # Página Ajustes (webhook, token, exclusiones)
-│   │       ├── appearance.php                 # Página Apariencia (títulos, posición, modo)
-│   │       ├── availability.php               # Página Horarios (disponibilidad)
-│   │       ├── gdpr.php                       # Página GDPR (consentimiento cookies)
-│   │       ├── history.php                    # Página Historial de conversaciones (v2.2.0)
-│   │       └── about.php                      # Página Acerca de (oculta, accesible desde versión)
-│   ├── class_settings.php                     # Registro de opciones con WordPress Settings API
-│   ├── class_frontend.php                     # Renderizado del chat en frontend
-│   ├── class_block.php                        # Registro del bloque Gutenberg
-│   ├── class_customizer.php                   # Integración con WordPress Customizer
-│   ├── class_cookie_manager.php               # Sistema de cookies con fingerprinting
-│   └── class_helpers.php                      # Funciones auxiliares y utilidades
+│   ├── admin/
+│   │   ├── class_admin_controller.php     # Controlador del panel de administración
+│   │   ├── class_template_helpers.php     # Helpers de renderizado
+│   │   ├── components/
+│   │   │   ├── class_admin_header.php
+│   │   │   ├── class_admin_sidebar.php
+│   │   │   └── class_admin_content.php
+│   │   └── templates/
+│   │       ├── dashboard.php
+│   │       ├── settings.php
+│   │       ├── appearance.php
+│   │       ├── availability.php
+│   │       ├── gdpr.php
+│   │       ├── history.php
+│   │       └── about.php
+│   ├── class_ajax_handler.php             # Proxy server-side hacia N8N
+│   ├── class_settings.php
+│   ├── class_frontend.php
+│   ├── class_block.php
+│   ├── class_cookie_manager.php
+│   └── class_helpers.php
 ├── assets/
 │   ├── css/
-│   │   ├── admin/                             # CSS del panel admin (v1.2.x)
-│   │   │   ├── variables.css                  # Variables CSS (colores, espaciado, fuentes)
-│   │   │   ├── base.css                       # Estilos base y reset
-│   │   │   ├── components.css                 # Componentes Bentō (cards, buttons, toggles)
-│   │   │   └── dashboard.css                  # Estilos específicos de páginas
-│   │   ├── braves_chat_block_modal.css        # Estilos del chat en modo modal
-│   │   ├── braves_chat_block_screen.css       # Estilos del chat en modo pantalla completa
-│   │   ├── braves_gdpr_banner.css             # Estilos del banner GDPR
-│   │   ├── block_editor.css                   # Estilos del editor de bloques
-│   │   └── block_style.css                    # Estilos base del bloque
+│   │   ├── admin/
+│   │   ├── braves_chat_block_modal.css
+│   │   ├── braves_chat_block_screen.css
+│   │   └── braves_gdpr_banner.css
 │   ├── js/
-│   │   ├── admin.js                           # Scripts del panel de administración
-│   │   ├── block.js                           # Registro del bloque Gutenberg
-│   │   ├── braves_chat_block_modal.js         # Lógica del chat modo modal
-│   │   ├── braves_chat_block_screen.js        # Lógica del chat modo pantalla completa
-│   │   └── braves_fingerprint.js              # Sistema de fingerprinting del navegador
+│   │   ├── block.js
+│   │   ├── braves_chat_block_modal.js
+│   │   ├── braves_chat_block_screen.js
+│   │   └── braves_fingerprint.js
 │   └── media/
-│       ├── chat.json                          # Animación Lottie del botón de chat
-│       ├── braves-logo.svg                    # Logo del plugin
-│       └── menu-icon.svg                      # Icono del menú WordPress
-├── templates/                                 # Templates PHP frontend
-│   ├── modal.php                              # Template HTML para modo modal
-│   └── screen.php                             # Template HTML para modo pantalla completa
-├── languages/                                 # Archivos de traducción (i18n)
-│   ├── braves-chat.pot                        # Plantilla de traducción
-│   └── braves-chat-es_ES.po                   # Traducción al español
-├── CHANGELOG.md                               # Historial completo de cambios
-├── README.md                                  # Este archivo (documentación general)
-└── LICENSE                                    # Licencia comercial
+├── templates/
+│   ├── modal.php
+│   └── screen.php
+└── CHANGELOG.md
 ```
 
-### Hooks y Filtros Disponibles
+---
 
-#### Filtros
+## Seguridad
 
-```php
-// Modificar configuración del chat
-add_filter('braves_chat_config', function($config) {
-    $config['webhook_url'] = 'https://mi-webhook.com';
-    return $config;
-});
+- **Token server-side** — El token de N8N nunca se expone al navegador.
+- **Sanitización de inputs** — Todos los datos se sanitizan antes de guardarse.
+- **Nonces en formularios** — Protección CSRF en todos los formularios.
+- **Escapado de salidas** — `esc_html()`, `esc_attr()`, `esc_url()` en toda salida.
+- **Verificación de capacidades** — Solo administradores pueden configurar el plugin.
+- **Prepared statements** — Prevención de SQL injection con `$wpdb->prepare()`.
+- **Fingerprinting privado** — Hash SHA-256 irreversible, sin datos personales.
+- **Flags de cookies** — `Secure` (HTTPS) y `SameSite=Lax`.
+- **Limpieza al desinstalar** — El plugin no deja rastros en la base de datos.
 
-// Modificar mensaje de bienvenida
-add_filter('braves_chat_welcome_message', function($message) {
-    return 'Mensaje personalizado';
-});
+---
 
-// Admin: Agregar items al sidebar
-add_filter('braves_chat_admin_menu_items', function($items) {
-    $items[] = array(
-        'id' => 'custom',
-        'label' => 'Mi Sección',
-        'url' => admin_url('admin.php?page=custom'),
-        'page_slug' => 'custom',
-        'icon' => '<svg>...</svg>',
-    );
-    return $items;
-});
-```
+## Sistema de sesiones y fingerprinting
 
-#### Acciones
+El plugin identifica a cada visitante mediante un hash SHA-256 generado a partir de características del navegador: user-agent, resolución, zona horaria, idioma, hardware y canvas fingerprint.
 
-```php
-// Antes de renderizar el chat
-add_action('braves_chat_before_render', function($attributes) {
-    // Tu código aquí
-});
-
-// Después de renderizar el chat
-add_action('braves_chat_after_render', function($attributes) {
-    // Tu código aquí
-});
-
-// Admin: Agregar contenido al sidebar
-add_action('braves_chat_admin_sidebar_items', function($current_page) {
-    echo '<div class="custom-sidebar-content">...</div>';
-});
-```
-
-### Funciones Auxiliares
-
-```php
-// Verificar si el chat debe mostrarse
-\BravesChat\Helpers::should_display_chat();
-
-// Verificar horarios de disponibilidad
-\BravesChat\Helpers::is_within_availability_hours();
-
-// Obtener configuración del chat
-\BravesChat\Helpers::get_chat_config();
-
-// Obtener mensaje de bienvenida apropiado
-\BravesChat\Helpers::get_welcome_message();
-```
-
-## Internacionalización (i18n)
-
-### Traducir el Plugin
-
-1. Copia el archivo `languages/braves-chat.pot`
-2. Usa [Poedit](https://poedit.net/) para crear traducciones
-3. Guarda los archivos como:
-   - `braves-chat-es_ES.po` y `braves-chat-es_ES.mo` (Español)
-   - `braves-chat-fr_FR.po` y `braves-chat-fr_FR.mo` (Francés)
-   - etc.
-4. Coloca los archivos en `/wp-content/languages/plugins/`
-
-### Cargar Traducciones Personalizadas
-
-```php
-add_filter('load_textdomain_mofile', function($mofile, $domain) {
-    if ('braves-chat' === $domain) {
-        $mofile = WP_CONTENT_DIR . '/languages/plugins/braves-chat-' . get_locale() . '.mo';
-    }
-    return $mofile;
-}, 10, 2);
-```
-
-## 🔒 Seguridad
-
-### Mejores Prácticas Implementadas
-
-El plugin sigue todas las mejores prácticas de seguridad de WordPress:
-
-- ✅ **Sanitización de inputs**: Todos los datos de usuario se sanitizan antes de guardarse
-- ✅ **Validación en servidor**: Validación de tipos de datos, URLs y formatos
-- ✅ **Nonces en formularios**: Protección contra ataques CSRF en todos los formularios
-- ✅ **Escapado de salidas**: Uso de `esc_html()`, `esc_attr()`, `esc_url()`, etc.
-- ✅ **Verificación de capacidades**: Solo usuarios con permisos `manage_options` pueden configurar
-- ✅ **wp_kses() personalizado**: Whitelist específica para elementos de formulario en admin (v1.2.2)
-- ✅ **Prepared statements**: Uso de `$wpdb->prepare()` para prevenir SQL injection
-- ✅ **Validación de URLs**: Comprobación de URLs de webhooks
-- ✅ **Hash seguro**: SHA-256 para fingerprinting de cookies
-- ✅ **Flags de cookies**: Secure (HTTPS), SameSite=Lax para cookies persistentes
-
-### Permisos y Acceso
-
-- Solo usuarios con rol **Administrator** pueden acceder al panel de configuración
-- Verificación de `current_user_can('manage_options')` en todas las páginas admin
-- Verificación de `ABSPATH` en todos los archivos PHP
-
-### Limpieza al Desinstalar
-
-El plugin incluye `uninstall.php` que realiza limpieza completa:
-
-- Elimina **todas las opciones** de la base de datos con prefijo `braves_chat_`
-- Borra archivos y directorios creados por el plugin
-- Limpia metadatos de posts y usuarios relacionados
-- Limpia transients y caché de WordPress
-- **No deja rastros** en la base de datos después de desinstalar
-
-## Sistema de Cookies con Fingerprinting
-
-**Versión 1.1.0+** incluye un sistema robusto de identificación de usuarios mediante cookies persistentes con fingerprinting del navegador.
-
-### Características
-
-#### Identificación Única de Usuarios
-- **Cookie persistente** `braves_chat_session` con duración de 1 año
-- **Hash SHA-256** de 64 caracteres hexadecimales
-- **Fingerprinting multi-característica** del navegador y dispositivo
-- **Fallback automático** a localStorage si las cookies están bloqueadas
-
-#### Características del Fingerprint
-
-El sistema genera un ID único basado en:
-- User-Agent del navegador
-- Resolución de pantalla (width × height × colorDepth)
-- Zona horaria y offset
-- Idioma y preferencias de idiomas
-- Platform y arquitectura del sistema
-- Hardware (CPU cores, memoria del dispositivo)
-- Lista de plugins del navegador
-- **Canvas fingerprint** (renderizado único por GPU)
-- **WebGL fingerprint** (información de la tarjeta gráfica)
-- Soporte táctil (maxTouchPoints)
-
-#### Compliance GDPR
-
-Banner de consentimiento configurable desde el panel de administración:
-
-**Configuración**: WordPress Admin > Ajustes > Braves Chat iA > "Compliance GDPR / Cookies"
-
-**Opciones disponibles**:
-- **Habilitar Banner GDPR**: Activa/desactiva el banner de consentimiento
-- **Mensaje del Banner**: Texto personalizable del aviso de cookies
-- **Texto del Botón**: Personaliza el botón de aceptación (ej: "Aceptar", "Entendido")
-
-El consentimiento se guarda en localStorage antes de crear cualquier cookie.
-
-#### Detección Inteligente de Cambios
-
-El sistema regenera automáticamente el session_id cuando detecta **2 o más cambios significativos**:
-- Cambio de navegador o versión mayor
-- Cambio de resolución de pantalla o monitor
-- Cambio de zona horaria
-- Cambio en canvas fingerprint (GPU diferente)
-
-### Integración con N8N
-
-Cada mensaje enviado al webhook de N8N incluye el campo `sessionId`:
+Este ID se envía con cada mensaje para mantener el contexto de la conversación en N8N, sin almacenar ningún dato personal.
 
 ```json
 {
   "chatInput": "Mensaje del usuario",
-  "sessionId": "9f12e684d6abd5ef281b2f33cff298d72f337083ceeb843d61ce84efe599486a"
+  "sessionId": "9f12e684d6abd5ef281b2f33cff298d72f337083..."
 }
 ```
 
-Esto permite:
-- **Mantener contexto de conversación** entre sesiones
-- **Identificar usuarios únicos** sin datos personales
-- **Analítica de uso** por dispositivo/navegador
-- **Prevención de abusos** mediante rate limiting
+Si las cookies están bloqueadas, el sistema usa `localStorage` como fallback automático.
 
-### Verificación
+---
 
-#### Cookies (DevTools > Application > Cookies)
-```
-Name:      braves_chat_session
-Value:     [hash de 64 caracteres]
-Domain:    tu-dominio.com
-Path:      /
-Expires:   [1 año desde creación]
-SameSite:  Lax
-Secure:    ✓ (solo en HTTPS)
-```
+## Compatibilidad
 
-#### Local Storage (DevTools > Application > Local Storage)
-```
-braves_chat_session_backup:  [hash de 64 caracteres] (fallback)
-braves_chat_fingerprint:     [objeto JSON con datos del fingerprint]
-braves_chat_gdpr_consent:    accepted
-```
+| | |
+|---|---|
+| **WordPress** | 5.8 → 6.7+ |
+| **PHP** | 7.4, 8.0, 8.1, 8.2, 8.3 |
+| **Navegadores** | Chrome 90+, Firefox 88+, Safari 14+, Edge 90+ |
+| **Móvil** | iOS Safari, Chrome Mobile, Samsung Internet |
+| **Temas** | Cualquier tema compatible con WordPress 5.8+ |
+| **Page builders** | Elementor, Beaver Builder, Divi |
+| **Multisite** | ✅ Compatible |
 
-#### Consola del Navegador
-```javascript
-[Braves Fingerprint] Nueva sesión creada: 9f12e684d6abd5ef281b2f...
-[Braves Chat Modal] Usando session_id con fingerprinting: 9f12e684d6abd5ef281b2f...
-```
+---
 
-### Implementación Técnica
+## FAQ
 
-#### Archivos del Sistema
+**¿Necesito configuración técnica avanzada?**
+No. Solo necesitas la URL del webhook de N8N. El resto tiene valores por defecto sensatos.
 
-**PHP**:
-- `includes/class_cookie_manager.php` - Gestión de cookies y configuración GDPR
+**¿El token de N8N es seguro?**
+Sí. A partir de v2.3.0 el token viaja exclusivamente en el servidor. Los visitantes de tu web no pueden acceder a él.
 
-**JavaScript**:
-- `assets/js/braves_fingerprint.js` - Clase BravesFingerprint con generación de hash
+**¿Es compatible con GDPR?**
+Sí. El banner de consentimiento bloquea la creación de cookies hasta que el usuario acepta explícitamente.
 
-**CSS**:
-- `assets/css/braves_gdpr_banner.css` - Estilos del banner GDPR responsive
+**¿Puedo usarlo en varias páginas con configuraciones distintas?**
+El bloque de Gutenberg permite personalizar el mensaje de bienvenida por página. El resto de ajustes se heredan del panel global.
 
-#### Flujo de Funcionamiento
+**¿Qué pasa si el webhook de N8N está caído?**
+El chat mostrará un mensaje de error al usuario. Se recomienda monitoreo en tu flujo de N8N.
 
-1. Usuario visita el sitio por primera vez
-2. Si GDPR habilitado → Muestra banner y espera consentimiento
-3. Genera fingerprint del navegador (múltiples características)
-4. Calcula hash SHA-256 usando Web Crypto API
-5. Crea cookie `braves_chat_session` (1 año de duración)
-6. Guarda backup en localStorage por si cookies bloqueadas
-7. Cada mensaje incluye `sessionId` en el payload a N8N
-8. En visitas futuras, verifica cambios y regenera si es necesario
+**¿Afecta al rendimiento del sitio?**
+No. Los assets solo se cargan cuando el chat está activo y están optimizados para impacto mínimo.
 
-### Privacidad y Seguridad
+---
 
-- **No se almacenan datos personales** (nombre, email, IP, etc.)
-- **Hash irreversible** - imposible obtener datos originales del fingerprint
-- **Compliance GDPR** con consentimiento explícito opcional
-- **Flags de seguridad**: Secure (HTTPS), SameSite=Lax
-- **Fallback respetuoso** si usuario bloquea cookies
+## Solución de problemas
 
-## Changelog
+**El chat no aparece**
+- Verifica que el toggle "Mostrar en toda la web" esté activo en Ajustes.
+- Comprueba que la página no esté en la lista de excluidas.
+- Purga la caché del plugin de caché y del navegador.
 
-Ver historial completo de cambios y detalles técnicos en [CHANGELOG.md](CHANGELOG.md).
+**Los ajustes no se guardan**
+- Confirma que estás logueado como Administrador.
+- Recarga la página antes de guardar (refresca los nonces).
 
-## Autor
+**El banner GDPR no aparece**
+- Activa "Habilitar Banner GDPR" en la pestaña GDPR.
+- Para testear, borra `braves_chat_gdpr_consent` del localStorage del navegador.
 
-- **Carlos Vera** - [GitHub](https://github.com/Carlos-Vera) - carlos@braveslab.com
+**Logs de depuración**
+- PHP: `debug.log` de WordPress.
+- JavaScript: consola del navegador, prefijo `BravesChat:`.
 
-Desarrollado para **BravesLab.com** - [https://braveslab.com](https://braveslab.com)
-
-## Licencia
-
-Este plugin es software comercial. Todos los derechos reservados.
-
-Copyright (c) 2025 BRAVES LAB LLC
-
-Para más información sobre la licencia, consulta el archivo [LICENSE](LICENSE).
-
-## ❓ Preguntas Frecuentes (FAQ)
-
-### ¿El plugin requiere configuración técnica complicada?
-
-No. Solo necesitas la URL del webhook de N8N. El resto de configuraciones son opcionales y tienen valores por defecto sensatos.
-
-### ¿Funciona con cualquier tema de WordPress?
-
-Sí. El plugin es independiente del tema y funciona con cualquier tema compatible con WordPress 5.8+.
-
-### ¿Puedo personalizar completamente el diseño del chat?
-
-Sí. Puedes personalizar títulos, mensajes, colores (mediante CSS custom), posición y modo de visualización.
-
-### ¿El chat se muestra en todas las páginas?
-
-Por defecto sí, pero puedes:
-- Deshabilitarlo globalmente con el toggle "Mostrar en toda la web"
-- Excluir páginas específicas desde Ajustes > Páginas Excluidas
-- Usar el bloque Gutenberg para control por página
-
-### ¿Cómo funcionan las cookies y el fingerprinting?
-
-El plugin genera un ID único de sesión basado en características del navegador (hash SHA-256). Este ID se envía con cada mensaje para mantener el contexto de la conversación. Ver sección "Sistema de Cookies con Fingerprinting" para más detalles.
-
-### ¿Es compatible con GDPR?
-
-Sí. Incluye un banner de consentimiento configurable que se muestra antes de crear cualquier cookie. El consentimiento se guarda en localStorage.
-
-### ¿Puedo tener diferentes configuraciones en diferentes páginas?
-
-Sí. Usa el bloque Gutenberg que permite configurar webhook, títulos y mensajes específicos por página.
-
-### ¿Qué pasa si mi webhook de N8N está caído?
-
-El chat mostrará un mensaje de error al usuario. Es recomendable tener monitoreo en tu webhook de N8N.
-
-### ¿El plugin afecta el rendimiento del sitio?
-
-No. Los assets (CSS/JS) solo se cargan cuando es necesario y están optimizados. El impacto en rendimiento es mínimo.
-
-## 🔧 Solución de Problemas
-
-### El chat no aparece en el frontend
-
-**Posibles causas**:
-1. El plugin no está activado
-2. Toggle "Mostrar en toda la web" está desactivado en Ajustes
-3. La página actual está en la lista de páginas excluidas
-4. Conflicto con caché (purga la caché del sitio y del navegador)
-5. JavaScript bloqueado por otro plugin
-
-**Solución**:
-- Verifica que el plugin esté activado
-- Ve a Ajustes y asegúrate que "Mostrar en toda la web" esté activado
-- Revisa la lista de páginas excluidas
-- Purga toda la caché (plugin de caché + navegador)
-- Desactiva temporalmente otros plugins para identificar conflictos
-
-### Los formularios del admin no guardan los datos
-
-**Posibles causas**:
-1. Problemas de permisos de usuario
-2. Conflicto con otro plugin de seguridad
-3. Nonces expirados
-
-**Solución**:
-- Asegúrate de estar logueado como Administrator
-- Verifica que no haya plugins de seguridad bloqueando las peticiones
-- Recarga la página antes de hacer cambios (refresca los nonces)
-
-### El banner GDPR no aparece
-
-**Causas comunes**:
-- Toggle "Habilitar Banner GDPR" está desactivado
-- El usuario ya aceptó cookies anteriormente (revisar localStorage)
-
-**Solución**:
-- Ve a GDPR y activa "Habilitar Banner GDPR"
-- Para testear, borra `braves_chat_gdpr_consent` del localStorage del navegador
-
-### Error "Las cookies están bloqueadas"
-
-El sistema tiene fallback automático a localStorage. Si ves este mensaje:
-- Las cookies de terceros están bloqueadas en el navegador
-- El sistema funcionará igualmente usando localStorage como backup
-
-### El webhook no recibe el sessionId
-
-**Solución**:
-1. Abre DevTools > Console
-2. Busca mensajes `[Braves Fingerprint]`
-3. Verifica que el sessionId se genere correctamente
-4. Revisa la petición en DevTools > Network para confirmar que incluye el campo
+---
 
 ## Soporte
 
-Para soporte, consultas o reportar problemas:
-
 - **Email**: carlos@braveslab.com
-- **Web**: [https://braveslab.com](https://braveslab.com)
-- **GitHub Issues**: [Reportar un problema](https://github.com/Carlos-Vera/braveschat/issues)
-- **Documentación Técnica**: Ver [CLAUDE.md](CLAUDE.md) para desarrollo
-
-## 🙏 Agradecimientos
-
-- **BravesLab** por el desarrollo, diseño y financiación del proyecto
-- **Carlos Vera** por la visión y dirección técnica
-- **La comunidad de WordPress** por los estándares y mejores prácticas
-- **N8N** por la plataforma de automatización que permite la integración con IA
-- **Lottie (Airbnb)** por las animaciones del botón de chat
-
-## 🌐 Compatibilidad
-
-### Navegadores Soportados
-
-El chat funciona en todos los navegadores modernos:
-
-- ✅ Chrome / Edge (Chromium) 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Opera 76+
-- ✅ Navegadores móviles (iOS Safari, Chrome Mobile, Samsung Internet)
-
-### WordPress
-
-- ✅ WordPress 5.8 - 6.4+
-- ✅ Multisite compatible
-- ✅ Compatible con temas populares (Astra, GeneratePress, Kadence, Twenty Twenty-Four)
-- ✅ Compatible con page builders (Elementor, Beaver Builder, Divi)
-
-### PHP
-
-- ✅ PHP 7.4, 8.0, 8.1, 8.2, 8.3
-- ⚠️ PHP 7.3 o inferior no soportado
-
-### Servidor
-
-- Funciona en cualquier servidor compatible con WordPress (Apache, Nginx, LiteSpeed)
-- Requiere HTTPS para cookies con flag Secure
-- Compatible con CDN (Cloudflare, CloudFront, etc.)
+- **Web**: [braveslab.com](https://braveslab.com)
+- **Issues**: [github.com/Carlos-Vera/braveschat/issues](https://github.com/Carlos-Vera/braveschat/issues)
 
 ---
 
-**Braves Chat iA** - Integrando la inteligencia artificial en WordPress de forma profesional.
+## Licencia
+
+GPL-2.0-or-later — libre para usar, modificar y distribuir.
+
+Copyright (c) 2026 BRAVES LAB LLC
 
 ---
 
-**Versión**: 2.2.0 | **Autor**: Carlos Vera @ BravesLab | **Licencia**: Comercial
+*Desarrollado por [Carlos Vera](https://github.com/Carlos-Vera) con ♥️ por un 🇻🇪 para [BravesLab](https://braveslab.com)*
