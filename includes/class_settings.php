@@ -99,6 +99,31 @@ class Settings {
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('admin_head', array($this, 'add_menu_icon_styles'));
+        add_action('wp_ajax_braves_save_auth_type', array($this, 'ajax_save_auth_type'));
+    }
+
+    /**
+     * Guarda el tipo de autenticación vía AJAX (sin recargar la página)
+     *
+     * @since 2.3.0
+     * @return void
+     */
+    public function ajax_save_auth_type() {
+        check_ajax_referer('braves_save_auth_type', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(array('message' => __('Sin permisos.', 'braves-chat')));
+        }
+
+        $allowed = array('none', 'header', 'basic');
+        $type    = sanitize_text_field(wp_unslash($_POST['auth_type'] ?? ''));
+
+        if (!in_array($type, $allowed, true)) {
+            wp_send_json_error(array('message' => __('Tipo de autenticación inválido.', 'braves-chat')));
+        }
+
+        update_option($this->option_prefix . 'n8n_auth_type', $type);
+        wp_send_json_success();
     }
 
     /**
@@ -111,7 +136,9 @@ class Settings {
         $all_fields = array(
             'global_enable',
             'webhook_url',
+            'n8n_auth_type',
             'n8n_auth_token',
+            'n8n_auth_header',
             'header_title',
             'header_subtitle',
             'welcome_message',
@@ -136,6 +163,7 @@ class Settings {
             'gdpr_accept_text',
             'chat_skin',
             'bubble_image',
+            'bubble_text',
             'header_status_text',
             'stats_webhook_url',
             'stats_api_key',
@@ -340,8 +368,20 @@ class Settings {
         // ========== TAREA 2A: CAMPO TOKEN DE AUTENTICACIÓN N8N ==========
         register_setting('braves_chat_settings', $this->option_prefix . 'n8n_auth_token', array(
             'type' => 'string',
-            'sanitize_callback' => 'sanitize_text_field', // Sanitización automática
+            'sanitize_callback' => 'sanitize_text_field',
             'default' => ''
+        ));
+
+        register_setting('braves_chat_settings', $this->option_prefix . 'n8n_auth_type', array(
+            'type'              => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'           => 'header',
+        ));
+
+        register_setting('braves_chat_settings', $this->option_prefix . 'n8n_auth_header', array(
+            'type'              => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'           => 'X-N8N-Auth',
         ));
         
         add_settings_field(
@@ -718,7 +758,7 @@ class Settings {
      * @return void
      */
     public function general_section_callback() {
-        echo '<p>' . __('Configure los ajustes generales del chat.', 'braves-chat') . '</p>';
+        echo '<p>' . esc_html__('Configure los ajustes generales del chat.', 'braves-chat') . '</p>';
     }
 
     /**
@@ -728,7 +768,7 @@ class Settings {
      * @return void
      */
     public function exclusions_section_callback() {
-        echo '<p>' . __('Seleccione las páginas donde NO desea mostrar el widget de chat.', 'braves-chat') . '</p>';
+        echo '<p>' . esc_html__('Seleccione las páginas donde NO desea mostrar el widget de chat.', 'braves-chat') . '</p>';
     }
 
     /**
@@ -738,7 +778,7 @@ class Settings {
      * @return void
      */
     public function availability_section_callback() {
-        echo '<p>' . __('Configure los horarios de disponibilidad del chat.', 'braves-chat') . '</p>';
+        echo '<p>' . esc_html__('Configure los horarios de disponibilidad del chat.', 'braves-chat') . '</p>';
     }
 
     /**
@@ -748,7 +788,7 @@ class Settings {
      * @return void
      */
     public function gdpr_section_callback() {
-        echo '<p>' . __('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR. El sistema utiliza cookies persistentes con fingerprinting del navegador para identificar usuarios únicamente.', 'braves-chat') . '</p>';
+        echo '<p>' . esc_html__('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR. El sistema utiliza cookies persistentes con fingerprinting del navegador para identificar usuarios únicamente.', 'braves-chat') . '</p>';
     }
     
     // ==================== CALLBACKS DE CAMPOS ====================
@@ -759,20 +799,20 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label>',
             esc_attr($this->option_prefix . 'global_enable'),
             checked(1, $value, false),
-            __('Mostrar el chat en todas las páginas del sitio', 'braves-chat')
+            esc_html__('Mostrar el chat en todas las páginas del sitio', 'braves-chat')
         );
     }
-    
+
     public function webhook_url_callback() {
         $value = get_option($this->option_prefix . 'webhook_url');
         printf(
             '<input type="url" name="%s" value="%s" class="regular-text" placeholder="https://flow.braveslab.com/webhook/..." /><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'webhook_url'),
             esc_attr($value),
-            __('URL del webhook de N8N para procesar los mensajes.', 'braves-chat')
+            esc_html__('URL del webhook de N8N para procesar los mensajes.', 'braves-chat')
         );
     }
-    
+
     /**
      * ========== TAREA 2A: CALLBACK PARA TOKEN N8N ==========
      */
@@ -788,11 +828,11 @@ class Settings {
             placeholder="••••••••••••••••"
         />
         <p class="description">
-            <?php _e('Token secreto para autenticar las peticiones al webhook de N8N (Header Auth X-N8N-Auth). Déjalo vacío si no usas autenticación.', 'braves-chat'); ?>
+            <?php esc_html_e('Token secreto para autenticar las peticiones al webhook de N8N (Header Auth X-N8N-Auth). Déjalo vacío si no usas autenticación.', 'braves-chat'); ?>
         </p>
         <p class="description">
-            <strong><?php _e('Importante:', 'braves-chat'); ?></strong>
-            <?php _e('Este token se enviará en cada petición al webhook para verificar que proviene del plugin.', 'braves-chat'); ?>
+            <strong><?php esc_html_e('Importante:', 'braves-chat'); ?></strong>
+            <?php esc_html_e('Este token se enviará en cada petición al webhook para verificar que proviene del plugin.', 'braves-chat'); ?>
         </p>
         <?php
     }
@@ -881,7 +921,7 @@ class Settings {
             esc_attr($this->option_prefix . 'bubble_text'),
             esc_attr($value)
         );
-        echo '<p class="description">' . __('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braves-chat') . '</p>';
+        echo '<p class="description">' . esc_html__('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braves-chat') . '</p>';
     }
     
     public function excluded_pages_callback() {
@@ -898,7 +938,7 @@ class Settings {
             );
         }
         echo '</select>';
-        echo '<p class="description">' . __('Mantenga presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braves-chat') . '</p>';
+        echo '<p class="description">' . esc_html__('Mantenga presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braves-chat') . '</p>';
     }
     
     public function availability_enabled_callback() {
@@ -907,10 +947,10 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label>',
             esc_attr($this->option_prefix . 'availability_enabled'),
             checked(1, $value, false),
-            __('Activar restricción por horarios', 'braves-chat')
+            esc_html__('Activar restricción por horarios', 'braves-chat')
         );
     }
-    
+
     public function availability_start_callback() {
         $value = get_option($this->option_prefix . 'availability_start');
         printf(
@@ -960,8 +1000,8 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_enabled'),
             checked(1, $value, false),
-            __('Mostrar banner de consentimiento de cookies', 'braves-chat'),
-            __('Cuando está habilitado, se mostrará un banner solicitando consentimiento antes de crear cookies. El consentimiento se guarda en localStorage.', 'braves-chat')
+            esc_html__('Mostrar banner de consentimiento de cookies', 'braves-chat'),
+            esc_html__('Cuando está habilitado, se mostrará un banner solicitando consentimiento antes de crear cookies. El consentimiento se guarda en localStorage.', 'braves-chat')
         );
     }
 
@@ -971,7 +1011,7 @@ class Settings {
             '<textarea name="%s" rows="4" class="large-text">%s</textarea><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_message'),
             esc_textarea($value),
-            __('Mensaje que se mostrará en el banner de cookies. Explica el uso de cookies para la sesión del chat.', 'braves-chat')
+            esc_html__('Mensaje que se mostrará en el banner de cookies. Explica el uso de cookies para la sesión del chat.', 'braves-chat')
         );
     }
 
@@ -981,7 +1021,7 @@ class Settings {
             '<input type="text" name="%s" value="%s" class="regular-text" /><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_accept_text'),
             esc_attr($value),
-            __('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braves-chat')
+            esc_html__('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braves-chat')
         );
     }
 
