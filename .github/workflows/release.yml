@@ -19,26 +19,30 @@ jobs:
     - name: Archive plugin
       run: |
         # Definir el nombre del directorio final
-        PLUGIN_SLUG="braveschat"
-        
+        PLUGIN_SLUG="braves-chat"
+
         # Crear directorio temporal para la estructura
         mkdir -p dist/$PLUGIN_SLUG
-        
+
         # Copiar todos los archivos excepto los ignorados a la carpeta del plugin
         rsync -av --progress ./ dist/$PLUGIN_SLUG/ \
           --exclude dist \
           --exclude .git \
           --exclude .github \
           --exclude .gitignore \
+          --exclude .gitattributes \
+          --exclude .distignore \
           --exclude .DS_Store \
+          --exclude .agents \
+          --exclude .claude \
           --exclude "*.zip" \
           --exclude "node_modules" \
           --exclude "tests" \
-          --exclude ".agent" \
-          --exclude ".agents" \
           --exclude "CLAUDE.md" \
           --exclude "GEMINI.md" \
           --exclude "UX-UI-Convenciones.md" \
+          --exclude "WORDPRESS_ORG_PLAN.md" \
+          --exclude "errores.md" \
           --exclude "*.bak"
 
         # Crear el zip
@@ -48,4 +52,4 @@ jobs:
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v2
       with:
-        files: braveschat.zip
+        files: braves-chat.zip
