@@ -962,9 +962,6 @@ class BravesChatScreen {
         this.current_stream_message_element = bubble_div;
         this.streaming_active = true;
 
-        if (this.chat_input) this.chat_input.disabled = true;
-        if (this.send_button) this.send_button.disabled = true;
-
         // Streaming carácter a carácter con markdown en tiempo real
         let visible_content = '';
 
