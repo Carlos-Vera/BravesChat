@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braves-chat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Última actualización: 10 de Marzo, 2026', 'braves-chat'),
+                            'footer' => __('Última actualización: 11 de Marzo, 2026', 'braves-chat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -112,6 +112,24 @@ $sidebar = Admin_Sidebar::get_instance();
                     <h2 class="braves-section__title">
                         <?php esc_html_e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
+
+                    <!-- Version 2.3.1 -->
+                    <div class="braves-changelog">
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.3.1</span>
+                                <?php echo wp_kses_post( __('Escribe mientras el agente responde: <i>interrumpe cuando quieras</i>', 'braves-chat') ); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php esc_html_e('11 de Marzo, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('IMPROVED: El chat ya no bloquea la caja de texto mientras el agente responde — escribe tu siguiente pregunta en cualquier momento. Si el agente está a mitad de respuesta, se cancela y tu nuevo mensaje se envía de inmediato.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Version 2.3.0 -->
                     <div class="braves-changelog">
