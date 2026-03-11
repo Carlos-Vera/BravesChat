@@ -3,7 +3,7 @@
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
  * Description: Una herramienta profesional que conecta tu sitio con tu agente de N8N, permitiéndote ofrecer atención con iA directamente en tu web.
- * Version: 2.3.0
+ * Version: 2.3.1
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braves-chat
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.3.0');
+define('BRAVES_CHAT_VERSION', '2.3.1');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
@@ -139,9 +139,9 @@ class BravesChat {
             // Fallback: valores genéricos si no existe config/defaults.php
             $defaults = array(
                 'webhook_url' => '',
-                'header_title' => __('Chat de Soporte', 'braves-chat'),
-                'header_subtitle' => __('Estamos aquí para ayudarte', 'braves-chat'),
-                'welcome_message' => __('¡Hola! ¿En qué podemos ayudarte hoy?', 'braves-chat'),
+                'header_title' => __('Tu agente de iA', 'braves-chat'),
+                'header_subtitle' => __('Estoy aquí para ayudarte', 'braves-chat'),
+                'welcome_message' => __('¡Hola! ¿En qué puedo ayudarte hoy?', 'braves-chat'),
                 'position' => 'bottom-right',
                 'excluded_pages' => array(),
                 'availability_enabled' => false,
@@ -151,7 +151,7 @@ class BravesChat {
                 'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'),
                 'display_mode' => 'modal',
                 'gdpr_enabled' => false,
-                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat'),
+                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies y.', 'braves-chat'),
                 'gdpr_accept_text' => __('Aceptar', 'braves-chat'),
             );
         }

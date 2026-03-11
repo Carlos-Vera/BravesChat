@@ -855,14 +855,6 @@ class BravesChatModal {
         this.current_stream_message_element = bubble_div;
         this.streaming_active = true;
 
-        // Deshabilitar input durante streaming
-        if (this.chat_input) {
-            this.chat_input.disabled = true;
-        }
-        if (this.send_button) {
-            this.send_button.disabled = true;
-        }
-
         let buffer = '';
         let full_content = ''; // Contenido total recibido (para logs y final)
         let visible_content = ''; // Contenido actualmente visible (para typing)
@@ -1125,9 +1117,6 @@ class BravesChatModal {
 
         this.current_stream_message_element = bubble_div;
         this.streaming_active = true;
-
-        if (this.chat_input)  this.chat_input.disabled  = true;
-        if (this.send_button) this.send_button.disabled = true;
 
         let visible_content = '';
 
