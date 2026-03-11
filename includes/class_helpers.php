@@ -121,12 +121,12 @@ class Helpers {
     public static function get_welcome_message() {
         if (self::is_availability_enabled() && !self::is_within_availability_hours()) {
             return get_option('braves_chat_availability_message',
-                __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat')
+                __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat')
             );
         }
 
         return get_option('braves_chat_welcome_message',
-            __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braves-chat')
+            __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braveschat')
         );
     }
 
@@ -174,7 +174,7 @@ class Helpers {
             'displayMode'     => get_option('braves_chat_display_mode', 'modal'),
             'chatSkin'        => get_option('braves_chat_chat_skin', 'default'),
             'bubbleImage'     => get_option('braves_chat_bubble_image', ''),
-            'bubbleText'      => get_option('braves_chat_bubble_text', __('¿Necesitas ayuda?', 'braves-chat')),
+            'bubbleText'      => get_option('braves_chat_bubble_text', __('¿Necesitas ayuda?', 'braveschat')),
         );
         
         $attributes = wp_parse_args($attributes, $defaults);

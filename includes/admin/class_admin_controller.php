@@ -143,10 +143,10 @@ class Admin_Controller {
 
         // Menú principal
         add_menu_page(
-            __('BravesChat iA', 'braves-chat'),
-            __('BravesChat iA', 'braves-chat'),
+            __('BravesChat iA', 'braveschat'),
+            __('BravesChat iA', 'braveschat'),
             'manage_options',
-            'braves-chat',
+            'braveschat',
             array($this, 'render_dashboard_page'),
             $icon_svg,
             58
@@ -160,18 +160,18 @@ class Admin_Controller {
         /*
         add_submenu_page(
             null, // parent_slug = null = página oculta en menu
-            __('Resumen', 'braves-chat'),
-            __('Resumen', 'braves-chat'),
+            __('Resumen', 'braveschat'),
+            __('Resumen', 'braveschat'),
             'manage_options',
-            'braves-chat',
+            'braveschat',
             array($this, 'render_dashboard_page')
         );
         */
 
         add_submenu_page(
             null,
-            __('Ajustes', 'braves-chat'),
-            __('Ajustes', 'braves-chat'),
+            __('Ajustes', 'braveschat'),
+            __('Ajustes', 'braveschat'),
             'manage_options',
             'braves-chat-settings',
             array($this, 'render_settings_page')
@@ -179,8 +179,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('Apariencia', 'braves-chat'),
-            __('Apariencia', 'braves-chat'),
+            __('Apariencia', 'braveschat'),
+            __('Apariencia', 'braveschat'),
             'manage_options',
             'braves-chat-appearance',
             array($this, 'render_appearance_page')
@@ -188,8 +188,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('Horarios', 'braves-chat'),
-            __('Horarios', 'braves-chat'),
+            __('Horarios', 'braveschat'),
+            __('Horarios', 'braveschat'),
             'manage_options',
             'braves-chat-availability',
             array($this, 'render_availability_page')
@@ -197,8 +197,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('GDPR', 'braves-chat'),
-            __('GDPR', 'braves-chat'),
+            __('GDPR', 'braveschat'),
+            __('GDPR', 'braveschat'),
             'manage_options',
             'braves-chat-gdpr',
             array($this, 'render_gdpr_page')
@@ -206,8 +206,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('Acerca de', 'braves-chat'),
-            __('Acerca de', 'braves-chat'),
+            __('Acerca de', 'braveschat'),
+            __('Acerca de', 'braveschat'),
             'manage_options',
             'braves-chat-about',
             array($this, 'render_about_page')
@@ -215,8 +215,8 @@ class Admin_Controller {
 
         add_submenu_page(
             null,
-            __('Historial', 'braves-chat'),
-            __('Historial', 'braves-chat'),
+            __('Historial', 'braveschat'),
+            __('Historial', 'braveschat'),
             'manage_options',
             'braves-chat-history',
             array($this, 'render_history_page')
@@ -246,7 +246,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_dashboard_page() {
-        $current_page = 'braves-chat';
+        $current_page = 'braveschat';
 
         // Template del dashboard
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/dashboard.php';
@@ -498,19 +498,19 @@ class Admin_Controller {
         $screen = get_current_screen();
 
         // Solo aplicar en páginas de BravesChat
-        if (!$screen || strpos($screen->id, 'braves-chat') === false) {
+        if (!$screen || strpos($screen->id, 'braveschat') === false) {
             return $admin_title;
         }
 
         // Mapeo de páginas a títulos
         $page_titles = array(
-            'toplevel_page_braves-chat' => __('Resumen', 'braves-chat'),
-            'admin_page_braves-chat-settings' => __('Ajustes', 'braves-chat'),
-            'admin_page_braves-chat-appearance' => __('Apariencia', 'braves-chat'),
-            'admin_page_braves-chat-availability' => __('Horarios', 'braves-chat'),
-            'admin_page_braves-chat-gdpr' => __('GDPR', 'braves-chat'),
-            'admin_page_braves-chat-about' => __('Acerca de', 'braves-chat'),
-            'admin_page_braves-chat-history' => __('Historial', 'braves-chat'),
+            'toplevel_page_braves-chat' => __('Resumen', 'braveschat'),
+            'admin_page_braves-chat-settings' => __('Ajustes', 'braveschat'),
+            'admin_page_braves-chat-appearance' => __('Apariencia', 'braveschat'),
+            'admin_page_braves-chat-availability' => __('Horarios', 'braveschat'),
+            'admin_page_braves-chat-gdpr' => __('GDPR', 'braveschat'),
+            'admin_page_braves-chat-about' => __('Acerca de', 'braveschat'),
+            'admin_page_braves-chat-history' => __('Historial', 'braveschat'),
         );
 
         // Obtener título de la sección actual

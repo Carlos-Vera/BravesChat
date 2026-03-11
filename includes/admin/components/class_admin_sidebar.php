@@ -63,7 +63,7 @@ class Admin_Sidebar {
     public function render($current_page = '') {
         if (empty($current_page)) {
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading the current admin page slug for navigation highlighting; no data is modified.
-            $current_page = isset($_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : 'braves-chat';
+            $current_page = isset($_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : 'braveschat';
         }
 
         $menu_items = $this->get_menu_items();
@@ -96,42 +96,42 @@ class Admin_Sidebar {
         $items = array(
             array(
                 'id' => 'dashboard',
-                'label' => __('Dashboard', 'braves-chat'),
+                'label' => __('Dashboard', 'braveschat'),
                 'url' => admin_url('admin.php?page=braves-chat'),
-                'page_slug' => 'braves-chat',
+                'page_slug' => 'braveschat',
                 'icon' => $this->get_icon_svg('dashboard'),
             ),
             array(
                 'id' => 'settings',
-                'label' => __('Ajustes', 'braves-chat'),
+                'label' => __('Ajustes', 'braveschat'),
                 'url' => admin_url('admin.php?page=braves-chat-settings'),
                 'page_slug' => 'braves-chat-settings',
                 'icon' => $this->get_icon_svg('settings'),
             ),
             array(
                 'id' => 'appearance',
-                'label' => __('Apariencia', 'braves-chat'),
+                'label' => __('Apariencia', 'braveschat'),
                 'url' => admin_url('admin.php?page=braves-chat-appearance'),
                 'page_slug' => 'braves-chat-appearance',
                 'icon' => $this->get_icon_svg('appearance'),
             ),
             array(
                 'id' => 'availability',
-                'label' => __('Horarios', 'braves-chat'),
+                'label' => __('Horarios', 'braveschat'),
                 'url' => admin_url('admin.php?page=braves-chat-availability'),
                 'page_slug' => 'braves-chat-availability',
                 'icon' => $this->get_icon_svg('availability'),
             ),
             array(
                 'id' => 'gdpr',
-                'label' => __('GDPR', 'braves-chat'),
+                'label' => __('GDPR', 'braveschat'),
                 'url' => admin_url('admin.php?page=braves-chat-gdpr'),
                 'page_slug' => 'braves-chat-gdpr',
                 'icon' => $this->get_icon_svg('gdpr'),
             ),
             array(
                 'id'        => 'history',
-                'label'     => __('Historial', 'braves-chat'),
+                'label'     => __('Historial', 'braveschat'),
                 'url'       => admin_url('admin.php?page=braves-chat-history'),
                 'page_slug' => 'braves-chat-history',
                 'icon'      => $this->get_icon_svg('history'),

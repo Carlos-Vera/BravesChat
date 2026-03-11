@@ -58,7 +58,7 @@ class Ajax_Handler {
             : '';
 
         if (empty($chat_input)) {
-            wp_send_json_error(array('message' => __('El mensaje no puede estar vacío.', 'braves-chat')));
+            wp_send_json_error(array('message' => __('El mensaje no puede estar vacío.', 'braveschat')));
         }
 
         // Obtener configuración desde el servidor (nunca desde el cliente)
@@ -68,7 +68,7 @@ class Ajax_Handler {
         $auth_token  = get_option('braves_chat_n8n_auth_token', '');
 
         if (empty($webhook_url)) {
-            wp_send_json_error(array('message' => __('El webhook de N8N no está configurado.', 'braves-chat')));
+            wp_send_json_error(array('message' => __('El webhook de N8N no está configurado.', 'braveschat')));
         }
 
         // Construir cabeceras según el tipo de autenticación configurado
@@ -108,7 +108,7 @@ class Ajax_Handler {
             wp_send_json_error(array(
                 'message' => sprintf(
                     /* translators: %d: HTTP response code */
-                    __('Error del webhook (HTTP %d).', 'braves-chat'),
+                    __('Error del webhook (HTTP %d).', 'braveschat'),
                     $http_code
                 ),
             ));

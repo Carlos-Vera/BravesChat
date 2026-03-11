@@ -82,7 +82,7 @@ class Admin_Header {
 
         if ($args['show_version']) {
             $admin_url    = esc_url(admin_url('admin.php?page=braves-chat-about'));
-            $title        = esc_attr__('Ver información del plugin', 'braves-chat');
+            $title        = esc_attr__('Ver información del plugin', 'braveschat');
             $version      = esc_html('v' . BRAVES_CHAT_VERSION);
             $display_mode = esc_html(get_option('braves_chat_display_mode', 'modal'));
 
@@ -112,7 +112,7 @@ class Admin_Header {
         } else {
             // Fallback a texto
             echo '<span class="braves-admin-header__logo-text">';
-            echo esc_html__('BravesChat iA', 'braves-chat');
+            echo esc_html__('BravesChat iA', 'braveschat');
             echo '</span>';
         }
     }

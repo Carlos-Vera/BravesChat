@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 // Obtener el icono seleccionado y tooltip
 $chat_icon = get_option('braves_chat_chat_icon', 'robot-chat');
 $icon_path = BRAVES_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . '.svg';
-$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'braves-chat'));
+$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'braveschat'));
 ?>
 
 <div id="<?php echo esc_attr($unique_id); ?>" class="braveslab-chat-widget-container position-fullscreen braves-skin-<?php echo esc_attr($chat_skin); ?>">
@@ -71,11 +71,11 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     <textarea
                         id="chat-input"
                         rows="3"
-                        placeholder="<?php esc_attr_e('Escribe tu mensaje...', 'braves-chat'); ?>"
-                        aria-label="<?php esc_attr_e('Escribe tu mensaje', 'braves-chat'); ?>"
+                        placeholder="<?php esc_attr_e('Escribe tu mensaje...', 'braveschat'); ?>"
+                        aria-label="<?php esc_attr_e('Escribe tu mensaje', 'braveschat'); ?>"
                         style="resize: none;"
                     ></textarea>
-                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Enviar mensaje', 'braves-chat'); ?>">
+                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Enviar mensaje', 'braveschat'); ?>">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>

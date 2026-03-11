@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braves-chat'));
+    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braveschat'));
 }
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
@@ -60,9 +60,9 @@ $option_prefix = 'braves_chat_';
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><strong><?php esc_html_e('Ajustes', 'braves-chat'); ?></strong></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('Ajustes', 'braveschat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php esc_html_e('Configura los ajustes principales del chat: habilitación global, webhook, token de autenticación y páginas excluidas.', 'braves-chat'); ?>
+                        <?php esc_html_e('Configura los ajustes principales del chat: habilitación global, webhook, token de autenticación y páginas excluidas.', 'braveschat'); ?>
                     </p>
                 </div>
 
@@ -71,8 +71,8 @@ $option_prefix = 'braves_chat_';
                 <div class="braves-section braves-section--warning">
                     <?php
                     Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'braves-chat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la <strong>URL del webhook</strong> en la página de ajustes.', 'braves-chat'),
+                        '<strong>' . __('Acción requerida:', 'braveschat') . '</strong> ' .
+                        __('Para que el chat funcione, necesitas configurar la <strong>URL del webhook</strong> en la página de ajustes.', 'braveschat'),
                         'warning'
                     );
                     ?>
@@ -84,7 +84,7 @@ $option_prefix = 'braves_chat_';
                 <div class="braves-section">
                     <?php
                     Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'braves-chat'),
+                        __('Configuración guardada correctamente.', 'braveschat'),
                         'success'
                     );
                     ?>
@@ -112,7 +112,7 @@ $option_prefix = 'braves_chat_';
                     <!-- Configuración General Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php esc_html_e('Configuración General', 'braves-chat'); ?>
+                            <?php esc_html_e('Configuración General', 'braveschat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -133,14 +133,14 @@ $option_prefix = 'braves_chat_';
                                 <span class="braves-toggle-slider"></span>
                             </label>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Mostrar el chat en todas las páginas del sitio web', 'braves-chat'); ?>
+                                <?php esc_html_e('Mostrar el chat en todas las páginas del sitio web', 'braveschat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Mostrar en toda la web', 'braves-chat'),
-                                'description' => __('Habilita el chat globalmente en todas las páginas del sitio web.', 'braves-chat'),
+                                'title' => __('Mostrar en toda la web', 'braveschat'),
+                                'description' => __('Habilita el chat globalmente en todas las páginas del sitio web.', 'braveschat'),
                                 'content' => $toggle_content,
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -160,14 +160,14 @@ $option_prefix = 'braves_chat_';
                                    style="width: 100%;"
                                    placeholder="https://flow.braveslab.com/webhook/...">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('URL del webhook de N8N para procesar los mensajes del chat.', 'braves-chat'); ?>
+                                <?php esc_html_e('URL del webhook de N8N para procesar los mensajes del chat.', 'braveschat'); ?>
                             </p>
                             <?php
                             $webhook_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('URL del Webhook', 'braves-chat'),
-                                'description' => __('URL del endpoint de N8N donde se procesarán los mensajes.', 'braves-chat'),
+                                'title' => __('URL del Webhook', 'braveschat'),
+                                'description' => __('URL del endpoint de N8N donde se procesarán los mensajes.', 'braveschat'),
                                 'content' => $webhook_content,
                             ));
                             ?>
@@ -185,17 +185,17 @@ $option_prefix = 'braves_chat_';
                                     class="braves-input"
                                     style="width: 100%;"
                                     onchange="bravesUpdateAuthLabels(this.value)">
-                                <option value="none"   <?php selected($n8n_auth_type, 'none'); ?>><?php esc_html_e('Sin autenticación', 'braves-chat'); ?></option>
-                                <option value="header" <?php selected($n8n_auth_type, 'header'); ?>><?php esc_html_e('Header personalizado (Header Auth)', 'braves-chat'); ?></option>
-                                <option value="basic"  <?php selected($n8n_auth_type, 'basic'); ?>><?php esc_html_e('Basic Auth (usuario + contraseña)', 'braves-chat'); ?></option>
+                                <option value="none"   <?php selected($n8n_auth_type, 'none'); ?>><?php esc_html_e('Sin autenticación', 'braveschat'); ?></option>
+                                <option value="header" <?php selected($n8n_auth_type, 'header'); ?>><?php esc_html_e('Header personalizado (Header Auth)', 'braveschat'); ?></option>
+                                <option value="basic"  <?php selected($n8n_auth_type, 'basic'); ?>><?php esc_html_e('Basic Auth (usuario + contraseña)', 'braveschat'); ?></option>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Elige el tipo de autenticación configurado en tu nodo Webhook o Chat Trigger de N8N.', 'braves-chat'); ?>
+                                <?php esc_html_e('Elige el tipo de autenticación configurado en tu nodo Webhook o Chat Trigger de N8N.', 'braveschat'); ?>
                             </p>
                             <?php
                             Template_Helpers::card(array(
-                                'title'       => __('Tipo de Autenticación', 'braves-chat'),
-                                'description' => __('Método de seguridad para proteger el acceso al webhook.', 'braves-chat'),
+                                'title'       => __('Tipo de Autenticación', 'braveschat'),
+                                'description' => __('Método de seguridad para proteger el acceso al webhook.', 'braveschat'),
                                 'content'     => ob_get_clean(),
                             ));
                             ?>
@@ -235,8 +235,8 @@ $option_prefix = 'braves_chat_';
                             </div>
                             <?php
                             Template_Helpers::card(array(
-                                'title'       => __('Credenciales', 'braves-chat'),
-                                'description' => __('Datos de acceso para el tipo de autenticación seleccionado.', 'braves-chat'),
+                                'title'       => __('Credenciales', 'braveschat'),
+                                'description' => __('Datos de acceso para el tipo de autenticación seleccionado.', 'braveschat'),
                                 'content'     => ob_get_clean(),
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -256,17 +256,17 @@ $option_prefix = 'braves_chat_';
                                     },
                                     header: {
                                         show:        true,
-                                        headerLabel: '<?php echo esc_js(__('Nombre del header', 'braves-chat')); ?>',
-                                        headerHelp:  '<?php echo esc_js(__('Ej: X-N8N-Auth. Debe coincidir con el "Header Name" configurado en N8N → Header Auth.', 'braves-chat')); ?>',
-                                        tokenLabel:  '<?php echo esc_js(__('Valor del token', 'braves-chat')); ?>',
-                                        tokenHelp:   '<?php echo esc_js(__('Token secreto enviado como valor del header.', 'braves-chat')); ?>'
+                                        headerLabel: '<?php echo esc_js(__('Nombre del header', 'braveschat')); ?>',
+                                        headerHelp:  '<?php echo esc_js(__('Ej: X-N8N-Auth. Debe coincidir con el "Header Name" configurado en N8N → Header Auth.', 'braveschat')); ?>',
+                                        tokenLabel:  '<?php echo esc_js(__('Valor del token', 'braveschat')); ?>',
+                                        tokenHelp:   '<?php echo esc_js(__('Token secreto enviado como valor del header.', 'braveschat')); ?>'
                                     },
                                     basic: {
                                         show:        true,
-                                        headerLabel: '<?php echo esc_js(__('Usuario', 'braves-chat')); ?>',
-                                        headerHelp:  '<?php echo esc_js(__('Debe coincidir con el campo "User" en N8N → Basic Auth.', 'braves-chat')); ?>',
-                                        tokenLabel:  '<?php echo esc_js(__('Contraseña', 'braves-chat')); ?>',
-                                        tokenHelp:   '<?php echo esc_js(__('Debe coincidir con el campo "Password" en N8N → Basic Auth.', 'braves-chat')); ?>'
+                                        headerLabel: '<?php echo esc_js(__('Usuario', 'braveschat')); ?>',
+                                        headerHelp:  '<?php echo esc_js(__('Debe coincidir con el campo "User" en N8N → Basic Auth.', 'braveschat')); ?>',
+                                        tokenLabel:  '<?php echo esc_js(__('Contraseña', 'braveschat')); ?>',
+                                        tokenHelp:   '<?php echo esc_js(__('Debe coincidir con el campo "Password" en N8N → Basic Auth.', 'braveschat')); ?>'
                                     }
                                 };
 
@@ -324,22 +324,22 @@ $option_prefix = 'braves_chat_';
                                 <?php endforeach; ?>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braves-chat'); ?>
+                                <?php esc_html_e('Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braveschat'); ?>
                             </p>
                             <div class="braves-button-group" style="margin-top: 10px;">
                                 <button type="button" id="braves-select-all-pages" class="button button-secondary button-small">
-                                    <?php esc_html_e('Seleccionar todas', 'braves-chat'); ?>
+                                    <?php esc_html_e('Seleccionar todas', 'braveschat'); ?>
                                 </button>
                                 <button type="button" id="braves-deselect-all-pages" class="button button-secondary button-small">
-                                    <?php esc_html_e('Deseleccionar todas', 'braves-chat'); ?>
+                                    <?php esc_html_e('Deseleccionar todas', 'braveschat'); ?>
                                 </button>
                             </div>
                             <?php
                             $pages_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Páginas Excluidas', 'braves-chat'),
-                                'description' => __('Selecciona las páginas donde NO quieres que aparezca el chat.', 'braves-chat'),
+                                'title' => __('Páginas Excluidas', 'braveschat'),
+                                'description' => __('Selecciona las páginas donde NO quieres que aparezca el chat.', 'braveschat'),
                                 'content' => $pages_content,
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -367,8 +367,8 @@ $option_prefix = 'braves_chat_';
                                         </div>
                                     </div>
                                     <div style="display: inline-block; justify-content: space-between; width: 100%; margin-top: 5px; margin-bottom: 35px; font-size: 11px; color: #888;">
-                                        <span style="position: absolute; left: 7%;"><?php esc_html_e('Rápido (10ms)', 'braves-chat'); ?></span>
-                                        <span style="position: absolute; right: 7%;"><?php esc_html_e('Lento (100ms)', 'braves-chat'); ?></span>
+                                        <span style="position: absolute; left: 7%;"><?php esc_html_e('Rápido (10ms)', 'braveschat'); ?></span>
+                                        <span style="position: absolute; right: 7%;"><?php esc_html_e('Lento (100ms)', 'braveschat'); ?></span>
                                     </div>
                                 </div>
                                 <div style="flex-shrink: 0; display: flex; align-items: center; gap: 5px;">
@@ -386,14 +386,14 @@ $option_prefix = 'braves_chat_';
                             </div>
                             <p class="braves-field-help" style="margin-top: 15px; font-size: 13px; color: #666;">
                                 <?php echo wp_kses_post( __('Ajusta la velocidad con la que el asistente "escribe" el mensaje.<br/>
-                                Un valor de 30-40ms se siente natural.', 'braves-chat') ); ?>
+                                Un valor de 30-40ms se siente natural.', 'braveschat') ); ?>
                             </p>
                             <?php
                             $speed_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Velocidad de Escritura', 'braves-chat'),
-                                'description' => __('Velocidad de la animación de texto (ms por carácter).', 'braves-chat'),
+                                'title' => __('Velocidad de Escritura', 'braveschat'),
+                                'description' => __('Velocidad de la animación de texto (ms por carácter).', 'braveschat'),
                                 'content' => $speed_content,
                             ));
                             ?>
@@ -404,7 +404,7 @@ $option_prefix = 'braves_chat_';
                     <!-- Configuración de Historial Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php esc_html_e('Configuración de Historial', 'braves-chat'); ?>
+                            <?php esc_html_e('Configuración de Historial', 'braveschat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -422,12 +422,12 @@ $option_prefix = 'braves_chat_';
                                    style="width: 100%;"
                                    placeholder="https://flow.braveslab.com/webhook/...">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('URL del webhook de N8N que consulta el historial de conversaciones en Postgres.', 'braves-chat'); ?>
+                                <?php esc_html_e('URL del webhook de N8N que consulta el historial de conversaciones en Postgres.', 'braveschat'); ?>
                             </p>
                             <?php
                             Template_Helpers::card(array(
-                                'title'       => __('URL Webhook de Historial', 'braves-chat'),
-                                'description' => __('Endpoint de N8N para recuperar las conversaciones registradas.', 'braves-chat'),
+                                'title'       => __('URL Webhook de Historial', 'braveschat'),
+                                'description' => __('Endpoint de N8N para recuperar las conversaciones registradas.', 'braveschat'),
                                 'content'     => ob_get_clean(),
                             ));
                             ?>
@@ -446,12 +446,12 @@ $option_prefix = 'braves_chat_';
                                    autocomplete="new-password"
                                    placeholder="••••••••••••••••">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Clave de autenticación enviada en el header x-api-key al webhook de historial.', 'braves-chat'); ?>
+                                <?php esc_html_e('Clave de autenticación enviada en el header x-api-key al webhook de historial.', 'braveschat'); ?>
                             </p>
                             <?php
                             Template_Helpers::card(array(
-                                'title'       => __('API Key de Historial', 'braves-chat'),
-                                'description' => __('Clave para autenticar las peticiones al webhook de historial.', 'braves-chat'),
+                                'title'       => __('API Key de Historial', 'braveschat'),
+                                'description' => __('Clave para autenticar las peticiones al webhook de historial.', 'braveschat'),
                                 'content'     => ob_get_clean(),
                             ));
                             ?>
@@ -463,7 +463,7 @@ $option_prefix = 'braves_chat_';
                     <div class="braves-section braves-section--actions">
                         <div class="braves-button-group">
                             <?php submit_button(
-                                __('Guardar', 'braves-chat'),
+                                __('Guardar', 'braveschat'),
                                 'primary braves-button braves-button--primary',
                                 'submit',
                                 false

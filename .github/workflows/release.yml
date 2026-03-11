@@ -19,7 +19,7 @@ jobs:
     - name: Archive plugin
       run: |
         # Definir el nombre del directorio final
-        PLUGIN_SLUG="braves-chat"
+        PLUGIN_SLUG="braveschat"
 
         # Crear directorio temporal para la estructura
         mkdir -p dist/$PLUGIN_SLUG

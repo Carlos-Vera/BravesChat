@@ -108,8 +108,8 @@ class Frontend {
         // Pasar configuración GDPR al script de fingerprinting
         wp_localize_script('braves-chat-fingerprint', 'bravesGDPRConfig', array(
             'enabled' => (bool) get_option('braves_chat_gdpr_enabled', false),
-            'message' => get_option('braves_chat_gdpr_message', __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat')),
-            'accept_text' => get_option('braves_chat_gdpr_accept_text', __('Aceptar', 'braves-chat')),
+            'message' => get_option('braves_chat_gdpr_message', __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braveschat')),
+            'accept_text' => get_option('braves_chat_gdpr_accept_text', __('Aceptar', 'braveschat')),
             'cookie_name' => 'braves_chat_session',
             'cookie_duration' => YEAR_IN_SECONDS
         ));
@@ -192,7 +192,7 @@ class Frontend {
         if (function_exists('wp_set_script_translations')) {
             wp_set_script_translations(
                 'braves-chat-frontend',
-                'braves-chat',
+                'braveschat',
                 BRAVES_CHAT_PLUGIN_DIR . 'languages'
             );
         }

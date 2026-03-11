@@ -322,7 +322,7 @@ class BravesCookieManager {
      * @return string Mensaje personalizado o mensaje por defecto
      */
     public function get_gdpr_message() {
-        $default_message = __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braves-chat');
+        $default_message = __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braveschat');
         return get_option(self::GDPR_MESSAGE_OPTION, $default_message);
     }
 
@@ -332,7 +332,7 @@ class BravesCookieManager {
      * @return string Texto personalizado o texto por defecto
      */
     public function get_gdpr_accept_text() {
-        $default_text = __('Aceptar', 'braves-chat');
+        $default_text = __('Aceptar', 'braveschat');
         return get_option(self::GDPR_ACCEPT_TEXT_OPTION, $default_text);
     }
 

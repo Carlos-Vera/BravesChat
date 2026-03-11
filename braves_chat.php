@@ -6,7 +6,7 @@
  * Version: 2.3.2
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
- * Text Domain: braves-chat
+ * Text Domain: braveschat
  * Domain Path: /languages
  * Requires at least: 5.8
  * Requires PHP: 7.4
@@ -26,7 +26,7 @@ define('BRAVES_CHAT_VERSION', '2.3.2');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
-define('BRAVES_CHAT_TEXT_DOMAIN', 'braves-chat');
+define('BRAVES_CHAT_TEXT_DOMAIN', 'braveschat');
 
 /**
  * Clase principal del plugin
@@ -139,20 +139,20 @@ class BravesChat {
             // Fallback: valores genéricos si no existe config/defaults.php
             $defaults = array(
                 'webhook_url' => '',
-                'header_title' => __('Tu agente de iA', 'braves-chat'),
-                'header_subtitle' => __('Estoy aquí para ayudarte', 'braves-chat'),
-                'welcome_message' => __('¡Hola! ¿En qué puedo ayudarte hoy?', 'braves-chat'),
+                'header_title' => __('Tu agente de iA', 'braveschat'),
+                'header_subtitle' => __('Estoy aquí para ayudarte', 'braveschat'),
+                'welcome_message' => __('¡Hola! ¿En qué puedo ayudarte hoy?', 'braveschat'),
                 'position' => 'bottom-right',
                 'excluded_pages' => array(),
                 'availability_enabled' => false,
                 'availability_start' => '09:00',
                 'availability_end' => '18:00',
                 'availability_timezone' => 'UTC',
-                'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braves-chat'),
+                'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat'),
                 'display_mode' => 'modal',
                 'gdpr_enabled' => false,
-                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies y.', 'braves-chat'),
-                'gdpr_accept_text' => __('Aceptar', 'braves-chat'),
+                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies y.', 'braveschat'),
+                'gdpr_accept_text' => __('Aceptar', 'braveschat'),
             );
         }
         
@@ -297,13 +297,13 @@ class BravesChat {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',
             admin_url('admin.php?page=braves-chat'),
-            __('Dashboard', 'braves-chat')
+            __('Dashboard', 'braveschat')
         );
 
         $config_link = sprintf(
             '<a href="%s">%s</a>',
             admin_url('admin.php?page=braves-chat-settings'),
-            __('Ajustes', 'braves-chat')
+            __('Ajustes', 'braveschat')
         );
 
         array_unshift($links, $settings_link, $config_link);
@@ -327,7 +327,7 @@ class BravesChat {
         $url = add_query_arg(
             array(
                 'tab'       => 'plugin-information',
-                'plugin'    => 'braves-chat',
+                'plugin'    => 'braveschat',
                 'TB_iframe' => 'true',
                 'width'     => '772',
                 'height'    => '800',
@@ -338,7 +338,7 @@ class BravesChat {
         $details_link = sprintf(
             '<a href="%s" class="thickbox open-plugin-details-modal">%s</a>',
             esc_url($url),
-            __('Ver detalles', 'braves-chat')
+            __('Ver detalles', 'braveschat')
         );
 
         array_splice($links, 2, 0, array($details_link));
