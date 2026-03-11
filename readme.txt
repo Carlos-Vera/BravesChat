@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 5. Conversation history — session viewer with CSV export.
 
 == Changelog ==
+
+= 2.3.1 =
+* IMPROVED: Input field stays active while the bot is responding — users can type and interrupt at any time.
 
 = 2.3.0 =
 * ADDED: N8N authentication token now travels server-side only — never exposed in the browser.
