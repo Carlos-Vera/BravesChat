@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.2](#232---2026-03-11) - **Actual** - Fix text domain para WordPress.org
+- [2.3.3](#233---2026-03-11) - **Actual** - Fix text domain alineado al slug braveschat
+- [2.3.2](#232---2026-03-11) - Fix text domain para WordPress.org
 - [2.3.1](#231---2026-03-11) - Input activo mientras el agente responde
 - [2.3.0](#230---2026-03-10) - Token de N8N server-side, seguridad reforzada y licencia GPL
 - [2.2.3](#223---2026-03-05) - Modal de plugin y editor de texto enriquecido
@@ -29,6 +30,13 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.3] - 2026-03-11
+
+### 🐛 Correcciones
+- **FIXED**: Text domain actualizado a `braveschat` en los 21 archivos PHP del plugin, alineándolo con el slug asignado por WordPress.org. Elimina todos los errores `TextDomainMismatch` reportados por Plugin Check (PCP). La carpeta del ZIP de distribución también se renombra a `braveschat/` y el archivo principal a `braveschat.php`.
 
 ---
 
