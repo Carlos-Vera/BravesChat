@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braves-chat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Última actualización: 11 de Marzo, 2026', 'braves-chat'),
+                            'footer' => __('Última actualización: 11 de Marzo, 2026 (v2.3.2)', 'braves-chat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -114,6 +114,22 @@ $sidebar = Admin_Sidebar::get_instance();
                     </h2>
 
                     <div class="braves-changelog">
+
+                    <!-- Version 2.3.2 -->
+                        <div class="braves-changelog__version">
+                            <h3 class="braves-changelog__title">
+                                <span class="braves-badge braves-badge--success">v2.3.2</span>
+                                <?php echo wp_kses_post( __('Listo para WordPress.org: <i>text domain validado</i>', 'braves-chat') ); ?>
+                            </h3>
+                            <p class="braves-changelog__date"><?php esc_html_e('11 de Marzo, 2026', 'braves-chat'); ?></p>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('🐛 Correcciones', 'braves-chat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('FIXED: El Plugin Check de WordPress.org ya no reporta error de text domain — el ZIP distribuido usa el slug correcto (braves-chat) en el nombre del archivo principal.', 'braves-chat'); ?></li>
+                                </ul>
+                            </div>
+                        </div>
 
                     <!-- Version 2.3.1 -->
                         <div class="braves-changelog__version">

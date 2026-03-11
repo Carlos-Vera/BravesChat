@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.3.2 =
+* FIXED: Plugin Check text domain mismatch — the distributed ZIP now uses the correct plugin slug (`braves-chat`) so the text domain validates correctly on WordPress.org.
+
 = 2.3.1 =
 * IMPROVED: Input field stays active while the bot is responding — users can type and interrupt at any time.
 
@@ -134,6 +137,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * Initial plugin release.
 
 == Upgrade Notice ==
+
+= 2.3.2 =
+Fixes a text domain validation error on WordPress.org. Recommended update before submitting to the plugin directory.
 
 = 2.3.0 =
 Security update: N8N token is now handled server-side only. Includes three authentication methods and a simplified frontend.

@@ -46,6 +46,9 @@ jobs:
           --exclude "memory" \
           --exclude "*.bak"
 
+        # Renombrar el archivo principal para coincidir con el slug
+        mv dist/$PLUGIN_SLUG/braves_chat.php dist/$PLUGIN_SLUG/$PLUGIN_SLUG.php
+
         # Crear el zip
         cd dist
         zip -r ../$PLUGIN_SLUG.zip $PLUGIN_SLUG
