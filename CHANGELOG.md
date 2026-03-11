@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.0](#230---2026-03-10) - **Actual** - Token de N8N server-side, seguridad reforzada y licencia GPL
+- [2.3.1](#231---2026-03-11) - **Actual** - Input activo mientras el agente responde
+- [2.3.0](#230---2026-03-10) - Token de N8N server-side, seguridad reforzada y licencia GPL
 - [2.2.3](#223---2026-03-05) - Modal de plugin y editor de texto enriquecido
 - [2.2.2](#222---2026-03-04) - Protección contra exportación no autorizada del plugin
 - [2.2.1](#221---2026-02-26) - Correcciones de compatibilidad y mejoras de UI
@@ -27,6 +28,13 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.1] - 2026-03-11
+
+### 🎨 Mejoras de Experiencia
+- **IMPROVED**: El campo de texto permanece activo mientras el agente está respondiendo. El usuario puede escribir y enviar un nuevo mensaje en cualquier momento — si el agente está respondiendo, la respuesta se cancela y el nuevo mensaje se envía de inmediato.
 
 ---
 
