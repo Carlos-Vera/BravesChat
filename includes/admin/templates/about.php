@@ -113,12 +113,13 @@ $sidebar = Admin_Sidebar::get_instance();
                         <?php esc_html_e('Historial de Cambios', 'braves-chat'); ?>
                     </h2>
 
-                    <!-- Version 2.3.1 -->
                     <div class="braves-changelog">
+
+                    <!-- Version 2.3.1 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.3.1</span>
-                                <?php echo wp_kses_post( __('Escribe mientras el agente responde: <i>interrumpe cuando quieras</i>', 'braves-chat') ); ?>
+                                <?php echo wp_kses_post( __('Escribe mientras el agente responde', 'braves-chat') ); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('11 de Marzo, 2026', 'braves-chat'); ?></p>
 
@@ -129,10 +130,8 @@ $sidebar = Admin_Sidebar::get_instance();
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
                     <!-- Version 2.3.0 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.3.0</span>
