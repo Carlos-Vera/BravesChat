@@ -54,6 +54,6 @@ jobs:
         zip -r ../$PLUGIN_SLUG.zip $PLUGIN_SLUG
 
     - name: Upload Release Asset
-      run: gh release upload "${{ github.ref_name }}" braves-chat.zip --clobber
+      run: gh release upload "${{ github.ref_name }}" braveschat.zip --clobber
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
