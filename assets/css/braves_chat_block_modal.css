@@ -113,7 +113,7 @@ body #braveslab-chat-container textarea {
 
 /* Contenedor principal del chat */
 body #braveslab-chat-container {
-    z-index: 999999;
+    z-index: 999;
     font-family: 'Montserrat', 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -144,7 +144,7 @@ body #braveslab-chat-container:not(.braves-skin-braves) #chat-toggle {
     font-weight: normal;
     outline: none;
     pointer-events: auto;
-    z-index: 999999;
+    z-index: 99999;
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -706,6 +706,17 @@ body #braveslab-chat-container .typing-cursor {
 /* Smooth scrolling durante streaming */
 body #braveslab-chat-container #chat-messages {
     scroll-behavior: smooth;
+}
+
+/* ============================================
+   WOOCOMMERCE - CHECKOUT / CART COMPATIBILITY
+   El widget queda detrás del sidebar de compra
+   ============================================ */
+body.woocommerce-checkout #braveslab-chat-container,
+body.woocommerce-cart #braveslab-chat-container,
+body.woocommerce-checkout #braveslab-chat-container #chat-toggle,
+body.woocommerce-cart #braveslab-chat-container #chat-toggle {
+    z-index: 800 !important;
 }
 
 /* Input deshabilitado durante streaming */
