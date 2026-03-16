@@ -11,19 +11,12 @@
    ============================================ */
 
 /* Aplicar estilos a todas las páginas de Braves Chat */
-.toplevel_page_braveschat,
-.admin_page_braveschat-settings,
-.admin_page_braveschat-appearance,
-.admin_page_braveschat-availability,
-.admin_page_braveschat-gdpr,
-.admin_page_braveschat-about,
-.admin_page_braveschat-history {
+.braves-chat-admin-page {
     background-color: #f3f6fc;
     --wp-components-color-accent: #3858e9;
     --wp-components-color-accent-darker-10: #2145e6;
     --wp-components-color-accent-darker-20: #183ad6;
     --braves-dashboard-width: 1200px;
-    /* Wider for better Bento layout */
 }
 
 /* ============================================
@@ -54,26 +47,13 @@ a.braves-card-link:focus {
 
 
 /* El ítem del menú debe verse activo en todas las páginas */
-.toplevel_page_braveschat ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-settings ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-appearance ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-availability ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-gdpr ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-about ul#adminmenu li.toplevel_page_braveschat>a,
-.admin_page_braveschat-history ul#adminmenu li.toplevel_page_braveschat>a {
+.braves-chat-admin-page ul#adminmenu li.toplevel_page_braveschat>a {
     background-color: #2271b1;
     color: #fff;
 }
 
 /* WordPress admin bar offset fix - mantener la flecha blanca */
-ul#adminmenu>li.toplevel_page_braveschat.current>a.current:after,
-ul#adminmenu>li.menu-top.toplevel_page_braveschat>a.current:after,
-.admin_page_braveschat-settings ul#adminmenu>li.toplevel_page_braveschat>a:after,
-.admin_page_braveschat-appearance ul#adminmenu>li.toplevel_page_braveschat>a:after,
-.admin_page_braveschat-availability ul#adminmenu>li.toplevel_page_braveschat>a:after,
-.admin_page_braveschat-gdpr ul#adminmenu>li.toplevel_page_braveschat>a:after,
-.admin_page_braveschat-about ul#adminmenu>li.toplevel_page_braveschat>a:after,
-.admin_page_braveschat-history ul#adminmenu>li.toplevel_page_braveschat>a:after {
+.braves-chat-admin-page ul#adminmenu>li.toplevel_page_braveschat>a:after {
     border-right-color: #f3f6fc;
     right: 0;
     border: 8px solid transparent;
@@ -87,40 +67,16 @@ ul#adminmenu>li.menu-top.toplevel_page_braveschat>a.current:after,
     margin-top: -8px;
 }
 
-.toplevel_page_braveschat #wpcontent,
-.admin_page_braveschat-settings #wpcontent,
-.admin_page_braveschat-appearance #wpcontent,
-.admin_page_braveschat-availability #wpcontent,
-.admin_page_braveschat-gdpr #wpcontent,
-.admin_page_braveschat-about #wpcontent,
-.admin_page_braveschat-history #wpcontent {
+.braves-chat-admin-page #wpcontent {
     padding-left: 0 !important;
 }
 
-.toplevel_page_braveschat #wpfooter,
-.toplevel_page_braveschat .notice:not(.braves-dashboard .notice),
-.admin_page_braveschat-settings #wpfooter,
-.admin_page_braveschat-settings .notice:not(.braves-notice),
-.admin_page_braveschat-appearance #wpfooter,
-.admin_page_braveschat-appearance .notice:not(.braves-notice),
-.admin_page_braveschat-availability #wpfooter,
-.admin_page_braveschat-availability .notice:not(.braves-notice),
-.admin_page_braveschat-gdpr #wpfooter,
-.admin_page_braveschat-gdpr .notice:not(.braves-notice),
-.admin_page_braveschat-about #wpfooter,
-.admin_page_braveschat-about .notice:not(.braves-notice),
-.admin_page_braveschat-history #wpfooter,
-.admin_page_braveschat-history .notice:not(.braves-notice) {
+.braves-chat-admin-page #wpfooter,
+.braves-chat-admin-page .notice:not(.braves-notice) {
     display: none;
 }
 
-.toplevel_page_braveschat #wpbody-content,
-.admin_page_braveschat-settings #wpbody-content,
-.admin_page_braveschat-appearance #wpbody-content,
-.admin_page_braveschat-availability #wpbody-content,
-.admin_page_braveschat-gdpr #wpbody-content,
-.admin_page_braveschat-about #wpbody-content,
-.admin_page_braveschat-history #wpbody-content {
+.braves-chat-admin-page #wpbody-content {
     padding-bottom: 0;
 }
 
@@ -425,24 +381,12 @@ ul#adminmenu>li.menu-top.toplevel_page_braveschat>a.current:after,
    WordPress Components Integration
    ============================================ */
 
-.toplevel_page_braveschat-ia .components-external-link,
-.toplevel_page_braveschat-ia .components-menu-item__button:focus,
-.admin_page_braveschat-settings .components-external-link,
-.admin_page_braveschat-settings .components-menu-item__button:focus,
-.admin_page_braveschat-appearance .components-external-link,
-.admin_page_braveschat-appearance .components-menu-item__button:focus,
-.admin_page_braveschat-availability .components-external-link,
-.admin_page_braveschat-availability .components-menu-item__button:focus,
-.admin_page_braveschat-gdpr .components-external-link,
-.admin_page_braveschat-gdpr .components-menu-item__button:focus {
+.braves-chat-admin-page .components-external-link,
+.braves-chat-admin-page .components-menu-item__button:focus {
     color: var(--wp-components-color-accent);
 }
 
-.toplevel_page_braveschat-ia .components-external-link:focus,
-.admin_page_braveschat-settings .components-external-link:focus,
-.admin_page_braveschat-appearance .components-external-link:focus,
-.admin_page_braveschat-availability .components-external-link:focus,
-.admin_page_braveschat-gdpr .components-external-link:focus {
+.braves-chat-admin-page .components-external-link:focus {
     box-shadow: 0 0 0 var(--wp-admin-border-width-focus) var(--wp-components-color-accent);
     border-radius: 2px;
 }

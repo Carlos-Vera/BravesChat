@@ -44,6 +44,7 @@
 .braves-admin-header__logo {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .braves-admin-header__logo svg {
@@ -80,23 +81,53 @@
 }
 
 /* ==================== SIDEBAR ==================== */
-.braves-admin-sidebar {
+.braves-admin-sidebar-col {
     flex-shrink: 0;
     width: var(--braves-sidebar-width);
+    display: flex;
+    flex-direction: column;
+    gap: var(--braves-space-md);
+    position: sticky;
+    top: calc(32px + 25px);
+    align-self: flex-start;
+}
+
+.braves-admin-sidebar {
     background: var(--braves-white);
     border: 1px solid var(--braves-gray-200);
     border-radius: var(--braves-radius-lg);
     padding: var(--braves-space-md);
     box-shadow: var(--braves-shadow-sm);
-    position: sticky;
-    top: 32px;
-    /* WordPress admin bar height */
+}
+
+.braves-sidebar-save {
+    width: 100%;
+}
+
+.braves-sidebar-save__btn {
+    width: 100%;
+    justify-content: center;
+    border-radius: var(--braves-radius-md) !important;
+    font-family: var(--braves-font-sans) !important;
+    font-size: var(--braves-text-base) !important;
+    font-weight: var(--braves-font-semibold) !important;
+    padding: 10px 0 !important;
+    height: auto !important;
+    background-color: var(--braves-primary) !important;
+    border-color: var(--braves-primary) !important;
+    transition: background-color var(--braves-transition-fast), box-shadow var(--braves-transition-fast) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 119, 182, 0.2) !important;
+}
+
+.braves-sidebar-save__btn:hover,
+.braves-sidebar-save__btn:focus {
+    background-color: var(--braves-dark) !important;
 }
 
 .braves-admin-sidebar__inner {
     display: flex;
     flex-direction: column;
-    gap: var(--braves-space-xs);
+    gap: var(--braves-space-sm);
 }
 
 .braves-admin-sidebar__item {
@@ -110,16 +141,20 @@
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-medium);
     transition: all var(--braves-transition-fast);
+    border: 1px solid transparent;
 }
 
 .braves-admin-sidebar__item:hover {
     background: var(--braves-gray-50);
     color: var(--braves-primary);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
 }
 
 .braves-admin-sidebar__item--active {
-    background: var(--braves-primary-lighter);
+    background: var(--braves-gray-50);
     color: var(--braves-primary);
+    transform: translateY(-2px);
 }
 
 .braves-admin-sidebar__icon {
@@ -144,6 +179,7 @@
 .braves-admin-content {
     flex: 1;
     min-width: 0;
+    padding-bottom: calc(var(--braves-space-3xl) * 2);
 }
 
 /* ==================== PAGE HEADER ==================== */
@@ -186,8 +222,10 @@
 
 .braves-section--actions {
     padding: var(--braves-space-xl);
-    background: var(--braves-gray-50);
-    border-radius: var(--braves-radius-lg);
+    background: var(--braves-white);
+    border: 1px solid var(--braves-gray-200);
+    border-radius: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .braves-section--warning {
@@ -204,7 +242,7 @@
         flex-direction: column;
     }
 
-    .braves-admin-sidebar {
+    .braves-admin-sidebar-col {
         width: 100%;
         position: static;
     }
@@ -238,7 +276,7 @@
         font-size: var(--braves-text-2xl);
     }
 
-    .braves-sidebar__item {
+    .braves-admin-sidebar__item {
         font-size: var(--braves-text-sm);
         padding: var(--braves-space-sm) var(--braves-space-md);
     }
