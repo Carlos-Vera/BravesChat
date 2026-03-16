@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.3](#233---2026-03-11) - **Actual** - Fix text domain alineado al slug braveschat
+- [2.3.4](#234---2026-03-16) - **Actual** - Burbuja compacta en móviles
+- [2.3.3](#233---2026-03-11) - Fix text domain alineado al slug braveschat
 - [2.3.2](#232---2026-03-11) - Fix text domain para WordPress.org
 - [2.3.1](#231---2026-03-11) - Input activo mientras el agente responde
 - [2.3.0](#230---2026-03-10) - Token de N8N server-side, seguridad reforzada y licencia GPL
@@ -30,6 +31,13 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.4] - 2026-03-16
+
+### 🎨 Mejoras de Experiencia
+- **IMPROVED**: Burbuja del chat reducida en móviles (< 480px). Skin default: círculo de 48×48px en lugar de 60×60px. Skin Braves: vista compacta forzada (avatar + botón redondo) ocultando el texto y el CTA completo. Sin cambios en escritorio.
 
 ---
 
