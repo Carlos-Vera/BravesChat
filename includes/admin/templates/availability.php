@@ -53,7 +53,7 @@ $option_prefix = 'braves_chat_';
 
             <?php
             // Renderizar sidebar
-            $sidebar->render($current_page);
+            $sidebar->render($current_page, array('form_id' => 'braveschat-form-availability'));
             ?>
 
             <div class="braves-admin-content">
@@ -92,7 +92,7 @@ $option_prefix = 'braves_chat_';
                 <?php endif; ?>
 
                 <!-- Availability Form -->
-                <form action="options.php" method="post">
+                <form id="braveschat-form-availability" action="options.php" method="post">
                     <?php
                     settings_fields('braves_chat_settings');
                     // Preservar opciones no mostradas en este formulario
@@ -247,18 +247,6 @@ $option_prefix = 'braves_chat_';
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-
-                    <!-- Save Button -->
-                    <div class="braves-section braves-section--actions">
-                        <div class="braves-button-group">
-                            <?php submit_button(
-                                __('Guardar', 'braveschat'),
-                                'primary braves-button braves-button--primary',
-                                'submit',
-                                false
-                            ); ?>
                         </div>
                     </div>
 
