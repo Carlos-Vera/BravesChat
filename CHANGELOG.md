@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.4](#234---2026-03-16) - **Actual** - Burbuja compacta en móviles
+- [2.3.5](#235---2026-03-16) - **Actual** - Fix botón de subir imagen en Apariencia
+- [2.3.4](#234---2026-03-16) - Burbuja compacta en móviles
 - [2.3.3](#233---2026-03-11) - Fix text domain alineado al slug braveschat
 - [2.3.2](#232---2026-03-11) - Fix text domain para WordPress.org
 - [2.3.1](#231---2026-03-11) - Input activo mientras el agente responde
@@ -31,6 +32,13 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.5] - 2026-03-16
+
+### 🐛 Correcciones
+- **FIXED**: `class_settings.php` — condición `strpos($hook, 'braveschat')` extendida con `|| strpos($hook, 'braves-chat')`. Las páginas de submenú con `null` como parent generan hooks del tipo `admin_page_braves-chat-appearance`, no `toplevel_page_braveschat`. Por eso `wp_enqueue_media()` y `admin_media_uploader.js` nunca se cargaban en Apariencia, inutilizando el botón de subir imagen.
 
 ---
 

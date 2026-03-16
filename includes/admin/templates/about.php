@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braveschat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Última actualización: 16 de Marzo, 2026 (v2.3.4)', 'braveschat'),
+                            'footer' => __('Última actualización: 16 de Marzo, 2026 (v2.3.5)', 'braveschat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -115,11 +115,11 @@ $sidebar = Admin_Sidebar::get_instance();
 
                     <div class="braves-changelog">
 
-                    <!-- Versions 2.3.2 → 2.3.4 -->
+                    <!-- Versions 2.3.2 → 2.3.5 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
-                                <span class="braves-badge braves-badge--success">v2.3.4</span>
-                                <?php esc_html_e('Burbuja compacta en móviles', 'braveschat'); ?>
+                                <span class="braves-badge braves-badge--success">v2.3.5</span>
+                                <?php esc_html_e('Imagen personalizada y burbuja compacta', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('16 de Marzo, 2026', 'braveschat'); ?></p>
 
@@ -133,6 +133,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             <div class="braves-changelog__section">
                                 <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
+                                    <li><?php esc_html_e('FIXED: El botón para subir imagen personalizada en Apariencia ahora abre correctamente la biblioteca de medios de WordPress.', 'braveschat'); ?></li>
                                     <li><?php esc_html_e('FIXED: El Plugin Check de WordPress.org ya no reporta errores de text domain. El plugin usa el slug correcto (braveschat) en todos los archivos y en el ZIP de distribución.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
