@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.3
+Stable tag: 2.3.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.3.4 =
+* IMPROVED: Chat bubble is now smaller on mobile devices — default skin shrinks to 48×48px, Braves skin switches to a compact avatar + button layout.
+
 = 2.3.3 =
 * FIXED: Text domain updated to `braveschat` across all files to match the WordPress.org assigned slug. Resolves all Plugin Check (PCP) text domain errors.
 
@@ -140,6 +143,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * Initial plugin release.
 
 == Upgrade Notice ==
+
+= 2.3.4 =
+Mobile UX improvement: the chat bubble is now smaller and less intrusive on phones. No configuration needed.
 
 = 2.3.3 =
 Resolves all Plugin Check text domain errors. Required before WordPress.org review.
