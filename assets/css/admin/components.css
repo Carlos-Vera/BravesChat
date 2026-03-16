@@ -6,6 +6,28 @@
  * @version 1.2.0
  */
 
+/* ==================== UTILIDADES DE INTERACCIÓN ==================== */
+
+/* Acento primario al hover: borde + sombra de color */
+.braves-hover-accent {
+    border: 1px solid transparent;
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.braves-hover-accent:hover,
+.braves-accent-active {
+    border-color: var(--braves-primary);
+    box-shadow: var(--braves-shadow-accent);
+}
+
+/* Variante oscura: mismo acento primario pero fondo negro al hover */
+.braves-hover-accent--dark:hover {
+    background-color: var(--braves-dark, #141414);
+    border-color: var(--braves-primary);
+    box-shadow: var(--braves-shadow-accent);
+}
+
 /* ==================== CARD GRID (BENTO LAYOUT) ==================== */
 .braves-card-grid {
     display: grid;
@@ -60,7 +82,7 @@ a.braves-card.braves-card--clickable:focus-visible {
 
 a.braves-card.braves-card--clickable:hover {
     border-color: var(--braves-primary);
-    box-shadow: 0 10px 20px -3px rgba(0, 119, 182, 0.15), 0 4px 6px -2px rgba(0, 119, 182, 0.1);
+    box-shadow: var(--braves-shadow-accent);
 }
 
 .braves-card__icon {
