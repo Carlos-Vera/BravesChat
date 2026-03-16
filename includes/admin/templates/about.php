@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braveschat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Última actualización: 11 de Marzo, 2026 (v2.3.2)', 'braveschat'),
+                            'footer' => __('Última actualización: 16 de Marzo, 2026 (v2.3.4)', 'braveschat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -115,18 +115,25 @@ $sidebar = Admin_Sidebar::get_instance();
 
                     <div class="braves-changelog">
 
-                    <!-- Version 2.3.2 -->
+                    <!-- Versions 2.3.2 → 2.3.4 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
-                                <span class="braves-badge braves-badge--success">v2.3.2</span>
-                                <?php echo wp_kses_post( __('Listo para WordPress.org: <i>text domain validado</i>', 'braveschat') ); ?>
+                                <span class="braves-badge braves-badge--success">v2.3.4</span>
+                                <?php esc_html_e('Burbuja compacta en móviles', 'braveschat'); ?>
                             </h3>
-                            <p class="braves-changelog__date"><?php esc_html_e('11 de Marzo, 2026', 'braveschat'); ?></p>
+                            <p class="braves-changelog__date"><?php esc_html_e('16 de Marzo, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🐛 Correcciones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: El Plugin Check de WordPress.org ya no reporta error de text domain — el ZIP distribuido usa el slug correcto (braves-chat) en el nombre del archivo principal.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: En móviles la burbuja ocupa menos espacio. El skin default se reduce a 48×48px; el skin Braves se contrae a avatar + botón redondo. En escritorio no cambia nada.', 'braveschat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('FIXED: El Plugin Check de WordPress.org ya no reporta errores de text domain. El plugin usa el slug correcto (braveschat) en todos los archivos y en el ZIP de distribución.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -135,14 +142,14 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.3.1</span>
-                                <?php echo wp_kses_post( __('Escribe mientras el agente responde', 'braveschat') ); ?>
+                                <?php esc_html_e('Escribe mientras el agente responde', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('11 de Marzo, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: El chat ya no bloquea la caja de texto mientras el agente responde — escribe tu siguiente pregunta en cualquier momento. Si el agente está a mitad de respuesta, se cancela y tu nuevo mensaje se envía de inmediato.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El campo de texto ya no se bloquea mientras el agente responde. Puedes escribir en cualquier momento. Si el agente está a mitad de respuesta, se cancela y tu nuevo mensaje se envía de inmediato.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -151,31 +158,31 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.3.0</span>
-                                <?php echo wp_kses_post( __('Seguridad reforzada', 'braveschat') ); ?>
+                                <?php esc_html_e('El token vive en el servidor', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('10 de Marzo, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('✨ Nuevas Funcionalidades', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: El token de autenticación de N8N ya no se expone en el HTML — viaja siempre en el servidor, invisible para cualquier visitante.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Soporte para tres métodos de autenticación hacia N8N: cabecera personalizada, Basic Auth o sin autenticación.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: El token de N8N ya no viaja al navegador. El frontend envía el mensaje a WordPress, y WordPress lo reenvía al webhook con el token añadido en el servidor — invisible para cualquier visitante.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Tres métodos de autenticación hacia N8N: cabecera personalizada, Basic Auth o sin autenticación.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: El modo de visualización activo (modal o pantalla completa) ahora aparece en la cabecera del panel para referencia rápida.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: El bloque de Gutenberg muestra un preview rediseñado con el estilo del panel: cabecera, cuerpo y pie de página con branding del chat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El modo de visualización activo (modal o pantalla completa) aparece ahora en la cabecera del panel.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El bloque de Gutenberg muestra un preview rediseñado con el estilo del panel.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: El plugin ahora se distribuye con licencia GPL-2.0, compatible con WordPress.org.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Las imágenes del plugin (banners, capturas) ahora son PNG para máxima compatibilidad.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Licencia GPL-2.0-or-later, alineada con los requisitos de WordPress.org.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Banners, capturas e iconos convertidos a PNG para máxima compatibilidad.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -184,23 +191,23 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.2.3</span>
-                                <?php esc_html_e('Admin afinado y protegido', 'braveschat'); ?>
+                                <?php esc_html_e('Detalles del plugin sin salir del admin', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('5 de Marzo, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Haz clic en "Ver detalles" en la lista de plugins de WordPress para ver la ficha completa del plugin — capturas, FAQ, instrucciones y compatibilidad — sin salir del admin.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: El mensaje del banner GDPR y el mensaje de horario offline ahora usan un editor visual — añade negritas, listas o enlaces sin escribir una sola línea de HTML.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: El panel de BravesChat ya no muestra avisos de otros plugins instalados en tu WordPress — la interfaz queda limpia y enfocada en tu configuración.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Haz clic en "Ver detalles" en la lista de plugins de WordPress para ver la ficha completa: capturas, FAQ, instrucciones y compatibilidad.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El mensaje del banner GDPR y el aviso de horario offline ahora usan editor visual. Puedes añadir negritas, listas o enlaces sin tocar HTML.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El panel de BravesChat ya no muestra avisos de otros plugins. Solo ves lo tuyo, sin ruido.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: El panel te avisa si detecta alguna herramienta instalada capaz de exportar el código del plugin — una capa extra de protección para tu instalación.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: El panel detecta si tienes herramientas instaladas que puedan exportar el código del plugin y te avisa. Una capa extra de protección.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -209,24 +216,24 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.2.0</span>
-                                <?php echo wp_kses_post( __('Historial de Conversaciones:<i>conoce lo que piensan tus clientes</i>', 'braveschat') ); ?>
+                                <?php esc_html_e('Historial de conversaciones', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('26 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('✨ Nuevas Funcionalidades', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php echo wp_kses_post( __('ADDED: New <strong>Historial</strong>: accede a todas las conversaciones que tu agente ha tenido con tus visitantes.', 'braveschat') ); ?></li>
-                                    <li><?php esc_html_e('ADDED: Abre cualquier conversación con un clic y lee cada mensaje tal y como ocurrió, en una interfaz de chat clara y fácil de seguir.', 'braveschat'); ?></li>
+                                    <li><?php echo wp_kses_post( __('ADDED: Nueva sección <strong>Historial</strong>: accede a todas las conversaciones que tu agente ha tenido con tus visitantes.', 'braveschat') ); ?></li>
+                                    <li><?php esc_html_e('ADDED: Abre cualquier conversación con un clic y lee cada mensaje tal como ocurrió, en una interfaz de chat clara.', 'braveschat'); ?></li>
                                     <li><?php echo wp_kses_post( __('ADDED: Exporta el historial completo a <strong>CSV</strong> con un clic para analizarlo en Excel, importarlo a tu CRM o compartirlo con tu equipo.', 'braveschat') ); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: Los mensajes de tus clientes se muestran exactamente como los escribieron, sin textos irrelevantes que dificulten la lectura.', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Cada fila agrupa en su interior todos los mensajes de la conversación, para que puedas entender el contexto completo.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Los mensajes de tus clientes se muestran exactamente como los escribieron, sin ruido que dificulte la lectura.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Cada fila agrupa todos los mensajes de la conversación para que veas el contexto completo.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -235,16 +242,15 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.3</span>
-                                <?php esc_html_e('Fix Release Automatizado con GitHub Actions', 'braveschat'); ?>
+                                <?php esc_html_e('ZIP automático en cada release', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('23 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Backend / CI', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: El workflow de GitHub Actions no se ejecutaba porque .gitignore excluía el directorio .github/workflows/', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Eliminada regla **/.github/workflows/* del .gitignore para que el workflow quede trackeado en git', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Workflow release.yml ahora genera automáticamente braveschat.zip al hacer push de un tag v*', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Cada vez que publicamos una versión, el ZIP listo para instalar se genera automáticamente en GitHub. Sin pasos manuales.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El proceso de generación automática del ZIP no se ejecutaba correctamente en versiones anteriores.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -253,36 +259,31 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.2</span>
-                                <?php esc_html_e('Aislamiento CSS y Mejoras de Compatibilidad', 'braveschat'); ?>
+                                <?php esc_html_e('El chat ignora los estilos de tu tema', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('20 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Interfaz', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: Sistema completo de aislamiento CSS (Isolation Layer) para prevenir conflictos con temas', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Reset exhaustivo de estilos de botones, inputs y elementos de texto en todos los modos', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Protección contra bleeding de CSS de temas externos en Modal, Fullscreen y GDPR Banner', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Forzado de tipografía Montserrat en todos los elementos del chat', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El chat ya no hereda estilos del tema activo. Botones, inputs y textos se ven igual sin importar qué tema tengas instalado.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: La tipografía Montserrat se aplica en todos los elementos del chat: modal, pantalla completa y banner GDPR.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🐛 Correcciones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: Posicionamiento del chat en modo centrado (position-center)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Ventana del chat centrada cuando la burbuja está en el centro', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Posicionamiento bottom-left corregido para modo modal', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Eliminación de cursores de escritura múltiples en streaming', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El chat en posición central se veía desplazado en algunos temas. Ahora se centra correctamente.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: La posición inferior izquierda en modo modal quedaba mal alineada en ciertos tamaños de pantalla.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Backend', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Filtro admin_title para títulos dinámicos por sección', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Títulos de pestañas personalizados: "BravesChat | Sección | Sitio"', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('CHANGED: Script de desinstalación preserva configuraciones al desinstalar', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Cada sección del panel tiene su propio título en la pestaña del navegador.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Al desinstalar el plugin, tus configuraciones se conservan por si lo reinstalás más adelante.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
@@ -291,353 +292,280 @@ $sidebar = Admin_Sidebar::get_instance();
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v2.1.1</span>
-                                <?php esc_html_e('Mejoras UX y Fixes', 'braveschat'); ?>
+                                <?php esc_html_e('Markdown en tiempo real', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('16 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras de Experiencia', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: Renderizado incremental de Markdown en tiempo real', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Mantenimiento del foco en el input tras enviar mensaje', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las respuestas del agente se renderizan en tiempo real con formato Markdown. Negritas, listas y enlaces aparecen tal como llegan.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Al enviar un mensaje, el cursor vuelve automáticamente al campo de texto. Puedes seguir escribiendo sin hacer clic.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-
                     <!-- Version 2.1.0 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--primary">v2.1.0</span>
-                                <?php esc_html_e('Nuevas Funcionalidades y Mejoras', 'braveschat'); ?>
+                                <?php esc_html_e('Controla la velocidad de escritura', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('16 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('✨ Nuevas Funcionalidades', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Slider de control de velocidad de escritura', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Soporte HTML/Markdown en banner GDPR', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Tipografía Montserrat local', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Control deslizante para ajustar la velocidad a la que el agente "escribe" sus respuestas. Desde lenta y pausada hasta casi instantánea.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: El banner GDPR ahora acepta texto enriquecido. Puedes añadir negritas, listas o enlaces directamente desde el campo de texto.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: La tipografía del chat se carga desde el propio servidor, sin depender de servicios externos.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
-                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🐛 Correcciones', 'braveschat'); ?></h4>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: Scroll automático y estilos GDPR', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El scroll del chat baja automáticamente al llegar un mensaje nuevo. El banner GDPR se muestra correctamente en todos los temas.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                     <!-- Version 2.0.0 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--primary">v2.0.0</span>
-                                <?php esc_html_e('Lanzamiento Mayor - BravesChat iA 2.0', 'braveschat'); ?>
+                                <?php esc_html_e('BravesChat iA 2.0', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('14 de Febrero, 2026', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🚀 Lanzamiento Mayor', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('MAJOR: Sistema reestructurado completo adoptando el nombre de "BravesChat iA"', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('MAJOR: Refactorización profunda de namespaces a BravesChat y BravesChat\Admin', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('MAJOR: Actualización de estructura de directorios y nombres de archivos principales', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: El plugin se renombra como BravesChat iA con arquitectura renovada de arriba abajo.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Botón para maximizar el chat. El usuario puede expandirlo a pantalla completa en cualquier momento.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: El área de texto crece automáticamente al escribir varias líneas, sin desbordar el chat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Tras interactuar, la burbuja del chat se minimiza en una pastilla compacta para no molestar.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('✨ Nuevas Funcionalidades UI/UX', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Funcionalidad de expansión del chat (botón de maximizar)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Auto-crecimiento del área de texto (textarea) al escribir múltiples líneas', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Enlace directo a la sección "About" desde la tarjeta de versión en el Dashboard', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Estado Minimizado de la burbuja tras interacción (pill shape)', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Identidad visual renovada con los colores corporativos de BravesChat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las burbujas de mensajes ya no cortan el texto ni muestran bordes extraños.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El icono de enviar mensaje es ahora un diseño propio en blanco.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El tooltip del botón flotante dice por defecto "Habla con nuestro asistente IA".', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎨 Mejoras Visuales', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: Unificación de identidad visual con colores corporativos "Braves Primary"', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Corrección de estilos en burbujas de chat (texto cortado, borders)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Actualización de tooltips predeterminados ("Habla con nuestro asistente IA")', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Icono de enviar mensaje actualizado a diseño personalizado (blanco)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Títulos de menú admin actualizados a "BravesChat iA"', 'braveschat'); ?></li>
-                                </ul>
-                            </div>
-
-                            <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🐛 Correcciones y Estabilidad', 'braveschat'); ?></h4>
-                                <ul>
-                                    <li><?php esc_html_e('FIXED: Lógica del botón de enviar (estado habilitado/deshabilitado)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Guardado de configuración en sección "Páginas Excluidas"', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Depuración de salida JSON en integración con n8n', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Renderizado de campos ocultos en formularios de configuración', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El botón de enviar ya no se queda bloqueado en situaciones inesperadas.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Al guardar ajustes de Páginas Excluidas, la selección ya no se perdía.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: La integración con N8N ya no enviaba datos extra que podían confundir al agente.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Al guardar ajustes desde cualquier sección, ya no se perdían los valores configurados en otras páginas.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                     <!-- Version 1.2.4 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--primary">v1.2.4</span>
-                                <?php esc_html_e('Tooltip Personalizable y Color de Icono', 'braveschat'); ?>
+                                <?php esc_html_e('Tooltip personalizable', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('17 de Noviembre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎁 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Campo de texto para personalizar el tooltip del botón flotante del chat', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Opción bubble_tooltip registrada en WordPress Settings API', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Card "Tooltip del Botón" en página de Apariencia (antes del selector de iconos)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Atributo title dinámico en botón flotante usando valor personalizado', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Color por defecto del icono SVG cambiado de #5B4CCC a #f2f2f2 (gris claro)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Mejor organización de opciones en panel de Apariencia', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Tooltip ubicado estratégicamente antes del selector de iconos', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Campo de texto para personalizar el mensaje que aparece al pasar el cursor sobre el botón flotante del chat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Al activar el plugin, detecta automáticamente versiones anteriores instaladas, las desactiva y limpia los archivos obsoletos. Sin perder ninguna configuración.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔄 Detección Automática de Versiones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Sistema automático de detección de versiones anteriores del plugin al activar', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Desactivación automática de plugins antiguos si están activos', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Eliminación automática de directorios de versiones anteriores', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Preservación de configuraciones del usuario durante la migración', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Prevención de errores fatales por funciones redeclaradas', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El color por defecto del icono del botón flotante cambia a gris claro para mejor contraste sobre fondos oscuros.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las opciones de Apariencia están mejor organizadas. El tooltip aparece justo antes del selector de iconos.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Correcciones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: Hotfix para error fatal causado por múltiples versiones instaladas simultáneamente', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Implementación de function_exists() check para prevenir redeclaraciones', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Fallback del color del icono corregido en appearance.php', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Error grave que impedía cargar WordPress cuando había dos versiones del plugin instaladas al mismo tiempo.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El color del icono no se aplicaba correctamente al editar la configuración de apariencia.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
                     <!-- Version 1.2.3 -->
-                    <div class="braves-changelog">
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--primary">v1.2.3</span>
-                                <?php esc_html_e('Personalización de Colores e Iconos SVG', 'braveschat'); ?>
+                                <?php esc_html_e('Personalización de colores e iconos', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('26 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎁 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Sistema completo de personalización de colores desde panel de Apariencia', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: 4 campos de color personalizables: Color de la Burbuja, Color Primario, Color de Fondo y Color de Texto', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Color picker nativo HTML5 con sincronización a input de texto hexadecimal', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Paleta de colores del tema de WordPress extraída desde theme.json (colapsable)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Paleta por defecto de 8 colores cuando el tema no define colores personalizados', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Sistema de selección de iconos SVG personalizables para botón flotante', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: 4 iconos SVG optimizados (Original/Robot, Círculo, Happy, Burbuja)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Selector estilo tabs Bentō en página de Apariencia', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Toggle buttons para expandir/colapsar paletas de colores con animación suave', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Color pickers con estilo Material Design list (inline-block, vertical-align: middle)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Diseño tabs horizontal con fondo gris claro y selección con borde morado', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Iconos optimizados 32x32px desde viewBox 460x460', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Diseño responsive (2 columnas en móvil)', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Sistema completo de personalización de colores desde el panel: burbuja, color primario, fondo y texto del chat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Selector de color nativo con sincronización a campo de texto hexadecimal. Escribe el código exacto o usa el picker visual.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Paleta de colores extraída automáticamente del tema activo, más una paleta por defecto de 8 colores.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Cuatro iconos para el botón flotante: Robot, Círculo, Happy y Burbuja.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Correcciones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: Eliminada dependencia de Lottie Player (CDN externo)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Errores de consola por animaciones Lottie no cargadas', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Error JavaScript cuando wp.i18n no está disponible', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Alineación del color picker y input text usando display: inline-block con vertical-align: middle', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Configuración JavaScript duplicada entre templates y class_frontend.php', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Templates modal.php y screen.php creaban variable conflictiva bravesChatConfig', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('REMOVED: Gradiente del botón flotante - ahora usa color sólido', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('REMOVED: Borde izquierdo de las burbujas de mensajes', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('CHANGED: Templates usan img SVG en lugar de animación Lottie', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('CHANGED: Icono por defecto cambiado a "Original" (robot-chat)', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las paletas de colores se pueden expandir y contraer con animación suave para no saturar la pantalla.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El selector de iconos usa un diseño de pestañas horizontal, más claro y rápido de usar.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El panel de Apariencia es responsive. Los selectores se reorganizan en dos columnas en pantallas pequeñas.', 'braveschat'); ?></li>
+                                </ul>
+                            </div>
+
+                            <div class="braves-changelog__section">
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
+                                <ul>
+                                    <li><?php esc_html_e('FIXED: Eliminada la dependencia de Lottie Player que se cargaba desde un CDN externo. El botón del chat ya no falla si no hay conexión a internet.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El botón flotante ahora usa un color sólido en lugar del gradiente que causaba inconsistencias visuales.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: La imagen del botón pasó de animación a SVG estático. Más rápido y sin errores de consola.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.2.2 -->
+                    <!-- Version 1.2.2 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v1.2.2</span>
-                                <?php esc_html_e('Correcciones y Mejoras UX', 'braveschat'); ?>
+                                <?php esc_html_e('Panel completo y funcional', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('25 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔧 Correcciones', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('FIXED: Los inputs de formulario no se renderizaban en las páginas de configuración', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: El método Admin_Content::render_card() no soportaba el parámetro content', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: wp_kses_post() eliminaba los elementos de formulario HTML', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Los ajustes se perdían al guardar desde diferentes páginas (Settings, Appearance, Availability, GDPR)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: El icono del menú mostraba color gris en lugar de blanco cuando estaba activo', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('FIXED: Script admin_settings.js no se cargaba en páginas Appearance, Availability y GDPR', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Los campos de configuración no se mostraban en algunas páginas del panel. Ahora aparecen correctamente en todas las secciones.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: Al guardar desde cualquier página de ajustes, ya no se borraban los valores configurados en las otras secciones.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('FIXED: El icono del menú lateral mostraba gris en lugar de blanco al estar seleccionado.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎁 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras de Experiencia', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Sistema de auto-ocultación para notificaciones de éxito con animación slide-up', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Campos ocultos en formularios para preservar ajustes de otras secciones', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: JavaScript para mantener clase wp-has-current-submenu en páginas del plugin', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Iconos de sidebar actualizados a versiones sólidas (Horarios, GDPR)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Iconos de página About actualizados (Version: verified, Autor: person_pin, Empresa: business_center)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Tarjetas informativas ahora son clicables con enlaces externos', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Todos los formularios ahora funcionales con diseño Bentō consistente', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Estilos CSS unificados en todas las páginas del admin', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Toggles estilo Bentō implementados en todos los checkboxes', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Las notificaciones de guardado exitoso desaparecen solas tras unos segundos, con animación suave.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Los iconos del sidebar se actualizaron a versiones sólidas para mejor legibilidad.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Las tarjetas de información son ahora clicables con enlaces externos.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: Todos los checkboxes del panel usan el estilo toggle del diseño Bentō.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.2.1 -->
+                    <!-- Version 1.2.1 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v1.2.1</span>
-                                <?php esc_html_e('Rediseño Completo del Admin', 'braveschat'); ?>
+                                <?php esc_html_e('Rediseño completo del panel de administración', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('24 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('⚙️ Características', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('Implementación completa del diseño Bentō', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('Nueva arquitectura modular de componentes', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('5 páginas de administración: Resumen, Ajustes, Apariencia, Horarios, GDPR', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('Sidebar único compartido entre todas las páginas', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('Sistema de Template Helpers para renderizado consistente', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Panel de administración rediseñado con el estilo Bentō — limpio, modular y fácil de navegar.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Cinco secciones independientes: Resumen, Ajustes, Apariencia, Horarios y GDPR.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Sidebar compartido entre todas las páginas del panel para una navegación consistente.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.1.2 -->
+                    <!-- Version 1.1.2 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v1.1.2</span>
-                                <?php esc_html_e('Cambio de Marca', 'braveschat'); ?>
+                                <?php esc_html_e('Cambio de marca', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('23 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔁 Cambios', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('CHANGED: Weblandia → BravesLab', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('CHANGED: URLs actualizadas a braveslab.com', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('CHANGED: Copyright actualizado a BRAVES LAB LLC', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: El plugin actualiza su marca de Weblandia a BravesLab — todas las URLs y referencias se actualizaron a braveslab.com.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.1.1 -->
+                    <!-- Version 1.1.1 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--primary">v1.1.1</span>
-                                <?php esc_html_e('Sistema de Cookies y GDPR', 'braveschat'); ?>
+                                <?php esc_html_e('Sistema de cookies y GDPR', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('16 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎁 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Sistema de cookies con fingerprinting del navegador', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Banner de consentimiento GDPR configurable', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Hash SHA-256 para identificación única', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Fallback a localStorage si cookies bloqueadas', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Sistema de identificación única de usuarios mediante fingerprinting del navegador, sin almacenar datos personales.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Banner de consentimiento GDPR configurable — bloquea el chat hasta que el usuario acepte.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Si las cookies están bloqueadas por el navegador, el historial de chat se guarda en memoria local como alternativa.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.1.0 -->
+                    <!-- Version 1.1.0 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v1.1.0</span>
-                                <?php esc_html_e('Horarios y Páginas Excluidas', 'braveschat'); ?>
+                                <?php esc_html_e('Horarios y páginas excluidas', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('1 de Octubre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('⚙️ Características', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Sistema de horarios de disponibilidad con zonas horarias', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Páginas excluidas configurables (selector múltiple)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Token de autenticación N8N (header X-N8N-Auth)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Mensaje personalizado fuera de horario', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Define el horario en que el chat está disponible, con soporte de zonas horarias.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Mensaje automático fuera de horario. El agente responde con tu texto cuando no está disponible.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Selector de páginas excluidas. Elige en qué páginas de tu sitio no aparece el chat.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Token de autenticación para asegurar la comunicación con tu agente de N8N.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🎁 Mejoras', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('IMPROVED: Configuración del webhook más flexible', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Validación de URLs de webhook', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('IMPROVED: Sanitización de inputs en Settings API', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('IMPROVED: La configuración del webhook es más flexible y valida la URL antes de guardar.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- Version 1.0.0 -->
+                    <!-- Version 1.0.0 -->
                         <div class="braves-changelog__version">
                             <h3 class="braves-changelog__title">
                                 <span class="braves-badge braves-badge--success">v1.0.0</span>
-                                <?php esc_html_e('Lanzamiento Inicial', 'braveschat'); ?>
+                                <?php esc_html_e('Lanzamiento inicial', 'braveschat'); ?>
                             </h3>
                             <p class="braves-changelog__date"><?php esc_html_e('15 de Septiembre, 2025', 'braveschat'); ?></p>
 
                             <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🛠️ Funcionalidades Principales', 'braveschat'); ?></h4>
+                                <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                 <ul>
-                                    <li><?php esc_html_e('ADDED: Integración de chat con IA mediante bloque Gutenberg', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Configuración de webhook N8N', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Sistema de mensajes personalizables', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Dos modos de visualización: Modal y Pantalla completa', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Posicionamiento configurable (derecha, izquierda, centro)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Animación Lottie en botón de chat', 'braveschat'); ?></li>
-                                </ul>
-                            </div>
-
-                            <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🧬 Arquitectura', 'braveschat'); ?></h4>
-                                <ul>
-                                    <li><?php esc_html_e('ADDED: Estructura OOP con namespaces PHP (BravesChat)', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: WordPress Settings API para configuración', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: WordPress Customizer API para personalización en tiempo real', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Bloque Gutenberg con opciones personalizables', 'braveschat'); ?></li>
-                                </ul>
-                            </div>
-
-                            <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🔒 Seguridad', 'braveschat'); ?></h4>
-                                <ul>
-                                    <li><?php esc_html_e('ADDED: Sanitización completa de inputs', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Nonces en todos los formularios', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Verificación de capacidades de usuario', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Escapado de salidas (esc_html, esc_attr, esc_url)', 'braveschat'); ?></li>
-                                </ul>
-                            </div>
-
-                            <div class="braves-changelog__section">
-                                <h4><?php esc_html_e('🇻🇪 i18n', 'braveschat'); ?></h4>
-                                <ul>
-                                    <li><?php esc_html_e('ADDED: Preparado para internacionalización', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Text domain: braves-chat', 'braveschat'); ?></li>
-                                    <li><?php esc_html_e('ADDED: Archivo .pot para traducciones', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Widget de chat con IA integrado en WordPress mediante bloque de Gutenberg.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Conexión directa con flujos de trabajo de N8N mediante webhook configurable.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Dos modos de visualización: modal flotante y pantalla completa.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Posicionamiento configurable del botón flotante: derecha, izquierda o centro.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Mensajes de bienvenida, título y subtítulo del chat personalizables desde el panel.', 'braveschat'); ?></li>
+                                    <li><?php esc_html_e('ADDED: Preparado para traducción a cualquier idioma.', 'braveschat'); ?></li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
