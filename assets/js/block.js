@@ -17,16 +17,16 @@
     var TextareaControl = components.TextareaControl;
 
     blocks.registerBlockType('braves/chat-widget', {
-        title: __('BravesChat — Pantalla Completa', 'braves-chat'),
-        description: __('Muestra el chat de BravesChat en pantalla completa en esta página. Configura el webhook, colores y título desde el panel del plugin.', 'braves-chat'),
+        title: __('BravesChat — Pantalla Completa', 'braveschat'),
+        description: __('Muestra el chat de BravesChat en pantalla completa en esta página. Configura el webhook, colores y título desde el panel del plugin.', 'braveschat'),
         icon: 'format-chat',
         category: 'widgets',
         keywords: [
-            __('chat', 'braves-chat'),
-            __('ia', 'braves-chat'),
-            __('asistente', 'braves-chat'),
-            __('braveslab', 'braves-chat'),
-            __('fullscreen', 'braves-chat')
+            __('chat', 'braveschat'),
+            __('ia', 'braveschat'),
+            __('asistente', 'braveschat'),
+            __('braveslab', 'braveschat'),
+            __('fullscreen', 'braveschat')
         ],
         supports: {
             html: false,
@@ -47,24 +47,24 @@
 
             var previewText = welcomeMessage
                 ? (welcomeMessage.length > 160 ? welcomeMessage.substring(0, 160) + '...' : welcomeMessage)
-                : __('(Usa el mensaje configurado en el panel del plugin)', 'braves-chat');
+                : __('(Usa el mensaje configurado en el panel del plugin)', 'braveschat');
 
             return el('div', { className: 'wp-block-braves-chat-widget' },
 
                 // Sidebar — solo mensaje de bienvenida
                 el(InspectorControls, {},
                     el(PanelBody, {
-                        title: __('Mensaje de bienvenida', 'braves-chat'),
+                        title: __('Mensaje de bienvenida', 'braveschat'),
                         initialOpen: true
                     },
                         el(TextareaControl, {
-                            label: __('Mensaje de bienvenida', 'braves-chat'),
+                            label: __('Mensaje de bienvenida', 'braveschat'),
                             value: welcomeMessage,
                             onChange: function (value) {
                                 setAttributes({ welcomeMessage: value });
                             },
                             rows: 5,
-                            help: __('Primer mensaje que verá el usuario en esta página. Si lo dejas vacío se usará el mensaje global del plugin.', 'braves-chat')
+                            help: __('Primer mensaje que verá el usuario en esta página. Si lo dejas vacío se usará el mensaje global del plugin.', 'braveschat')
                         })
                     )
                 ),
@@ -88,7 +88,7 @@
                             el('span', { className: 'braves-block-card__name' }, 'BravesChat')
                         ),
                         el('span', { className: 'braves-block-card__badge' },
-                            __('Pantalla Completa', 'braves-chat')
+                            __('Pantalla Completa', 'braveschat')
                         )
                     ),
 
@@ -125,7 +125,7 @@
                             el('line', { x1: '12', y1: '16', x2: '12.01', y2: '16' })
                         ),
                         el('span', {},
-                            __('Webhook, título, colores y posición se configuran desde el panel de BravesChat.', 'braves-chat')
+                            __('Webhook, título, colores y posición se configuran desde el panel de BravesChat.', 'braveschat')
                         )
                     )
                 )

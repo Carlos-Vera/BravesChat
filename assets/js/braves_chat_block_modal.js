@@ -356,11 +356,11 @@ class BravesChatModal {
         notice.className = 'braves-chat-gdpr-notice braves-gdpr-global-overlay';
         notice.innerHTML = `
             <div class="braves-gdpr-card">
-                <h3>${__('Términos y condiciones', 'braves-chat')}</h3>
-                <p>${window.bravesFingerprint.gdpr_config.message || __('Al hacer clic en «Aceptar» y cada vez que interactúo con este agente de IA, doy mi consentimiento para que se graben, almacenen y compartan mis comunicaciones con terceros proveedores de servicios, tal y como se describe en la Política de privacidad. Si no desea que se graben sus conversaciones, le rogamos que se abstenga de utilizar este servicio.', 'braves-chat')}</p>
+                <h3>${__('Términos y condiciones', 'braveschat')}</h3>
+                <p>${window.bravesFingerprint.gdpr_config.message || __('Al hacer clic en «Aceptar» y cada vez que interactúo con este agente de IA, doy mi consentimiento para que se graben, almacenen y compartan mis comunicaciones con terceros proveedores de servicios, tal y como se describe en la Política de privacidad. Si no desea que se graben sus conversaciones, le rogamos que se abstenga de utilizar este servicio.', 'braveschat')}</p>
                 <div class="braves-gdpr-actions">
-                    <button class="braves-btn-cancel" id="braves-gdpr-cancel-btn">${__('Cancelar', 'braves-chat')}</button>
-                    <button class="braves-btn-accept" id="braves-gdpr-accept-btn">${window.bravesFingerprint.gdpr_config.accept_text || __('Aceptar', 'braves-chat')}</button>
+                    <button class="braves-btn-cancel" id="braves-gdpr-cancel-btn">${__('Cancelar', 'braveschat')}</button>
+                    <button class="braves-btn-accept" id="braves-gdpr-accept-btn">${window.bravesFingerprint.gdpr_config.accept_text || __('Aceptar', 'braveschat')}</button>
                 </div>
             </div>
         `;
@@ -649,54 +649,54 @@ class BravesChatModal {
             this.hide_typing_indicator();
 
             // Construir mensaje de error descriptivo
-            let user_message = __('Error al procesar tu mensaje:', 'braves-chat') + '\n\n';
+            let user_message = __('Error al procesar tu mensaje:', 'braveschat') + '\n\n';
             let technical_details = '';
 
             if (error.message.includes('Failed to fetch')) {
-                user_message += __('**No se pudo conectar con el servidor**', 'braves-chat') + '\n\n';
-                user_message += __('Posibles causas:', 'braves-chat') + '\n';
-                user_message += __('• Sin conexión a internet', 'braves-chat') + '\n';
-                user_message += __('• El servidor N8N está caído', 'braves-chat') + '\n';
-                user_message += __('• Problema de CORS', 'braves-chat') + '\n';
-                user_message += __('• URL del webhook incorrecta', 'braves-chat') + '\n\n';
+                user_message += __('**No se pudo conectar con el servidor**', 'braveschat') + '\n\n';
+                user_message += __('Posibles causas:', 'braveschat') + '\n';
+                user_message += __('• Sin conexión a internet', 'braveschat') + '\n';
+                user_message += __('• El servidor N8N está caído', 'braveschat') + '\n';
+                user_message += __('• Problema de CORS', 'braveschat') + '\n';
+                user_message += __('• URL del webhook incorrecta', 'braveschat') + '\n\n';
                 technical_details = `URL: ${this.webhook_url}\nError: ${error.message}`;
             } else if (error.message.includes('WEBHOOK_NOT_CONFIGURED')) {
-                user_message += __('**Webhook no configurado**', 'braves-chat') + '\n\n';
-                user_message += __('El administrador debe configurar la URL del webhook en:', 'braves-chat') + '\n';
-                user_message += __('WordPress Admin > Ajustes > BravesChat iA', 'braves-chat') + '\n\n';
+                user_message += __('**Webhook no configurado**', 'braveschat') + '\n\n';
+                user_message += __('El administrador debe configurar la URL del webhook en:', 'braveschat') + '\n';
+                user_message += __('WordPress Admin > Ajustes > BravesChat iA', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('401') || error.message.includes('403')) {
-                user_message += __('**Error de autenticación**', 'braves-chat') + '\n\n';
-                user_message += __('El token de autenticación es inválido o ha expirado.', 'braves-chat') + '\n';
-                user_message += __('Contacta al administrador para verificar el token N8N.', 'braves-chat') + '\n\n';
+                user_message += __('**Error de autenticación**', 'braveschat') + '\n\n';
+                user_message += __('El token de autenticación es inválido o ha expirado.', 'braveschat') + '\n';
+                user_message += __('Contacta al administrador para verificar el token N8N.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('404')) {
-                user_message += __('**Webhook no encontrado**', 'braves-chat') + '\n\n';
-                user_message += __('La URL del webhook no existe o es incorrecta.', 'braves-chat') + '\n';
-                user_message += __('Verifica la URL en los ajustes del plugin.', 'braves-chat') + '\n\n';
+                user_message += __('**Webhook no encontrado**', 'braveschat') + '\n\n';
+                user_message += __('La URL del webhook no existe o es incorrecta.', 'braveschat') + '\n';
+                user_message += __('Verifica la URL en los ajustes del plugin.', 'braveschat') + '\n\n';
                 technical_details = `URL: ${this.webhook_url}\n${error.message}`;
             } else if (error.message.includes('JSON_PARSE_ERROR')) {
-                user_message += __('**Respuesta inválida del servidor**', 'braves-chat') + '\n\n';
-                user_message += __('El servidor N8N no devolvió un JSON válido.', 'braves-chat') + '\n';
-                user_message += __('Verifica la configuración del workflow en N8N.', 'braves-chat') + '\n\n';
+                user_message += __('**Respuesta inválida del servidor**', 'braveschat') + '\n\n';
+                user_message += __('El servidor N8N no devolvió un JSON válido.', 'braveschat') + '\n';
+                user_message += __('Verifica la configuración del workflow en N8N.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('RESPONSE_FORMAT_ERROR')) {
-                user_message += __('**Formato de respuesta incorrecto**', 'braves-chat') + '\n\n';
-                user_message += __('El servidor devolvió una respuesta pero sin el campo esperado.', 'braves-chat') + '\n';
-                user_message += __('El webhook debe devolver: {output: "mensaje"} o {response: "mensaje"}', 'braves-chat') + '\n\n';
+                user_message += __('**Formato de respuesta incorrecto**', 'braveschat') + '\n\n';
+                user_message += __('El servidor devolvió una respuesta pero sin el campo esperado.', 'braveschat') + '\n';
+                user_message += __('El webhook debe devolver: {output: "mensaje"} o {response: "mensaje"}', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('500') || error.message.includes('502') || error.message.includes('503')) {
-                user_message += __('**Error del servidor**', 'braves-chat') + '\n\n';
-                user_message += __('El servidor N8N tiene un problema interno.', 'braves-chat') + '\n';
-                user_message += __('Contacta al administrador del servidor.', 'braves-chat') + '\n\n';
+                user_message += __('**Error del servidor**', 'braveschat') + '\n\n';
+                user_message += __('El servidor N8N tiene un problema interno.', 'braveschat') + '\n';
+                user_message += __('Contacta al administrador del servidor.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else {
-                user_message += __('**Error desconocido**', 'braves-chat') + '\n\n';
-                user_message += __('Ocurrió un error inesperado. Por favor, intenta de nuevo.', 'braves-chat') + '\n\n';
+                user_message += __('**Error desconocido**', 'braveschat') + '\n\n';
+                user_message += __('Ocurrió un error inesperado. Por favor, intenta de nuevo.', 'braveschat') + '\n\n';
                 technical_details = `${error.message}\n\nStack: ${error.stack}`;
             }
 
-            user_message += __('**Detalles técnicos:**', 'braves-chat') + '\n';
+            user_message += __('**Detalles técnicos:**', 'braveschat') + '\n';
             user_message += '```\n' + technical_details + '\n```\n\n';
             user_message += `${new Date().toLocaleString('es-ES')}`;
 

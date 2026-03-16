@@ -100,7 +100,7 @@ $config_status = Template_Helpers::get_config_status();
                         'title' => __('Configuración', 'braveschat'),
                         'description' => __('Personaliza la apariencia, mensajes y comportamiento del chat según tus necesidades.', 'braveschat'),
                         'action_text' => __('Ir a Ajustes', 'braveschat'),
-                        'action_url' => admin_url('admin.php?page=braves-chat-settings'),
+                        'action_url' => admin_url('admin.php?page=braveschat-settings'),
                         'is_link_card' => true,
                     ));
                     ?>
@@ -136,7 +136,7 @@ $config_status = Template_Helpers::get_config_status();
 
                         Template_Helpers::quick_action(array(
                             'text' => __('Configurar Webhook', 'braveschat'),
-                            'url' => admin_url('admin.php?page=braves-chat-settings'),
+                            'url' => admin_url('admin.php?page=braveschat-settings'),
                             'style' => 'secondary',
                         ));
                         ?>

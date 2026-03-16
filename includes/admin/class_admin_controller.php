@@ -90,7 +90,7 @@ class Admin_Controller {
         $screen = get_current_screen();
 
         // Solo aplicar en páginas del plugin que NO activan wp-has-current-submenu automáticamente
-        $braves_pages = array('admin_page_braves-chat-settings', 'admin_page_braves-chat-appearance', 'admin_page_braves-chat-availability', 'admin_page_braves-chat-gdpr', 'admin_page_braves-chat-about', 'admin_page_braves-chat-history');
+        $braves_pages = array('admin_page_braveschat-settings', 'admin_page_braveschat-appearance', 'admin_page_braveschat-availability', 'admin_page_braveschat-gdpr', 'admin_page_braveschat-about', 'admin_page_braveschat-history');
 
         if (!$screen || !in_array($screen->id, $braves_pages)) {
             return;
@@ -100,7 +100,7 @@ class Admin_Controller {
         <script>
             // Agregar la clase wp-has-current-submenu para que WordPress aplique estilos correctos
             document.addEventListener('DOMContentLoaded', function() {
-                var menuItem = document.getElementById('toplevel_page_braves-chat');
+                var menuItem = document.getElementById('toplevel_page_braveschat');
                 if (menuItem) {
                     menuItem.classList.add('wp-has-current-submenu', 'wp-menu-open');
                     menuItem.classList.remove('wp-not-current-submenu');
@@ -173,7 +173,7 @@ class Admin_Controller {
             __('Ajustes', 'braveschat'),
             __('Ajustes', 'braveschat'),
             'manage_options',
-            'braves-chat-settings',
+            'braveschat-settings',
             array($this, 'render_settings_page')
         );
 
@@ -182,7 +182,7 @@ class Admin_Controller {
             __('Apariencia', 'braveschat'),
             __('Apariencia', 'braveschat'),
             'manage_options',
-            'braves-chat-appearance',
+            'braveschat-appearance',
             array($this, 'render_appearance_page')
         );
 
@@ -191,7 +191,7 @@ class Admin_Controller {
             __('Horarios', 'braveschat'),
             __('Horarios', 'braveschat'),
             'manage_options',
-            'braves-chat-availability',
+            'braveschat-availability',
             array($this, 'render_availability_page')
         );
 
@@ -200,7 +200,7 @@ class Admin_Controller {
             __('GDPR', 'braveschat'),
             __('GDPR', 'braveschat'),
             'manage_options',
-            'braves-chat-gdpr',
+            'braveschat-gdpr',
             array($this, 'render_gdpr_page')
         );
 
@@ -209,7 +209,7 @@ class Admin_Controller {
             __('Acerca de', 'braveschat'),
             __('Acerca de', 'braveschat'),
             'manage_options',
-            'braves-chat-about',
+            'braveschat-about',
             array($this, 'render_about_page')
         );
 
@@ -218,7 +218,7 @@ class Admin_Controller {
             __('Historial', 'braveschat'),
             __('Historial', 'braveschat'),
             'manage_options',
-            'braves-chat-history',
+            'braveschat-history',
             array($this, 'render_history_page')
         );
     }
@@ -258,7 +258,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_settings_page() {
-        $current_page = 'braves-chat-settings';
+        $current_page = 'braveschat-settings';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/settings.php';
     }
 
@@ -268,7 +268,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_appearance_page() {
-        $current_page = 'braves-chat-appearance';
+        $current_page = 'braveschat-appearance';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/appearance.php';
     }
 
@@ -278,7 +278,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_availability_page() {
-        $current_page = 'braves-chat-availability';
+        $current_page = 'braveschat-availability';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/availability.php';
     }
 
@@ -288,7 +288,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_gdpr_page() {
-        $current_page = 'braves-chat-gdpr';
+        $current_page = 'braveschat-gdpr';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/gdpr.php';
     }
 
@@ -298,7 +298,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_about_page() {
-        $current_page = 'braves-chat-about';
+        $current_page = 'braveschat-about';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/about.php';
     }
 
@@ -308,7 +308,7 @@ class Admin_Controller {
      * @return void
      */
     public function render_history_page() {
-        $current_page = 'braves-chat-history';
+        $current_page = 'braveschat-history';
         include BRAVES_CHAT_PLUGIN_DIR . 'includes/admin/templates/history.php';
     }
 
@@ -381,7 +381,7 @@ class Admin_Controller {
         );
 
         // Script de selector de iconos y color picker (solo en página de Apariencia)
-        if ($hook === 'admin_page_braves-chat-appearance') {
+        if ($hook === 'admin_page_braveschat-appearance') {
             wp_enqueue_script(
                 'braves-icon-selector',
                 BRAVES_CHAT_PLUGIN_URL . 'assets/js/icon_selector.js',
@@ -428,13 +428,13 @@ class Admin_Controller {
      */
     public function suppress_other_notices($screen) {
         $braves_screens = array(
-            'toplevel_page_braves-chat',
-            'admin_page_braves-chat-settings',
-            'admin_page_braves-chat-appearance',
-            'admin_page_braves-chat-availability',
-            'admin_page_braves-chat-gdpr',
-            'admin_page_braves-chat-about',
-            'admin_page_braves-chat-history',
+            'toplevel_page_braveschat',
+            'admin_page_braveschat-settings',
+            'admin_page_braveschat-appearance',
+            'admin_page_braveschat-availability',
+            'admin_page_braveschat-gdpr',
+            'admin_page_braveschat-about',
+            'admin_page_braveschat-history',
         );
 
         if (in_array($screen->id, $braves_screens)) {
@@ -445,13 +445,13 @@ class Admin_Controller {
 
     private function is_braves_admin_page($hook) {
         $braves_pages = array(
-            'toplevel_page_braves-chat',
-            'admin_page_braves-chat-settings',
-            'admin_page_braves-chat-appearance',
-            'admin_page_braves-chat-availability',
-            'admin_page_braves-chat-gdpr',
-            'admin_page_braves-chat-about',
-            'admin_page_braves-chat-history',
+            'toplevel_page_braveschat',
+            'admin_page_braveschat-settings',
+            'admin_page_braveschat-appearance',
+            'admin_page_braveschat-availability',
+            'admin_page_braveschat-gdpr',
+            'admin_page_braveschat-about',
+            'admin_page_braveschat-history',
         );
 
         return in_array($hook, $braves_pages);
@@ -466,8 +466,8 @@ class Admin_Controller {
         $config = array(
             'siteUrl' => esc_url(home_url()),
             'adminUrl' => esc_url(admin_url()),
-            'settingsUrl' => esc_url(admin_url('admin.php?page=braves-chat-settings')),
-            'dashboardUrl' => esc_url(admin_url('admin.php?page=braves-chat')),
+            'settingsUrl' => esc_url(admin_url('admin.php?page=braveschat-settings')),
+            'dashboardUrl' => esc_url(admin_url('admin.php?page=braveschat')),
             'customizeUrl' => esc_url(admin_url('customize.php')),
             'pluginVersion' => BRAVES_CHAT_VERSION,
             'isConfigured' => !empty(get_option('braves_chat_webhook_url')),
@@ -504,13 +504,13 @@ class Admin_Controller {
 
         // Mapeo de páginas a títulos
         $page_titles = array(
-            'toplevel_page_braves-chat' => __('Resumen', 'braveschat'),
-            'admin_page_braves-chat-settings' => __('Ajustes', 'braveschat'),
-            'admin_page_braves-chat-appearance' => __('Apariencia', 'braveschat'),
-            'admin_page_braves-chat-availability' => __('Horarios', 'braveschat'),
-            'admin_page_braves-chat-gdpr' => __('GDPR', 'braveschat'),
-            'admin_page_braves-chat-about' => __('Acerca de', 'braveschat'),
-            'admin_page_braves-chat-history' => __('Historial', 'braveschat'),
+            'toplevel_page_braveschat' => __('Resumen', 'braveschat'),
+            'admin_page_braveschat-settings' => __('Ajustes', 'braveschat'),
+            'admin_page_braveschat-appearance' => __('Apariencia', 'braveschat'),
+            'admin_page_braveschat-availability' => __('Horarios', 'braveschat'),
+            'admin_page_braveschat-gdpr' => __('GDPR', 'braveschat'),
+            'admin_page_braveschat-about' => __('Acerca de', 'braveschat'),
+            'admin_page_braveschat-history' => __('Historial', 'braveschat'),
         );
 
         // Obtener título de la sección actual

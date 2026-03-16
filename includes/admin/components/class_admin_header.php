@@ -81,7 +81,7 @@ class Admin_Header {
         }
 
         if ($args['show_version']) {
-            $admin_url    = esc_url(admin_url('admin.php?page=braves-chat-about'));
+            $admin_url    = esc_url(admin_url('admin.php?page=braveschat-about'));
             $title        = esc_attr__('Ver información del plugin', 'braveschat');
             $version      = esc_html('v' . BRAVES_CHAT_VERSION);
             $display_mode = esc_html(get_option('braves_chat_display_mode', 'modal'));

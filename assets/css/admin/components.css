@@ -1092,3 +1092,161 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     margin-top: 40px;
     font-style: italic;
 }
+
+/* ==================== HISTORY PAGE: BENTO CARD ==================== */
+.braves-bento-card {
+    background: var(--braves-white);
+    border-radius: var(--braves-radius-lg, 12px);
+    box-shadow: var(--braves-shadow, 0 1px 3px rgba(0, 0, 0, 0.1));
+    overflow: hidden;
+    margin-bottom: 20px;
+    font-family: var(--braves-font-sans, "Montserrat", sans-serif);
+}
+
+/* ==================== HISTORY PAGE: TABLE OVERRIDES ==================== */
+.braves-history-table {
+    border-spacing: 0;
+}
+
+.braves-history-table th,
+.braves-history-table td {
+    text-align: left !important;
+}
+
+.braves-history-table thead th {
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--braves-gray-600, #4b5563);
+    background: var(--braves-gray-50, #f9fafb);
+    border-bottom: 1px solid var(--braves-gray-200, #e5e7eb);
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.braves-history-table tbody td {
+    padding: 16px 20px;
+    font-size: 15px;
+    color: var(--braves-gray-800, #1f2937);
+    border-bottom: 1px solid var(--braves-gray-100, #f3f4f6);
+}
+
+/* Row interactivity */
+.braves-history-table-row {
+    cursor: pointer;
+    transition: background-color var(--braves-transition-fast, 0.2s);
+}
+
+.braves-history-table-row:hover {
+    background-color: var(--braves-gray-50, #f9fafb) !important;
+}
+
+.braves-history-table-row:last-child td {
+    border-bottom: none;
+}
+
+/* ==================== HISTORY PAGE: EXPORT BUTTON ==================== */
+#braves-history-export-csv.button-primary {
+    border-radius: var(--braves-radius-md, 8px);
+    font-family: var(--braves-font-sans, "Montserrat", sans-serif);
+    padding: 4px 16px;
+    background-color: var(--braves-primary, #0077b6);
+    border-color: var(--braves-primary, #0077b6);
+    color: var(--braves-white, #fff);
+    box-shadow: var(--braves-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+    transition: background-color var(--braves-transition-fast, 0.2s);
+}
+
+#braves-history-export-csv.button-primary:hover,
+#braves-history-export-csv.button-primary:active,
+#braves-history-export-csv.button-primary:focus {
+    background-color: var(--braves-primary-hover, #3c3c3c) !important;
+    border-color: var(--braves-primary-hover, #3c3c3c) !important;
+    color: var(--braves-white, #fff);
+}
+
+/* ==================== HISTORY PAGE: MODAL FIXES ==================== */
+.braves-history-modal__header {
+    align-items: flex-start;
+}
+
+.braves-history-modal__header > div {
+    flex: 1;
+    min-width: 0;
+    padding-right: 15px;
+}
+
+.braves-history-modal__subtitle {
+    word-break: break-all;
+    margin: 5px 0 0 0;
+    font-size: 12px;
+}
+
+.braves-history-modal__close {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+#braves-history-modal-body {
+    padding: 20px;
+    gap: 15px;
+    background: var(--braves-gray-50, #f8f9fa);
+}
+
+/* ==================== HISTORY PAGE: BUBBLE WRAPPERS ==================== */
+.braves-history-bubble-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.braves-history-bubble-wrap--user {
+    align-items: flex-end;
+}
+
+.braves-history-bubble-wrap--ai {
+    align-items: flex-start;
+}
+
+.braves-history-chat-sender {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--braves-gray-500, #6b7280);
+    margin-bottom: 4px;
+    padding: 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ==================== HISTORY PAGE: BUBBLE STYLES ==================== */
+.braves-history-chat-bubble {
+    border-radius: 12px;
+    box-shadow: var(--braves-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+    word-break: break-word;
+}
+
+.braves-history-chat-bubble--user {
+    background-color: var(--braves-primary, #0077b6);
+    color: var(--braves-white, #ffffff);
+}
+
+.braves-history-chat-bubble--user a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.braves-history-chat-bubble--ai {
+    background-color: var(--braves-white, #ffffff);
+    color: var(--braves-gray-800, #1f2937);
+    border: 1px solid var(--braves-gray-200, #e5e7eb);
+}
+
+.braves-history-chat-bubble--ai a {
+    color: var(--braves-primary, #0077b6);
+    text-decoration: underline;
+}

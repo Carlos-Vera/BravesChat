@@ -296,13 +296,13 @@ class BravesChat {
     public function add_action_links($links) {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',
-            admin_url('admin.php?page=braves-chat'),
+            admin_url('admin.php?page=braveschat'),
             __('Dashboard', 'braveschat')
         );
 
         $config_link = sprintf(
             '<a href="%s">%s</a>',
-            admin_url('admin.php?page=braves-chat-settings'),
+            admin_url('admin.php?page=braveschat-settings'),
             __('Ajustes', 'braveschat')
         );
 

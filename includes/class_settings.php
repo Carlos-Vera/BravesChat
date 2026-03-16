@@ -277,7 +277,7 @@ class Settings {
         ?>
         <style>
             /* Estilos del icono del menú Braves Chat */
-            #toplevel_page_braves-chat .wp-menu-image img {
+            #toplevel_page_braveschat .wp-menu-image img {
                 width: 20px;
                 height: 20px;
                 padding: 6px 0;
@@ -285,32 +285,32 @@ class Settings {
                 transition: opacity 0.2s ease;
             }
 
-            #toplevel_page_braves-chat:hover .wp-menu-image img,
-            #toplevel_page_braves-chat.current .wp-menu-image img,
-            #toplevel_page_braves-chat.wp-has-current-submenu .wp-menu-image img {
+            #toplevel_page_braveschat:hover .wp-menu-image img,
+            #toplevel_page_braveschat.current .wp-menu-image img,
+            #toplevel_page_braveschat.wp-has-current-submenu .wp-menu-image img {
                 opacity: 1;
             }
 
             /* Para SVG con currentColor */
-            #toplevel_page_braves-chat .wp-menu-image svg {
+            #toplevel_page_braveschat .wp-menu-image svg {
                 width: 20px;
                 height: 20px;
                 fill: #a7aaad;
                 transition: fill 0.2s ease;
             }
 
-            #toplevel_page_braves-chat:hover .wp-menu-image svg {
+            #toplevel_page_braveschat:hover .wp-menu-image svg {
                 fill: #00a0d2;
             }
 
             /* Cuando el menú está activo (cualquier subpágina) */
-            #toplevel_page_braves-chat.wp-has-current-submenu .wp-menu-image svg,
-            #toplevel_page_braves-chat.current .wp-menu-image svg {
+            #toplevel_page_braveschat.wp-has-current-submenu .wp-menu-image svg,
+            #toplevel_page_braveschat.current .wp-menu-image svg {
                 fill: #ffffff !important;
             }
 
             /* Color del badge de notificación (para futuras funcionalidades) */
-            #toplevel_page_braves-chat .update-plugins {
+            #toplevel_page_braveschat .update-plugins {
                 background-color: #00a0d2;
             }
         </style>
@@ -1146,7 +1146,7 @@ class Settings {
         }
         
         // Mejor lógica: verificar si contiene nuestro slug
-        if (strpos($hook, 'braveschat') === false && strpos($hook, 'braves-chat') === false) {
+        if (strpos($hook, 'braveschat') === false) {
              return;
         }
 
@@ -1192,7 +1192,7 @@ class Settings {
         );
 
         // Enqueue media uploader para todas las páginas de Braves Chat
-        if (strpos($hook, 'braveschat') !== false || strpos($hook, 'braves-chat') !== false) {
+        if (strpos($hook, 'braveschat') !== false) {
             wp_enqueue_media();
             wp_enqueue_script(
                 'braves-admin-media-uploader',
@@ -1204,7 +1204,7 @@ class Settings {
         }
 
         // Enqueue settings-specific styles
-        if (strpos($hook, 'braves-chat-settings') !== false) {
+        if (strpos($hook, 'braveschat-settings') !== false) {
             wp_enqueue_style(
                 'braves-admin-settings',
                 BRAVES_CHAT_PLUGIN_URL . 'assets/css/admin/settings.css',
