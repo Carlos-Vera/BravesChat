@@ -79,6 +79,7 @@ class Admin_Controller {
         add_action('admin_head', array($this, 'add_menu_icon_active_styles'));
         add_filter('admin_title', array($this, 'filter_admin_title'), 10, 2);
         add_action('current_screen', array($this, 'suppress_other_notices'));
+        add_filter('admin_body_class', array($this, 'add_admin_body_class'));
     }
 
     /**
@@ -89,24 +90,20 @@ class Admin_Controller {
     public function add_menu_icon_active_styles() {
         $screen = get_current_screen();
 
-        // Solo aplicar en páginas del plugin que NO activan wp-has-current-submenu automáticamente
-        $braves_pages = array('admin_page_braveschat-settings', 'admin_page_braveschat-appearance', 'admin_page_braveschat-availability', 'admin_page_braveschat-gdpr', 'admin_page_braveschat-about', 'admin_page_braveschat-history');
-
-        if (!$screen || !in_array($screen->id, $braves_pages)) {
+        if (!$screen || strpos($screen->id, 'braveschat') === false) {
             return;
         }
 
+        // Ocultar los ítems del submenú nativo de WordPress.
+        // La navegación se gestiona con el sidebar personalizado del plugin.
+        // Los submenús se registran con parent_slug = 'braveschat' para que WordPress
+        // active el resaltado del menú principal de forma nativa.
         ?>
-        <script>
-            // Agregar la clase wp-has-current-submenu para que WordPress aplique estilos correctos
-            document.addEventListener('DOMContentLoaded', function() {
-                var menuItem = document.getElementById('toplevel_page_braveschat');
-                if (menuItem) {
-                    menuItem.classList.add('wp-has-current-submenu', 'wp-menu-open');
-                    menuItem.classList.remove('wp-not-current-submenu');
-                }
-            });
-        </script>
+        <style>
+            #toplevel_page_braveschat .wp-submenu {
+                display: none !important;
+            }
+        </style>
         <?php
     }
 
@@ -169,7 +166,7 @@ class Admin_Controller {
         */
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('Ajustes', 'braveschat'),
             __('Ajustes', 'braveschat'),
             'manage_options',
@@ -178,7 +175,7 @@ class Admin_Controller {
         );
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('Apariencia', 'braveschat'),
             __('Apariencia', 'braveschat'),
             'manage_options',
@@ -187,7 +184,7 @@ class Admin_Controller {
         );
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('Horarios', 'braveschat'),
             __('Horarios', 'braveschat'),
             'manage_options',
@@ -196,7 +193,7 @@ class Admin_Controller {
         );
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('GDPR', 'braveschat'),
             __('GDPR', 'braveschat'),
             'manage_options',
@@ -205,7 +202,7 @@ class Admin_Controller {
         );
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('Acerca de', 'braveschat'),
             __('Acerca de', 'braveschat'),
             'manage_options',
@@ -214,13 +211,32 @@ class Admin_Controller {
         );
 
         add_submenu_page(
-            null,
+            'braveschat',
             __('Historial', 'braveschat'),
             __('Historial', 'braveschat'),
             'manage_options',
             'braveschat-history',
             array($this, 'render_history_page')
         );
+    }
+
+    /**
+     * Añadir clase CSS personalizada al body en páginas del plugin
+     *
+     * @param string $classes Clases actuales del body
+     * @return string
+     */
+    public function add_admin_body_class($classes) {
+        $screen = get_current_screen();
+        if (!$screen) {
+            return $classes;
+        }
+        if ($screen->id === 'toplevel_page_braveschat'
+            || strpos($screen->id, '_page_braveschat-') !== false
+        ) {
+            $classes .= ' braves-chat-admin-page';
+        }
+        return $classes;
     }
 
     /**
@@ -381,7 +397,7 @@ class Admin_Controller {
         );
 
         // Script de selector de iconos y color picker (solo en página de Apariencia)
-        if ($hook === 'admin_page_braveschat-appearance') {
+        if (strpos($hook, '_page_braveschat-appearance') !== false) {
             wp_enqueue_script(
                 'braves-icon-selector',
                 BRAVES_CHAT_PLUGIN_URL . 'assets/js/icon_selector.js',
@@ -427,34 +443,17 @@ class Admin_Controller {
      * @return void
      */
     public function suppress_other_notices($screen) {
-        $braves_screens = array(
-            'toplevel_page_braveschat',
-            'admin_page_braveschat-settings',
-            'admin_page_braveschat-appearance',
-            'admin_page_braveschat-availability',
-            'admin_page_braveschat-gdpr',
-            'admin_page_braveschat-about',
-            'admin_page_braveschat-history',
-        );
-
-        if (in_array($screen->id, $braves_screens)) {
+        if ($screen->id === 'toplevel_page_braveschat'
+            || strpos($screen->id, '_page_braveschat-') !== false
+        ) {
             remove_all_actions('admin_notices');
             remove_all_actions('all_admin_notices');
         }
     }
 
     private function is_braves_admin_page($hook) {
-        $braves_pages = array(
-            'toplevel_page_braveschat',
-            'admin_page_braveschat-settings',
-            'admin_page_braveschat-appearance',
-            'admin_page_braveschat-availability',
-            'admin_page_braveschat-gdpr',
-            'admin_page_braveschat-about',
-            'admin_page_braveschat-history',
-        );
-
-        return in_array($hook, $braves_pages);
+        return $hook === 'toplevel_page_braveschat'
+            || strpos($hook, '_page_braveschat-') !== false;
     }
 
     /**
@@ -505,12 +504,12 @@ class Admin_Controller {
         // Mapeo de páginas a títulos
         $page_titles = array(
             'toplevel_page_braveschat' => __('Resumen', 'braveschat'),
-            'admin_page_braveschat-settings' => __('Ajustes', 'braveschat'),
-            'admin_page_braveschat-appearance' => __('Apariencia', 'braveschat'),
-            'admin_page_braveschat-availability' => __('Horarios', 'braveschat'),
-            'admin_page_braveschat-gdpr' => __('GDPR', 'braveschat'),
-            'admin_page_braveschat-about' => __('Acerca de', 'braveschat'),
-            'admin_page_braveschat-history' => __('Historial', 'braveschat'),
+            'braveschat_page_braveschat-settings' => __('Ajustes', 'braveschat'),
+            'braveschat_page_braveschat-appearance' => __('Apariencia', 'braveschat'),
+            'braveschat_page_braveschat-availability' => __('Horarios', 'braveschat'),
+            'braveschat_page_braveschat-gdpr' => __('GDPR', 'braveschat'),
+            'braveschat_page_braveschat-about' => __('Acerca de', 'braveschat'),
+            'braveschat_page_braveschat-history' => __('Historial', 'braveschat'),
         );
 
         // Obtener título de la sección actual

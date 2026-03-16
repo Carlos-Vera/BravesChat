@@ -60,21 +60,28 @@ class Admin_Sidebar {
      * @param string $current_page Página actual
      * @return void
      */
-    public function render($current_page = '') {
+    public function render($current_page = '', $args = array()) {
         if (empty($current_page)) {
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading the current admin page slug for navigation highlighting; no data is modified.
             $current_page = isset($_GET['page']) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : 'braveschat';
         }
 
+        $defaults = array(
+            'form_id' => '',
+        );
+        $args = wp_parse_args($args, $defaults);
+
         $menu_items = $this->get_menu_items();
+
+        echo '<div class="braves-admin-sidebar-col">';
 
         echo '<nav class="braves-admin-sidebar">';
         echo '<div class="braves-admin-sidebar__inner">';
-        
+
         foreach ($menu_items as $item) {
             $this->render_menu_item($item, $current_page);
         }
-        
+
         echo '</div>'; // .braves-admin-sidebar__inner
 
         /**
@@ -83,8 +90,19 @@ class Admin_Sidebar {
          * @param string $current_page Página actual
          */
         do_action('braves_chat_admin_sidebar_items', $current_page);
-        
+
         echo '</nav>';
+
+        if (!empty($args['form_id'])) {
+            $form_id = esc_attr($args['form_id']);
+            echo '<div class="braves-sidebar-save">';
+            echo '<button type="submit" form="' . $form_id . '" class="button button-primary braves-sidebar-save__btn braves-hover-accent--dark">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $form_id is esc_attr().
+            echo esc_html__('Guardar', 'braveschat');
+            echo '</button>';
+            echo '</div>';
+        }
+
+        echo '</div>'; // .braves-admin-sidebar-col
     }
 
     /**
@@ -155,10 +173,10 @@ class Admin_Sidebar {
      */
     private function render_menu_item($item, $current_page) {
         $is_active = ($item['page_slug'] === $current_page);
-        $item_class = 'braves-admin-sidebar__item';
+        $item_class = 'braves-admin-sidebar__item braves-hover-accent';
 
         if ($is_active) {
-            $item_class .= ' braves-admin-sidebar__item--active';
+            $item_class .= ' braves-admin-sidebar__item--active braves-accent-active';
         }
 
         $url = esc_url($item['url']);

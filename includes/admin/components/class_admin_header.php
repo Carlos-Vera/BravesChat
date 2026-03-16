@@ -75,9 +75,10 @@ class Admin_Header {
         echo '<div class="braves-admin-header__inner">';
 
         if ($args['show_logo']) {
-            echo '<div class="braves-admin-header__logo">';
+            $dashboard_url = esc_url(admin_url('admin.php?page=braveschat'));
+            echo '<a href="' . $dashboard_url . '" class="braves-admin-header__logo">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $dashboard_url is esc_url().
             $this->render_logo();
-            echo '</div>';
+            echo '</a>';
         }
 
         if ($args['show_version']) {
