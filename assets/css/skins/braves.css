@@ -558,4 +558,49 @@ body .braves-skin-braves #minimize-chat:hover {
         bottom: -60px;
         right: 10px;
     }
+
+    /* Forzar vista minimizada en móvil (skin Braves, chat cerrado) */
+    body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-toggle {
+        min-width: auto !important;
+        width: auto !important;
+        padding: 6px !important;
+        border-radius: 50px !important;
+        gap: 8px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+
+    body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-text,
+    body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta-text {
+        display: none !important;
+    }
+
+    body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-content {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: auto !important;
+    }
+
+    body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta {
+        width: 40px !important;
+        height: 40px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    body #braveslab-chat-container.chat-closed.braves-skin-braves .braves-bubble-cta-icon {
+        display: block !important;
+        width: 18px !important;
+        height: 18px !important;
+        fill: #ffffff !important;
+    }
+
+    body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-bubble-image {
+        width: 40px !important;
+        height: 40px !important;
+    }
 }
