@@ -1146,7 +1146,7 @@ class Settings {
         }
         
         // Mejor lógica: verificar si contiene nuestro slug
-        if (strpos($hook, 'braveschat') === false) {
+        if (strpos($hook, 'braveschat') === false && strpos($hook, 'braves-chat') === false) {
              return;
         }
 
@@ -1192,7 +1192,7 @@ class Settings {
         );
 
         // Enqueue media uploader para todas las páginas de Braves Chat
-        if (strpos($hook, 'braveschat') !== false) {
+        if (strpos($hook, 'braveschat') !== false || strpos($hook, 'braves-chat') !== false) {
             wp_enqueue_media();
             wp_enqueue_script(
                 'braves-admin-media-uploader',
