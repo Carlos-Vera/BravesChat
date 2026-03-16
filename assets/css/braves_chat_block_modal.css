@@ -571,6 +571,19 @@ body #braveslab-chat-container .typing-dot:nth-child(3) {
         right: 20px;
         left: auto;
     }
+
+    /* Burbuja más pequeña en móvil (skin default) */
+    body #braveslab-chat-container:not(.braves-skin-braves) #chat-toggle {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    body #braveslab-chat-container.chat-closed:not(.braves-skin-braves) #chat-toggle #chat-lottie {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 /* ============================================
