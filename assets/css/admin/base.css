@@ -98,15 +98,22 @@
 
 .braves-admin-header__version {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--braves-space-xs);
+    flex-shrink: 0;
+}
+
+.braves-admin-header__version-badge {
+    display: flex;
     align-items: center;
     gap: var(--braves-space-sm);
-    flex-shrink: 0;
 }
 
 .braves-header__mode-label {
     font-size: 11px;
     font-style: italic;
-    color: var(--braves-gray-400);
+    color: var(--braves-primary);
     font-weight: 400;
     letter-spacing: 0.01em;
     opacity: 0.8;
@@ -319,4 +326,16 @@
         font-size: var(--braves-text-sm);
         padding: var(--braves-space-sm) var(--braves-space-md);
     }
+}
+
+.braves-admin-header__verse {
+    margin: 0;
+    text-align: right;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--braves-gray-400);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    opacity: 0.8;
+    line-height: 1.4;
 }
