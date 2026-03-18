@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.7
+Stable tag: 2.3.8
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.3.8 =
+* ADDED: Un versículo de la Biblia (NVI) aparece cada día en el encabezado del panel. Cambia solo — sin configurar nada.
+
 = 2.3.7 =
 * ADDED: Agent Name field in Appearance — label your agent to identify conversations in History.
 * IMPROVED: Status notices (configuration warnings, save confirmations) moved to the header bar — cleaner page layout across all admin sections.
@@ -154,6 +157,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * Initial plugin release.
 
 == Upgrade Notice ==
+
+= 2.3.8 =
+Versículo diario NVI en el header del panel. Se actualiza solo cada día.
 
 = 2.3.7 =
 Admin panel polish: notices moved to the header, cleaner navigation labels, and a new Agent Name field to organize your conversations.

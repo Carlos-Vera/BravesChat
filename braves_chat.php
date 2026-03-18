@@ -3,7 +3,7 @@
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
  * Description: Una herramienta profesional que conecta tu sitio con tu agente de N8N, permitiéndote ofrecer atención con iA directamente en tu web.
- * Version: 2.3.7
+ * Version: 2.3.8
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braveschat
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.3.7');
+define('BRAVES_CHAT_VERSION', '2.3.8');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);

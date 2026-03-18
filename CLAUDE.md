@@ -4,7 +4,7 @@
 
 ## 📋 Información General
 - **Nombre:** BravesChat
-- **Versión:** 2.3.7
+- **Versión:** 2.3.8
 - **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR, personalización avanzada y estadísticas de conversaciones.
 - **Autor:** Carlos Vera (BravesLab)
 - **Repositorio:** Carlos-Vera/BravesChat
@@ -94,6 +94,7 @@ No se requiere compilación (Vanilla JS/CSS).
 4.  **Archivos a actualizar en cada versión** (usar `/release` para automatizar esto):
     - `braves_chat.php` — header `Version:` y constante `BRAVES_CHAT_VERSION`
     - `readme.txt` — `Stable tag:`, sección `== Changelog ==` y `== Upgrade Notice ==` ⚠️ WordPress lo usa para detectar actualizaciones
+    - `README.md` — actualizar número de versión donde aparezca mencionado
     - `CHANGELOG.md` — índice de versiones + nueva entrada al tope
     - `includes/admin/templates/about.php` — nuevo bloque `.braves-changelog`
     - `CLAUDE.md` — campo `Versión:` en Información General
@@ -148,3 +149,4 @@ Preserva todas las opciones al guardar formularios parciales. Siempre que se reg
 ## ⚠️ Notas Importantes
 - **Cache:** Al actualizar Assets, incrementar `BRAVES_CHAT_VERSION` en `braves_chat.php` para romper la caché del navegador.
 - **Base de Datos:** Las opciones se guardan en `wp_options` con prefijo `braves_chat_`.
+- **API Key Versículo NVI:** La key de scripture.api.bible está hardcodeada en `includes/admin/components/class_admin_header.php` método `get_daily_verse()`. Si se regenera o rota la key en el panel de scripture.api.bible, hay que actualizarla en ese archivo y publicar nueva versión del plugin. ⚠️ Pendiente evaluar límites si el plugin escala en número de installs.

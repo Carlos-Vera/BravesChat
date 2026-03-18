@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.7](#237---2026-03-18) - **Actual** - Nombre del agente, notices en header y navegación renombrada
+- [2.3.8](#238---2026-03-18) - **Actual** - Versículo diario NVI en el header del panel admin
+- [2.3.7](#237---2026-03-18) - Nombre del agente, notices en header y navegación renombrada
 - [2.3.5](#235---2026-03-16) - Fix botón de subir imagen en Apariencia
 - [2.3.4](#234---2026-03-16) - Burbuja compacta en móviles
 - [2.3.3](#233---2026-03-11) - Fix text domain alineado al slug braveschat
@@ -33,6 +34,17 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.8] - 2026-03-18
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Versículo diario NVI en el header del panel admin. Se obtiene de scripture.api.bible con caché de 24h en transient de WordPress. Si la API no responde, se muestra un versículo del listado de respaldo integrado. La selección varía según el día del año.
+
+### 🎨 CSS
+- **ADDED**: `.braves-admin-header__verse` — estilo del versículo: alineado a la derecha, itálica, color gris, tamaño 11px.
+- **IMPROVED**: `.braves-admin-header__version` ahora usa `flex-direction: column` para apilar badge y versículo. El badge queda en `.braves-admin-header__version-badge`.
 
 ---
 

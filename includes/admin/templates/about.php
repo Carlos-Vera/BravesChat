@@ -116,8 +116,34 @@ $sidebar = Admin_Sidebar::get_instance();
 
                     <div class="braves-timeline">
 
+                        <div class="braves-timeline__cap">
+                            <span class="braves-timeline__cap-label"><?php esc_html_e('Hoy', 'braveschat'); ?></span>
+                        </div>
+
+                    <!-- Version 2.3.8 -->
+                        <div class="braves-timeline__item braves-tl-right">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.3.8</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('18 Mar 2026', 'braveschat'); ?></div>
+                            </div>
+                            <div class="braves-timeline__card-side">
+                                <div class="braves-changelog__version">
+                                    <h3 class="braves-changelog__title">
+                                        <?php esc_html_e('Versículo del día', 'braveschat'); ?>
+                                    </h3>
+                                    <div class="braves-changelog__section">
+                                        <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
+                                        <ul>
+                                            <li><?php esc_html_e('ADDED: Cada día aparece un versículo de la Biblia (NVI) en el encabezado del panel. Cambia solo a medianoche — sin configurar nada.', 'braveschat'); ?></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     <!-- Versions 2.3.2 → 2.3.5 -->
-                        <div class="braves-timeline__item">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -5rem;">
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -149,12 +175,7 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.3.1 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -25rem;">
-                            <div class="braves-timeline__spacer"></div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.3.1</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('11 Mar 2026', 'braveschat'); ?></div>
-                            </div>
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -28rem;">
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -168,10 +189,20 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.3.1</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('11 Mar 2026', 'braveschat'); ?></div>
+                            </div>
+                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 2.3.0 -->
-                        <div class="braves-timeline__item">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -10rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.3.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('10 Mar 2026', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -200,15 +231,10 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.3.0</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('10 Mar 2026', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Versions 2.2.1 → 2.2.3 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -28rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -24rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.2.3</div>
@@ -238,7 +264,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.2.0 -->
-                        <div class="braves-timeline__item">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -3rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.2.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('26 Feb 2026', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -261,15 +292,10 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.2.0</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('26 Feb 2026', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 2.1.3 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -23rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -23rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.1.3</div>
@@ -292,12 +318,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.1.2 -->
-                        <div class="braves-timeline__item " style="--braves-tl-nudge: -4rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -4rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.1.2</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('20 Feb 2026', 'braveschat'); ?></div>
-                            </div>
+                                    <div class="braves-timeline__badge">v2.1.2</div>
+                                    <div class="braves-timeline__label"><?php esc_html_e('20 Feb 2026', 'braveschat'); ?></div>
+                                </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -329,7 +355,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.1.1 -->
-                        <div class="braves-timeline__item braves-tl-connector-left" style="--braves-tl-nudge: -28rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -28rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.1.1</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('16 Feb 2026', 'braveschat'); ?></div>
+                            </div> 
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -344,15 +375,16 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.1.1</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('16 Feb 2026', 'braveschat'); ?></div>
-                            </div> <!-- Arriba = Derecha | Abajo = Izquierda -->
-                            <div class="braves-timeline__spacer"></div> <!-- Esto arriba del todo o abajo del todo -->
+                            
                         </div>
 
                     <!-- Version 2.1.0 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -8rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -8rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.1.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('16 Feb 2026', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -374,20 +406,15 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.1.0</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('16 Feb 2026', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 2.0.0 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -16rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -16rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v2.0.0</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('14 Feb 2026', 'braveschat'); ?></div>
-                            </div>
+                                    <div class="braves-timeline__badge">v2.0.0</div>
+                                    <div class="braves-timeline__label"><?php esc_html_e('14 Feb 2026', 'braveschat'); ?></div>
+                                </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -425,7 +452,13 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 1.2.4 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -33rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -33rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                    <div class="braves-timeline__badge">v1.2.4</div>
+                                    <div class="braves-timeline__label"><?php esc_html_e('17 Nov 2025', 'braveschat'); ?></div>
+                                </div>
+                            
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -454,15 +487,10 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v1.2.4</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('17 Nov 2025', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 1.2.3 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -2rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -3.5rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v1.2.3</div>
@@ -503,7 +531,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 1.2.2 -->
-                        <div class="braves-timeline__item" style="--braves-tl-nudge: -44rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -44rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v1.2.2</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('25 Oct 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -528,15 +561,15 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v1.2.2</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('25 Oct 2025', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 1.2.1 -->
-                        <div class="braves-timeline__item braves-tl-connector-left" style="--braves-tl-nudge: -7rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -7rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v1.2.1</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('24 Oct 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -552,20 +585,15 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v1.2.1</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('24 Oct 2025', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 1.1.2 -->
-                        <div class="braves-timeline__item braves-tl-connector-right" style="--braves-tl-nudge: -6rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -8rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
-                                    <div class="braves-timeline__badge">v1.1.2</div>
-                                    <div class="braves-timeline__label"><?php esc_html_e('23 Oct 2025', 'braveschat'); ?></div>
-                                </div>
+                                <div class="braves-timeline__badge">v1.1.2</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('23 Oct 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -582,7 +610,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 1.1.1 -->
-                        <div class="braves-timeline__item braves-tl-connector-left" style="--braves-tl-nudge: -4rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -2rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v1.1.1</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('16 Oct 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -598,20 +631,15 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v1.1.1</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('16 Oct 2025', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     <!-- Version 1.1.0 -->
-                        <div class="braves-timeline__item  braves-tl-connector-right" style="--braves-tl-nudge: -15rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -15rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
-                                    <div class="braves-timeline__badge">v1.1.0</div>
-                                    <div class="braves-timeline__label"><?php esc_html_e('1 Oct 2025', 'braveschat'); ?></div>
-                                </div>
+                                <div class="braves-timeline__badge">v1.1.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('1 Oct 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -637,7 +665,12 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 1.0.0 -->
-                        <div class="braves-timeline__item braves-tl-connector-left" style="--braves-tl-nudge: -10rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -10rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v1.0.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('15 Sep 2025', 'braveschat'); ?></div>
+                            </div>
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
@@ -656,11 +689,6 @@ $sidebar = Admin_Sidebar::get_instance();
                                     </div>
                                 </div>
                             </div>
-                            <div class="braves-timeline__axis">
-                                <div class="braves-timeline__badge">v1.0.0</div>
-                                <div class="braves-timeline__label"><?php esc_html_e('15 Sep 2025', 'braveschat'); ?></div>
-                            </div>
-                            <div class="braves-timeline__spacer"></div>
                         </div>
 
                     </div>
