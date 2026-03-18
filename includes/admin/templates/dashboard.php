@@ -143,7 +143,6 @@ $config_status = Template_Helpers::get_config_status();
                     </div>
                 </div>
 
-
             </div><!-- .braves-admin-content -->
 
         </div><!-- .braves-admin-body -->
