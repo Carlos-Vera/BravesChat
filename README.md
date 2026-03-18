@@ -295,4 +295,4 @@ Copyright (c) 2026 BRAVES LAB LLC
 
 ---
 
-*Desarrollado por [Carlos Vera](https://github.com/Carlos-Vera) con corazón desde Venezuela para [BravesLab](https://braveslab.com)*
+*Desarrollado por [Carlos Vera](https://github.com/Carlos-Vera) para [BravesLab](https://braveslab.com) con el favor de nuestro señor JesusCristo*
