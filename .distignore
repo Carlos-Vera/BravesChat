@@ -18,6 +18,7 @@ composer.lock
 package.json
 package-lock.json
 phpcs.xml
+.phpcs.xml
 phpunit.xml
 .editorconfig
 .DS_Store
