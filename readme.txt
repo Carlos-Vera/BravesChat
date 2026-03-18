@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.5
+Stable tag: 2.3.7
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,14 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.3.7 =
+* ADDED: Agent Name field in Appearance — label your agent to identify conversations in History.
+* IMPROVED: Status notices (configuration warnings, save confirmations) moved to the header bar — cleaner page layout across all admin sections.
+* IMPROVED: Sidebar navigation labels updated — "Schedules" → "Availability", "GDPR" → "Privacy", "History" → "Conversations".
+* IMPROVED: Version badge in the header highlights when you are on the About page.
+* IMPROVED: Display mode and skin option labels rewritten for clarity.
+* IMPROVED: Changelog in the About page redesigned as a two-column timeline layout.
+
 = 2.3.5 =
 * FIXED: Image upload button in Appearance now correctly opens the WordPress Media Library.
 
@@ -146,6 +154,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * Initial plugin release.
 
 == Upgrade Notice ==
+
+= 2.3.7 =
+Admin panel polish: notices moved to the header, cleaner navigation labels, and a new Agent Name field to organize your conversations.
 
 = 2.3.5 =
 Bug fix: the image upload button in Appearance now works correctly.

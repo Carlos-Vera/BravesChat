@@ -72,10 +72,30 @@ if (empty($theme_colors)) {
     <div class="braves-admin-container">
 
         <?php
+        // Construir notices para el header
+        $notices_html = '';
+        if (!$config_status['is_configured']) {
+            ob_start();
+            Template_Helpers::notice(
+                __('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'),
+                'warning'
+            );
+            $notices_html .= ob_get_clean();
+        }
+        if ($settings_updated) {
+            ob_start();
+            Template_Helpers::notice(
+                __('Configuración guardada correctamente.', 'braveschat'),
+                'success'
+            );
+            $notices_html .= ob_get_clean();
+        }
+
         // Renderizar header
         $header->render(array(
-            'show_logo' => true,
+            'show_logo'    => true,
             'show_version' => true,
+            'notices'      => $notices_html,
         ));
         ?>
 
@@ -96,31 +116,6 @@ if (empty($theme_colors)) {
                     </p>
                 </div>
 
-                <!-- Configuration Status Section -->
-                <?php if (!$config_status['is_configured']): ?>
-                <div class="braves-section braves-section--warning">
-                    <?php
-                    Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'braveschat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braveschat'),
-                        'warning'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
-
-                <!-- Success Notice -->
-                <?php if ($settings_updated): ?>
-                <div class="braves-section">
-                    <?php
-                    Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'braveschat'),
-                        'success'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
-
                 <!-- Appearance Form -->
                 <form id="braveschat-form-appearance" action="options.php" method="post">
                     <?php
@@ -130,6 +125,7 @@ if (empty($theme_colors)) {
                         'header_title',
                         'header_status_text',
                         'header_subtitle',
+                        'agent_name',
                         'welcome_message',
                         'position',
                         'display_mode',
@@ -158,8 +154,8 @@ if (empty($theme_colors)) {
                             <?php
                             $current_mode = get_option($option_prefix . 'display_mode', 'modal');
                             $modes = array(
-                                'modal' => __('Modal (ventana flotante)', 'braveschat'),
-                                'fullscreen' => __('Pantalla completa', 'braveschat'),
+                                'modal' => __('Burbuja Flotante', 'braveschat'),
+                                'fullscreen' => __('Pantalla Completa', 'braveschat'),
                             );
 
                             ob_start();
@@ -176,14 +172,14 @@ if (empty($theme_colors)) {
                                 <?php endforeach; ?>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Modo de presentación del chat al abrirse.', 'braveschat'); ?>
+                                <?php esc_html_e('Selecciona el comportamiento visual que mejor se adapte al diseño de tu web.', 'braveschat'); ?>
                             </p>
                             <?php
                             $mode_content = ob_get_clean();
 
                             Template_Helpers::card(array(
                                 'title' => __('Modo de Visualización', 'braveschat'),
-                                'description' => __('Cómo se mostrará el chat al abrirse.', 'braveschat'),
+                                'description' => __('Define cómo se presenta la ventana ante el visitante.', 'braveschat'),
                                 'content' => $mode_content,
                             ));
                             ?>
@@ -198,18 +194,18 @@ if (empty($theme_colors)) {
                                     id="<?php echo esc_attr($option_prefix . 'chat_skin'); ?>"
                                     class="braves-select"
                                     style="width: 100%;">
-                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Básica', 'braveschat'); ?></option>
-                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Braves', 'braveschat'); ?></option>
+                                <option value="default" <?php selected('default', $chat_skin); ?>><?php esc_html_e('Skin Básico', 'braveschat'); ?></option>
+                                <option value="braves" <?php selected('braves', $chat_skin); ?>><?php esc_html_e('Skin Braves', 'braveschat'); ?></option>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Selecciona el diseño visual del chat.', 'braveschat'); ?>
+                                <?php esc_html_e('Elige la plantilla de diseño que mejor se adapte a tu marca.', 'braveschat'); ?>
                             </p>
                             <?php
                             $skin_content = ob_get_clean();
                             
                             Template_Helpers::card(array(
                                 'title' => __('Diseño del Chat', 'braveschat'),
-                                'description' => __('Personaliza la apariencia del widget.', 'braveschat'),
+                                'description' => __('Personaliza el estilo visual del Agente.', 'braveschat'),
                                 'content' => $skin_content,
                             ));
                             ?>
@@ -354,6 +350,29 @@ if (empty($theme_colors)) {
                                 'title' => __('Subtítulo de la Cabecera', 'braveschat'),
                                 'description' => __('Texto descriptivo que complementa el título.', 'braveschat'),
                                 'content' => $header_subtitle_content,
+                            ));
+                            ?>
+
+                            <!-- Card: Nombre del Agente -->
+                            <?php
+                            $agent_name = get_option($option_prefix . 'agent_name', '');
+                            ob_start();
+                            ?>
+                            <input type="text"
+                                   id="<?php echo esc_attr($option_prefix . 'agent_name'); ?>"
+                                   name="<?php echo esc_attr($option_prefix . 'agent_name'); ?>"
+                                   value="<?php echo esc_attr($agent_name); ?>"
+                                   class="braves-input"
+                                   style="width: 100%;"
+                                   placeholder="<?php esc_attr_e('Ej: Charlie', 'braveschat'); ?>">
+                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                                <?php esc_html_e('Este nombre se usará en el historial para organizar y filtrar las conversaciones.', 'braveschat'); ?>
+                            </p>
+                            <?php
+                            Template_Helpers::card(array(
+                                'title'       => __('Nombre del Agente', 'braveschat'),
+                                'description' => __('Define cómo reconocerás a tu agente en tus registros.', 'braveschat'),
+                                'content'     => ob_get_clean(),
                             ));
                             ?>
 

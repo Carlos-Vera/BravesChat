@@ -63,9 +63,10 @@ class Admin_Header {
      */
     public function render($args = array()) {
         $defaults = array(
-            'show_logo' => true,
+            'show_logo'    => true,
             'show_version' => true,
             'custom_class' => '',
+            'notices'      => '',
         );
 
         $args = wp_parse_args($args, $defaults);
@@ -81,15 +82,24 @@ class Admin_Header {
             echo '</a>';
         }
 
+        if (!empty($args['notices'])) {
+            echo '<div class="braves-admin-header__notices">';
+            echo $args['notices']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- notices are built with Template_Helpers::notice() which handles escaping internally.
+            echo '</div>';
+        }
+
         if ($args['show_version']) {
             $admin_url    = esc_url(admin_url('admin.php?page=braveschat-about'));
             $title        = esc_attr__('Ver información del plugin', 'braveschat');
             $version      = esc_html('v' . BRAVES_CHAT_VERSION);
             $display_mode = esc_html(get_option('braves_chat_display_mode', 'modal'));
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only, used for styling only.
+            $is_about     = isset($_GET['page']) && $_GET['page'] === 'braveschat-about';
+            $badge_class  = 'braves-badge braves-badge--primary braves-badge--clickable' . ($is_about ? ' braves-badge--active' : '');
 
             echo '<div class="braves-admin-header__version">';
             echo '<em class="braves-header__mode-label">' . $display_mode . '</em>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $display_mode is esc_html().
-            echo '<a href="' . $admin_url . '" class="braves-badge braves-badge--primary braves-badge--clickable" title="' . $title . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $admin_url is esc_url(); $title is esc_attr__().
+            echo '<a href="' . $admin_url . '" class="' . esc_attr($badge_class) . '" title="' . $title . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $admin_url is esc_url(); $title is esc_attr__().
             echo $version; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $version is esc_html().
             echo '</a>';
             echo '</div>';

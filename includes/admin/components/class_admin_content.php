@@ -178,7 +178,7 @@ class Admin_Content {
 
         if (!empty($args['description'])) {
             echo '<p class="braves-card__description">';
-            echo esc_html($args['description']);
+            echo wp_kses_post($args['description']);
             echo '</p>';
         }
 
@@ -344,7 +344,7 @@ class Admin_Content {
             
             if (!empty($args['description'])) {
                 echo '<p class="braves-section__description">';
-                echo esc_html($args['description']);
+                echo wp_kses_post($args['description']);
                 echo '</p>';
             }
             echo '</div>';
@@ -402,7 +402,7 @@ class Admin_Content {
 
         if (!empty($args['description'])) {
             echo '<p class="braves-toggle__description">';
-            echo esc_html($args['description']);
+            echo wp_kses_post($args['description']);
             echo '</p>';
         }
         

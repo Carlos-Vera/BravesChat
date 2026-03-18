@@ -337,7 +337,8 @@ a.braves-card.braves-card--clickable:hover {
     box-shadow: var(--braves-shadow-sm);
 }
 
-.braves-badge--clickable.braves-badge--primary:hover {
+.braves-badge--clickable.braves-badge--primary:hover,
+.braves-badge--clickable.braves-badge--primary.braves-badge--active {
     background: var(--braves-primary-light);
     color: var(--braves-white);
 }
@@ -603,15 +604,138 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     font-family: var(--braves-font-mono);
 }
 
-/* Changelog section */
-.braves-changelog {
-    display: flex;
-    flex-direction: column;
-    gap: var(--braves-space-2xl);
+/* ==================== CHANGELOG TIMELINE ==================== */
+
+.braves-timeline {
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
+    align-items: start;
+    row-gap: 0;
+    padding: var(--braves-space-lg) 0;
+    position: relative;
 }
 
+/* Línea vertical continua — centrada en el eje (col 2 = 45%–55%, centro = 50%) */
+.braves-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    border-left: 2px dashed var(--braves-gray-300);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* display:contents hace que los hijos participen directamente en el grid padre */
+.braves-timeline__item {
+    display: contents;
+}
+
+/* Posición explícita — sobreescribe la paridad por defecto */
+.braves-tl-left .braves-timeline__card-side { grid-column: 1; }
+.braves-tl-left .braves-timeline__axis      { grid-column: 2; }
+.braves-tl-left .braves-timeline__spacer    { grid-column: 3; }
+
+.braves-tl-right .braves-timeline__card-side { grid-column: 3; }
+.braves-tl-right .braves-timeline__axis      { grid-column: 2; }
+.braves-tl-right .braves-timeline__spacer    { grid-column: 1; }
+
+/* Stagger por paridad — card y axis se mueven juntos via --braves-tl-nudge */
+.braves-timeline__item:nth-child(even) {
+    --braves-tl-nudge: 2.5rem; /* ~5% en un contenedor de ~800px */
+}
+.braves-timeline__item:nth-child(odd):not(:first-child) {
+    --braves-tl-nudge: 1rem; /* ~2% */
+}
+
+.braves-timeline__card-side {
+    position: relative;
+    min-width: 0;
+    margin-top: var(--braves-tl-nudge, 0px);
+    margin-bottom: var(--braves-space-lg);
+}
+
+.braves-timeline__spacer {
+    /* columna vacía, solo ocupa espacio */
+}
+
+/* Eje central — siempre en col 2 */
+.braves-timeline__axis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-top: var(--braves-tl-nudge, 0px);
+}
+
+/* Sin línea vertical por ítem — el contenedor la gestiona */
+.braves-timeline__axis::before {
+    display: none;
+}
+
+/* Línea horizontal punteada — izquierda por defecto */
+.braves-timeline__axis::after {
+    content: '';
+    position: absolute;
+    top: calc(var(--braves-space-lg) + 13px);
+    left: 0;
+    right: auto;
+    width: 50%;
+    border-top: 2px dashed var(--braves-gray-300);
+    z-index: 0;
+}
+
+/* Pares: conector a la derecha por paridad (fallback sin clase explícita) */
+.braves-timeline__item:nth-child(even) .braves-timeline__axis::after {
+    left: auto;
+    right: 0;
+}
+
+/* Overrides explícitos — especificidad igualada con .braves-timeline__item para ganar al nth-child */
+.braves-timeline__item.braves-tl-connector-left .braves-timeline__axis::after,
+.braves-timeline__item.braves-tl-left .braves-timeline__axis::after {
+    left: 0;
+    right: auto;
+}
+
+.braves-timeline__item.braves-tl-connector-right .braves-timeline__axis::after,
+.braves-timeline__item.braves-tl-right .braves-timeline__axis::after {
+    left: auto;
+    right: 0;
+}
+
+/* Badge de versión — pill centrado en el eje */
+.braves-timeline__badge {
+    background: var(--braves-gray-900);
+    color: var(--braves-white);
+    border-radius: var(--braves-radius-full);
+    padding: 4px 12px;
+    font-size: var(--braves-text-xs);
+    font-weight: var(--braves-font-bold);
+    letter-spacing: 0.04em;
+    margin-top: var(--braves-space-lg);
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    line-height: 1.5;
+}
+
+.braves-timeline__label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--braves-gray-400);
+    text-align: center;
+    margin-top: 5px;
+    white-space: nowrap;
+    line-height: 1.3;
+}
+
+/* Tarjeta de versión */
 .braves-changelog__version {
-    padding: var(--braves-space-xl);
+    padding: var(--braves-space-lg);
     background: var(--braves-white);
     border: 1px solid var(--braves-gray-200);
     border-radius: var(--braves-radius-lg);
@@ -619,41 +743,113 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-changelog__title {
-    display: flex;
-    align-items: center;
-    gap: var(--braves-space-md);
-    font-size: var(--braves-text-xl);
-    font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
-    margin: 0 0 var(--braves-space-xs) 0;
-}
-
-.braves-changelog__date {
-    font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
-    margin: 0 0 var(--braves-space-lg) 0;
-}
-
-.braves-changelog__section {
-    margin-top: var(--braves-space-lg);
-}
-
-.braves-changelog__section h4 {
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-semibold);
     color: var(--braves-gray-900);
-    margin: 0 0 var(--braves-space-sm) 0;
+    margin: 0 0 var(--braves-space-md) 0;
+    line-height: var(--braves-leading-normal);
+}
+
+.braves-changelog__section {
+    margin-top: var(--braves-space-md);
+}
+
+.braves-changelog__section:first-child {
+    margin-top: 0;
+}
+
+.braves-changelog__section h4 {
+    font-size: var(--braves-text-xs);
+    font-weight: var(--braves-font-semibold);
+    color: var(--braves-gray-400);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--braves-space-xs) 0;
 }
 
 .braves-changelog__section ul {
     margin: 0;
-    padding-left: var(--braves-space-xl);
+    padding-left: var(--braves-space-lg);
 }
 
 .braves-changelog__section li {
     margin-bottom: var(--braves-space-xs);
-    color: var(--braves-gray-700);
+    color: var(--braves-gray-600);
+    font-size: var(--braves-text-sm);
     line-height: var(--braves-leading-relaxed);
+}
+
+/* Utilidades de desplazamiento vertical de tarjeta + badge
+ *
+ * Uso: añade la clase al div .braves-timeline__item
+ * La variable CSS se hereda a ambos hijos — card y badge se mueven juntos.
+ *
+ * Escala en rem (pasos de 0.5rem) — igual para ambas columnas del grid.
+ * Los % no funcionan aquí porque resuelven contra el ancho de cada celda
+ * (col 1 = 45%, col 2 = 10%) dando distancias distintas por columna.
+ *
+ *   braves-tl-mt-1  →  +1rem  (~16px, baja poco)
+ *   braves-tl-mt-5  →  +3rem  (~48px)
+ *   braves-tl-mt-10 →  +5.5rem (~88px, baja mucho)
+ *   braves-tl-mt-n1 →  -1rem  (prefijo n = sube)
+ */
+.braves-tl-mt-1   { --braves-tl-nudge:  2rem; }
+.braves-tl-mt-2   { --braves-tl-nudge:  2.5rem; }
+.braves-tl-mt-3   { --braves-tl-nudge:  3rem; }
+.braves-tl-mt-4   { --braves-tl-nudge:  3.5rem; }
+.braves-tl-mt-5   { --braves-tl-nudge:  4rem; }
+.braves-tl-mt-6   { --braves-tl-nudge:  4.5rem; }
+.braves-tl-mt-7   { --braves-tl-nudge:  5rem; }
+.braves-tl-mt-8   { --braves-tl-nudge:  5.5rem; }
+.braves-tl-mt-9   { --braves-tl-nudge:  6rem; }
+.braves-tl-mt-10  { --braves-tl-nudge:  6.5rem; }
+
+.braves-tl-mt-n1  { --braves-tl-nudge: -2rem; }
+.braves-tl-mt-n2  { --braves-tl-nudge: -2.5rem; }
+.braves-tl-mt-n3  { --braves-tl-nudge: -3rem; }
+.braves-tl-mt-n4  { --braves-tl-nudge: -3.5rem; }
+.braves-tl-mt-n5  { --braves-tl-nudge: -4rem; }
+.braves-tl-mt-n6  { --braves-tl-nudge: -4.5rem; }
+.braves-tl-mt-n7  { --braves-tl-nudge: -5rem; }
+.braves-tl-mt-n8  { --braves-tl-nudge: -5.5rem; }
+.braves-tl-mt-n9  { --braves-tl-nudge: -6rem; }
+.braves-tl-mt-n10 { --braves-tl-nudge: -6.5rem; }
+
+/* Timeline responsive — colapsa a columna única */
+@media screen and (max-width: 768px) {
+    .braves-timeline::before {
+        left: 28px; /* centro de la columna de eje en móvil (56px / 2) */
+        transform: none;
+    }
+
+    .braves-timeline {
+        grid-template-columns: 56px 1fr;
+        row-gap: var(--braves-space-md);
+    }
+
+    /* Items impares (HTML: card | axis | spacer) → mover axis a col 1, card a col 2 */
+    .braves-timeline__item:nth-child(odd) .braves-timeline__axis {
+        grid-column: 1;
+    }
+    .braves-timeline__item:nth-child(odd) .braves-timeline__card-side {
+        grid-column: 2;
+    }
+
+    /* Items pares (HTML: spacer(oculto) | axis | card) → auto-placement: col 1, col 2 */
+    .braves-timeline__item:nth-child(even) .braves-timeline__axis {
+        grid-column: 1;
+    }
+    .braves-timeline__item:nth-child(even) .braves-timeline__card-side {
+        grid-column: 2;
+    }
+
+    .braves-timeline__spacer {
+        display: none;
+    }
+
+    .braves-timeline__axis::after {
+        display: none;
+    }
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -941,9 +1137,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     background: var(--braves-surface, #f9fafb);
 }
 
-.braves-history-table tbody tr:hover {
-    background: #eff3fb;
-}
+/* El hover se gestiona por .braves-history-table-row:hover td */
 
 .braves-history-table tbody td {
     padding: 11px 16px;
@@ -987,6 +1181,28 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     cursor: pointer;
 }
 
+/* ==================== HISTORY TABLE CELL CONTENT ==================== */
+.braves-history-table__contact-name {
+    font-weight: 600;
+}
+
+.braves-history-table__snippet {
+    font-style: italic;
+}
+
+.braves-history-table__date {
+    display: flex;
+    align-items: center;
+    font-size: var(--braves-text-sm);
+}
+
+.braves-history-table__date-icon {
+    margin-right: 6px;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
 /* ==================== HISTORY CHAT MODAL ==================== */
 .braves-history-modal-overlay {
     position: fixed;
@@ -994,37 +1210,48 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
     z-index: 99999;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
+    visibility: hidden;
+    pointer-events: none;
     opacity: 0;
-    transition: opacity var(--braves-transition-normal, 0.3s ease);
+    transition: opacity var(--braves-transition-normal, 0.3s ease), visibility var(--braves-transition-normal, 0.3s ease);
 }
 
 .braves-history-modal-overlay.braves-is-visible {
-    display: flex;
+    visibility: visible;
+    pointer-events: auto;
     opacity: 1;
+}
+
+.braves-history-modal-wrapper {
+    position: relative;
+    width: 90%;
+    max-width: 600px;
 }
 
 .braves-history-modal {
     background: var(--braves-white, #ffffff);
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
     height: 80vh;
     max-height: 800px;
+    border: 1px solid var(--braves-primary);
     border-radius: var(--braves-radius-xl, 16px);
-    box-shadow: var(--braves-shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04));
+    box-shadow: 0 20px 40px -6px rgba(0, 119, 182, 0.4), 0 8px 16px -4px rgba(0, 119, 182, 0.25);
     display: flex;
     flex-direction: column;
-    transform: translateY(20px);
-    transition: transform var(--braves-transition-normal, 0.3s ease);
+    transform: translateY(24px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
     overflow: hidden;
 }
 
 .braves-history-modal-overlay.braves-is-visible .braves-history-modal {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    opacity: 1;
 }
 
 .braves-history-modal__header {
@@ -1050,27 +1277,6 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     font-family: var(--braves-font-mono, monospace);
 }
 
-.braves-history-modal__close {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    line-height: 1;
-    color: var(--braves-text-secondary, #6b7280);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: var(--braves-radius-full, 9999px);
-    transition: background-color var(--braves-transition-fast, 0.15s ease), color var(--braves-transition-fast, 0.15s ease);
-}
-
-.braves-history-modal__close:hover {
-    background: var(--braves-gray-200, #e5e7eb);
-    color: var(--braves-text-primary, #111827);
-}
-
-.braves-history-modal__close:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--braves-primary-light, #bfdbfe);
-}
 
 .braves-history-modal__body {
     flex: 1;
@@ -1085,12 +1291,29 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 /* Chat bubble styles inside the modal */
 .braves-history-chat-bubble {
     max-width: 80%;
-    padding: 12px 16px;
+    padding: 10px 14px 6px;
     border-radius: 16px;
     font-size: 14px;
     line-height: 1.5;
     position: relative;
     word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.braves-history-bubble-content {
+    display: block;
+}
+
+.braves-history-bubble-time {
+    display: block;
+    font-size: 10px;
+    opacity: 0.65;
+    text-align: right;
+    line-height: 1;
+    margin-top: 2px;
+    letter-spacing: 0.02em;
 }
 
 .braves-history-chat-bubble--user {
@@ -1156,11 +1379,18 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 /* Row interactivity */
 .braves-history-table-row {
     cursor: pointer;
-    transition: background-color var(--braves-transition-fast, 0.2s);
+    transition: all var(--braves-transition-fast);
 }
 
 .braves-history-table-row:hover {
-    background-color: var(--braves-gray-50, #f9fafb) !important;
+    background: var(--braves-gray-100) !important;
+    color: var(--braves-primary);
+    box-shadow: var(--braves-shadow-lg);
+    transform: translateY(-2px);
+}
+
+.braves-history-table-row:hover td {
+    color: var(--braves-primary) !important;
 }
 
 .braves-history-table-row:last-child td {
@@ -1195,7 +1425,6 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-history-modal__header > div {
     flex: 1;
     min-width: 0;
-    padding-right: 15px;
 }
 
 .braves-history-modal__subtitle {
@@ -1204,14 +1433,30 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     font-size: 12px;
 }
 
+/* Close button — outside the modal box */
 .braves-history-modal__close {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
+    position: absolute;
+    top: -36px;
+    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: var(--braves-white, #fff);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.braves-history-modal__close:hover {
+    opacity: 1;
+}
+
+.braves-history-modal__close:focus {
+    outline: none;
 }
 
 #braves-history-modal-body {

@@ -4,7 +4,7 @@
 
 ## 📋 Información General
 - **Nombre:** BravesChat
-- **Versión:** 2.3.5
+- **Versión:** 2.3.7
 - **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR, personalización avanzada y estadísticas de conversaciones.
 - **Autor:** Carlos Vera (BravesLab)
 - **Repositorio:** Carlos-Vera/BravesChat
@@ -98,11 +98,52 @@ No se requiere compilación (Vanilla JS/CSS).
     - `includes/admin/templates/about.php` — nuevo bloque `.braves-changelog`
     - `CLAUDE.md` — campo `Versión:` en Información General
     - `memory/MEMORY.md` — versión actual y cambios clave
+    - `braves_chat.php` método `plugin_api_info()` — actualizar `$plugin->active_installs`
     - `errores.md` — si se corrigieron bugs en esta versión
 5.  **Release Automatizado:**
     - Al crear un tag que empiece por `v` (e.g., `v2.1.3`), un GitHub Action genera automáticamente `braveschat.zip`.
     - Este ZIP contiene la carpeta `braveschat/` en la raíz, asegurando actualizaciones limpias en WordPress.
     - El ZIP se adjunta automáticamente al Release en GitHub.
+
+## 🗄️ Opciones WP Registradas (prefijo `braves_chat_`)
+
+| Opción | Tipo | Página |
+|---|---|---|
+| `global_enable` | bool | Ajustes |
+| `webhook_url` | url | Ajustes |
+| `n8n_auth_token` | string | Ajustes |
+| `typing_speed` | int | Ajustes |
+| `header_title/subtitle/status_text` | string | Ajustes |
+| `welcome_message` | string | Ajustes |
+| `excluded_pages` | array | Ajustes |
+| `position`, `display_mode`, `chat_icon` | string | Apariencia |
+| `icon_color`, `bubble_color`, `primary_color`, `background_color`, `text_color` | hex | Apariencia |
+| `bubble_tooltip`, `bubble_image`, `bubble_text` | string | Apariencia |
+| `agent_name` | string | Apariencia |
+| `chat_skin` | string | Apariencia |
+| `availability_enabled` | bool | Horarios |
+| `availability_start/end` | time | Horarios |
+| `availability_timezone`, `availability_message` | string | Horarios |
+| `gdpr_enabled` | bool | GDPR |
+| `gdpr_message`, `gdpr_accept_text` | string | GDPR |
+| `stats_webhook_url` | url | Estadísticas |
+| `stats_api_key` | string | Estadísticas |
+
+## 📊 Funcionalidad Historial / Estadísticas
+- **Template:** `includes/admin/templates/history.php` (reemplazó a `statistics.php` en v2.1.5)
+- **Fetch:** `wp_remote_get($url, ['headers' => ['x-api-key' => $key]])` → JSON decode
+- **JSON esperado de N8N:** `[{ session_id, client_mail, last_message, chat_history, metadata, user_height, updated_at }]`
+- **CSV:** exportado por JS inline con BOM UTF-8, columnas extra en `data-*` de cada `<tr>`
+- **Nombre archivo CSV:** `braveschat_estadisticas_YYYYMMDD.csv`
+
+### Patrón para agregar una nueva pestaña admin
+1. `class_admin_sidebar.php` → ítem en `get_menu_items()` + SVG en `get_icon_svg()`
+2. `class_admin_controller.php` → `add_submenu_page(null, ...)`, método `render_*_page()`, añadir slug a `is_braves_admin_page()`, `add_menu_icon_active_styles()` y `filter_admin_title()`
+3. `class_settings.php` → `register_setting()` para nuevas opciones + añadir a `$all_fields` en `render_hidden_fields()`
+4. Crear `includes/admin/templates/[page].php` siguiendo el patrón: `Admin_Header`, `Admin_Sidebar`, `Template_Helpers`, form con `settings_fields('braves_chat_settings')` + `render_hidden_fields()`
+
+### `render_hidden_fields()` — CRÍTICO
+Preserva todas las opciones al guardar formularios parciales. Siempre que se registre una nueva opción, añadirla a `$all_fields` en este método.
 
 ## ⚠️ Notas Importantes
 - **Cache:** Al actualizar Assets, incrementar `BRAVES_CHAT_VERSION` en `braves_chat.php` para romper la caché del navegador.

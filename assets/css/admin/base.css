@@ -58,10 +58,49 @@
     color: var(--braves-primary);
 }
 
+.braves-admin-header__notices {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--braves-space-xl);
+}
+
+.braves-admin-header__notices .braves-notice {
+    margin: 0;
+    width: 100%;
+    max-width: 560px;
+    padding: var(--braves-space-sm) var(--braves-space-lg);
+    background: transparent;
+    box-shadow: none;
+}
+
+.braves-admin-header__notices .braves-notice__content {
+    font-size: var(--braves-text-lg);
+    font-weight: 700;
+}
+
+.braves-admin-header__notices .braves-notice--warning .braves-notice__content {
+    color: var(--braves-warning);
+}
+
+.braves-admin-header__notices .braves-notice--success .braves-notice__content {
+    color: var(--braves-success);
+}
+
+.braves-admin-header__notices .braves-notice--info .braves-notice__content {
+    color: var(--braves-info);
+}
+
+.braves-admin-header__notices .braves-notice--error .braves-notice__content {
+    color: var(--braves-error);
+}
+
 .braves-admin-header__version {
     display: flex;
     align-items: center;
     gap: var(--braves-space-sm);
+    flex-shrink: 0;
 }
 
 .braves-header__mode-label {
@@ -147,7 +186,7 @@
 .braves-admin-sidebar__item:hover {
     background: var(--braves-gray-50);
     color: var(--braves-primary);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--braves-shadow-lg);
     transform: translateY(-2px);
 }
 

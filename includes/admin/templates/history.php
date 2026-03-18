@@ -188,6 +188,9 @@ foreach ($conversations as $row) {
         // Omitir si el contenido quedó vacío tras la limpieza
         if (empty(trim((string)$msg['content']))) continue;
 
+        // Preservar timestamp individual del mensaje para mostrarlo en el modal
+        $msg['_ts'] = isset($row['updated_at']) ? (string)$row['updated_at'] : (isset($row['update_at']) ? (string)$row['update_at'] : '');
+
         $sessions[$sid]['messages'][] = $msg;
     }
 }
@@ -232,8 +235,7 @@ uasort($sessions, function ($a, $b) {
                 <?php if (!$config_status['is_configured']): ?>
                 <div class="notice notice-warning inline">
                     <p>
-                        <strong><?php esc_html_e('Acción requerida:', 'braveschat'); ?></strong>
-                        <?php esc_html_e('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braveschat'); ?>
+                        <?php esc_html_e('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'); ?>
                     </p>
                 </div>
                 <?php endif; ?>
@@ -327,17 +329,17 @@ uasort($sessions, function ($a, $b) {
                                     data-chat-history="<?php echo esc_attr($chat_history_json); ?>">
                                     <td>
                                         <?php if (!empty($client_name)): ?>
-                                            <div style="font-weight: 600; color: var(--braves-primary);"><?php echo esc_html($client_name); ?></div>
+                                            <div class="braves-history-table__contact-name"><?php echo esc_html($client_name); ?></div>
                                         <?php else: ?>
-                                            <em style="color: var(--braves-gray-500);"><?php esc_html_e('Desconocido', 'braveschat'); ?></em>
+                                            <em><?php esc_html_e('Desconocido', 'braveschat'); ?></em>
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <span style="color: var(--braves-gray-600); font-style: italic;"><?php echo esc_html($snippet); ?></span>
+                                        <span class="braves-history-table__snippet"><?php echo esc_html($snippet); ?></span>
                                     </td>
                                     <td>
-                                        <div style="display: flex; align-items: center; color: var(--braves-gray-500); font-size: 14px;">
-                                            <span class="dashicons dashicons-clock" style="margin-right: 6px; font-size: 16px; width: 16px; height: 16px;"></span>
+                                        <div class="braves-history-table__date">
+                                            <span class="dashicons dashicons-clock braves-history-table__date-icon"></span>
                                             <?php echo esc_html($date_formatted); ?>
                                         </div>
                                     </td>
@@ -358,21 +360,25 @@ uasort($sessions, function ($a, $b) {
 
 <!-- Chat History Viewer Modal -->
 <div id="braves-history-modal" class="braves-history-modal-overlay">
-    <div class="braves-history-modal" role="dialog" aria-modal="true" aria-labelledby="braves-modal-title">
-        <div class="braves-history-modal__header">
-            <div>
-                <h3 id="braves-modal-title" class="braves-history-modal__title"><?php esc_html_e('Conversación del Chat', 'braveschat'); ?></h3>
-                <p id="braves-modal-subtitle" class="braves-history-modal__subtitle"></p>
+    <div class="braves-history-modal-wrapper">
+        <button type="button" id="braves-history-modal-close" class="braves-history-modal__close" aria-label="<?php esc_attr_e('Cerrar', 'braveschat'); ?>">&times;</button>
+        <div class="braves-history-modal" role="dialog" aria-modal="true" aria-labelledby="braves-modal-title">
+            <div class="braves-history-modal__header">
+                <div>
+                    <h3 id="braves-modal-title" class="braves-history-modal__title"><?php esc_html_e('Conversación del Chat', 'braveschat'); ?></h3>
+                    <p id="braves-modal-subtitle" class="braves-history-modal__subtitle"></p>
+                </div>
             </div>
-            <button type="button" id="braves-history-modal-close" class="braves-history-modal__close" aria-label="<?php esc_attr_e('Cerrar', 'braveschat'); ?>">&times;</button>
-        </div>
-        <div id="braves-history-modal-body" class="braves-history-modal__body">
-            <!-- Chat messages will be dynamically injected here by JS -->
+            <div id="braves-history-modal-body" class="braves-history-modal__body">
+                <!-- Chat messages will be dynamically injected here by JS -->
+            </div>
         </div>
     </div>
 </div>
 
 <script>
+var bravesAgentName = <?php echo wp_json_encode(get_option('braves_chat_agent_name', '') ?: __('Agente', 'braveschat')); ?>;
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- CSV Export Logic ---
@@ -436,9 +442,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 var chatHistoryRaw = this.getAttribute('data-chat-history');
                 var sessionId      = this.getAttribute('data-session-id') || 'N/A';
                 var clientName     = this.getAttribute('data-client-name') || '';
+                var updateAt       = this.getAttribute('data-update-at') || '';
 
                 modalTitle.textContent = clientName || 'Conversación Anónima';
-                modalSubtitle.textContent = 'Session ID: ' + sessionId;
+
+                // Mostrar solo los últimos 7 caracteres del session ID
+                var sessionIdShort = sessionId.length > 7 ? '…' + sessionId.slice(-7) : sessionId;
+                // Extraer solo la fecha (sin hora) del campo data-update-at (formato d/m/Y H:i)
+                var dateOnly = updateAt ? updateAt.split(' ')[0] : '';
+                var subtitleParts = ['Session: ' + sessionIdShort];
+                if (dateOnly) subtitleParts.push(dateOnly);
+                modalSubtitle.textContent = subtitleParts.join(' · ');
 
                 // Render Chat
                 modalBody.innerHTML = ''; // Clear previous
@@ -488,12 +502,26 @@ document.addEventListener('DOMContentLoaded', function() {
                                 // Etiqueta remitente
                                 var labelDiv = document.createElement('div');
                                 labelDiv.className = 'braves-history-chat-sender';
-                                labelDiv.textContent = isUser ? (clientName || 'Usuario') : 'Agente';
+                                labelDiv.textContent = isUser ? (clientName || 'Usuario') : bravesAgentName;
 
                                 // Burbuja con contenido limpio y Markdown renderizado
                                 var msgDiv = document.createElement('div');
                                 msgDiv.className = 'braves-history-chat-bubble ' + (isUser ? 'braves-history-chat-bubble--user' : 'braves-history-chat-bubble--ai');
-                                msgDiv.innerHTML = parseMarkdown(cleanContent(msg.content || ''));
+
+                                var contentHtml = parseMarkdown(cleanContent(msg.content || ''));
+
+                                // Hora al estilo WhatsApp
+                                var timeHtml = '';
+                                if (msg._ts) {
+                                    var tsDate = new Date(msg._ts);
+                                    if (!isNaN(tsDate.getTime())) {
+                                        var hh = String(tsDate.getHours()).padStart(2, '0');
+                                        var mm = String(tsDate.getMinutes()).padStart(2, '0');
+                                        timeHtml = '<span class="braves-history-bubble-time">' + hh + ':' + mm + '</span>';
+                                    }
+                                }
+
+                                msgDiv.innerHTML = '<span class="braves-history-bubble-content">' + contentHtml + '</span>' + timeHtml;
 
                                 wrapDiv.appendChild(labelDiv);
                                 wrapDiv.appendChild(msgDiv);

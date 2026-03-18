@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.5](#235---2026-03-16) - **Actual** - Fix botón de subir imagen en Apariencia
+- [2.3.7](#237---2026-03-18) - **Actual** - Nombre del agente, notices en header y navegación renombrada
+- [2.3.5](#235---2026-03-16) - Fix botón de subir imagen en Apariencia
 - [2.3.4](#234---2026-03-16) - Burbuja compacta en móviles
 - [2.3.3](#233---2026-03-11) - Fix text domain alineado al slug braveschat
 - [2.3.2](#232---2026-03-11) - Fix text domain para WordPress.org
@@ -32,6 +33,25 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.3.7] - 2026-03-18
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: `braves_chat_agent_name` — campo en Apariencia para nombrar al agente (ej. "Charlie"). Aparece en el historial para identificar conversaciones cuando tienes más de un flujo.
+
+### 🎨 Mejoras de UX/UI
+- **IMPROVED**: Los avisos de webhook y guardado se mueven al header. El cuerpo de las páginas admin queda libre — afecta a `settings.php`, `appearance.php`, `availability.php` y `gdpr.php`. Nuevo slot `notices` en `Admin_Header::render()`.
+- **IMPROVED**: Sidebar renombrado — "Horarios" → "Disponibilidad", "GDPR" → "Privacidad", "Historial" → "Conversaciones".
+- **IMPROVED**: Badge de versión en el header con estado activo (`.braves-badge--active`) al estar en la página About.
+- **IMPROVED**: Etiquetas en Apariencia: "Modal (ventana flotante)" → "Burbuja Flotante", "Pantalla completa" → "Pantalla Completa", "Básica" → "Skin Básico", "Braves" → "Skin Braves".
+- **IMPROVED**: Changelog en About migrado a `.braves-timeline` — grid `45% | 10% | 45%` con línea central y badges de versión.
+
+### 🎨 CSS
+- **ADDED**: `.braves-admin-header__notices` — notices en el header, sin fondo, texto bold.
+- **ADDED**: Sistema CSS para `.braves-timeline` — grid, línea vertical continua, conectores horizontales, responsive ≤768px.
+- **IMPROVED**: `.braves-badge--active` comparte el mismo estilo que el hover del badge primario.
 
 ---
 

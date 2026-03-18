@@ -36,10 +36,23 @@ $config_status = Template_Helpers::get_config_status();
     <div class="braves-admin-container">
 
         <?php
+        // Construir notices para el header
+        $notices_html = '';
+        if (!$config_status['is_configured']) {
+            ob_start();
+            Template_Helpers::notice(
+                '<strong>' . __('Falta el último cable.', 'braveschat') . '</strong> ' .
+                __('Sin la URL del Webhook, el chat no puede comunicarse con N8N. Pásate por Ajustes y vincula tu flujo para activar la IA.', 'braveschat'),
+                'warning'
+            );
+            $notices_html .= ob_get_clean();
+        }
+
         // Renderizar header
         $header->render(array(
-            'show_logo' => true,
+            'show_logo'    => true,
             'show_version' => true,
+            'notices'      => $notices_html,
         ));
         ?>
 
@@ -58,22 +71,9 @@ $config_status = Template_Helpers::get_config_status();
                         <strong><?php esc_html_e('Dashboard', 'braveschat'); ?></strong>
                     </h1>
                     <p class="braves-page-description">
-                        <?php echo wp_kses_post( __('Una visión general de las funciones de <strong>BravesChat iA</strong> para construir y personalizar tu chat.', 'braveschat') ); ?>
+                        <?php echo wp_kses_post( __('El centro de control de tu agente. Desde aquí gestionas cómo interactúa tu IA con el mundo.', 'braveschat') ); ?>
                     </p>
                 </div>
-
-                <!-- Configuration Status Section -->
-                <?php if (!$config_status['is_configured']): ?>
-                <div class="braves-section braves-section--warning">
-                    <?php
-                    Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'braveschat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braveschat'),
-                        'warning'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
 
                 <!-- Status Cards Grid -->
                 <div class="braves-card-grid braves-card-grid--3-cols">
@@ -84,9 +84,9 @@ $config_status = Template_Helpers::get_config_status();
                         'icon' => Template_Helpers::get_icon('chat', '#0077b6'),
                         'title' => __('Chat Activo', 'braveschat'),
                         'description' => $config_status['is_configured']
-                            ? __('El chat está configurado y funcionando correctamente en tu sitio web.', 'braveschat')
-                            : __('El chat aún no está configurado. Configura el webhook para empezar.', 'braveschat'),
-                        'action_text' => __('Ver sitio web', 'braveschat'),
+                            ? __('Tu agente está online. Todo en orden, la IA ya está lista para atender a tus clientes.', 'braveschat')
+                            : __('Tu agente aún no está configurado. Configura el webhook para empezar.', 'braveschat'),
+                        'action_text' => __('Ver en vivo', 'braveschat'),
                         'action_url' => home_url(),
                         'action_target' => '_blank',
                         'is_link_card' => true,
@@ -98,8 +98,8 @@ $config_status = Template_Helpers::get_config_status();
                     Template_Helpers::card(array(
                         'icon' => Template_Helpers::get_icon('settings', '#0077b6'),
                         'title' => __('Configuración', 'braveschat'),
-                        'description' => __('Personaliza la apariencia, mensajes y comportamiento del chat según tus necesidades.', 'braveschat'),
-                        'action_text' => __('Ir a Ajustes', 'braveschat'),
+                        'description' => __('Cerebro y estilo. Ajusta qué dice el chat, cómo lo dice y qué aspecto tiene.', 'braveschat'),
+                        'action_text' => __('Configurar', 'braveschat'),
                         'action_url' => admin_url('admin.php?page=braveschat-settings'),
                         'is_link_card' => true,
                     ));
@@ -110,8 +110,8 @@ $config_status = Template_Helpers::get_config_status();
                     Template_Helpers::card(array(
                         'icon' => Template_Helpers::get_icon('docs', '#0077b6'),
                         'title' => __('Documentación', 'braveschat'),
-                        'description' => __('Aprende cómo sacar el máximo provecho del plugin con nuestra documentación completa.', 'braveschat'),
-                        'action_text' => __('Ver documentación', 'braveschat'),
+                        'description' => __('¿Necesitas ayuda? Guía paso a paso para exprimir todas las funciones de BravesChat.', 'braveschat'),
+                        'action_text' => __('Abrir manual', 'braveschat'),
                         'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                         'action_target' => '_blank',
                         'is_link_card' => true,
@@ -129,13 +129,13 @@ $config_status = Template_Helpers::get_config_status();
                     <div class="braves-button-group">
                         <?php
                         Template_Helpers::quick_action(array(
-                            'text' => __('Personalizar Apariencia', 'braveschat'),
+                            'text' => __('Cambiar Diseño', 'braveschat'),
                             'url' => admin_url('customize.php'),
                             'style' => 'secondary',
                         ));
 
                         Template_Helpers::quick_action(array(
-                            'text' => __('Configurar Webhook', 'braveschat'),
+                            'text' => __('Vincular con N8N', 'braveschat'),
                             'url' => admin_url('admin.php?page=braveschat-settings'),
                             'style' => 'secondary',
                         ));

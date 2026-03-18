@@ -167,6 +167,7 @@ class Settings {
             'header_status_text',
             'stats_webhook_url',
             'stats_api_key',
+            'agent_name',
         );
 
         foreach ($all_fields as $field) {
@@ -743,6 +744,12 @@ class Settings {
         ));
 
         register_setting('braves_chat_settings', $this->option_prefix . 'stats_api_key', array(
+            'type'              => 'string',
+            'sanitize_callback' => 'sanitize_text_field',
+            'default'           => '',
+        ));
+
+        register_setting('braves_chat_settings', $this->option_prefix . 'agent_name', array(
             'type'              => 'string',
             'sanitize_callback' => 'sanitize_text_field',
             'default'           => '',

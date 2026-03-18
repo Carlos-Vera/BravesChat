@@ -42,10 +42,30 @@ $option_prefix = 'braves_chat_';
     <div class="braves-admin-container">
 
         <?php
+        // Construir notices para el header
+        $notices_html = '';
+        if (!$config_status['is_configured']) {
+            ob_start();
+            Template_Helpers::notice(
+                __('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'),
+                'warning'
+            );
+            $notices_html .= ob_get_clean();
+        }
+        if ($settings_updated) {
+            ob_start();
+            Template_Helpers::notice(
+                __('Configuración guardada correctamente.', 'braveschat'),
+                'success'
+            );
+            $notices_html .= ob_get_clean();
+        }
+
         // Renderizar header
         $header->render(array(
-            'show_logo' => true,
+            'show_logo'    => true,
             'show_version' => true,
+            'notices'      => $notices_html,
         ));
         ?>
 
@@ -65,31 +85,6 @@ $option_prefix = 'braves_chat_';
                         <?php esc_html_e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'braveschat'); ?>
                     </p>
                 </div>
-
-                <!-- Configuration Status Section -->
-                <?php if (!$config_status['is_configured']): ?>
-                <div class="braves-section braves-section--warning">
-                    <?php
-                    Template_Helpers::notice(
-                        '<strong>' . __('Acción requerida:', 'braveschat') . '</strong> ' .
-                        __('Para que el chat funcione, necesitas configurar la URL del webhook en la página de ajustes.', 'braveschat'),
-                        'warning'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
-
-                <!-- Success Notice -->
-                <?php if ($settings_updated): ?>
-                <div class="braves-section">
-                    <?php
-                    Template_Helpers::notice(
-                        __('Configuración guardada correctamente.', 'braveschat'),
-                        'success'
-                    );
-                    ?>
-                </div>
-                <?php endif; ?>
 
                 <!-- Availability Form -->
                 <form id="braveschat-form-availability" action="options.php" method="post">
