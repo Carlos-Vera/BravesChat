@@ -246,7 +246,7 @@ class Customizer {
         
         // Registrar preview
         if ($wp_customize->is_preview()) {
-            add_action('wp_footer', array($this, 'customizer_preview_script'));
+            add_action('wp_enqueue_scripts', array($this, 'customizer_preview_script'));
         }
     }
     
@@ -259,29 +259,24 @@ class Customizer {
      * @return void
      */
     public function customizer_preview_script() {
-        ?>
-        <script type="text/javascript">
-        (function($) {
-            wp.customize('braves_chat_header_title', function(value) {
+        $js = '(function($) {
+            wp.customize(\'braves_chat_header_title\', function(value) {
                 value.bind(function(newval) {
-                    $('#chat-header h3').text(newval);
+                    $(\'#chat-header h3\').text(newval);
                 });
             });
-            
-            wp.customize('braves_chat_header_subtitle', function(value) {
+            wp.customize(\'braves_chat_header_subtitle\', function(value) {
                 value.bind(function(newval) {
-                    $('#chat-header p').text(newval);
+                    $(\'#chat-header p\').text(newval);
                 });
             });
-            
-            wp.customize('braves_chat_welcome_message', function(value) {
+            wp.customize(\'braves_chat_welcome_message\', function(value) {
                 value.bind(function(newval) {
-                    $('#chat-messages .message.bot .message-bubble').first().text(newval);
+                    $(\'#chat-messages .message.bot .message-bubble\').first().text(newval);
                 });
             });
-        })(jQuery);
-        </script>
-        <?php
+        })(jQuery);';
+        wp_add_inline_script( 'jquery', $js );
     }
     
     /**

@@ -237,67 +237,6 @@ $option_prefix = 'braves_chat_';
                             ));
                             ?>
 
-                            <script>
-                            (function() {
-                                var authNonce = '<?php echo esc_js(wp_create_nonce('braves_save_auth_type')); ?>';
-
-                                var labels = {
-                                    none: {
-                                        show:        false,
-                                        headerLabel: '',
-                                        headerHelp:  '',
-                                        tokenLabel:  '',
-                                        tokenHelp:   ''
-                                    },
-                                    header: {
-                                        show:        true,
-                                        headerLabel: '<?php echo esc_js(__('Nombre del header', 'braveschat')); ?>',
-                                        headerHelp:  '<?php echo esc_js(__('Ej: X-N8N-Auth. Debe coincidir con el "Header Name" configurado en N8N → Header Auth.', 'braveschat')); ?>',
-                                        tokenLabel:  '<?php echo esc_js(__('Valor del token', 'braveschat')); ?>',
-                                        tokenHelp:   '<?php echo esc_js(__('Token secreto enviado como valor del header.', 'braveschat')); ?>'
-                                    },
-                                    basic: {
-                                        show:        true,
-                                        headerLabel: '<?php echo esc_js(__('Usuario', 'braveschat')); ?>',
-                                        headerHelp:  '<?php echo esc_js(__('Debe coincidir con el campo "User" en N8N → Basic Auth.', 'braveschat')); ?>',
-                                        tokenLabel:  '<?php echo esc_js(__('Contraseña', 'braveschat')); ?>',
-                                        tokenHelp:   '<?php echo esc_js(__('Debe coincidir con el campo "Password" en N8N → Basic Auth.', 'braveschat')); ?>'
-                                    }
-                                };
-
-                                function bravesUpdateAuthLabels(type) {
-                                    var l    = labels[type] || labels.header;
-                                    var card = document.getElementById('braves-auth-credentials-card');
-
-                                    if (card) card.closest('.braves-card').style.display = l.show ? '' : 'none';
-
-                                    var el = function(id) { return document.getElementById(id); };
-                                    if (el('braves-auth-header-label')) el('braves-auth-header-label').textContent = l.headerLabel;
-                                    if (el('braves-auth-header-help'))  el('braves-auth-header-help').textContent  = l.headerHelp;
-                                    if (el('braves-auth-token-label'))  el('braves-auth-token-label').textContent  = l.tokenLabel;
-                                    if (el('braves-auth-token-help'))   el('braves-auth-token-help').textContent   = l.tokenHelp;
-
-                                    // Auto-guardar el tipo de autenticación vía AJAX
-                                    fetch(ajaxurl, {
-                                        method: 'POST',
-                                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                                        body: new URLSearchParams({
-                                            action:    'braves_save_auth_type',
-                                            nonce:     authNonce,
-                                            auth_type: type
-                                        })
-                                    });
-                                }
-
-                                window.bravesUpdateAuthLabels = bravesUpdateAuthLabels;
-
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    var sel = document.getElementById('<?php echo esc_js($option_prefix . 'n8n_auth_type'); ?>');
-                                    if (sel) bravesUpdateAuthLabels(sel.value);
-                                });
-                            })();
-                            </script>
-
                             <!-- Card: Páginas Excluidas -->
                             <?php
                             $excluded_pages = get_option($option_prefix . 'excluded_pages', array());

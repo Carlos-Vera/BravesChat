@@ -76,7 +76,7 @@ class Admin_Controller {
     private function init_hooks() {
         add_action('admin_menu', array($this, 'register_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-        add_action('admin_head', array($this, 'add_menu_icon_active_styles'));
+        add_action('admin_enqueue_scripts', array($this, 'add_menu_icon_active_styles'), 20);
         add_filter('admin_title', array($this, 'filter_admin_title'), 10, 2);
         add_action('current_screen', array($this, 'suppress_other_notices'));
         add_filter('admin_body_class', array($this, 'add_admin_body_class'));
@@ -98,13 +98,7 @@ class Admin_Controller {
         // La navegación se gestiona con el sidebar personalizado del plugin.
         // Los submenús se registran con parent_slug = 'braveschat' para que WordPress
         // active el resaltado del menú principal de forma nativa.
-        ?>
-        <style>
-            #toplevel_page_braveschat .wp-submenu {
-                display: none !important;
-            }
-        </style>
-        <?php
+        wp_add_inline_style( 'braves-admin-base', '#toplevel_page_braveschat .wp-submenu { display: none !important; }' );
     }
 
     /**
@@ -428,6 +422,193 @@ class Admin_Controller {
 
         // Localizar datos
         $this->localize_admin_data();
+
+        // History page script (previously inline in history.php template)
+        if ( strpos( $hook, 'braveschat-history' ) !== false ) {
+            $history_data = array(
+                'agentName' => get_option( 'braves_chat_agent_name', '' ) ?: __( 'Agente', 'braveschat' ),
+                'i18n'      => array(
+                    'chatEmpty'  => __( 'Chat vacío o formato inválido.', 'braveschat' ),
+                    'chatError'  => __( 'No se pudo visualizar el chat.', 'braveschat' ),
+                    'chatNoData' => __( 'No hay datos de historial.', 'braveschat' ),
+                ),
+            );
+            wp_add_inline_script(
+                'braves-admin-settings',
+                'var bravesHistoryData = ' . wp_json_encode( $history_data ) . ';',
+                'before'
+            );
+            wp_add_inline_script(
+                'braves-admin-settings',
+                'var bravesAgentName = bravesHistoryData.agentName;
+
+document.addEventListener(\'DOMContentLoaded\', function() {
+
+    // --- CSV Export Logic ---
+    var btn = document.getElementById(\'braves-history-export-csv\');
+    if (btn) {
+        btn.addEventListener(\'click\', function() {
+            var tableRows = document.querySelectorAll(\'#braves-history-table tbody tr\');
+            if (!tableRows || tableRows.length === 0) return;
+
+            var rows = [];
+            var today = new Date();
+            var dateStr = today.getFullYear()
+                + String(today.getMonth() + 1).padStart(2, \'0\')
+                + String(today.getDate()).padStart(2, \'0\');
+
+            rows.push([\'Session ID\', \'Client Name\', \'Updated At\', \'Chat History JSON\']);
+
+            tableRows.forEach(function(tr) {
+                rows.push([
+                    tr.getAttribute(\'data-session-id\') || \'\',
+                    tr.getAttribute(\'data-client-name\') || \'\',
+                    tr.getAttribute(\'data-update-at\') || \'\',
+                    tr.getAttribute(\'data-chat-history\') || \'\'
+                ]);
+            });
+
+            var csv = rows.map(function(row) {
+                return row.map(function(cell) {
+                    return \'"\' + String(cell).replace(/"/g, \'""\'  ) + \'"\';
+                }).join(\',\');
+            }).join(\'\\r\\n\');
+
+            var blob = new Blob([\'\\uFEFF\' + csv], { type: \'text/csv;charset=utf-8;\' });
+            var url  = URL.createObjectURL(blob);
+            var a    = document.createElement(\'a\');
+            a.href     = url;
+            a.download = \'braveschat_history_\' + dateStr + \'.csv\';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    // --- Modal Logic ---
+    var tableRows = document.querySelectorAll(\'.braves-history-table-row\');
+    var modalOverlay = document.getElementById(\'braves-history-modal\');
+    var modalClose = document.getElementById(\'braves-history-modal-close\');
+    var modalTitle = document.getElementById(\'braves-modal-title\');
+    var modalSubtitle = document.getElementById(\'braves-modal-subtitle\');
+    var modalBody = document.getElementById(\'braves-history-modal-body\');
+
+    if (modalOverlay && modalClose) {
+        tableRows.forEach(function(row) {
+            row.addEventListener(\'click\', function(e) {
+                if (e.target.tagName.toLowerCase() === \'a\') return;
+
+                var chatHistoryRaw = this.getAttribute(\'data-chat-history\');
+                var sessionId      = this.getAttribute(\'data-session-id\') || \'N/A\';
+                var clientName     = this.getAttribute(\'data-client-name\') || \'\';
+                var updateAt       = this.getAttribute(\'data-update-at\') || \'\';
+
+                modalTitle.textContent = clientName || \'Conversación Anónima\';
+
+                var sessionIdShort = sessionId.length > 7 ? \'…\' + sessionId.slice(-7) : sessionId;
+                var dateOnly = updateAt ? updateAt.split(\' \')[0] : \'\';
+                var subtitleParts = [\'Session: \' + sessionIdShort];
+                if (dateOnly) subtitleParts.push(dateOnly);
+                modalSubtitle.textContent = subtitleParts.join(\' · \');
+
+                modalBody.innerHTML = \'\';
+
+                function cleanContent(text) {
+                    text = text.replace(/^Mensaje del usuario:\\s*/i, \'\');
+                    var nl = text.indexOf(\'\\n\');
+                    if (nl !== -1) text = text.substring(0, nl);
+                    return text.trim();
+                }
+
+                function parseMarkdown(text) {
+                    text = text.replace(/&/g, \'&amp;\')
+                               .replace(/</g, \'&lt;\')
+                               .replace(/>/g, \'&gt;\');
+                    text = text.replace(/\\*\\*(.+?)\\*\\*/g, \'<strong>$1</strong>\');
+                    text = text.replace(/__(.+?)__/g, \'<strong>$1</strong>\');
+                    text = text.replace(/\\*([^*\\n]+)\\*/g, \'<em>$1</em>\');
+                    text = text.replace(/\\[([^\\]]+)\\]\\((https?:\\/\\/[^)]+)\\)/g, \'<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>\');
+                    text = text.replace(/(^|[\\s>])(https?:\\/\\/[^\\s<"]+)/g, \'$1<a href="$2" target="_blank" rel="noopener noreferrer">$2</a>\');
+                    text = text.replace(/\\n/g, \'<br>\');
+                    return text;
+                }
+
+                if (chatHistoryRaw) {
+                    try {
+                        var chatHistory = JSON.parse(chatHistoryRaw);
+                        if (Array.isArray(chatHistory) && chatHistory.length > 0) {
+                            chatHistory.forEach(function(msg) {
+                                var role = (msg.role || msg.type || \'\').trim().toLowerCase();
+                                var isUser = (role === \'human\' || role === \'user\');
+
+                                var wrapDiv = document.createElement(\'div\');
+                                wrapDiv.className = \'braves-history-bubble-wrap\' + (isUser ? \' braves-history-bubble-wrap--user\' : \' braves-history-bubble-wrap--ai\');
+
+                                var labelDiv = document.createElement(\'div\');
+                                labelDiv.className = \'braves-history-chat-sender\';
+                                labelDiv.textContent = isUser ? (clientName || \'Usuario\') : bravesAgentName;
+
+                                var msgDiv = document.createElement(\'div\');
+                                msgDiv.className = \'braves-history-chat-bubble \' + (isUser ? \'braves-history-chat-bubble--user\' : \'braves-history-chat-bubble--ai\');
+
+                                var contentHtml = parseMarkdown(cleanContent(msg.content || \'\'));
+
+                                var timeHtml = \'\';
+                                if (msg._ts) {
+                                    var tsDate = new Date(msg._ts);
+                                    if (!isNaN(tsDate.getTime())) {
+                                        var hh = String(tsDate.getHours()).padStart(2, \'0\');
+                                        var mm = String(tsDate.getMinutes()).padStart(2, \'0\');
+                                        timeHtml = \'<span class="braves-history-bubble-time">\' + hh + \':\' + mm + \'</span>\';
+                                    }
+                                }
+
+                                msgDiv.innerHTML = \'<span class="braves-history-bubble-content">\' + contentHtml + \'</span>\' + timeHtml;
+
+                                wrapDiv.appendChild(labelDiv);
+                                wrapDiv.appendChild(msgDiv);
+                                modalBody.appendChild(wrapDiv);
+                            });
+                        } else {
+                            modalBody.innerHTML = \'<div class="braves-history-chat-empty">\' + bravesHistoryData.i18n.chatEmpty + \'</div>\';
+                        }
+                    } catch (err) {
+                        console.error(\'BravesChat: Error parsing chat history JSON.\', err);
+                        modalBody.innerHTML = \'<div class="braves-history-chat-empty">\' + bravesHistoryData.i18n.chatError + \'</div>\';
+                    }
+                } else {
+                    modalBody.innerHTML = \'<div class="braves-history-chat-empty">\' + bravesHistoryData.i18n.chatNoData + \'</div>\';
+                }
+
+                modalOverlay.classList.add(\'braves-is-visible\');
+                document.body.style.overflow = \'hidden\';
+            });
+        });
+
+        var closeModal = function() {
+            modalOverlay.classList.remove(\'braves-is-visible\');
+            document.body.style.overflow = \'\';
+        };
+
+        modalClose.addEventListener(\'click\', closeModal);
+
+        modalOverlay.addEventListener(\'click\', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener(\'keydown\', function(e) {
+            if (e.key === \'Escape\' && modalOverlay.classList.contains(\'braves-is-visible\')) {
+                closeModal();
+            }
+        });
+    }
+
+});'
+            );
+        }
     }
 
     /**

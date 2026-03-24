@@ -98,7 +98,7 @@ class Settings {
         // add_action('admin_menu', array($this, 'add_settings_page'));
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-        add_action('admin_head', array($this, 'add_menu_icon_styles'));
+        add_action('admin_enqueue_scripts', array($this, 'add_menu_icon_styles'), 20);
         add_action('wp_ajax_braves_save_auth_type', array($this, 'ajax_save_auth_type'));
     }
 
@@ -275,9 +275,7 @@ class Settings {
      * @return void
      */
     public function add_menu_icon_styles() {
-        ?>
-        <style>
-            /* Estilos del icono del menú Braves Chat */
+        $css = '
             #toplevel_page_braveschat .wp-menu-image img {
                 width: 20px;
                 height: 20px;
@@ -285,37 +283,31 @@ class Settings {
                 opacity: 0.6;
                 transition: opacity 0.2s ease;
             }
-
             #toplevel_page_braveschat:hover .wp-menu-image img,
             #toplevel_page_braveschat.current .wp-menu-image img,
             #toplevel_page_braveschat.wp-has-current-submenu .wp-menu-image img {
                 opacity: 1;
             }
-
-            /* Para SVG con currentColor */
             #toplevel_page_braveschat .wp-menu-image svg {
                 width: 20px;
                 height: 20px;
                 fill: #a7aaad;
                 transition: fill 0.2s ease;
             }
-
             #toplevel_page_braveschat:hover .wp-menu-image svg {
                 fill: #00a0d2;
             }
-
-            /* Cuando el menú está activo (cualquier subpágina) */
             #toplevel_page_braveschat.wp-has-current-submenu .wp-menu-image svg,
             #toplevel_page_braveschat.current .wp-menu-image svg {
                 fill: #ffffff !important;
             }
-
-            /* Color del badge de notificación (para futuras funcionalidades) */
             #toplevel_page_braveschat .update-plugins {
                 background-color: #00a0d2;
             }
-        </style>
-        <?php
+        ';
+        wp_register_style( 'braves-menu-icon', false );
+        wp_enqueue_style( 'braves-menu-icon' );
+        wp_add_inline_style( 'braves-menu-icon', $css );
     }
 
     /**
@@ -1228,6 +1220,79 @@ class Settings {
                 array('jquery'),
                 BRAVES_CHAT_VERSION,
                 true
+            );
+        }
+
+        // Auth type toggle script (previously inline in settings.php template)
+        if (strpos($hook, 'braveschat-settings') !== false) {
+            $auth_config = array(
+                'nonce'   => wp_create_nonce( 'braves_save_auth_type' ),
+                'fieldId' => 'braves_chat_n8n_auth_type',
+                'labels'  => array(
+                    'none'   => array(
+                        'show'        => false,
+                        'headerLabel' => '',
+                        'headerHelp'  => '',
+                        'tokenLabel'  => '',
+                        'tokenHelp'   => '',
+                    ),
+                    'header' => array(
+                        'show'        => true,
+                        'headerLabel' => __( 'Nombre del header', 'braveschat' ),
+                        'headerHelp'  => __( 'Ej: X-N8N-Auth. Debe coincidir con el "Header Name" configurado en N8N → Header Auth.', 'braveschat' ),
+                        'tokenLabel'  => __( 'Valor del token', 'braveschat' ),
+                        'tokenHelp'   => __( 'Token secreto enviado como valor del header.', 'braveschat' ),
+                    ),
+                    'basic'  => array(
+                        'show'        => true,
+                        'headerLabel' => __( 'Usuario', 'braveschat' ),
+                        'headerHelp'  => __( 'Debe coincidir con el campo "User" en N8N → Basic Auth.', 'braveschat' ),
+                        'tokenLabel'  => __( 'Contraseña', 'braveschat' ),
+                        'tokenHelp'   => __( 'Debe coincidir con el campo "Password" en N8N → Basic Auth.', 'braveschat' ),
+                    ),
+                ),
+            );
+            wp_add_inline_script(
+                'braves-admin-settings',
+                'var bravesAuthConfig = ' . wp_json_encode( $auth_config ) . ';',
+                'before'
+            );
+            wp_add_inline_script(
+                'braves-admin-settings',
+                '(function() {
+    var authNonce = bravesAuthConfig.nonce;
+    var labels    = bravesAuthConfig.labels;
+
+    function bravesUpdateAuthLabels(type) {
+        var l    = labels[type] || labels.header;
+        var card = document.getElementById(\'braves-auth-credentials-card\');
+
+        if (card) card.closest(\'.braves-card\').style.display = l.show ? \'\' : \'none\';
+
+        var el = function(id) { return document.getElementById(id); };
+        if (el(\'braves-auth-header-label\')) el(\'braves-auth-header-label\').textContent = l.headerLabel;
+        if (el(\'braves-auth-header-help\'))  el(\'braves-auth-header-help\').textContent  = l.headerHelp;
+        if (el(\'braves-auth-token-label\'))  el(\'braves-auth-token-label\').textContent  = l.tokenLabel;
+        if (el(\'braves-auth-token-help\'))   el(\'braves-auth-token-help\').textContent   = l.tokenHelp;
+
+        fetch(ajaxurl, {
+            method: \'POST\',
+            headers: { \'Content-Type\': \'application/x-www-form-urlencoded\' },
+            body: new URLSearchParams({
+                action:    \'braves_save_auth_type\',
+                nonce:     authNonce,
+                auth_type: type
+            })
+        });
+    }
+
+    window.bravesUpdateAuthLabels = bravesUpdateAuthLabels;
+
+    document.addEventListener(\'DOMContentLoaded\', function() {
+        var sel = document.getElementById(bravesAuthConfig.fieldId);
+        if (sel) bravesUpdateAuthLabels(sel.value);
+    });
+})();'
             );
         }
     }

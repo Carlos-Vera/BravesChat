@@ -55,7 +55,7 @@ class Frontend {
     private function __construct() {
         add_action('wp_enqueue_scripts', array($this, 'enqueue_assets'));
         add_action('wp_footer', array($this, 'render_global_chat'), 100);
-        add_action('wp_head', array($this, 'inject_custom_colors'), 100);
+        add_action('wp_enqueue_scripts', array($this, 'inject_custom_colors'), 20);
     }
 
     /**
@@ -360,8 +360,8 @@ class Frontend {
         // Calcular color secundario (tono más claro del color primario)
         $secondary_color = $this->lighten_color($primary_color, 20);
 
+        ob_start();
         ?>
-        <style id="braves-chat-custom-colors">
             /* Colores personalizados del chat - BravesChat */
             :root {
                 --braves-primary: <?php echo esc_attr($primary_color); ?>;
@@ -507,8 +507,9 @@ class Frontend {
             body #braveslab-chat-container .message-time {
                 color: <?php echo esc_attr($text_color); ?>80 !important;
             }
-        </style>
         <?php
+        $css = ob_get_clean();
+        wp_add_inline_style( 'braves-chat-frontend', $css );
     }
 
     /**
