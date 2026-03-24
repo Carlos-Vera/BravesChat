@@ -22,6 +22,9 @@ memory/
 errores.md
 WORDPRESS_ORG_PLAN.md
 
+# Reportes de Plugin Check
+braveschat-*.md
+
 # Configuración de valores por defecto (contiene datos específicos de cada instalación)
 config/defaults.php
 
