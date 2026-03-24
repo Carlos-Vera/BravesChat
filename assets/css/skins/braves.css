@@ -559,6 +559,59 @@ body .braves-skin-braves #minimize-chat:hover {
         right: 10px;
     }
 
+    /* Modo fullscreen móvil — overrides del skin Braves */
+    body.braves-mobile-open .braves-skin-braves #chat-window {
+        height: 100vh !important;        /* fallback */
+        height: 100dvh !important;
+        border-radius: 0 !important;
+        background: var(--bc-bg-color, #F4F4F4) !important;
+    }
+
+    body.braves-mobile-open .braves-skin-braves #chat-messages {
+        padding-bottom: 10px !important;
+        /* En mobile el input está en el flujo, no flotante */
+    }
+
+    body.braves-mobile-open .braves-skin-braves #chat-input-wrapper {
+        position: static !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        padding: 12px 16px !important;
+        padding-bottom: max(12px, env(safe-area-inset-bottom)) !important;
+    }
+
+    body.braves-mobile-open .braves-skin-braves #minimize-chat {
+        display: none !important;
+    }
+
+    /* Textarea: una sola línea en mobile */
+    body.braves-mobile-open .braves-skin-braves #chat-input {
+        min-height: 30px !important;
+        max-height: 30px !important;
+        overflow-y: hidden !important;
+    }
+
+    /* Botón enviar: sin círculo, icono en color primary */
+    body.braves-mobile-open .braves-skin-braves #send-button,
+    body.braves-mobile-open .braves-skin-braves #send-button:not(:disabled) {
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        min-width: unset !important;
+        padding: 4px !important;
+    }
+
+    body.braves-mobile-open .braves-skin-braves #send-button svg path {
+        fill: var(--braves-primary, #01B7AF) !important;
+    }
+
+    body.braves-mobile-open .braves-skin-braves #send-button:disabled svg path {
+        fill: #cccccc !important;
+    }
+
     /* Forzar vista minimizada en móvil (skin Braves, chat cerrado) */
     body #braveslab-chat-container.chat-closed.braves-skin-braves #chat-toggle {
         min-width: auto !important;

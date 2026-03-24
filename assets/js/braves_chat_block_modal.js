@@ -188,15 +188,26 @@ class BravesChatModal {
             });
         }
 
-        // Cerrar al hacer clic fuera
+        // Cerrar al hacer clic fuera (solo en desktop, no en modo móvil fullscreen)
         document.addEventListener('click', (e) => {
             if (this.is_open &&
+                !document.body.classList.contains('braves-mobile-open') &&
                 this.chat_window && !this.chat_window.contains(e.target) &&
                 this.chat_toggle && !this.chat_toggle.contains(e.target) &&
                 !e.target.closest('.braves-chat-gdpr-notice')) {
                 this.close_window();
             }
         });
+
+        // Listeners del header móvil
+        const mobile_back = document.getElementById('braves-mobile-back');
+        const mobile_close = document.getElementById('braves-mobile-close');
+        if (mobile_back) {
+            mobile_back.addEventListener('click', () => this.exit_mobile_mode());
+        }
+        if (mobile_close) {
+            mobile_close.addEventListener('click', () => this.exit_mobile_mode());
+        }
     }
 
 
@@ -275,6 +286,37 @@ class BravesChatModal {
     }
 
     /**
+     * Detecta si el dispositivo está en viewport móvil
+     * @returns {boolean}
+     */
+    is_mobile() {
+        return window.innerWidth <= 480;
+    }
+
+    /**
+     * Activa el modo fullscreen móvil
+     * Toma control de la pantalla con un header de navegación propio
+     * @returns {void}
+     */
+    enter_mobile_mode() {
+        this._mobile_scroll_y = window.scrollY;
+        document.body.style.top = `-${this._mobile_scroll_y}px`;
+        document.body.classList.add('braves-mobile-open');
+        setTimeout(() => this.scroll_to_bottom(), 150);
+    }
+
+    /**
+     * Desactiva el modo fullscreen móvil y restaura el scroll
+     * @returns {void}
+     */
+    exit_mobile_mode() {
+        document.body.classList.remove('braves-mobile-open');
+        document.body.style.top = '';
+        window.scrollTo(0, this._mobile_scroll_y || 0);
+        this.close_window();
+    }
+
+    /**
      * Alterna entre abrir y cerrar el chat
      * @returns {void}
      */
@@ -305,9 +347,12 @@ class BravesChatModal {
         if (!window.bravesFingerprint) {
             console.error('[BravesChat Modal] window.bravesFingerprint no está definido');
             // Si no está definido, permitir abrir por seguridad
-            setTimeout(() => {
-                if (this.chat_input) this.chat_input.focus();
-            }, 300);
+            if (!this.is_mobile()) {
+                setTimeout(() => {
+                    if (this.chat_input) this.chat_input.focus();
+                }, 300);
+            }
+            if (this.is_mobile()) this.enter_mobile_mode();
             return;
         }
 
@@ -326,10 +371,17 @@ class BravesChatModal {
             const inputWrapper = document.getElementById('chat-input-wrapper');
             if (inputWrapper) inputWrapper.style.display = '';
 
-            // Focus en el input si ya hay consentimiento
-            setTimeout(() => {
-                if (this.chat_input) this.chat_input.focus();
-            }, 300);
+            // Focus en el input solo en desktop (en móvil evitar que el teclado se abra automáticamente)
+            if (!this.is_mobile()) {
+                setTimeout(() => {
+                    if (this.chat_input) this.chat_input.focus();
+                }, 300);
+            }
+        }
+
+        // Activar modo fullscreen en mobile
+        if (this.is_mobile()) {
+            this.enter_mobile_mode();
         }
     }
 
@@ -443,8 +495,14 @@ class BravesChatModal {
      * @returns {void}
      */
     close_window() {
+        // Limpiar modo móvil si estaba activo (llamada directa, no vía exit_mobile_mode)
+        if (document.body.classList.contains('braves-mobile-open')) {
+            document.body.classList.remove('braves-mobile-open');
+            document.body.style.top = '';
+            window.scrollTo(0, this._mobile_scroll_y || 0);
+        }
         this.chat_container.classList.remove('chat-open');
-        this.chat_container.classList.remove('braves-expanded'); // Reset expansion on close
+        this.chat_container.classList.remove('braves-expanded');
         this.chat_container.classList.add('chat-closed');
         this.is_open = false;
     }
