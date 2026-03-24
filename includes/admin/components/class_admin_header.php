@@ -34,7 +34,7 @@ use function wp_remote_retrieve_body;
 use function is_wp_error;
 use function json_decode;
 use function trim;
-use function date;
+use function gmdate;
 use function count;
 
 class Admin_Header {
@@ -137,7 +137,7 @@ class Admin_Header {
      * @return array{ text: string, ref: string }|null
      */
     private static function get_daily_verse() {
-        $cache_key = 'braves_chat_verse_' . date( 'Ymd' );
+        $cache_key = 'braves_chat_verse_' . gmdate( 'Ymd' );
         $cached    = get_transient( $cache_key );
 
         if ( false !== $cached ) {
@@ -157,7 +157,7 @@ class Admin_Header {
         );
 
         $bible_id = '4122de86530c9cdf-01'; // NVI — Nueva Versión Internacional
-        $verse_id = $verse_ids[ (int) date( 'z' ) % count( $verse_ids ) ];
+        $verse_id = $verse_ids[ (int) gmdate( 'z' ) % count( $verse_ids ) ];
         $url      = 'https://api.scripture.api.bible/v1/bibles/' . $bible_id . '/verses/' . $verse_id
                   . '?content-type=text&include-notes=false&include-titles=false'
                   . '&include-chapter-numbers=false&include-verse-numbers=false';
@@ -221,7 +221,7 @@ class Admin_Header {
             array( 'text' => 'El que habita al abrigo del Altísimo se acoge a la sombra del Todopoderoso.',            'ref' => 'Sal. 91:1' ),
             array( 'text' => 'Yo y mi familia serviremos al Señor.',                                                   'ref' => 'Jos. 24:15' ),
         );
-        return $verses[ (int) date( 'z' ) % count( $verses ) ];
+        return $verses[ (int) gmdate( 'z' ) % count( $verses ) ];
     }
 
     /**
