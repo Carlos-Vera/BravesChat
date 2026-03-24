@@ -45,7 +45,8 @@ jobs:
           --exclude "WORDPRESS_ORG_PLAN.md" \
           --exclude "errores.md" \
           --exclude "memory" \
-          --exclude "*.bak"
+          --exclude "*.bak" \
+          --exclude "braveschat-*.md"
 
         # Renombrar el archivo principal para coincidir con el slug
         mv dist/$PLUGIN_SLUG/braves_chat.php dist/$PLUGIN_SLUG/$PLUGIN_SLUG.php
