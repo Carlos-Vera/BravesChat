@@ -305,7 +305,7 @@ class Settings {
                 background-color: #00a0d2;
             }
         ';
-        wp_register_style( 'braves-menu-icon', false );
+        wp_register_style( 'braves-menu-icon', false, array(), BRAVES_CHAT_VERSION );
         wp_enqueue_style( 'braves-menu-icon' );
         wp_add_inline_style( 'braves-menu-icon', $css );
     }
