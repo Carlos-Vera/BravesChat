@@ -82,25 +82,28 @@ $config_status = Template_Helpers::get_config_status();
                     <?php
                     Template_Helpers::card(array(
                         'icon' => Template_Helpers::get_icon('chat', '#0077b6'),
-                        'title' => __('Chat Activo', 'braveschat'),
-                        'description' => $config_status['is_configured']
-                            ? __('Tu agente está online. Todo en orden, la IA ya está lista para atender a tus clientes.', 'braveschat')
-                            : __('Tu agente aún no está configurado. Configura el webhook para empezar.', 'braveschat'),
-                        'action_text' => __('Ver en vivo', 'braveschat'),
-                        'action_url' => home_url(),
-                        'action_target' => '_blank',
+                        'title' => $config_status['global_enabled'] ? __('Chat Activo', 'braveschat') : __('Chat Offline', 'braveschat'),
+                        'description' => !$config_status['global_enabled']
+                            ? __('Chat desactivado — actívalo en Ajustes para que tus visitas puedan usarlo.', 'braveschat')
+                            : ($config_status['is_configured']
+                                ? __('Tu agente está online. Todo en orden, la IA ya está lista para atender a tus clientes.', 'braveschat')
+                                : __('Tu agente aún no está configurado. Configura el webhook para empezar.', 'braveschat')
+                            ),
+                        'action_text' => $config_status['global_enabled'] ? __('Ver en vivo', 'braveschat') : __('Ir a Configuración General', 'braveschat'),
+                        'action_url' => $config_status['global_enabled'] ? home_url() : admin_url('admin.php?page=braveschat-settings'),
+                        'action_target' => $config_status['global_enabled'] ? '_blank' : '_self',
                         'is_link_card' => true,
                     ));
                     ?>
 
-                    <!-- Configuración Card -->
+                    <!-- Apariencia Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('settings', '#0077b6'),
-                        'title' => __('Configuración', 'braveschat'),
+                        'icon' => Template_Helpers::get_icon('appearance', '#0077b6'),
+                        'title' => __('Apariencia', 'braveschat'),
                         'description' => __('Cerebro y estilo. Ajusta qué dice el chat, cómo lo dice y qué aspecto tiene.', 'braveschat'),
-                        'action_text' => __('Configurar', 'braveschat'),
-                        'action_url' => admin_url('admin.php?page=braveschat-settings'),
+                        'action_text' => __('Personalizar', 'braveschat'),
+                        'action_url' => admin_url('admin.php?page=braveschat-appearance'),
                         'is_link_card' => true,
                     ));
                     ?>
