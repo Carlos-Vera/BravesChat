@@ -47,7 +47,8 @@
     text-decoration: none;
 }
 
-.braves-admin-header__logo svg {
+.braves-admin-header__logo svg,
+.braves-admin-header__logo img {
     height: 52px;
     width: auto;
 }
@@ -113,7 +114,7 @@
 .braves-header__mode-label {
     font-size: 11px;
     font-style: italic;
-    color: var(--braves-primary);
+    color: var(--braves-gray-400);
     font-weight: 400;
     letter-spacing: 0.01em;
     opacity: 0.8;
@@ -314,7 +315,8 @@
         padding: var(--braves-space-md) var(--braves-space-lg);
     }
 
-    .braves-admin-header__logo svg {
+    .braves-admin-header__logo svg,
+    .braves-admin-header__logo img {
         height: 42px;
     }
 
@@ -333,7 +335,7 @@
     text-align: right;
     font-size: 11px;
     font-style: italic;
-    color: var(--braves-gray-400);
+    color: var(--braves-primary);
     font-weight: 400;
     letter-spacing: 0.01em;
     opacity: 0.8;
