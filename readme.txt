@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.8
+Stable tag: 2.4.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,16 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Changelog ==
 
+= 2.4.0 =
+* ADDED: Mobile fullscreen mode — on devices up to 480px the chat opens as a full-screen overlay with its own header, back/close buttons, and iOS safe-area support.
+* IMPROVED: WooCommerce compatibility — z-index adjusted so WooCommerce cart and checkout elements always render on top of the chat widget.
+* IMPROVED: Logo now rendered as a standard img tag instead of inline SVG — compatible with strict Content Security Policy configurations.
+* IMPROVED: Admin scripts moved from PHP templates to wp_add_inline_script — resolves Plugin Check (PCP) warnings about inline scripts in templates.
+* IMPROVED: Menu icon SVG sanitized before encoding as data URI to prevent rendering issues in some browsers.
+* IMPROVED: Style version added to wp_register_style for reliable cache busting on plugin updates.
+* FIXED: Daily verse selection now uses gmdate instead of date for correct UTC-based rotation.
+* FIXED: External service disclosure added to API.Bible integration for WordPress.org compliance.
+
 = 2.3.8 =
 * ADDED: Un versículo de la Biblia (NVI) aparece cada día en el encabezado del panel. Cambia solo — sin configurar nada.
 
@@ -156,7 +166,38 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 = 1.0.0 =
 * Initial plugin release.
 
+== External services ==
+
+= API.Bible (scripture.api.bible) =
+
+This plugin connects to the API.Bible service, provided by the American Bible Society, to display a daily Bible verse in the WordPress admin dashboard header.
+
+**What data is sent:** Only a verse reference identifier (e.g. "JHN.3.16") selected by the day of the year. No user data, visitor data, IP addresses, or site-specific information is ever transmitted.
+
+**When:** Once per day, on the first admin page load after the 24-hour cache expires. The result is stored as a WordPress transient and reused for the rest of the day. Front-end visitors are never affected.
+
+**Why:** To show an inspirational verse to the site administrator in the plugin's admin header.
+
+* Service provider: American Bible Society
+* Terms of Service: https://scripture.api.bible/admin/terms-of-service
+* Privacy Policy: https://www.americanbible.org/privacy-policy
+
+= N8N Webhook (user-configured) =
+
+This plugin sends chat messages to an N8N webhook URL configured by the site administrator.
+
+**What data is sent:** The visitor's chat message, conversation history, an anonymous session identifier (fingerprint), and the current page URL.
+
+**When:** On every message sent by a visitor through the chat widget, but only if the administrator has configured a webhook URL.
+
+**Why:** To forward the conversation to the administrator's N8N workflow for AI processing.
+
+The webhook URL, destination server, and all data processing are fully controlled by the site administrator. No data is sent to any Braves-operated server.
+
 == Upgrade Notice ==
+
+= 2.4.0 =
+Mobile fullscreen chat experience, WooCommerce z-index fix, and several Plugin Check compliance improvements. Recommended update for all users.
 
 = 2.3.8 =
 Versículo diario NVI en el header del panel. Se actualiza solo cada día.

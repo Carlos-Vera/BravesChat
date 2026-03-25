@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.3.8](#238---2026-03-18) - **Actual** - Versículo diario NVI en el header del panel admin
+- [2.4.0](#240---2026-03-25) - **Actual** - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
+- [2.3.8](#238---2026-03-18) - Versículo diario NVI en el header del panel admin
 - [2.3.7](#237---2026-03-18) - Nombre del agente, notices en header y navegación renombrada
 - [2.3.5](#235---2026-03-16) - Fix botón de subir imagen en Apariencia
 - [2.3.4](#234---2026-03-16) - Burbuja compacta en móviles
@@ -34,6 +35,27 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.4.0] - 2026-03-25
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Mobile fullscreen mode — en dispositivos ≤480px el chat se abre como overlay de pantalla completa con header propio, botones de volver/cerrar y soporte de `safe-area-inset` para iPhones con notch. El scroll del body se bloquea y restaura correctamente al cerrar.
+- **ADDED**: `#braves-mobile-header` en `modal.php` — header exclusivo para el modo fullscreen móvil, incluye botón volver, título configurable y botón cerrar.
+
+### 🐛 Correcciones
+- **FIXED**: `date()` reemplazado por `gmdate()` en `get_daily_verse()` para que la rotación del versículo sea correcta independientemente del timezone del servidor.
+
+### 🔧 Mejoras Técnicas
+- **IMPROVED**: z-index del contenedor de chat bajado de 999 a 990 — evita conflictos visuales con el carrito y checkout de WooCommerce.
+- **IMPROVED**: Logo del header renderizado como `<img>` en lugar de SVG inline — compatible con políticas CSP estrictas y elimina warnings de Plugin Check.
+- **IMPROVED**: Scripts del panel de admin (historial CSV + modal, ajustes) movidos de templates PHP a `wp_add_inline_script()` en `Admin_Controller::enqueue_admin_assets()`.
+- **IMPROVED**: Estilos del menú movidos de `admin_head` a `wp_add_inline_style()` — más correcto según WordPress coding standards.
+- **IMPROVED**: SVG del icono del menú sanitizado antes de codificarse como data URI: se elimina la declaración XML y se sustituyen dimensiones `100%` por valores fijos.
+- **IMPROVED**: `wp_register_style( 'braves-menu-icon' )` ahora incluye `BRAVES_CHAT_VERSION` para cache busting correcto.
+- **IMPROVED**: Comentario de disclosure del servicio externo API.Bible añadido en `get_daily_verse()` para cumplimiento con WordPress.org.
+- **IMPROVED**: `.gitignore` y `release.yml` actualizados para excluir reportes de Plugin Check (`braveschat-*.md`) y `.phpcs.xml` del ZIP de distribución.
 
 ---
 
