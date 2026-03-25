@@ -156,6 +156,14 @@ class Admin_Header {
             'ROM.8.28', 'MAT.5.8',    'JHN.8.32',   'HEB.13.8',   'PSA.91.1',
         );
 
+        /*
+         * External service: API.Bible (scripture.api.bible) — provided by American Bible Society.
+         * Purpose: retrieve a daily Bible verse shown in the WordPress admin header.
+         * Data sent: a verse reference ID selected by day-of-year index. No user data, no site data.
+         * Result is cached for 24 hours via WordPress transients; the request is only made once per day.
+         * Terms of Service : https://scripture.api.bible/admin/terms-of-service
+         * Privacy Policy   : https://www.americanbible.org/privacy-policy
+         */
         $bible_id = '4122de86530c9cdf-01'; // NVI — Nueva Versión Internacional
         $verse_id = $verse_ids[ (int) gmdate( 'z' ) % count( $verse_ids ) ];
         $url      = 'https://api.scripture.api.bible/v1/bibles/' . $bible_id . '/verses/' . $verse_id
@@ -233,8 +241,7 @@ class Admin_Header {
         $logo_path = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/braves-logo.svg';
 
         if (file_exists($logo_path)) {
-            // Renderizar SVG directamente
-            echo file_get_contents($logo_path); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- local plugin SVG file, safe internal asset.
+            echo '<img src="' . esc_url( BRAVES_CHAT_PLUGIN_URL . 'assets/media/braves-logo.svg' ) . '" alt="' . esc_attr__( 'BravesChat', 'braveschat' ) . '" class="braves-admin-header__logo-img" />';
         } else {
             // Fallback a texto
             echo '<span class="braves-admin-header__logo-text">';
