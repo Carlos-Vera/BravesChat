@@ -242,8 +242,16 @@ class Admin_Controller {
         $svg_path = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/menu_icon_solid.svg';
 
         if (file_exists($svg_path)) {
-            $svg_content = file_get_contents($svg_path);
-            return 'data:image/svg+xml;base64,' . base64_encode($svg_content);
+            $svg_content = file_get_contents($svg_path); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin asset
+            // Eliminar XML declaration y DOCTYPE — inválidos en data URI
+            $svg_start = strpos( $svg_content, '<svg' );
+            if ( false !== $svg_start ) {
+                $svg_content = substr( $svg_content, $svg_start );
+            }
+            // width/height en % no se resuelven en background-image sin contexto padre
+            $svg_content = preg_replace( '/(<svg[^>]*)\bwidth="100%"/', '$1width="20"', $svg_content );
+            $svg_content = preg_replace( '/(<svg[^>]*)\bheight="100%"/', '$1height="20"', $svg_content );
+            return 'data:image/svg+xml;base64,' . base64_encode( $svg_content );
         }
 
         // Fallback a dashicon
