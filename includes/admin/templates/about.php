@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified', '#0077b6'),
                             'title' => __('Versión', 'braveschat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Last Update: <b>18/03/2026</b>', 'braveschat'),
+                            'footer' => __('Last Update: <b>25/03/2026</b>', 'braveschat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -120,8 +120,37 @@ $sidebar = Admin_Sidebar::get_instance();
                             <span class="braves-timeline__cap-label"><?php esc_html_e('Hoy', 'braveschat'); ?></span>
                         </div>
 
+                    <!-- Version 2.4.0 -->
+                        <div class="braves-timeline__item braves-tl-left">
+                            <div class="braves-timeline__card-side">
+                                <div class="braves-changelog__version">
+                                    <h3 class="braves-changelog__title">
+                                        <?php esc_html_e('Chat nativo en móviles', 'braveschat'); ?>
+                                    </h3>
+                                    <div class="braves-changelog__section">
+                                        <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
+                                        <ul>
+                                            <li><?php esc_html_e('ADDED: En móviles el chat ahora ocupa toda la pantalla. Tiene su propio header con botón de cierre, respeta la muesca del iPhone y bloquea el scroll del fondo mientras está abierto.', 'braveschat'); ?></li>
+                                        </ul>
+                                    </div>
+                                    <div class="braves-changelog__section">
+                                        <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
+                                        <ul>
+                                            <li><?php esc_html_e('IMPROVED: El widget ya no interfiere con el carrito ni el checkout de WooCommerce — z-index ajustado para coexistir sin conflictos.', 'braveschat'); ?></li>
+                                            <li><?php esc_html_e('IMPROVED: Los scripts del panel se cargan con el sistema de WordPress en lugar de estar embebidos en las plantillas — mayor compatibilidad y seguridad.', 'braveschat'); ?></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.4.0</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('25 Mar 2026', 'braveschat'); ?></div>
+                            </div>
+                            <div class="braves-timeline__spacer"></div>
+                        </div>
+
                     <!-- Version 2.3.8 -->
-                        <div class="braves-timeline__item braves-tl-right">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -17rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.3.8</div>
@@ -135,15 +164,15 @@ $sidebar = Admin_Sidebar::get_instance();
                                     <div class="braves-changelog__section">
                                         <h4><?php esc_html_e('Nuevas Funcionalidades', 'braveschat'); ?></h4>
                                         <ul>
-                                            <li><?php esc_html_e('ADDED: Cada día aparece un versículo de la Biblia (NVI) en el encabezado del panel. Cambia solo a medianoche — sin configurar nada.', 'braveschat'); ?></li>
+                                            <li><?php esc_html_e('ADDED: Cada día aparece un versículo de la Biblia (NVI) en el encabezado del panel. Cambia solo a medianoche — sin configurar nada. Se obtiene de la API de la American Bible Society con caché de 24h en transient de WordPress. Totalmente seguro y sin recopilación de datos de usuario. ', 'braveschat'); ?></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    <!-- Versions 2.3.2 → 2.3.5 -->
-                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -5rem;">
+                    <!-- Versions 2.3.2 → 2.3.7 -->
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: 2rem;">
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
