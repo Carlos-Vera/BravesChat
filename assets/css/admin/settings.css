@@ -55,8 +55,8 @@
 
 /* ==================== FIELD GROUPS ==================== */
 .braves-settings-field {
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg);
     padding: var(--braves-space-lg);
     transition: all var(--braves-transition-fast);
@@ -80,13 +80,13 @@
 .braves-field-label {
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: 0;
 }
 
 .braves-field-description {
     font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
     line-height: var(--braves-leading-relaxed);
     margin: 0;
 }
@@ -95,13 +95,13 @@
 .braves-field-input,
 .braves-field-textarea,
 .braves-field-select {
-    border: 1px solid var(--braves-gray-300);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-md);
     padding: var(--braves-space-sm) var(--braves-space-md);
     font-size: var(--braves-text-base);
     font-family: var(--braves-font-sans);
-    color: var(--braves-gray-900);
-    background: var(--braves-white);
+    color: var(--braves-text-primary);
+    background: var(--braves-surface-input);
     transition: all var(--braves-transition-fast);
     width: 100%;
 }
@@ -148,13 +148,48 @@
     }
 }
 
+/* ==================== DARK MODE: SETTINGS FIELDS ==================== */
+[data-braves-theme="dark"] .braves-settings-field {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+[data-braves-theme="dark"] .braves-settings-field:hover {
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-braves-theme="dark"] .braves-settings-form h2 {
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-braves-theme="dark"] .braves-settings-form .form-table tr {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-braves-theme="dark"] .braves-settings-actions {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-braves-theme="dark"] .braves-section--actions {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
 /* ==================== SETTINGS ACTIONS ==================== */
 .braves-settings-actions {
     margin-top: var(--braves-space-2xl);
     padding: var(--braves-space-xl);
-    background: var(--braves-gray-50);
+    background: var(--braves-surface-alt);
     border-radius: var(--braves-radius-lg);
-    border: 1px solid var(--braves-gray-200);
+    border: 1px solid var(--braves-border-color);
     position: sticky;
     bottom: var(--braves-space-md);
     z-index: 10;
@@ -165,10 +200,10 @@
 .braves-settings-form h2 {
     font-size: var(--braves-text-xl);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: var(--braves-space-2xl) 0 var(--braves-space-lg) 0;
     padding-bottom: var(--braves-space-md);
-    border-bottom: 1px solid var(--braves-gray-200);
+    border-bottom: 1px solid var(--braves-border-color);
 }
 
 .braves-settings-form h2:first-child {
@@ -193,7 +228,7 @@
 .braves-settings-form .form-table th {
     padding: var(--braves-space-lg) var(--braves-space-md) var(--braves-space-lg) 0;
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     font-size: var(--braves-text-base);
     width: 250px;
     vertical-align: top;
@@ -204,7 +239,7 @@
 }
 
 .braves-settings-form .form-table tr {
-    border-bottom: 1px solid var(--braves-gray-100);
+    border-bottom: 1px solid var(--braves-border-color);
 }
 
 .braves-settings-form .form-table tr:last-child {
@@ -219,13 +254,13 @@
 .braves-settings-form input[type="time"],
 .braves-settings-form textarea,
 .braves-settings-form select {
-    border: 1px solid var(--braves-gray-300);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-md);
     padding: var(--braves-space-sm) var(--braves-space-md);
     font-size: var(--braves-text-base);
     font-family: var(--braves-font-sans);
-    color: var(--braves-gray-900);
-    background: var(--braves-white);
+    color: var(--braves-text-primary);
+    background: var(--braves-surface-input);
     box-shadow: var(--braves-shadow-sm);
     transition: all var(--braves-transition-fast);
     max-width: 500px;
@@ -242,6 +277,15 @@
     border-color: var(--braves-primary);
     outline: none;
     box-shadow: 0 0 0 3px var(--braves-primary-lighter);
+}
+
+/* Clock icon on time inputs — dark mode */
+[data-braves-theme="dark"] input[type="time"].braves-input {
+    color-scheme: dark;
+}
+
+[data-braves-theme="dark"] input[type="time"].braves-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
 
 /* Password fields */
@@ -279,6 +323,50 @@
     gap: var(--braves-space-sm);
 }
 
+/* Dark mode: checkboxes custom */
+[data-braves-theme="dark"] .braves-settings-form input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+[data-braves-theme="dark"] .braves-settings-form input[type="checkbox"]:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-braves-theme="dark"] .braves-settings-form input[type="checkbox"]:checked {
+    background: var(--braves-primary);
+    border-color: var(--braves-primary);
+}
+
+[data-braves-theme="dark"] .braves-settings-form input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+[data-braves-theme="dark"] .braves-settings-form input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(1, 183, 175, 0.2);
+}
+
 /* ==================== DESCRIPTIONS ==================== */
 .braves-settings-form .description {
     color: var(--braves-gray-600);
@@ -289,7 +377,7 @@
 }
 
 .braves-settings-form .description strong {
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     font-weight: var(--braves-font-semibold);
 }
 
@@ -297,15 +385,15 @@
 .braves-settings-form .braves-section--actions {
     margin-top: var(--braves-space-2xl);
     padding: var(--braves-space-xl);
-    background: var(--braves-gray-50);
+    background: var(--braves-surface-alt);
     border-radius: var(--braves-radius-lg);
-    border: 1px solid var(--braves-gray-200);
+    border: 1px solid var(--braves-border-color);
 }
 
 .braves-settings-form #submit {
     background: var(--braves-primary);
     border-color: var(--braves-primary);
-    color: var(--braves-white);
+    color: var(--braves-text-on-primary);
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-semibold);
     padding: var(--braves-space-md) var(--braves-space-xl);
@@ -345,8 +433,8 @@
     /* Adjust based on height */
     left: 0;
     transform: translateX(-50%);
-    background-color: var(--braves-gray-900);
-    color: var(--braves-white);
+    background-color: var(--braves-text-primary);
+    color: var(--braves-bg-page);
     padding: 4px 8px;
     border-radius: var(--braves-radius-sm);
     font-size: 12px;
@@ -367,12 +455,76 @@
     transform: translateX(-50%);
     border-width: 5px;
     border-style: solid;
-    border-color: var(--braves-gray-900) transparent transparent transparent;
+    border-color: var(--braves-text-primary) transparent transparent transparent;
 }
 
 .braves-range-tooltip.visible {
     opacity: 1;
     visibility: visible;
+}
+
+/* ==================== RANGE INPUT ==================== */
+.braves-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: var(--braves-radius-full);
+    background: linear-gradient(to right, var(--braves-primary) 0%, var(--braves-gray-300) 0%);
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.braves-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--braves-primary);
+    cursor: pointer;
+    box-shadow: var(--braves-shadow-sm);
+    transition: transform var(--braves-transition-fast);
+}
+
+.braves-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: var(--braves-primary);
+    cursor: pointer;
+    box-shadow: var(--braves-shadow-sm);
+    transition: transform var(--braves-transition-fast);
+}
+
+.braves-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.braves-range::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.braves-range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 35px;
+    font-size: 11px;
+    color: var(--braves-text-secondary);
+}
+
+.braves-range-unit {
+    font-size: 13px;
+    color: var(--braves-text-secondary);
+}
+
+.braves-field-help {
+    margin-top: 15px;
+    font-size: 13px;
+    color: var(--braves-text-secondary);
 }
 
 /* ==================== RESPONSIVE ==================== */
