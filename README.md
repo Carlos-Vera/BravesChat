@@ -17,6 +17,9 @@ BravesChat es un plugin de chat para WordPress con integración directa a **N8N*
 
 ## Screenshots
 
+![New Dark Mode](assets/media/screenshot-0.png)
+*En PRO de cuidar nuestros ojos ahora tenemos el nuevo Dark Mode*
+
 ![Widget de chat en el frontend](assets/media/screenshot-1.png)
 *El chat en acción — modal flotante integrado en tu web.*
 
