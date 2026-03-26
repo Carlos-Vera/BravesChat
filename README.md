@@ -10,7 +10,8 @@
 
 BravesChat es un plugin de chat para WordPress con integración directa a **N8N**. Configuras el webhook, eliges el diseño y el chat queda listo para producción — sin tocar código.
 
-**Versión actual**: 2.4.2 · [Ver changelog](CHANGELOG.md) · [Repositorio](https://github.com/Carlos-Vera/braveschat)
+**Versión actual**: 2.4.2. 
+[Ver changelog](CHANGELOG.md) · [Repositorio](https://github.com/Carlos-Vera/braveschat)
 
 ---
 
@@ -38,19 +39,19 @@ BravesChat es un plugin de chat para WordPress con integración directa a **N8N*
 - **Fingerprinting sin datos personales**: Identificación única de sesión mediante hash SHA-256, sin nombre, email ni IP.
 
 ### Experiencia de usuario cuidada
-- **Dos modos**: Modal flotante o pantalla completa — según cómo quieras integrar el chat en tu web.
-- **Skins**: Diseño "Default" y "Braves" con header transparente y avatares.
+- **Dos modos**: Burbuja flotante o Pantalla Completa — según cómo quieras integrar el chat en tu web.
+- **Skins**: Diseño "Skin Básico" y "Skin Braves" siendo este ultimo el recomendado.
 - **Markdown**: Los mensajes del agente soportan negritas, listas, enlaces y más.
 - **Ritmo de escritura**: Controla la velocidad del efecto de escritura para una experiencia más natural.
 - **Tipografía Montserrat**: Cargada localmente, sin conexiones externas.
 
 ### Historial de conversaciones
 - Ves todas las sesiones que tu agente ha tenido con tus visitantes.
-- Abres cualquier sesión y lees el hilo completo con burbujas de chat.
+- Abres cualquier sesión y lees el hilo completo con burbujas de chat con fecha y hora.
 - Exportas a CSV con un clic.
 
 ### Panel de administración
-- Interfaz limpia inspirada en el diseño Bentō.
+- Interfaz limpia inspirada en el diseño Bentō con Dark Mode.
 - Editor visual TinyMCE para mensajes GDPR y mensajes fuera de horario.
 - Configuración centralizada — un solo panel para el modal y la versión pantalla completa.
 
@@ -58,9 +59,11 @@ BravesChat es un plugin de chat para WordPress con integración directa a **N8N*
 
 ## Nuestra promesa
 
-**BravesChat es gratuito y lo seguirá siendo.** Conectar WordPress con un agente de N8N con seguridad y un diseño cuidado no debería costar nada — y eso no va a cambiar.
+**BravesChat es gratuito y lo seguirá siendo.**  
+Conectar WordPress con un agente de N8N con seguridad y un diseño cuidado no debería costar nada — y eso no va a cambiar.
 
-En algún momento habrá un add-on de pago con funcionalidades avanzadas para quien quiera ir más lejos. El plugin base seguirá siendo 100% libre, sin límites artificiales ni funciones bloqueadas.
+En algún momento habrá un add-on de pago con funcionalidades avanzadas para quien quiera ir más lejos.  
+El plugin base seguirá siendo 100% libre, sin límites artificiales ni funciones bloqueadas.
 
 ---
 
@@ -84,7 +87,7 @@ En algún momento habrá un add-on de pago con funcionalidades avanzadas para qu
 2. Ve a **Plugins → Añadir nuevo → Subir plugin**.
 3. Selecciona el ZIP y activa.
 
-### Desde GitHub
+### Desde GitHub en tu consola
 ```bash
 cd wp-content/plugins/
 git clone https://github.com/Carlos-Vera/braveschat.git braves-chat
@@ -102,6 +105,8 @@ Parámetros fundamentales del chat:
 - **Token de autenticación** — Se envía exclusivamente desde el servidor, nunca al navegador.
 - **Mostrar en toda la web** — Toggle global.
 - **Páginas excluidas** — Páginas donde no mostrar el chat.
+- **URL Webhook de Historial** - URL del webhook de consulta en N8N (conectado a tu base de datos).
+- **API Key de Historial** - API Key de autenticación.
 
 ### Apariencia
 - Título, subtítulo y mensaje de bienvenida.
@@ -110,7 +115,7 @@ Parámetros fundamentales del chat:
 - Modo de visualización: modal o pantalla completa.
 - Colores: primario, fondo, texto, burbuja, icono.
 - Icono: selección de SVGs o imagen personalizada.
-- Skin: Default o Braves.
+- Skin: Básico o Braves.
 
 ### Horarios
 - Hora de inicio y fin (formato 24h).
@@ -123,21 +128,18 @@ Parámetros fundamentales del chat:
 - Texto del botón de aceptación configurable.
 
 ### Historial
-- URL del webhook de consulta en N8N (conectado a tu base de datos).
-- API Key de autenticación.
 - Tabla de sesiones: Session ID, email, último mensaje, fecha.
 - Visor de conversación por sesión.
 - Exportación CSV completa.
 
 ---
 
-## Bloque de Gutenberg
+## Bloque de Gutenberg (Pantalla Completa)
 
 El bloque **"BravesChat — Pantalla Completa"** muestra el chat embebido en una página concreta.
 
 1. Edita una página en Gutenberg.
 2. Añade el bloque buscando **"BravesChat"**.
-3. Opcional: personaliza el mensaje de bienvenida específico para esa página.
 
 El bloque lee la configuración global del plugin (webhook, colores, título). No necesitas duplicar ajustes.
 
@@ -214,7 +216,7 @@ Este ID se envía con cada mensaje para mantener el contexto de la conversación
 ```json
 {
   "chatInput": "Mensaje del usuario",
-  "sessionId": "9f12e684d6abd5ef281b2f33cff298d72f337083..."
+  "sessionId": "...337083"
 }
 ```
 
@@ -238,20 +240,23 @@ Si las cookies están bloqueadas, el sistema usa `localStorage` como fallback au
 
 ## FAQ
 
-**¿Necesito configuración técnica avanzada?**
-No. Solo necesitas la URL del webhook de N8N. El resto tiene valores por defecto sensatos.
+**¿Necesito configuración técnica avanzada?**  
+No. Solo necesitas la URL del webhook de N8N. El resto tiene valores por defecto sensatos.  
+Ideal configurar tu token en Tipo de Autenticación y Credencial
 
-**¿El token de N8N es seguro?**
-Sí. Desde v2.3.0 el token viaja exclusivamente en el servidor. Los visitantes de tu web no pueden acceder a él.
+**¿El token de N8N es seguro?**  
+Sí. Desde v2.3.0 el token viaja exclusivamente en el servidor.  
+Los visitantes de tu web no pueden acceder a él.
 
-**¿Es compatible con GDPR?**
+**¿Es compatible con GDPR?**  
 Sí. El banner de consentimiento bloquea la creación de cookies hasta que el usuario acepta explícitamente.
 
-**¿Puedo usarlo en varias páginas con configuraciones distintas?**
-El bloque de Gutenberg permite personalizar el mensaje de bienvenida por página. El resto de ajustes se heredan del panel global.
+**¿Puedo usarlo en varias páginas con configuraciones distintas?**  
+No, los ajustes se heredan del panel global.
 
 **¿Qué pasa si el webhook de N8N está caído?**
-El chat muestra un mensaje de error al usuario. Recomendable monitorear el flujo en N8N.
+El chat muestra un mensaje de error al usuario.  
+Recomendable monitorear el flujo en N8N.
 
 **¿Afecta al rendimiento del sitio?**
 No. Los assets solo se cargan cuando el chat está activo y están optimizados para impacto mínimo.
@@ -262,6 +267,7 @@ No. Los assets solo se cargan cuando el chat está activo y están optimizados p
 
 **El chat no aparece**
 - Verifica que el toggle "Mostrar en toda la web" esté activo en Ajustes.
+- Verifica que tienes configurada una url de webhook correcta.
 - Comprueba que la página no esté en la lista de excluidas.
 - Purga la caché del plugin de caché y del navegador.
 
@@ -295,4 +301,4 @@ Copyright (c) 2026 BRAVES LAB LLC
 
 ---
 
-*Desarrollado por [Carlos Vera](https://github.com/Carlos-Vera) para [BravesLab](https://braveslab.com) con el favor de nuestro señor JesusCristo*
+*Desarrollado por [Carlos Vera](https://github.com/Carlos-Vera) para [BravesLab](https://braveslab.com) con el favor de nuestro señor JesusCristo.*
