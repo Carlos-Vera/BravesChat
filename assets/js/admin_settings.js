@@ -234,7 +234,7 @@
 
             if (!tooltip || !tooltipValue) return;
 
-            // Función para actualizar posición y valor
+            // Función para actualizar posición, valor y fill del track
             const updateTooltip = () => {
                 const val = range.value;
                 const min = range.min ? parseFloat(range.min) : 0;
@@ -244,15 +244,21 @@
                 // Actualizar valor del tooltip
                 tooltipValue.textContent = val;
 
-                // Calcular posición
+                // Actualizar fill del track
+                const fillColor = getComputedStyle(document.documentElement).getPropertyValue('--braves-primary').trim() || '#01b7af';
+                const trackColor = getComputedStyle(document.documentElement).getPropertyValue('--braves-gray-300').trim() || '#d1d1d6';
+                range.style.background = `linear-gradient(to right, ${fillColor} ${newVal}%, ${trackColor} ${newVal}%)`;
+
+                // Calcular posición del tooltip
                 const thumbWidth = 16;
                 const rangeWidth = range.getBoundingClientRect().width;
-                // Evitar división por cero si el elemento no es visible aún
                 if (rangeWidth > 0) {
-                    const tooltipPos = newVal * (rangeWidth - thumbWidth) / rangeWidth + (thumbWidth / 2 / rangeWidth * 100);
                     tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
                 }
             };
+
+            // Inicializar fill al cargar
+            updateTooltip();
 
             // Sincronizar Range -> Number Input
             range.addEventListener('input', () => {
