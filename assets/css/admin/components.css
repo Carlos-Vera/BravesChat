@@ -21,9 +21,9 @@
     box-shadow: var(--braves-shadow-accent);
 }
 
-/* Variante oscura: mismo acento primario pero fondo negro al hover */
+/* Variante oscura: fondo muy oscuro + acento teal al hover */
 .braves-hover-accent--dark:hover {
-    background-color: var(--braves-dark, #141414);
+    background-color: rgba(1, 183, 175, 0.08);
     border-color: var(--braves-primary);
     box-shadow: var(--braves-shadow-accent);
 }
@@ -49,13 +49,11 @@
 
 /* ==================== CARDS ==================== */
 .braves-card {
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
-    border-radius: 24px;
-    /* More rounded for Bento feel */
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
+    border-radius: 18px;
     padding: var(--braves-space-xl);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    /* Softer shadow */
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -66,7 +64,30 @@
 
 .braves-card:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
+}
+
+/* Dark mode: neutro oscuro, teal sólo en hover/acento */
+[data-braves-theme="dark"] .braves-card {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+[data-braves-theme="dark"] .braves-card:hover {
+    background: var(--braves-surface-alt);
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 6px 20px rgba(0, 0, 0, 0.65);
+    transform: translateY(-2px);
+}
+
+[data-braves-theme="dark"] a.braves-card.braves-card--clickable:hover {
+    border-color: var(--braves-primary);
+    box-shadow: var(--braves-shadow-accent);
 }
 
 a.braves-card.braves-card--clickable {
@@ -94,25 +115,26 @@ a.braves-card.braves-card--clickable:hover {
 .braves-card__icon svg {
     width: 30px;
     height: 30px;
+    color: var(--braves-primary);
 }
 
 .braves-card__title {
     font-size: var(--braves-text-lg);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: 0;
     line-height: var(--braves-leading-tight);
 }
 
 .braves-card__subtitle {
     font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
     margin: 0;
 }
 
 .braves-card__description {
     font-size: var(--braves-text-base);
-    color: var(--braves-gray-700);
+    color: var(--braves-text-secondary);
     margin: 0;
     line-height: var(--braves-leading-relaxed);
     flex: 1;
@@ -132,7 +154,7 @@ a.braves-card.braves-card--clickable:hover {
 .braves-card__footer {
     padding-top: var(--braves-space-md);
     font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
 }
 
 .braves-card--compact {
@@ -140,103 +162,104 @@ a.braves-card.braves-card--clickable:hover {
 }
 
 /* ==================== BUTTONS ==================== */
-.braves-button {
+.braves-admin-wrap .braves-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--braves-space-sm);
-    padding: 12px 32px;
-    font-size: var(--braves-text-base);
-    font-weight: 600;
-    font-family: var(--braves-font-sans);
-    line-height: 1.5;
-    border-radius: 50px;
-    /* Bordes completamente redondeados estilo Bentō */
-    text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    white-space: nowrap;
+    padding: 10px 24px !important;
+    font-size: var(--braves-text-sm) !important;
+    font-weight: 600 !important;
+    font-family: var(--braves-font-sans) !important;
+    line-height: 1.5 !important;
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+    border: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    white-space: nowrap !important;
+    height: auto !important;
+    text-shadow: none !important;
 }
 
-.braves-button:focus {
+.braves-admin-wrap .braves-button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(56, 88, 233, 0.15);
+    box-shadow: 0 0 0 3px var(--braves-primary-lighter) !important;
 }
 
 /* Button Primary */
-.braves-button--primary {
-    background: var(--braves-primary);
-    color: var(--braves-white);
-    box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2);
+.braves-admin-wrap .braves-button--primary {
+    background: var(--braves-primary) !important;
+    color: var(--braves-text-on-primary) !important;
+    box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2) !important;
 }
 
-.braves-button--primary:hover {
-    background: var(--braves-primary-hover);
-    color: var(--braves-white);
+.braves-admin-wrap .braves-button--primary:hover {
+    background: var(--braves-primary-hover) !important;
+    color: var(--braves-text-on-primary) !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(56, 88, 233, 0.3);
+    box-shadow: 0 4px 8px rgba(56, 88, 233, 0.3) !important;
 }
 
-.braves-button--primary:active {
+.braves-admin-wrap .braves-button--primary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(56, 88, 233, 0.2);
+    box-shadow: 0 1px 2px rgba(56, 88, 233, 0.2) !important;
 }
 
 /* Button Secondary */
-.braves-button--secondary {
-    background: var(--braves-white);
-    color: var(--braves-gray-700);
-    border: 1px solid var(--braves-gray-300);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+.braves-admin-wrap .braves-button--secondary {
+    background: var(--braves-surface) !important;
+    color: var(--braves-text-secondary) !important;
+    border: 1px solid var(--braves-border-color) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
-.braves-button--secondary:hover {
-    background: var(--braves-gray-50);
-    border-color: var(--braves-gray-400);
-    color: var(--braves-gray-900);
+.braves-admin-wrap .braves-button--secondary:hover {
+    background: var(--braves-surface-alt) !important;
+    border-color: var(--braves-text-muted) !important;
+    color: var(--braves-text-primary) !important;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-.braves-button--secondary:active {
+.braves-admin-wrap .braves-button--secondary:active {
     transform: translateY(0);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
 /* Button Link */
-.braves-button--link {
-    background: transparent;
-    color: var(--braves-primary);
-    border: none;
-    padding: var(--braves-space-sm) var(--braves-space-md);
-    box-shadow: none;
+.braves-admin-wrap .braves-button--link {
+    background: transparent !important;
+    color: var(--braves-primary) !important;
+    border: none !important;
+    padding: var(--braves-space-sm) var(--braves-space-md) !important;
+    box-shadow: none !important;
 }
 
-.braves-button--link:hover {
-    color: var(--braves-primary-hover);
+.braves-admin-wrap .braves-button--link:hover {
+    color: var(--braves-primary-hover) !important;
     text-decoration: underline;
     transform: none;
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 /* Button Outline */
-.braves-button--outline {
-    background: transparent;
-    color: var(--braves-primary);
-    border: 2px solid var(--braves-primary);
-    box-shadow: none;
+.braves-admin-wrap .braves-button--outline {
+    background: transparent !important;
+    color: var(--braves-primary) !important;
+    border: 2px solid var(--braves-primary) !important;
+    box-shadow: none !important;
 }
 
-.braves-button--outline:hover {
-    background: var(--braves-primary);
-    color: var(--braves-white);
+.braves-admin-wrap .braves-button--outline:hover {
+    background: var(--braves-primary) !important;
+    color: var(--braves-text-on-primary) !important;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2);
+    box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2) !important;
 }
 
-.braves-button--outline:active {
+.braves-admin-wrap .braves-button--outline:active {
     transform: translateY(0);
 }
 
@@ -266,7 +289,7 @@ a.braves-card.braves-card--clickable:hover {
     border-radius: 50px !important;
     border: none !important;
     background: var(--braves-primary) !important;
-    color: var(--braves-white) !important;
+    color: var(--braves-text-on-primary) !important;
     box-shadow: 0 2px 4px rgba(56, 88, 233, 0.2) !important;
     text-shadow: none !important;
     height: auto !important;
@@ -277,7 +300,7 @@ a.braves-card.braves-card--clickable:hover {
 .braves-button-group .button-primary:hover,
 .braves-button-group input[type="submit"].button-primary:hover {
     background: var(--braves-primary-hover) !important;
-    color: var(--braves-white) !important;
+    color: var(--braves-text-on-primary) !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(56, 88, 233, 0.3) !important;
 }
@@ -291,7 +314,7 @@ a.braves-card.braves-card--clickable:hover {
 .braves-button-group .button-primary:focus,
 .braves-button-group input[type="submit"].button-primary:focus {
     outline: none !important;
-    box-shadow: 0 0 0 3px rgba(56, 88, 233, 0.15) !important;
+    box-shadow: 0 0 0 3px var(--braves-primary-lighter) !important;
 }
 
 /* ==================== BADGES ==================== */
@@ -340,7 +363,13 @@ a.braves-card.braves-card--clickable:hover {
 .braves-badge--clickable.braves-badge--primary:hover,
 .braves-badge--clickable.braves-badge--primary.braves-badge--active {
     background: var(--braves-primary-light);
-    color: var(--braves-white);
+    color: var(--braves-text-on-primary);
+}
+
+[data-braves-theme="dark"] .braves-badge--clickable.braves-badge--primary:hover,
+[data-braves-theme="dark"] .braves-badge--clickable.braves-badge--primary.braves-badge--active {
+    background: var(--braves-primary);
+    color: var(--braves-text-on-primary);
 }
 
 /* ==================== TOGGLES / SWITCHES ==================== */
@@ -406,13 +435,13 @@ a.braves-card.braves-card--clickable:hover {
 .braves-toggle__text {
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-medium);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
 }
 
 .braves-toggle__description {
     margin: var(--braves-space-sm) 0 0 62px;
     font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
 }
 
 /* ==================== TOGGLE WRAPPER (SIMPLIFIED) ==================== */
@@ -469,6 +498,90 @@ a.braves-card.braves-card--clickable:hover {
 .braves-toggle-input:disabled+.braves-toggle-slider {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+/* ==================== FORM INPUTS (braves-input / braves-select / braves-textarea) ==================== */
+.braves-admin-wrap .braves-input,
+.braves-admin-wrap .braves-select,
+.braves-admin-wrap .braves-textarea {
+    border: 1px solid var(--braves-border-color);
+    border-radius: var(--braves-radius-md);
+    padding: var(--braves-space-sm) var(--braves-space-md);
+    font-size: var(--braves-text-base);
+    font-family: var(--braves-font-sans);
+    color: var(--braves-text-primary);
+    background: var(--braves-surface-input);
+    transition: all var(--braves-transition-fast);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.braves-admin-wrap .braves-textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: var(--braves-leading-relaxed);
+    background: var(--braves-surface-input) !important;
+}
+
+.braves-admin-wrap .braves-input:focus,
+.braves-admin-wrap .braves-textarea:focus {
+    border-color: var(--braves-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--braves-primary-lighter);
+}
+
+.braves-admin-wrap .braves-select:focus {
+    border-color: var(--braves-primary);
+    color: var(--braves-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px var(--braves-primary-lighter);
+}
+
+/* Dark mode: forzar colores en select múltiple y sus options */
+[data-braves-theme="dark"] .braves-admin-wrap .braves-select,
+[data-braves-theme="dark"] .braves-admin-wrap .braves-select option {
+    background-color: var(--braves-surface-input) !important;
+    color: var(--braves-text-primary) !important;
+}
+
+[data-braves-theme="dark"] .braves-admin-wrap .braves-select option:checked,
+[data-braves-theme="dark"] .braves-admin-wrap .braves-select option:hover {
+    background-color: var(--braves-primary) !important;
+    color: var(--braves-text-on-primary) !important;
+}
+
+/* Dark mode: toggle switch */
+[data-braves-theme="dark"] .braves-toggle__switch {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+[data-braves-theme="dark"] .braves-toggle__input:checked + .braves-toggle__label .braves-toggle__switch,
+[data-braves-theme="dark"] .braves-toggle-input:checked + .braves-toggle-slider {
+    background: var(--braves-primary);
+    border-color: var(--braves-primary);
+    box-shadow: 0 0 10px rgba(1, 183, 175, 0.3);
+}
+
+[data-braves-theme="dark"] .braves-toggle-slider {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Dark mode: section --actions card */
+[data-braves-theme="dark"] .braves-section--actions {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.braves-field-help {
+    color: var(--braves-text-secondary) !important;
+    font-size: var(--braves-text-sm) !important;
+    line-height: var(--braves-leading-relaxed);
+    margin: 0;
 }
 
 /* ==================== NOTICES / ALERTS - Estilo Bentō ==================== */
@@ -551,8 +664,8 @@ a.braves-card.braves-card--clickable:hover {
 
 .braves-about-team__member {
     padding: var(--braves-space-xl);
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg);
     box-shadow: var(--braves-shadow-sm);
     transition: all var(--braves-transition-fast);
@@ -696,8 +809,8 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 
 /* Badge de versión — pill centrado en el eje */
 .braves-timeline__badge {
-    background: var(--braves-gray-900);
-    color: var(--braves-white);
+    background: var(--braves-text-primary);
+    color: var(--braves-bg-page);
     border-radius: var(--braves-radius-full);
     padding: 4px 12px;
     font-size: var(--braves-text-xs);
@@ -713,7 +826,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-timeline__label {
     font-size: 10px;
     font-weight: 500;
-    color: var(--braves-gray-400);
+    color: var(--braves-text-muted);
     text-align: center;
     margin-top: 5px;
     white-space: nowrap;
@@ -731,8 +844,8 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-timeline__cap-label {
-    background: var(--braves-gray-900);
-    color: var(--braves-white);
+    background: var(--braves-text-primary);
+    color: var(--braves-bg-page);
     border-radius: var(--braves-radius-full);
     padding: 4px 16px;
     font-size: var(--braves-text-xs);
@@ -745,8 +858,8 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 /* Tarjeta de versión */
 .braves-changelog__version {
     padding: var(--braves-space-lg);
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg);
     box-shadow: var(--braves-shadow-sm);
 }
@@ -754,7 +867,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-changelog__title {
     font-size: var(--braves-text-base);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: 0 0 var(--braves-space-md) 0;
     line-height: var(--braves-leading-normal);
 }
@@ -770,7 +883,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-changelog__section h4 {
     font-size: var(--braves-text-xs);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-400);
+    color: var(--braves-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin: 0 0 var(--braves-space-xs) 0;
@@ -783,7 +896,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 
 .braves-changelog__section li {
     margin-bottom: var(--braves-space-xs);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
     font-size: var(--braves-text-sm);
     line-height: var(--braves-leading-relaxed);
 }
@@ -823,6 +936,31 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-tl-mt-n8  { --braves-tl-nudge: -5.5rem; }
 .braves-tl-mt-n9  { --braves-tl-nudge: -6rem; }
 .braves-tl-mt-n10 { --braves-tl-nudge: -6.5rem; }
+
+/* ==================== DARK MODE: TIMELINE ==================== */
+[data-braves-theme="dark"] .braves-timeline::before {
+    border-left-color: var(--braves-primary);
+    opacity: 0.4;
+}
+
+[data-braves-theme="dark"] .braves-timeline__axis::after {
+    border-top-color: var(--braves-primary);
+    opacity: 0.4;
+}
+
+[data-braves-theme="dark"] .braves-timeline__badge {
+    background: var(--braves-primary);
+    color: var(--braves-text-on-primary);
+}
+
+[data-braves-theme="dark"] .braves-timeline__cap-label {
+    background: var(--braves-primary);
+    color: var(--braves-text-on-primary);
+}
+
+[data-braves-theme="dark"] .braves-timeline__label {
+    color: var(--braves-primary);
+}
 
 /* Timeline responsive — colapsa a columna única */
 @media screen and (max-width: 768px) {
@@ -922,11 +1060,11 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-icon-tab:hover .braves-icon-tab__content {
-    background: #ffffff;
+    background: var(--braves-surface);
 }
 
 .braves-icon-tab input[type="radio"]:checked+.braves-icon-tab__content {
-    background: #ffffff;
+    background: var(--braves-surface);
     border-color: #5B4CCC;
     box-shadow: 0 2px 8px rgba(91, 76, 204, 0.15);
 }
@@ -1005,34 +1143,64 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-color-picker-label {
-    font-size: 10px;
-    font-weight: 500;
-    color: #6B7280;
+    font-size: var(--braves-text-xs);
+    font-weight: var(--braves-font-medium);
+    color: var(--braves-text-muted);
     text-align: center;
     line-height: 1.2;
     white-space: nowrap;
+}
+
+/* ==================== WELCOME MESSAGE PREVIEW ==================== */
+.braves-admin-wrap .braves-message-preview {
+    background: var(--braves-surface-alt) !important;
+    border: 1px solid var(--braves-border-color);
+    border-radius: var(--braves-radius-md);
+    padding: 15px;
+    margin-top: 10px;
+    font-size: var(--braves-text-sm);
+    line-height: var(--braves-leading-relaxed);
+    color: var(--braves-text-primary) !important;
+}
+
+/* ==================== COLOR TEXT INPUT ==================== */
+.braves-admin-wrap .braves-color-text {
+    display: inline-block;
+    vertical-align: middle;
+    width: 200px;
+    height: 40px;
+    font-family: var(--braves-font-mono);
+    text-transform: uppercase;
+    font-size: var(--braves-text-sm);
+    color: var(--braves-text-secondary) !important;
+    padding: var(--braves-space-sm) var(--braves-space-md);
+    border: 1px solid var(--braves-border-color);
+    border-radius: var(--braves-radius-md);
+    background: var(--braves-surface-alt) !important;
+    margin-left: var(--braves-space-md);
+    box-sizing: border-box;
 }
 
 /* ==================== PALETTE TOGGLE BUTTON ==================== */
 .braves-palette-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: #F9FAFB;
-    border: 1px solid #E5E7EB;
-    border-radius: 6px;
-    color: #4B5563;
-    font-size: 13px;
-    font-weight: 500;
+    gap: var(--braves-space-sm);
+    padding: var(--braves-space-sm) var(--braves-space-md);
+    background: var(--braves-surface-alt);
+    border: 1px solid var(--braves-border-color);
+    border-radius: var(--braves-radius-md);
+    color: var(--braves-text-secondary);
+    font-size: var(--braves-text-sm);
+    font-weight: var(--braves-font-medium);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--braves-transition-base);
 }
 
 .braves-palette-toggle:hover {
-    background: #F3F4F6;
-    border-color: #D1D5DB;
-    color: #1F2937;
+    background: var(--braves-gray-100);
+    border-color: var(--braves-gray-300);
+    color: var(--braves-text-primary);
 }
 
 .braves-palette-toggle-icon {
@@ -1063,27 +1231,27 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-color-palette--expanded {
     max-height: 200px;
     opacity: 1;
-    margin-top: 12px;
+    margin-top: var(--braves-space-md);
 }
 
 /* Botones de colores predefinidos */
 .braves-color-preset {
     width: 40px;
     height: 40px;
-    border: 2px solid #E5E7EB;
-    border-radius: 6px;
+    border: 2px solid var(--braves-border-color);
+    border-radius: var(--braves-radius-md);
     cursor: pointer;
     padding: 0;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all var(--braves-transition-base);
+    box-shadow: var(--braves-shadow-sm);
     position: relative;
     outline: none;
 }
 
 .braves-color-preset:hover {
     transform: scale(1.1);
-    border-color: #9CA3AF;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-color: var(--braves-gray-400);
+    box-shadow: var(--braves-shadow);
 }
 
 .braves-color-preset:active {
@@ -1091,8 +1259,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-color-preset:focus {
-    outline: 2px solid #5B4CCC;
-    outline-offset: 2px;
+    box-shadow: 0 0 0 3px var(--braves-primary-lighter);
 }
 
 /* ==================== CARD ROW (TITLE + ACTION INLINE) ==================== */
@@ -1113,40 +1280,40 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-history-table thead tr {
-    background: var(--braves-surface, #f9fafb);
+    background: var(--braves-surface-alt);
 }
 
 .braves-history-table thead th {
-    background: var(--braves-surface, #f9fafb);
-    color: var(--braves-text-primary, #1e1e1e);
+    background: var(--braves-surface-alt);
+    color: var(--braves-text-primary);
     font-weight: 500;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     padding: 12px 16px;
-    border-bottom: 1px solid var(--braves-gray-200, #e5e7eb);
+    border-bottom: 1px solid var(--braves-border-color);
     border-right: none;
     border-left: none;
     box-shadow: none;
 }
 
 .braves-history-table tbody tr {
-    background: var(--braves-white, #ffffff);
+    background: var(--braves-surface);
     transition: background 0.15s ease;
 }
 
 .braves-history-table tbody tr:nth-child(even) {
-    background: var(--braves-surface, #f9fafb);
+    background: var(--braves-surface-alt);
 }
 
 /* El hover se gestiona por .braves-history-table-row:hover td */
 
 .braves-history-table tbody td {
     padding: 11px 16px;
-    border-bottom: 1px solid var(--braves-gray-200, #e5e7eb);
+    border-bottom: 1px solid var(--braves-border-color);
     border-right: none;
     border-left: none;
-    color: var(--braves-text-primary, #1e1e1e);
+    color: var(--braves-text-primary);
     vertical-align: middle;
     line-height: 1.5;
 }
@@ -1236,7 +1403,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-history-modal {
-    background: var(--braves-white, #ffffff);
+    background: var(--braves-surface);
     width: 100%;
     height: 80vh;
     max-height: 800px;
@@ -1258,11 +1425,11 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 
 .braves-history-modal__header {
     padding: var(--braves-space-lg, 24px) var(--braves-space-xl, 32px);
-    border-bottom: 1px solid var(--braves-gray-200, #e5e7eb);
+    border-bottom: 1px solid var(--braves-border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--braves-surface, #f9fafb);
+    background: var(--braves-surface-alt);
 }
 
 .braves-history-modal__title {
@@ -1284,7 +1451,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     flex: 1;
     overflow-y: auto;
     padding: var(--braves-space-xl, 32px);
-    background: var(--braves-white, #ffffff);
+    background: var(--braves-surface);
     display: flex;
     flex-direction: column;
     gap: var(--braves-space-md, 16px);
@@ -1321,7 +1488,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-history-chat-bubble--user {
     align-self: flex-end;
     background: var(--braves-primary, #0077b6);
-    color: white;
+    color: var(--braves-text-on-primary, #ffffff);
     border-bottom-right-radius: 4px;
 }
 
@@ -1342,12 +1509,28 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 
 /* ==================== HISTORY PAGE: BENTO CARD ==================== */
 .braves-bento-card {
-    background: var(--braves-white);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg, 12px);
     box-shadow: var(--braves-shadow, 0 1px 3px rgba(0, 0, 0, 0.1));
     overflow: hidden;
     margin-bottom: 20px;
     font-family: var(--braves-font-sans, "Montserrat", sans-serif);
+}
+
+.braves-bento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--braves-border-color);
+}
+
+.braves-bento-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--braves-text-primary);
 }
 
 /* ==================== HISTORY PAGE: TABLE OVERRIDES ==================== */
@@ -1364,9 +1547,9 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     padding: 16px 20px;
     font-weight: 600;
     font-size: 14px;
-    color: var(--braves-gray-600, #4b5563);
-    background: var(--braves-gray-50, #f9fafb);
-    border-bottom: 1px solid var(--braves-gray-200, #e5e7eb);
+    color: var(--braves-text-secondary);
+    background: var(--braves-surface-alt);
+    border-bottom: 1px solid var(--braves-border-color);
     text-transform: none;
     letter-spacing: normal;
 }
@@ -1374,8 +1557,8 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 .braves-history-table tbody td {
     padding: 16px 20px;
     font-size: 15px;
-    color: var(--braves-gray-800, #1f2937);
-    border-bottom: 1px solid var(--braves-gray-100, #f3f4f6);
+    color: var(--braves-text-primary);
+    border-bottom: 1px solid var(--braves-border-color);
 }
 
 /* Row interactivity */
@@ -1385,7 +1568,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-history-table-row:hover {
-    background: var(--braves-gray-100) !important;
+    background: var(--braves-surface-alt) !important;
     color: var(--braves-primary);
     box-shadow: var(--braves-shadow-lg);
     transform: translateY(-2px);
@@ -1406,7 +1589,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     padding: 4px 16px;
     background-color: var(--braves-primary, #0077b6);
     border-color: var(--braves-primary, #0077b6);
-    color: var(--braves-white, #fff);
+    color: var(--braves-text-on-primary, #ffffff);
     box-shadow: var(--braves-shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
     transition: background-color var(--braves-transition-fast, 0.2s);
 }
@@ -1416,7 +1599,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 #braves-history-export-csv.button-primary:focus {
     background-color: var(--braves-primary-hover, #3c3c3c) !important;
     border-color: var(--braves-primary-hover, #3c3c3c) !important;
-    color: var(--braves-white, #fff);
+    color: var(--braves-text-on-primary, #ffffff);
 }
 
 /* ==================== HISTORY PAGE: MODAL FIXES ==================== */
@@ -1464,7 +1647,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 #braves-history-modal-body {
     padding: 20px;
     gap: 15px;
-    background: var(--braves-gray-50, #f8f9fa);
+    background: var(--braves-surface-alt);
 }
 
 /* ==================== HISTORY PAGE: BUBBLE WRAPPERS ==================== */
@@ -1501,7 +1684,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 
 .braves-history-chat-bubble--user {
     background-color: var(--braves-primary, #0077b6);
-    color: var(--braves-white, #ffffff);
+    color: var(--braves-text-on-primary, #ffffff);
 }
 
 .braves-history-chat-bubble--user a {
@@ -1510,12 +1693,165 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 .braves-history-chat-bubble--ai {
-    background-color: var(--braves-white, #ffffff);
-    color: var(--braves-gray-800, #1f2937);
-    border: 1px solid var(--braves-gray-200, #e5e7eb);
+    background-color: var(--braves-surface);
+    color: var(--braves-text-primary);
+    border: 1px solid var(--braves-border-color);
 }
 
 .braves-history-chat-bubble--ai a {
     color: var(--braves-primary, #0077b6);
     text-decoration: underline;
+}
+
+/* ==================== DARK MODE: TINYMCE OVERRIDES ==================== */
+/* Tabs Visual / Código */
+[data-braves-theme="dark"] .wp-editor-tabs .wp-switch-editor {
+    background: var(--braves-surface-alt) !important;
+    border-color: var(--braves-border-color) !important;
+    color: var(--braves-text-secondary) !important;
+}
+
+[data-braves-theme="dark"] .wp-editor-wrap.tmce-active .switch-tmce,
+[data-braves-theme="dark"] .wp-editor-wrap.html-active .switch-html {
+    background: var(--braves-surface) !important;
+    color: var(--braves-text-primary) !important;
+    border-bottom-color: var(--braves-surface) !important;
+}
+
+/* Borde exterior del editor */
+[data-braves-theme="dark"] .wp-editor-container {
+    border: 1px solid var(--braves-border-color) !important;
+    background: var(--braves-surface-alt) !important;
+    box-shadow: none !important;
+}
+
+/* Toolbar container */
+[data-braves-theme="dark"] .mce-tinymce.mce-container,
+[data-braves-theme="dark"] .mce-panel,
+[data-braves-theme="dark"] .mce-toolbar-grp,
+[data-braves-theme="dark"] .mce-toolbar {
+    background: var(--braves-surface-alt) !important;
+    border: 1px solid var(--braves-border-color) !important;
+    box-shadow: none !important;
+}
+
+/* Cuerpo interno y área de edición */
+[data-braves-theme="dark"] .mce-container-body,
+[data-braves-theme="dark"] .mce-edit-area {
+    border-color: var(--braves-border-color) !important;
+    box-shadow: none !important;
+}
+
+/* Botones de toolbar */
+[data-braves-theme="dark"] .mce-btn {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+[data-braves-theme="dark"] .mce-btn button,
+[data-braves-theme="dark"] .mce-btn i,
+[data-braves-theme="dark"] .mce-ico {
+    color: var(--braves-text-secondary) !important;
+}
+
+[data-braves-theme="dark"] .mce-btn:hover,
+[data-braves-theme="dark"] .mce-btn.mce-active {
+    background: var(--braves-surface) !important;
+    border-color: var(--braves-border-color) !important;
+}
+
+[data-braves-theme="dark"] .mce-btn:hover button,
+[data-braves-theme="dark"] .mce-btn:hover i,
+[data-braves-theme="dark"] .mce-btn.mce-active i {
+    color: var(--braves-text-primary) !important;
+}
+
+/* Separadores entre grupos */
+[data-braves-theme="dark"] .mce-btn-group:not(:first-child) {
+    border-left-color: var(--braves-border-color) !important;
+}
+
+/* Statusbar (barra de resize inferior) */
+[data-braves-theme="dark"] .mce-statusbar {
+    background: var(--braves-surface-alt) !important;
+    border-color: var(--braves-border-color) !important;
+}
+
+[data-braves-theme="dark"] .mce-path .mce-path-item,
+[data-braves-theme="dark"] .mce-wordcount {
+    color: var(--braves-text-muted) !important;
+}
+
+/* Barra de botones en modo Código (HTML) */
+[data-braves-theme="dark"] .quicktags-toolbar {
+    background: var(--braves-surface-alt) !important;
+    border-bottom-color: var(--braves-border-color) !important;
+}
+
+[data-braves-theme="dark"] .quicktags-toolbar input.button,
+[data-braves-theme="dark"] .quicktags-toolbar input.button-small {
+    background: var(--braves-surface) !important;
+    border-color: var(--braves-border-color) !important;
+    color: var(--braves-text-secondary) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+[data-braves-theme="dark"] .quicktags-toolbar input.button:hover,
+[data-braves-theme="dark"] .quicktags-toolbar input.button-small:hover {
+    background: var(--braves-surface-elevated) !important;
+    color: var(--braves-text-primary) !important;
+}
+
+/* Textarea en modo Código (HTML) */
+[data-braves-theme="dark"] .wp-editor-area {
+    background: var(--braves-surface-alt) !important;
+    color: var(--braves-text-primary) !important;
+    border-color: var(--braves-border-color) !important;
+}
+
+/* ==================== DARK MODE: WP .button OVERRIDES ==================== */
+[data-braves-theme="dark"] .braves-media-uploader .button {
+    background-color: var(--braves-surface-alt) !important;
+    border-color: var(--braves-border-color) !important;
+    color: var(--braves-text-primary) !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+[data-braves-theme="dark"] .braves-media-uploader .button:hover {
+    background-color: var(--braves-surface) !important;
+    border-color: var(--braves-text-muted) !important;
+    color: var(--braves-text-primary) !important;
+}
+
+/* Media uploader wrapper */
+.braves-media-preview-wrapper {
+    margin-bottom: 10px;
+}
+
+.braves-hidden {
+    display: none;
+}
+
+.braves-ml-sm {
+    margin-left: 5px;
+}
+
+.braves-mt-sm {
+    margin-top: 5px;
+}
+
+/* Media preview image */
+.braves-media-preview {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: var(--braves-radius-md);
+    border: 1px solid var(--braves-border-color);
+    display: block;
+}
+
+[data-braves-theme="dark"] .braves-media-preview {
+    border-color: var(--braves-border-color);
+    background-color: var(--braves-surface-alt);
 }
