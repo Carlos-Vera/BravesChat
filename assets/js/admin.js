@@ -4,6 +4,50 @@
  * @package BravesChat
  */
 
+/* ==================== DARK MODE TOGGLE ==================== */
+(function () {
+    window.bravesToggleTheme = function () {
+        var isDark   = document.documentElement.getAttribute('data-braves-theme') === 'dark';
+        var newTheme = isDark ? '' : 'dark';
+
+        if (newTheme === 'dark') {
+            document.documentElement.setAttribute('data-braves-theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-braves-theme');
+        }
+
+        var btn = document.getElementById('braves-theme-toggle');
+        if (btn) {
+            var span = btn.querySelector('.braves-button__text');
+            if (span) {
+                span.textContent = newTheme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
+            }
+        }
+
+        /* Guardar preferencia en user_meta vía AJAX */
+        var config = window.bravesAdminConfig;
+        if (config && config.ajaxUrl && config.themeNonce) {
+            var data = new FormData();
+            data.append('action', 'braveschat_save_theme');
+            data.append('theme', newTheme);
+            data.append('nonce', config.themeNonce);
+            fetch(config.ajaxUrl, { method: 'POST', body: data });
+        }
+    };
+
+    /* Sincronizar texto del botón con el tema activo al cargar */
+    document.addEventListener('DOMContentLoaded', function () {
+        var isDark = document.documentElement.getAttribute('data-braves-theme') === 'dark';
+        var btn    = document.getElementById('braves-theme-toggle');
+        if (btn) {
+            var span = btn.querySelector('.braves-button__text');
+            if (span) {
+                span.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+            }
+        }
+    });
+})();
+
 (function ($) {
     'use strict';
 
@@ -77,6 +121,16 @@
 
             updateCounter();
             $excludedPages.on('change', updateCounter);
+
+            $('#braves-select-all-pages').on('click', function () {
+                $excludedPages.find('option').prop('selected', true);
+                updateCounter();
+            });
+
+            $('#braves-deselect-all-pages').on('click', function () {
+                $excludedPages.find('option').prop('selected', false);
+                updateCounter();
+            });
         }
 
         /**
@@ -100,16 +154,6 @@
 
         if ($welcomeMessage.length) {
             var $preview = $('<div class="braves-message-preview"></div>');
-            $preview.css({
-                'background': 'white',
-                'border': '1px solid #ddd',
-                'border-radius': '8px',
-                'padding': '15px',
-                'margin-top': '10px',
-                'font-size': '14px',
-                'line-height': '1.5',
-                'color': '#242424'
-            });
 
             $welcomeMessage.after($preview);
 
@@ -166,3 +210,56 @@
     });
 
 })(jQuery);
+
+/* ==================== TINYMCE DARK MODE ==================== */
+(function () {
+    var DARK_CSS = 'html,body{background:#1e1e1e!important;color:#f0f0f0!important}p,div,span,li,td,th,h1,h2,h3,h4,h5,h6{color:#f0f0f0!important}a{color:#42b9f8!important}';
+
+    function injectDark(editor) {
+        try {
+            var doc = editor.getDoc();
+            if (!doc || doc.getElementById('braves-tmce-dark')) return;
+            var style = doc.createElement('style');
+            style.id = 'braves-tmce-dark';
+            style.textContent = DARK_CSS;
+            (doc.head || doc.getElementsByTagName('head')[0]).appendChild(style);
+        } catch (e) {}
+    }
+
+    function removeDark(editor) {
+        try {
+            var doc = editor.getDoc();
+            if (!doc) return;
+            var el = doc.getElementById('braves-tmce-dark');
+            if (el) el.parentNode.removeChild(el);
+        } catch (e) {}
+    }
+
+    function applyToAll(isDark) {
+        if (typeof tinymce === 'undefined') return;
+        tinymce.editors.forEach(function (editor) {
+            isDark ? injectDark(editor) : removeDark(editor);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof tinymce === 'undefined') return;
+
+        tinymce.on('AddEditor', function (e) {
+            e.editor.on('init', function () {
+                if (document.documentElement.getAttribute('data-braves-theme') === 'dark') {
+                    injectDark(e.editor);
+                }
+            });
+        });
+    });
+
+    /* Parchar el toggle para actualizar TinyMCE al cambiar de tema */
+    var _originalToggle = window.bravesToggleTheme;
+    window.bravesToggleTheme = function () {
+        _originalToggle();
+        setTimeout(function () {
+            applyToAll(document.documentElement.getAttribute('data-braves-theme') === 'dark');
+        }, 50);
+    };
+})();
