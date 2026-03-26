@@ -38,7 +38,7 @@
 
                 // Update preview
                 $previewImage.attr('src', attachment.url);
-                $previewWrapper.show();
+                $previewWrapper.removeClass('braves-hidden');
             });
 
             // Finally, open the modal.
@@ -60,7 +60,7 @@
 
             // Clear preview
             $previewImage.attr('src', '');
-            $previewWrapper.hide();
+            $previewWrapper.addClass('braves-hidden');
         });
     });
 
