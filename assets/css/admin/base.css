@@ -14,7 +14,7 @@
 .braves-admin-wrap {
     margin: 20px 20px 0 0;
     font-family: var(--braves-font-sans);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     line-height: var(--braves-leading-normal);
 }
 
@@ -27,8 +27,8 @@
 
 /* ==================== HEADER ==================== */
 .braves-admin-header {
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg);
     padding: var(--braves-space-lg) var(--braves-space-xl);
     margin-bottom: var(--braves-space-xl);
@@ -120,6 +120,10 @@
     opacity: 0.8;
 }
 
+[data-braves-theme="dark"] .braves-header__mode-label {
+    color: var(--braves-gray-600);
+}
+
 /* ==================== BODY LAYOUT ==================== */
 .braves-admin-body {
     display: flex;
@@ -140,8 +144,8 @@
 }
 
 .braves-admin-sidebar {
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: var(--braves-radius-lg);
     padding: var(--braves-space-md);
     box-shadow: var(--braves-shadow-sm);
@@ -168,7 +172,24 @@
 
 .braves-sidebar-save__btn:hover,
 .braves-sidebar-save__btn:focus {
-    background-color: var(--braves-dark) !important;
+    background-color: var(--braves-primary-hover) !important;
+    border-color: var(--braves-primary-hover) !important;
+}
+
+[data-braves-theme="dark"] .braves-sidebar-save__btn {
+    box-shadow: 0 4px 12px rgba(1, 183, 175, 0.25) !important;
+    color: var(--braves-text-on-primary) !important;
+}
+
+[data-braves-theme="dark"] .braves-admin-header {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-braves-theme="dark"] .braves-admin-sidebar {
+    background: var(--braves-surface);
+    border-color: rgba(255, 255, 255, 0.07);
 }
 
 .braves-admin-sidebar__inner {
@@ -182,7 +203,7 @@
     align-items: center;
     gap: var(--braves-space-md);
     padding: var(--braves-space-md);
-    color: var(--braves-gray-700);
+    color: var(--braves-text-secondary);
     text-decoration: none;
     border-radius: var(--braves-radius-md);
     font-size: var(--braves-text-base);
@@ -191,17 +212,42 @@
     border: 1px solid transparent;
 }
 
-.braves-admin-sidebar__item:hover {
-    background: var(--braves-gray-50);
+.braves-admin-sidebar__item:hover,
+.braves-admin-sidebar__item:focus {
+    background: var(--braves-surface-alt);
     color: var(--braves-primary);
-    box-shadow: var(--braves-shadow-lg);
+    border-color: var(--braves-border-color);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
     transform: translateY(-2px);
+    outline: none;
 }
 
 .braves-admin-sidebar__item--active {
-    background: var(--braves-gray-50);
     color: var(--braves-primary);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
     transform: translateY(-2px);
+}
+
+[data-braves-theme="dark"] .braves-admin-sidebar__item--active {
+    background: var(--braves-surface-alt);
+    color: var(--braves-primary-light);
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 6px 20px rgba(0, 0, 0, 0.65);
+    transform: translateY(-2px);
+}
+
+[data-braves-theme="dark"] .braves-admin-sidebar__item:hover,
+[data-braves-theme="dark"] .braves-admin-sidebar__item:focus {
+    background: var(--braves-surface-alt);
+    color: var(--braves-primary-light);
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 6px 20px rgba(0, 0, 0, 0.65);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .braves-admin-sidebar__icon {
@@ -237,14 +283,14 @@
 .braves-page-title {
     font-size: var(--braves-text-3xl);
     font-weight: var(--braves-font-bold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: 0 0 var(--braves-space-sm) 0;
     line-height: var(--braves-leading-tight);
 }
 
 .braves-page-description {
     font-size: var(--braves-text-base);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
     margin: 0;
     line-height: var(--braves-leading-relaxed);
 }
@@ -257,20 +303,20 @@
 .braves-section__title {
     font-size: var(--braves-text-xl);
     font-weight: var(--braves-font-semibold);
-    color: var(--braves-gray-900);
+    color: var(--braves-text-primary);
     margin: 0 0 var(--braves-space-lg) 0;
 }
 
 .braves-section__description {
     font-size: var(--braves-text-sm);
-    color: var(--braves-gray-600);
+    color: var(--braves-text-secondary);
     margin: 0 0 var(--braves-space-md) 0;
 }
 
 .braves-section--actions {
     padding: var(--braves-space-xl);
-    background: var(--braves-white);
-    border: 1px solid var(--braves-gray-200);
+    background: var(--braves-surface);
+    border: 1px solid var(--braves-border-color);
     border-radius: 24px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
@@ -341,3 +387,11 @@
     opacity: 0.8;
     line-height: 1.4;
 }
+
+/* ==================== DARK MODE: LOGO SWAP ==================== */
+/* Logo light (por defecto visible, dark oculto) */
+.braves-admin-header__logo .logo-light { display: block; }
+.braves-admin-header__logo .logo-dark  { display: none; }
+
+[data-braves-theme="dark"] .braves-admin-header__logo .logo-light { display: none; }
+[data-braves-theme="dark"] .braves-admin-header__logo .logo-dark  { display: block; }
