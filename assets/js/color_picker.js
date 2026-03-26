@@ -46,17 +46,6 @@
         const preset_buttons = document.querySelectorAll('.braves-color-preset');
 
         preset_buttons.forEach(function (button) {
-            // Agregar efecto hover
-            button.addEventListener('mouseenter', function () {
-                this.style.transform = 'scale(1.1)';
-                this.style.borderColor = '#9CA3AF';
-            });
-
-            button.addEventListener('mouseleave', function () {
-                this.style.transform = 'scale(1)';
-                this.style.borderColor = '#E5E7EB';
-            });
-
             // Aplicar color al hacer clic
             button.addEventListener('click', function (e) {
                 e.preventDefault();
