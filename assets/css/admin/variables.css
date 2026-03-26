@@ -8,9 +8,9 @@
 
 :root {
     /* ==================== COLORES PRINCIPALES ==================== */
-    --braves-primary: #0077b6;
-    --braves-primary-hover: #3c3c3c;
-    --braves-primary-light: #0096c7;
+    --braves-primary:         #0077b6;
+    --braves-primary-hover:   #3c3c3c;
+    --braves-primary-light:   #0096c7;
     --braves-primary-lighter: #eff2fe;
 
     /* ==================== COLORES DE ESTADO ==================== */
@@ -127,4 +127,58 @@
     /* lg: 1024px */
     /* xl: 1280px */
     /* 2xl: 1536px */
+
+    /* ==================== VARIABLES SEMÁNTICAS (TEMA CLARO) ==================== */
+    --braves-bg-page:        #f3f4f6;
+    --braves-surface:        #ffffff;
+    --braves-surface-alt:    #f9fafb;
+    --braves-surface-input:  #ffffff;
+    --braves-border-color:   #e5e7eb;
+    --braves-text-primary:    #111827;
+    --braves-text-secondary:  #4b5563;
+    --braves-text-muted:      #9ca3af;
+    --braves-text-on-primary: #ffffff;
+}
+
+/* ==================== TEMA OSCURO ==================== */
+[data-braves-theme="dark"] {
+    /* Superficies: grises neutros sin tinte de color */
+    --braves-bg-page:          #0c0c0c;
+    --braves-surface:          #161616;
+    --braves-surface-alt:      #1e1e1e;
+    --braves-surface-elevated: #131313;
+    --braves-surface-input:    #1a1a1a;
+    --braves-border-color:     rgba(255, 255, 255, 0.08);
+
+    /* Texto */
+    --braves-text-primary:     #f5f5f5;
+    --braves-text-secondary:   #8e8e93;
+    --braves-text-muted:       #48484a;
+    --braves-text-on-primary:  #141414;
+
+    /* Acento teal — sólo para interactivos */
+    --braves-primary:          #01b7af;
+    --braves-primary-hover:    #31bdad;
+    --braves-primary-light:    #5dd5c7;
+    --braves-primary-lighter:  rgba(1, 183, 175, 0.15);
+    --braves-shadow-accent:    0 10px 24px -4px rgba(1, 183, 175, 0.28), 0 4px 8px -2px rgba(1, 183, 175, 0.14);
+
+    /* Estados */
+    --braves-success-light:    rgba(0, 163, 42, 0.18);
+    --braves-warning-light:    rgba(240, 180, 41, 0.18);
+    --braves-error-light:      rgba(214, 54, 56, 0.18);
+    --braves-info-light:       rgba(53, 130, 196, 0.18);
+
+    /* Gray scale neutro para dark mode */
+    --braves-gray-50:  #161616;
+    --braves-gray-100: #1e1e1e;
+    --braves-gray-200: #2a2a2a;
+    --braves-gray-300: #3a3a3a;
+    --braves-gray-400: #48484a;
+    --braves-gray-500: #8e8e93;
+    --braves-gray-600: #aeaeb2;
+    --braves-gray-700: #c7c7cc;
+    --braves-gray-800: #e5e5ea;
+    --braves-gray-900: #f5f5f5;
+
 }
