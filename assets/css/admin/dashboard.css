@@ -12,7 +12,7 @@
 
 /* Aplicar estilos a todas las páginas de Braves Chat */
 .braves-chat-admin-page {
-    background-color: #f3f6fc;
+    background-color: var(--braves-bg-page);
     --wp-components-color-accent: #3858e9;
     --wp-components-color-accent-darker-10: #2145e6;
     --wp-components-color-accent-darker-20: #183ad6;
@@ -54,7 +54,7 @@ a.braves-card-link:focus {
 
 /* WordPress admin bar offset fix - mantener la flecha blanca */
 .braves-chat-admin-page ul#adminmenu>li.toplevel_page_braveschat>a:after {
-    border-right-color: #f3f6fc;
+    border-right-color: var(--braves-bg-page);
     right: 0;
     border: 8px solid transparent;
     content: " ";
@@ -62,7 +62,7 @@ a.braves-card-link:focus {
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-right-color: #f3f6fc;
+    border-right-color: var(--braves-bg-page);
     top: 50%;
     margin-top: -8px;
 }
@@ -80,13 +80,21 @@ a.braves-card-link:focus {
     padding-bottom: 0;
 }
 
+/* Dark mode: extender fondo a todo el área WP */
+html[data-braves-theme="dark"] .braves-chat-admin-page,
+html[data-braves-theme="dark"] #wpcontent,
+html[data-braves-theme="dark"] #wpbody,
+html[data-braves-theme="dark"] #wpbody-content {
+    background-color: var(--braves-bg-page);
+}
+
 /* ============================================
    Dashboard Container
    ============================================ */
 
 #braves-dashboard {
-    background-color: #fff;
-    color: #1e1e1e;
+    background-color: var(--braves-surface);
+    color: var(--braves-text-primary);
     min-height: 100vh;
 }
 
@@ -94,12 +102,12 @@ a.braves-card-link:focus {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: #1e1e1e;
+    color: var(--braves-text-primary);
 }
 
 #braves-dashboard h2,
 #braves-dashboard h3 {
-    color: #1e1e1e;
+    color: var(--braves-text-primary);
     font-weight: 600;
 }
 
@@ -118,8 +126,8 @@ a.braves-card-link:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff;
-    border-bottom: 1px solid #ddd;
+    background: var(--braves-surface);
+    border-bottom: 1px solid var(--braves-border-color);
 }
 
 .braves-dashboard__logo svg {
@@ -149,8 +157,8 @@ a.braves-card-link:focus {
 
 .braves-dashboard__nav {
     padding: 20px 12px;
-    border-right: 1px solid #ddd;
-    background: #fff;
+    border-right: 1px solid var(--braves-border-color);
+    background: var(--braves-surface);
     position: sticky;
     top: 92px;
     align-self: flex-start;
@@ -167,7 +175,7 @@ a.braves-card-link:focus {
     font-weight: 400;
     height: auto;
     font-size: 13px;
-    color: #1e1e1e;
+    color: var(--braves-text-primary);
     text-decoration: none;
     transition: all 0.2s ease;
     margin-bottom: 4px;
@@ -180,14 +188,47 @@ a.braves-card-link:focus {
 }
 
 .braves-dashboard__nav-item:hover {
-    background: #f0f0f0;
+    background: var(--braves-surface-alt);
 }
 
 .braves-dashboard__nav-item--active,
 .braves-dashboard__nav-item--active:hover {
-    background: #f0f0f0;
+    background: var(--braves-surface-alt);
     font-weight: 500;
     color: var(--wp-components-color-accent);
+}
+
+[data-braves-theme="dark"] .braves-dashboard__nav-item--active,
+[data-braves-theme="dark"] .braves-dashboard__nav-item--active:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--braves-primary-light);
+    box-shadow: inset 3px 0 0 var(--braves-primary);
+}
+
+[data-braves-theme="dark"] .braves-dashboard__nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--braves-primary-light);
+}
+
+[data-braves-theme="dark"] .braves-dashboard__header {
+    background: var(--braves-surface);
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-braves-theme="dark"] .braves-dashboard__nav {
+    background: var(--braves-surface-elevated);
+    border-right-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-braves-theme="dark"] .braves-tab-header {
+    background-color: #0c0c0c;
+    border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+[data-braves-theme="dark"] .braves-about__grid .column {
+    background: var(--braves-surface-alt);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* ============================================
@@ -202,11 +243,11 @@ a.braves-card-link:focus {
 .braves-tab-header {
     padding: 26px 32px 20px;
     position: sticky;
-    background-color: #fff;
+    background-color: var(--braves-surface);
     top: 32px;
     z-index: 1;
     margin-inline: -32px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--braves-border-color);
     height: 95px;
     box-sizing: border-box;
     display: flex;
@@ -235,7 +276,7 @@ a.braves-card-link:focus {
 .braves-section p {
     margin-top: 0;
     line-height: 1.6;
-    color: #50575e;
+    color: var(--braves-text-secondary);
 }
 
 /* ============================================
@@ -255,7 +296,7 @@ a.braves-card-link:focus {
 
 .braves-about__grid .column {
     padding: 28px 24px;
-    background-color: #f5f5f7;
+    background-color: var(--braves-surface-alt);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -325,11 +366,11 @@ a.braves-card-link:focus {
 }
 
 .components-button.is-secondary {
-    border: 1px solid #757575;
+    border: 1px solid var(--braves-border-color);
 }
 
 .components-button.is-secondary:hover {
-    border-color: #1e1e1e;
+    border-color: var(--braves-text-primary);
 }
 
 /* ============================================
@@ -353,7 +394,7 @@ a.braves-card-link:focus {
         top: 0;
         min-height: auto;
         border-right: 0;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--braves-border-color);
     }
 
     .braves-about__grid,
@@ -438,7 +479,7 @@ a.braves-card-link:focus {
 .braves-dashboard__empty {
     text-align: center;
     padding: 60px 20px;
-    color: #757575;
+    color: var(--braves-text-muted);
 }
 
 .braves-dashboard__empty svg {
@@ -451,7 +492,7 @@ a.braves-card-link:focus {
 .braves-dashboard__empty h3 {
     font-size: 1.25rem;
     margin-bottom: 8px;
-    color: #1e1e1e;
+    color: var(--braves-text-primary);
 }
 
 .braves-dashboard__empty p {
