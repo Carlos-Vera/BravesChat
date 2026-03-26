@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.4.0](#240---2026-03-25) - **Actual** - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
+- [2.4.2](#242---2026-03-26) - **Actual** - Dark mode en el panel admin y limpieza de estilos hardcodeados
+- [2.4.0](#240---2026-03-25) - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
 - [2.3.8](#238---2026-03-18) - Versículo diario NVI en el header del panel admin
 - [2.3.7](#237---2026-03-18) - Nombre del agente, notices en header y navegación renombrada
 - [2.3.5](#235---2026-03-16) - Fix botón de subir imagen en Apariencia
@@ -35,6 +36,23 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.4.2] - 2026-03-26
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Dark mode para el panel de administración — botón para alternar entre tema claro y oscuro. La preferencia se guarda en `user_meta` (`braveschat_admin_theme`) por usuario y se restaura sin flash (FOUC) mediante un script en `<head>` antes de que cargue el CSS.
+- **ADDED**: Soporte de dark mode en TinyMCE — el editor de bienvenida adapta su fondo y texto al tema activo.
+
+### 🔧 Mejoras Técnicas
+- **IMPROVED**: Variables CSS semánticas añadidas a `variables.css` (`--braves-bg-page`, `--braves-surface`, `--braves-surface-alt`, `--braves-border-color`, `--braves-text-primary`, `--braves-text-secondary`, `--braves-text-muted`). Todas las variantes dark mode se declaran bajo `[data-braves-theme="dark"]`.
+- **IMPROVED**: `components.css` — cards, títulos, subtítulos y footers usan las nuevas variables semánticas en lugar de valores hardcodeados. Border-radius reducido de 24px a 18px, lift en hover de -4px a -2px.
+- **IMPROVED**: Botones "Seleccionar todas" / "Deseleccionar todas" de páginas excluidas usan clases `braves-button braves-button--secondary` en lugar de clases WordPress genéricas, y su lógica JS se movió a `admin.js`.
+- **IMPROVED**: Los `style` inline con `font-size: 13px; color: #666` eliminados de los párrafos `.braves-field-help` en `settings.php` — el color ahora viene de la hoja de estilos, compatible con dark mode.
+- **IMPROVED**: Las etiquetas del slider de velocidad de tipeo usan clase `braves-range-labels` en lugar de posicionamiento absoluto con `style` inline.
+- **IMPROVED**: El div de previsualización del mensaje de bienvenida ya no inyecta estilos inline desde JS — usa clases CSS.
+- **IMPROVED**: `bravesAdminConfig` ahora incluye `ajaxUrl` y `themeNonce` para que el toggle de tema pueda guardar la preferencia vía AJAX sin exponer credenciales.
 
 ---
 

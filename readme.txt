@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.4.0
+Stable tag: 2.4.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,13 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 5. Conversation history — session viewer with CSV export.
 
 == Changelog ==
+
+= 2.4.2 =
+* ADDED: Dark mode for the admin panel — toggle between light and dark theme. Preference is saved per user and restored on every page load without flash.
+* IMPROVED: Admin UI uses semantic CSS variables throughout — dark mode adapts automatically with no hardcoded colors.
+* IMPROVED: Select/deselect all pages buttons in Settings are now styled consistently with the rest of the admin panel.
+* IMPROVED: Inline styles removed from field help text and range labels — styles now come from CSS classes for better dark mode support.
+* IMPROVED: Message preview no longer injects hardcoded inline styles — uses CSS class instead.
 
 = 2.4.0 =
 * ADDED: Mobile fullscreen mode — on devices up to 480px the chat opens as a full-screen overlay with its own header, back/close buttons, and iOS safe-area support.
@@ -195,6 +202,9 @@ This plugin sends chat messages to an N8N webhook URL configured by the site adm
 The webhook URL, destination server, and all data processing are fully controlled by the site administrator. No data is sent to any Braves-operated server.
 
 == Upgrade Notice ==
+
+= 2.4.2 =
+Dark mode for the admin panel and UI polish across all admin pages. Recommended update for all users.
 
 = 2.4.0 =
 Mobile fullscreen chat experience, WooCommerce z-index fix, and several Plugin Check compliance improvements. Recommended update for all users.
