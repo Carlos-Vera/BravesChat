@@ -127,7 +127,7 @@ $option_prefix = 'braves_chat_';
                                        class="braves-toggle-input">
                                 <span class="braves-toggle-slider"></span>
                             </label>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('Mostrar el chat en todas las páginas del sitio web', 'braveschat'); ?>
                             </p>
                             <?php
@@ -154,7 +154,7 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;"
                                    placeholder="https://tudominio.com/webhook/...">
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('URL del webhook de N8N para procesar los mensajes del chat.', 'braveschat'); ?>
                             </p>
                             <?php
@@ -184,7 +184,7 @@ $option_prefix = 'braves_chat_';
                                 <option value="header" <?php selected($n8n_auth_type, 'header'); ?>><?php esc_html_e('Header personalizado (Header Auth)', 'braveschat'); ?></option>
                                 <option value="basic"  <?php selected($n8n_auth_type, 'basic'); ?>><?php esc_html_e('Basic Auth (usuario + contraseña)', 'braveschat'); ?></option>
                             </select>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('Elige el tipo de autenticación configurado en tu nodo Webhook o Chat Trigger de N8N.', 'braveschat'); ?>
                             </p>
                             <?php
@@ -257,14 +257,14 @@ $option_prefix = 'braves_chat_';
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braveschat'); ?>
                             </p>
                             <div class="braves-button-group" style="margin-top: 10px;">
-                                <button type="button" id="braves-select-all-pages" class="button button-secondary button-small">
+                                <button type="button" id="braves-select-all-pages" class="braves-button braves-button--secondary">
                                     <?php esc_html_e('Seleccionar todas', 'braveschat'); ?>
                                 </button>
-                                <button type="button" id="braves-deselect-all-pages" class="button button-secondary button-small">
+                                <button type="button" id="braves-deselect-all-pages" class="braves-button braves-button--secondary">
                                     <?php esc_html_e('Deseleccionar todas', 'braveschat'); ?>
                                 </button>
                             </div>
@@ -288,37 +288,36 @@ $option_prefix = 'braves_chat_';
                             <div class="braves-range-wrapper" style="display: flex; align-items: center; gap: 15px;">
                                 <div style="flex-grow: 1;">
                                     <div class="braves-range-container">
-                                        <input type="range" 
-                                               id="<?php echo esc_attr($option_prefix . 'typing_speed_range'); ?>" 
-                                               min="10" 
-                                               max="100" 
-                                               step="5" 
+                                        <input type="range"
+                                               id="<?php echo esc_attr($option_prefix . 'typing_speed_range'); ?>"
+                                               min="10"
+                                               max="100"
+                                               step="5"
                                                value="<?php echo esc_attr($typing_speed); ?>"
-                                               class="braves-range"
-                                               style="width: 100%; vertical-align: middle;">
+                                               class="braves-range">
                                         <div class="braves-range-tooltip" id="braves-range-tooltip" style="display: none;">
                                             <span class="braves-range-tooltip-value"><?php echo esc_html($typing_speed); ?></span> ms
                                         </div>
                                     </div>
-                                    <div style="display: inline-block; justify-content: space-between; width: 100%; margin-top: 5px; margin-bottom: 35px; font-size: 11px; color: #888;">
-                                        <span style="position: absolute; left: 7%;"><?php esc_html_e('Rápido (10ms)', 'braveschat'); ?></span>
-                                        <span style="position: absolute; right: 7%;"><?php esc_html_e('Lento (100ms)', 'braveschat'); ?></span>
+                                    <div class="braves-range-labels">
+                                        <span><?php esc_html_e('Rápido (10ms)', 'braveschat'); ?></span>
+                                        <span><?php esc_html_e('Lento (100ms)', 'braveschat'); ?></span>
                                     </div>
                                 </div>
                                 <div style="flex-shrink: 0; display: flex; align-items: center; gap: 5px;">
-                                    <input type="number" 
-                                           id="<?php echo esc_attr($option_prefix . 'typing_speed'); ?>" 
-                                           name="<?php echo esc_attr($option_prefix . 'typing_speed'); ?>" 
-                                           value="<?php echo esc_attr($typing_speed); ?>" 
-                                           min="10" 
+                                    <input type="number"
+                                           id="<?php echo esc_attr($option_prefix . 'typing_speed'); ?>"
+                                           name="<?php echo esc_attr($option_prefix . 'typing_speed'); ?>"
+                                           value="<?php echo esc_attr($typing_speed); ?>"
+                                           min="10"
                                            max="100"
                                            class="braves-input small-text"
                                            style="width: 70px; text-align: center;"
                                            oninput="document.getElementById('<?php echo esc_attr($option_prefix . 'typing_speed_range'); ?>').value = this.value">
-                                    <span style="font-size: 13px; color: #666;">ms</span>
+                                    <span class="braves-range-unit">ms</span>
                                 </div>
                             </div>
-                            <p class="braves-field-help" style="margin-top: 15px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help">
                                 <?php echo wp_kses_post(__('Ajusta la velocidad con la que el asistente "escribe" el mensaje.<br/>Un valor de 30-40ms se siente natural.', 'braveschat')); ?>
                             </p>
                             <?php
@@ -354,7 +353,7 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;"
                                    placeholder="https://tudominio.com/webhook/...">
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('URL del webhook de N8N que consulta el historial de conversaciones en Postgres.', 'braveschat'); ?>
                             </p>
                             <?php
@@ -378,7 +377,7 @@ $option_prefix = 'braves_chat_';
                                    style="width: 100%;"
                                    autocomplete="new-password"
                                    placeholder="••••••••••••••••">
-                            <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
+                            <p class="braves-field-help" style="margin-top: 8px;">
                                 <?php esc_html_e('Clave de autenticación enviada en el header x-api-key al webhook de historial.', 'braveschat'); ?>
                             </p>
                             <?php

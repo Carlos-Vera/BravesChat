@@ -223,18 +223,17 @@ if (empty($theme_colors)) {
                                        value="<?php echo esc_attr($bubble_image); ?>" 
                                        class="braves-media-url">
                                 
-                                <div class="braves-media-preview-wrapper" style="margin-bottom: 10px; <?php echo empty($bubble_image) ? 'display: none;' : ''; ?>">
-                                    <img src="<?php echo esc_attr($bubble_image); ?>" 
-                                         class="braves-media-preview" 
-                                         style="max-width: 100px; max-height: 100px; border-radius: 8px; border: 1px solid #ddd;">
+                                <div class="braves-media-preview-wrapper<?php echo esc_attr( empty($bubble_image) ? ' braves-hidden' : '' ); ?>">
+                                    <img src="<?php echo esc_url($bubble_image); ?>"
+                                         class="braves-media-preview">
                                 </div>
-                                
+
                                 <button type="button" class="button braves-upload-media" data-title="<?php esc_attr_e('Seleccionar imagen', 'braveschat'); ?>" data-button="<?php esc_attr_e('Usar imagen', 'braveschat'); ?>">
                                     <?php esc_html_e('Subir imagen', 'braveschat'); ?>
                                 </button>
-                                <button type="button" class="button braves-remove-media" style="margin-left: 5px;"><?php esc_html_e('Quitar imagen', 'braveschat'); ?></button>
+                                <button type="button" class="button braves-remove-media braves-ml-sm"><?php esc_html_e('Quitar imagen', 'braveschat'); ?></button>
                             </div>
-                            <p class="braves-field-help" style="margin-top: 5px;">
+                            <p class="braves-field-help braves-mt-sm">
                                 <?php echo wp_kses_post( __('Sube una imagen personalizada (1:1) para el botón flotante.<br/>
                                 Solo visible en el skin Braves.', 'braveschat') ); ?>
                             </p>
@@ -524,7 +523,7 @@ if (empty($theme_colors)) {
                                        class="braves-color-text"
                                        data-color-input="<?php echo esc_attr($option_prefix . 'icon_color'); ?>"
                                        readonly
-                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                                       >
                             </div>
 
                             <!-- Toggle para mostrar paleta -->
@@ -594,7 +593,7 @@ if (empty($theme_colors)) {
                                        class="braves-color-text"
                                        data-color-input="<?php echo esc_attr($option_prefix . 'bubble_color'); ?>"
                                        readonly
-                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                                       >
                             </div>
 
                             <!-- Toggle para mostrar paleta -->
@@ -653,7 +652,7 @@ if (empty($theme_colors)) {
                                        class="braves-color-text"
                                        data-color-input="<?php echo esc_attr($option_prefix . 'primary_color'); ?>"
                                        readonly
-                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                                       >
                             </div>
 
                             <!-- Toggle para mostrar paleta -->
@@ -712,7 +711,7 @@ if (empty($theme_colors)) {
                                        class="braves-color-text"
                                        data-color-input="<?php echo esc_attr($option_prefix . 'background_color'); ?>"
                                        readonly
-                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                                       >
                             </div>
 
                             <!-- Toggle para mostrar paleta -->
@@ -781,7 +780,7 @@ if (empty($theme_colors)) {
                                        class="braves-color-text"
                                        data-color-input="<?php echo esc_attr($option_prefix . 'text_color'); ?>"
                                        readonly
-                                       style="display: inline-block; vertical-align: middle; width: 200px; height: 40px; font-family: monospace; text-transform: uppercase; font-size: 13px; color: #6B7280; padding: 8px 12px; border: 1px solid #E5E7EB; border-radius: 6px; background: #F9FAFB; margin: 0 0 0 12px; box-sizing: border-box;">
+                                       >
                             </div>
 
                             <!-- Toggle para mostrar paleta -->

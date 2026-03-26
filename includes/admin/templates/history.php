@@ -270,8 +270,8 @@ uasort($sessions, function ($a, $b) {
                     <div class="braves-bento-card" style="margin-top: 20px;">
                         
                         <!-- Actions -->
-                        <div class="braves-bento-header" style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--braves-gray-200);">
-                            <h3 style="margin: 0; font-size: 18px; font-weight: 600; color: var(--braves-gray-900);">
+                        <div class="braves-bento-header">
+                            <h3>
                                 <?php
                                 echo esc_html( sprintf(
                                     // translators: %d is the number of conversations found.

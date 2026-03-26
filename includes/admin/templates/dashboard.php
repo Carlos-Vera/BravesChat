@@ -81,7 +81,7 @@ $config_status = Template_Helpers::get_config_status();
                     <!-- Chat Activo Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('chat', '#0077b6'),
+                        'icon' => Template_Helpers::get_icon('chat'),
                         'title' => $config_status['global_enabled'] ? __('Chat Activo', 'braveschat') : __('Chat Offline', 'braveschat'),
                         'description' => !$config_status['global_enabled']
                             ? __('Chat desactivado — actívalo en Ajustes para que tus visitas puedan usarlo.', 'braveschat')
@@ -99,7 +99,7 @@ $config_status = Template_Helpers::get_config_status();
                     <!-- Apariencia Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('appearance', '#0077b6'),
+                        'icon' => Template_Helpers::get_icon('appearance'),
                         'title' => __('Apariencia', 'braveschat'),
                         'description' => __('Cerebro y estilo. Ajusta qué dice el chat, cómo lo dice y qué aspecto tiene.', 'braveschat'),
                         'action_text' => __('Personalizar', 'braveschat'),
@@ -111,7 +111,7 @@ $config_status = Template_Helpers::get_config_status();
                     <!-- Documentación Card -->
                     <?php
                     Template_Helpers::card(array(
-                        'icon' => Template_Helpers::get_icon('docs', '#0077b6'),
+                        'icon' => Template_Helpers::get_icon('docs'),
                         'title' => __('Documentación', 'braveschat'),
                         'description' => __('¿Necesitas ayuda? Guía paso a paso para exprimir todas las funciones de BravesChat.', 'braveschat'),
                         'action_text' => __('Abrir manual', 'braveschat'),
@@ -143,6 +143,9 @@ $config_status = Template_Helpers::get_config_status();
                             'style' => 'secondary',
                         ));
                         ?>
+                        <button type="button" id="braves-theme-toggle" class="braves-button braves-button--secondary" onclick="bravesToggleTheme()">
+                            <span class="braves-button__text"><?php esc_html_e('Modo Oscuro', 'braveschat'); ?></span>
+                        </button>
                     </div>
                 </div>
 
