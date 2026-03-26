@@ -77,9 +77,11 @@ class Admin_Controller {
         add_action('admin_menu', array($this, 'register_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
         add_action('admin_enqueue_scripts', array($this, 'add_menu_icon_active_styles'), 20);
+        add_action('admin_head', array($this, 'add_theme_restoration_script'));
         add_filter('admin_title', array($this, 'filter_admin_title'), 10, 2);
         add_action('current_screen', array($this, 'suppress_other_notices'));
         add_filter('admin_body_class', array($this, 'add_admin_body_class'));
+        add_action('wp_ajax_braveschat_save_theme', array($this, 'ajax_save_theme'));
     }
 
     /**
@@ -99,6 +101,46 @@ class Admin_Controller {
         // Los submenús se registran con parent_slug = 'braveschat' para que WordPress
         // active el resaltado del menú principal de forma nativa.
         wp_add_inline_style( 'braves-admin-base', '#toplevel_page_braveschat .wp-submenu { display: none !important; }' );
+    }
+
+    /**
+     * Inyectar script de restauración de tema en el <head> para evitar FOUC
+     *
+     * @return void
+     */
+    public function add_theme_restoration_script() {
+        $screen = get_current_screen();
+        if ( ! $screen || strpos( $screen->id, 'braveschat' ) === false ) {
+            return;
+        }
+        $theme = get_user_meta( get_current_user_id(), 'braveschat_admin_theme', true );
+        if ( 'dark' === $theme ) {
+            echo '<script>document.documentElement.setAttribute("data-braves-theme","dark");</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static string, no user input
+        }
+    }
+
+    /**
+     * AJAX: guardar preferencia de tema en user_meta
+     *
+     * @return void
+     */
+    public function ajax_save_theme() {
+        check_ajax_referer( 'braveschat_save_theme', 'nonce' );
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_die( -1, '', array( 'response' => 403 ) );
+        }
+
+        $theme   = isset( $_POST['theme'] ) ? sanitize_text_field( wp_unslash( $_POST['theme'] ) ) : '';
+        $user_id = get_current_user_id();
+
+        if ( 'dark' === $theme ) {
+            update_user_meta( $user_id, 'braveschat_admin_theme', 'dark' );
+        } else {
+            delete_user_meta( $user_id, 'braveschat_admin_theme' );
+        }
+
+        wp_send_json_success();
     }
 
     /**
@@ -660,6 +702,8 @@ document.addEventListener(\'DOMContentLoaded\', function() {
             'pluginVersion' => BRAVES_CHAT_VERSION,
             'isConfigured' => !empty(get_option('braves_chat_webhook_url')),
             'nonce' => wp_create_nonce('braves_chat_admin'),
+            'ajaxUrl' => esc_url(admin_url('admin-ajax.php')),
+            'themeNonce' => wp_create_nonce('braveschat_save_theme'),
         );
 
         wp_localize_script('wp-components', 'bravesAdminConfig', $config);
