@@ -238,12 +238,17 @@ class Admin_Header {
      * @return void
      */
     private function render_logo() {
-        $logo_path = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/braves-logo.svg';
+        $logo_light_path = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/braves-logo.svg';
+        $logo_dark_path  = BRAVES_CHAT_PLUGIN_DIR . 'assets/media/braves-logo-white.svg';
 
-        if (file_exists($logo_path)) {
-            echo '<img src="' . esc_url( BRAVES_CHAT_PLUGIN_URL . 'assets/media/braves-logo.svg' ) . '" alt="' . esc_attr__( 'BravesChat', 'braveschat' ) . '" class="braves-admin-header__logo-img" />';
-        } else {
-            // Fallback a texto
+        if ( file_exists( $logo_light_path ) ) {
+            echo '<img src="' . esc_url( BRAVES_CHAT_PLUGIN_URL . 'assets/media/braves-logo.svg' ) . '" alt="' . esc_attr__( 'BravesChat', 'braveschat' ) . '" class="braves-admin-header__logo-img logo-light" />';
+        }
+
+        if ( file_exists( $logo_dark_path ) ) {
+            echo '<img src="' . esc_url( BRAVES_CHAT_PLUGIN_URL . 'assets/media/braves-logo-white.svg' ) . '" alt="' . esc_attr__( 'BravesChat', 'braveschat' ) . '" class="braves-admin-header__logo-img logo-dark" />';
+        } elseif ( ! file_exists( $logo_light_path ) ) {
+            // Fallback a texto si no hay ningún logo
             echo '<span class="braves-admin-header__logo-text">';
             echo esc_html__('BravesChat iA', 'braveschat');
             echo '</span>';
