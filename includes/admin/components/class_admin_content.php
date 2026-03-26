@@ -240,6 +240,19 @@ class Admin_Content {
                         'style' => true,
                         'id' => true,
                     ),
+                    'button' => array(
+                        'type'              => true,
+                        'id'                => true,
+                        'name'              => true,
+                        'value'             => true,
+                        'class'             => true,
+                        'style'             => true,
+                        'title'             => true,
+                        'disabled'          => true,
+                        'data-palette-target' => true,
+                        'data-color'        => true,
+                        'data-target'       => true,
+                    ),
                 )
             );
             echo wp_kses($args['content'], $allowed_html);
