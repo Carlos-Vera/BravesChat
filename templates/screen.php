@@ -16,6 +16,16 @@ $icon_path = BRAVES_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . 
 $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'braveschat'));
 ?>
 
+<script>
+(function(){
+    if (!document.getElementById('braves-fullscreen-overlay')) {
+        var el = document.createElement('div');
+        el.id = 'braves-fullscreen-overlay';
+        document.body.appendChild(el);
+    }
+})();
+</script>
+
 <div id="<?php echo esc_attr($unique_id); ?>" class="braveslab-chat-widget-container position-fullscreen braves-skin-<?php echo esc_attr($chat_skin); ?>">
     <div id="braveslab-chat-container" class="chat-open">
         <!-- Botón flotante eliminado para el modo inmersivo tipo ChatGPT -->

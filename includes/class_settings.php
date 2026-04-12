@@ -1050,7 +1050,7 @@ class Settings {
      * @return string Valor sanitizado
      */
     public function sanitize_display_mode($value) {
-        $allowed = array('modal', 'fullscreen');
+        $allowed = array('modal', 'fullscreen', 'mixed');
         return in_array($value, $allowed) ? $value : 'modal';
     }
 

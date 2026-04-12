@@ -156,6 +156,7 @@ if (empty($theme_colors)) {
                             $modes = array(
                                 'modal' => __('Burbuja Flotante', 'braveschat'),
                                 'fullscreen' => __('Pantalla Completa', 'braveschat'),
+                                'mixed' => __('Visualización Mixta', 'braveschat'),
                             );
 
                             ob_start();
@@ -173,6 +174,9 @@ if (empty($theme_colors)) {
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
                                 <?php esc_html_e('Selecciona el comportamiento visual que mejor se adapte al diseño de tu web.', 'braveschat'); ?>
+                                <?php if ($current_mode === 'mixed'): ?>
+                                    <br><?php esc_html_e('Modo Mixto: burbuja flotante en toda la web, pantalla completa en las páginas con el bloque de Gutenberg.', 'braveschat'); ?>
+                                <?php endif; ?>
                             </p>
                             <?php
                             $mode_content = ob_get_clean();

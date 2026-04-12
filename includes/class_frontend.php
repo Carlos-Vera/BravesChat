@@ -88,6 +88,7 @@ class Frontend {
 
         // El modo pantalla completa solo funciona vía bloque de Gutenberg:
         // no se carga en páginas que no lo tengan aunque global_enable esté activo.
+        // El modo mixto sí carga assets en páginas sin bloque (muestra burbuja flotante).
         $display_mode_setting = get_option('braves_chat_display_mode', 'modal');
         if ($display_mode_setting === 'fullscreen' && !$has_block) {
             $this->dequeue_all_assets();
@@ -132,11 +133,18 @@ class Frontend {
 
         // Si hay un bloque en la página, siempre carga assets de screen (el bloque es siempre fullscreen).
         // Si no hay bloque, usa el modo configurado globalmente.
+        // En modo mixto sin bloque → modal (burbuja flotante).
         if ($has_block) {
             $asset_mode = 'screen';
         } else {
             $display_mode = get_option('braves_chat_display_mode', 'modal');
-            $asset_mode = ($display_mode === 'fullscreen') ? 'screen' : $display_mode;
+            if ($display_mode === 'fullscreen') {
+                $asset_mode = 'screen';
+            } elseif ($display_mode === 'mixed') {
+                $asset_mode = 'modal';
+            } else {
+                $asset_mode = $display_mode;
+            }
         }
 
         // CSS condicional según modo de visualización
@@ -235,7 +243,10 @@ class Frontend {
 
         // El modo pantalla completa solo se activa vía bloque de Gutenberg,
         // nunca de forma global (cada página con bloque lo renderiza por sí sola).
-        if (get_option('braves_chat_display_mode', 'modal') === 'fullscreen') {
+        // El modo mixto sí renderiza la burbuja globalmente; en páginas con bloque
+        // la burbuja se omite por el check de page_has_chat_block() más abajo.
+        $display_mode_setting = get_option('braves_chat_display_mode', 'modal');
+        if ($display_mode_setting === 'fullscreen') {
             return;
         }
         
@@ -248,13 +259,17 @@ class Frontend {
         }
         
         // Obtener atributos por defecto
+        // En modo mixto, el render global siempre es burbuja flotante (modal).
+        $raw_display_mode = get_option('braves_chat_display_mode', 'modal');
+        $effective_display_mode = ($raw_display_mode === 'mixed') ? 'modal' : $raw_display_mode;
+
         $attributes = array(
             'webhookUrl'      => get_option('braves_chat_webhook_url'),
             'headerTitle'     => get_option('braves_chat_header_title'),
             'headerSubtitle'  => get_option('braves_chat_header_subtitle'),
             'welcomeMessage'  => Helpers::get_welcome_message(),
             'position'        => get_option('braves_chat_position', 'bottom-right'),
-            'displayMode'     => get_option('braves_chat_display_mode', 'modal'),
+            'displayMode'     => $effective_display_mode,
             'chatSkin'        => get_option('braves_chat_chat_skin', 'default'),
             'bubbleImage'     => get_option('braves_chat_bubble_image', ''),
             'bubbleText'      => get_option('braves_chat_bubble_text', 'Chat de voz'),
@@ -432,7 +447,7 @@ class Frontend {
             // Modo display para el widget global o bloques (en el plugin usa modo o modal/fullscreen)
             $display_mode_global = get_option('braves_chat_display_mode', 'modal');
             ?>
-            <?php if ($display_mode_global !== 'fullscreen') : ?>
+            <?php if ($display_mode_global !== 'fullscreen' && !$has_block) : ?>
             /* Color de fondo del chat */
             body #braveslab-chat-container #chat-window {
                 background: <?php echo esc_attr($background_color); ?> !important;
@@ -443,7 +458,7 @@ class Frontend {
             }
             <?php endif; ?>
 
-            <?php if ($display_mode_global !== 'fullscreen') : ?>
+            <?php if ($display_mode_global !== 'fullscreen' && !$has_block) : ?>
             /* Color de mensajes del bot (sin borde izquierdo) */
             body #braveslab-chat-container .message.bot .message-bubble {
                 background: transparent !important;
@@ -458,7 +473,7 @@ class Frontend {
             }
             <?php endif; ?>
 
-            <?php if ($display_mode_global !== 'fullscreen') : ?>
+            <?php if ($display_mode_global !== 'fullscreen' && !$has_block) : ?>
             /* Color de mensajes del usuario (sin borde izquierdo) */
             body #braveslab-chat-container .message.user .message-bubble {
                 background: <?php echo esc_attr($primary_color); ?> !important;
@@ -468,7 +483,7 @@ class Frontend {
             <?php endif; ?>
 
             /* Caja de escritura - input */
-            <?php if ($display_mode_global !== 'fullscreen') : ?>
+            <?php if ($display_mode_global !== 'fullscreen' && !$has_block) : ?>
             body #braveslab-chat-container #chat-input {
                 color: <?php echo esc_attr($text_color); ?> !important;
                 border-color: <?php echo esc_attr($primary_color); ?>40 !important;
