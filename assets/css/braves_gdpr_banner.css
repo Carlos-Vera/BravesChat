@@ -21,6 +21,8 @@ body .braves-chat-gdpr-notice * {
     line-height: normal;
     letter-spacing: normal;
     text-transform: none;
+    color-scheme: light;
+    color: #000000;
 }
 
 /* Reset buttons in GDPR banner */
@@ -97,7 +99,7 @@ body .braves-skin-braves .braves-gdpr-banner {
     left: 50%;
     transform: translate(-50%, -50%);
     background: #ffffff;
-    color: #000000;
+    color: #000000 !important;
     padding: 40px;
     z-index: 9999999;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -117,9 +119,21 @@ body .braves-skin-braves .braves-gdpr-banner.active {
 body .braves-skin-braves .braves-gdpr-title {
     font-size: 16px;
     font-weight: 600;
-    color: #000000;
+    color: #000000 !important;
     margin: 0 0 20px 0;
     text-align: center;
+}
+
+/* Contenido del mensaje GDPR (texto configurado en el admin) */
+body .braves-skin-braves .braves-gdpr-message-content {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #333333 !important;
+    margin-bottom: 24px;
+}
+
+body .braves-skin-braves .braves-gdpr-message-content * {
+    color: inherit !important;
 }
 
 /* Lista de condiciones */
@@ -135,14 +149,14 @@ body .braves-skin-braves .braves-gdpr-conditions li {
     margin-bottom: 12px;
     font-size: 13px;
     line-height: 1.5;
-    color: #666666;
+    color: #444444 !important;
 }
 
 body .braves-skin-braves .braves-gdpr-conditions li::before {
     content: "•";
     position: absolute;
     left: 0;
-    color: #000000;
+    color: #000000 !important;
     font-weight: 600;
 }
 
@@ -387,18 +401,18 @@ body #braveslab-chat-container #chat-window.braves-gdpr-locked {
     margin: 0 auto;
 }
 
-.braves-gdpr-card h3 {
+body .braves-chat-gdpr-notice .braves-gdpr-card h3 {
     margin: 0 0 12px 0;
     font-size: 16px;
     font-weight: 700;
-    color: #000000;
+    color: #000000 !important;
 }
 
-.braves-gdpr-card p {
+body .braves-chat-gdpr-notice .braves-gdpr-card p {
     margin: 0 0 20px 0;
     font-size: 14px;
     line-height: 1.5;
-    color: #374151;
+    color: #374151 !important;
 }
 
 .braves-gdpr-actions {
