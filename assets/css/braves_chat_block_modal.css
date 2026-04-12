@@ -437,6 +437,11 @@ body #braveslab-chat-container #chat-input {
     box-sizing: border-box;
 }
 
+body #braveslab-chat-container #chat-input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
 body #braveslab-chat-container #chat-input:focus {
     border-color: #01B7AF;
     box-shadow: 0 0 0 3px rgba(1, 183, 175, 0.1);
@@ -589,6 +594,12 @@ body #braveslab-chat-container .typing-dot:nth-child(3) {
 /* ============================================
    RESET DE ESTILOS
    ============================================ */
+
+/* Previene ajustes automáticos de color en iOS Safari dark mode */
+body #braveslab-chat-container {
+    color-scheme: light;
+}
+
 body #braveslab-chat-container * {
     box-sizing: border-box;
 }
