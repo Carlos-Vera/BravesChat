@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.4.2](#242---2026-03-26) - **Actual** - Dark mode en el panel admin y limpieza de estilos hardcodeados
+- [2.4.3](#243---2026-04-12) - **Actual** - Modo Mixto de visualización y correcciones CSS para iOS Safari dark mode
+- [2.4.2](#242---2026-03-26) - Dark mode en el panel admin y limpieza de estilos hardcodeados
 - [2.4.0](#240---2026-03-25) - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
 - [2.3.8](#238---2026-03-18) - Versículo diario NVI en el header del panel admin
 - [2.3.7](#237---2026-03-18) - Nombre del agente, notices en header y navegación renombrada
@@ -36,6 +37,22 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.4.3] - 2026-04-12
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Modo Mixto (`mixed`) en ajustes de visualización — muestra la burbuja flotante en toda la web y el chat en pantalla completa en las páginas que tienen el bloque de Gutenberg.
+
+### 🔧 Mejoras Técnicas
+- **IMPROVED**: `color-scheme: light` forzado en el container del widget para prevenir que iOS Safari aplique el dark mode del sistema y invierta los colores del chat.
+- **IMPROVED**: El banner GDPR fuerza colores con especificidad `!important` para aislar el texto del dark mode de temas de terceros.
+
+### 🐛 Correcciones
+- **FIXED**: En modo pantalla completa (bloque Gutenberg), se añade un overlay de fondo `#braves-fullscreen-overlay` que cubre el fondo blanco del tema mientras carga el chat.
+- **FIXED**: El color del placeholder del input de chat ya no hereda del tema activo — se fija en `#9ca3af`.
+- **FIXED**: El CSS de pantalla completa se fuerza siempre en páginas con el bloque Gutenberg, independientemente del modo de visualización global configurado.
 
 ---
 

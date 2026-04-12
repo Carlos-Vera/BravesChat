@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,14 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 5. Conversation history — session viewer with CSV export.
 
 == Changelog ==
+
+= 2.4.3 =
+* ADDED: Mixed display mode — floating bubble on all pages, fullscreen chat on pages with the Gutenberg block.
+* IMPROVED: Chat widget now forces light color scheme, preventing iOS Safari dark mode from inverting widget colors.
+* IMPROVED: GDPR banner colors are now fully isolated from theme dark mode — text colors stay consistent on all themes.
+* FIXED: Fullscreen block mode now renders a background overlay that hides the white page background while the chat loads.
+* FIXED: Chat input placeholder color no longer inherits from the active theme.
+* FIXED: Screen CSS is now always loaded on pages using the fullscreen Gutenberg block, regardless of global display mode setting.
 
 = 2.4.2 =
 * ADDED: Dark mode for the admin panel — toggle between light and dark theme. Preference is saved per user and restored on every page load without flash.
@@ -202,6 +210,9 @@ This plugin sends chat messages to an N8N webhook URL configured by the site adm
 The webhook URL, destination server, and all data processing are fully controlled by the site administrator. No data is sent to any Braves-operated server.
 
 == Upgrade Notice ==
+
+= 2.4.3 =
+New mixed display mode plus visual fixes for iOS Safari dark mode and GDPR banner. Recommended update for all users.
 
 = 2.4.2 =
 Dark mode for the admin panel and UI polish across all admin pages. Recommended update for all users.
