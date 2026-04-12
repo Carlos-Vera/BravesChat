@@ -4,6 +4,7 @@
 /.gitattributes
 /.distignore
 /.agents
+/.wordpress-org
 /.claude
 /memory
 /node_modules
