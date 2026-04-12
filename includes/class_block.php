@@ -159,6 +159,14 @@ class Block {
         // Generar ID único
         $unique_id = Helpers::generate_unique_id();
 
+        // Forzar el CSS de pantalla completa si enqueue_assets() cargó el modal por error
+        wp_enqueue_style(
+            'braves-chat-frontend',
+            BRAVES_CHAT_PLUGIN_URL . 'assets/css/braves_chat_block_screen.css',
+            array(),
+            BRAVES_CHAT_VERSION
+        );
+
         ob_start();
         include BRAVES_CHAT_PLUGIN_DIR . 'templates/screen.php';
         return ob_get_clean();
