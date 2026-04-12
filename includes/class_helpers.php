@@ -150,7 +150,7 @@ class Helpers {
             'display_mode'    => get_option('braves_chat_display_mode', 'modal'),
             'skin'            => get_option('braves_chat_chat_skin', 'default'),
             'bubble_image'    => get_option('braves_chat_bubble_image', ''),
-            'bubble_text'     => get_option('braves_chat_bubble_text', 'Chat de voz'),
+            'bubble_text'     => get_option('braves_chat_bubble_text', __('Chat de voz', 'braveschat')),
             'is_available'    => !self::is_availability_enabled() || self::is_within_availability_hours(),
         );
     }

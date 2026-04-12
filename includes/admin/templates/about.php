@@ -70,7 +70,7 @@ $sidebar = Admin_Sidebar::get_instance();
                             'icon' => Template_Helpers::get_icon('verified'),
                             'title' => __('Versión', 'braveschat'),
                             'description' => 'v' . BRAVES_CHAT_VERSION,
-                            'footer' => __('Last Update: <b>26/03/2026</b>', 'braveschat'),
+                            'footer' => __('Last Update: <b>12/04/2026</b>', 'braveschat'),
                             'action_text' => 'GitHub Repository',
                             'action_url' => 'https://github.com/Carlos-Vera/braveschat',
                             'action_target' => '_blank',
@@ -120,14 +120,54 @@ $sidebar = Admin_Sidebar::get_instance();
                             <span class="braves-timeline__cap-label"><?php esc_html_e('Hoy', 'braveschat'); ?></span>
                         </div>
 
+                    <!-- **** CONVENCIÓN DE LAS CARDS *****
+                        - Para cambiar de lado la card utiliza: 
+                            braves-tl-right Card a la derecha
+                            braves-tl-left Card a la izquierda
+                        - style="--braves-tl-nudge: 3rem;" 
+                            Para mover la card o badged 
+                            hacia arriba cuando es negativo
+                            y abajo cuando es positivo
+                        - braves-tl-nude se puede usar en braves-timeline__item para la card
+                            y braves-timeline__card-side para mover la burbuja de la versión
+                    -->
+
+                    <!-- Version 2.4.4 -->
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: 3rem;">
+                            <div class="braves-timeline__spacer"></div>
+                            <div class="braves-timeline__axis">
+                                <div class="braves-timeline__badge">v2.4.4</div>
+                                <div class="braves-timeline__label"><?php esc_html_e('12 Abr 2026', 'braveschat'); ?></div>
+                            </div>
+                            <div class="braves-timeline__card-side">
+                                <div class="braves-changelog__version">
+                                    <h3 class="braves-changelog__title">
+                                        <?php esc_html_e('El plugin en tu idioma', 'braveschat'); ?>
+                                    </h3>
+                                    <div class="braves-changelog__section">
+                                        <h4><?php esc_html_e('Mejoras', 'braveschat'); ?></h4>
+                                        <ul>
+                                            <li><?php esc_html_e('IMPROVED: Si tu WordPress no está en español, el panel y el chat ya se adaptan — botones, textos del widget y etiquetas incluidos.', 'braveschat'); ?></li>
+                                        </ul>
+                                    </div>
+                                    <div class="braves-changelog__section">
+                                        <h4><?php esc_html_e('Correcciones', 'braveschat'); ?></h4>
+                                        <ul>
+                                            <li><?php esc_html_e('FIXED: Algunos textos del chat aparecían siempre en español, sin importar el idioma del sitio. Ya no.', 'braveschat'); ?></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     <!-- Version 2.4.3 -->
-                        <div class="braves-timeline__item braves-tl-left">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -10rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.4.3</div>
                                 <div class="braves-timeline__label"><?php esc_html_e('12 Abr 2026', 'braveschat'); ?></div>
                             </div>
-                            <div class="braves-timeline__card-side" style="--braves-tl-nudge: -4rem;">
+                            <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">
                                         <?php esc_html_e('Modo Mixto y compatibilidad con dark mode', 'braveschat'); ?>
@@ -151,7 +191,7 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.4.2 -->
-                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -20rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -18rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.4.2</div>
@@ -210,7 +250,7 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Version 2.3.8 -->
-                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -5rem;">
+                        <div class="braves-timeline__item braves-tl-right" style="--braves-tl-nudge: -15rem;">
                             <div class="braves-timeline__spacer"></div>
                             <div class="braves-timeline__axis">
                                 <div class="braves-timeline__badge">v2.3.8</div>
@@ -232,7 +272,7 @@ $sidebar = Admin_Sidebar::get_instance();
                         </div>
 
                     <!-- Versions 2.3.2 → 2.3.7 -->
-                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: -7rem;">
+                        <div class="braves-timeline__item braves-tl-left" style="--braves-tl-nudge: 2rem;">
                             <div class="braves-timeline__card-side">
                                 <div class="braves-changelog__version">
                                     <h3 class="braves-changelog__title">

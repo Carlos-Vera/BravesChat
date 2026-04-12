@@ -6,7 +6,8 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.4.3](#243---2026-04-12) - **Actual** - Modo Mixto de visualización y correcciones CSS para iOS Safari dark mode
+- [2.4.4](#244---2026-04-12) - **Actual** - Internacionalización completa: 481 strings traducibles, soporte JS i18n y archivos de idioma para es_ES
+- [2.4.3](#243---2026-04-12) - Modo Mixto de visualización y correcciones CSS para iOS Safari dark mode
 - [2.4.2](#242---2026-03-26) - Dark mode en el panel admin y limpieza de estilos hardcodeados
 - [2.4.0](#240---2026-03-25) - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
 - [2.3.8](#238---2026-03-18) - Versículo diario NVI en el header del panel admin
@@ -37,6 +38,21 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.4.4] - 2026-04-12
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Archivos de idioma completos para español (es_ES): `.pot` regenerado con 481 strings (desde 83), `.po` con todas las traducciones completadas, `.mo` compilado y archivos JSON para traducciones JS.
+
+### 🔧 Mejoras Técnicas
+- **IMPROVED**: Todas las strings visibles al usuario en `admin.js` ahora usan `wp.i18n.__()` — compatibles con el sistema de traducciones de WordPress.
+- **IMPROVED**: El script de administración se registra con `wp_set_script_translations()` — carga automáticamente los archivos JSON de idioma según el locale activo.
+- **IMPROVED**: Los valores por defecto de `bubble_text`, el pie del modo pantalla completa y los placeholders de configuración ahora pasan por las funciones de traducción de WordPress.
+
+### 🐛 Correcciones
+- **FIXED**: Strings hardcodeadas en PHP (`'Chat de voz'`, pie de pantalla completa) que no eran traducibles en instalaciones no en español.
 
 ---
 

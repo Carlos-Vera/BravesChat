@@ -92,7 +92,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     </button>
                 </div>
                 <div class="chat-footer-text">
-                    La IA puede cometer errores. Considera verificar la información importante.
+                    <?php esc_html_e( 'La IA puede cometer errores. Considera verificar la información importante.', 'braveschat' ); ?>
                 </div>
             </div>
         </div>

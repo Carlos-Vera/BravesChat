@@ -6,6 +6,8 @@
 
 /* ==================== DARK MODE TOGGLE ==================== */
 (function () {
+    var __ = ( wp && wp.i18n && wp.i18n.__ ) ? wp.i18n.__ : function( s ) { return s; };
+
     window.bravesToggleTheme = function () {
         var isDark   = document.documentElement.getAttribute('data-braves-theme') === 'dark';
         var newTheme = isDark ? '' : 'dark';
@@ -20,7 +22,8 @@
         if (btn) {
             var span = btn.querySelector('.braves-button__text');
             if (span) {
-                span.textContent = newTheme === 'dark' ? 'Modo Claro' : 'Modo Oscuro';
+                /* translators: button label to switch to light mode */
+                span.textContent = newTheme === 'dark' ? __('Modo Claro', 'braveschat') : __('Modo Oscuro', 'braveschat');
             }
         }
 
@@ -42,7 +45,8 @@
         if (btn) {
             var span = btn.querySelector('.braves-button__text');
             if (span) {
-                span.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+                /* translators: button label to switch to light mode */
+                span.textContent = isDark ? __('Modo Claro', 'braveschat') : __('Modo Oscuro', 'braveschat');
             }
         }
     });
@@ -50,6 +54,8 @@
 
 (function ($) {
     'use strict';
+
+    var __ = ( wp && wp.i18n && wp.i18n.__ ) ? wp.i18n.__ : function( s ) { return s; };
 
     $(document).ready(function () {
 
@@ -61,7 +67,8 @@
             var urlPattern = /^https?:\/\/.+/i;
 
             if (url && !urlPattern.test(url)) {
-                alert('Por favor, introduce una URL válida que comience con http:// o https://');
+                /* translators: browser alert for invalid webhook URL */
+                alert( __('Por favor, introduce una URL válida que comience con http:// o https://', 'braveschat') );
                 $(this).focus();
             }
         });
@@ -78,7 +85,8 @@
             var time = $(this).val();
 
             if (time && !validateTimeFormat(time)) {
-                alert('Por favor, introduce un horario válido en formato HH:MM (ejemplo: 09:00)');
+                /* translators: browser alert for invalid time format */
+                alert( __('Por favor, introduce un horario válido en formato HH:MM (ejemplo: 09:00)', 'braveschat') );
                 $(this).val('09:00');
                 $(this).focus();
             }
@@ -113,9 +121,10 @@
 
             function updateCounter() {
                 var count = $excludedPages.find('option:selected').length;
-                var text = count === 0 ? 'No hay páginas excluidas' :
-                    count === 1 ? '1 página excluida' :
-                        count + ' páginas excluidas';
+                /* translators: %d = number of excluded pages */
+                var text = count === 0 ? __('No hay páginas excluidas', 'braveschat') :
+                    count === 1 ? __('1 página excluida', 'braveschat') :
+                        count + ' ' + __('páginas excluidas', 'braveschat');
                 $counter.text(text);
             }
 
@@ -141,7 +150,8 @@
 
             if (!webhookUrl) {
                 e.preventDefault();
-                alert('Por favor, introduce una URL de webhook válida antes de guardar.');
+                /* translators: browser alert shown when saving without a webhook URL */
+                alert( __('Por favor, introduce una URL de webhook válida antes de guardar.', 'braveschat') );
                 $('input[name="braves_chat_webhook_url"]').focus();
                 return false;
             }
@@ -177,7 +187,8 @@
 
         $(window).on('beforeunload', function () {
             if (formChanged) {
-                return '¿Estás seguro de que quieres salir? Los cambios no guardados se perderán.';
+                /* translators: browser confirmation when leaving page with unsaved changes */
+                return __('¿Estás seguro de que quieres salir? Los cambios no guardados se perderán.', 'braveschat');
             }
         });
 
@@ -201,9 +212,11 @@
             var systemInfo = $(this).prev('textarea').val();
 
             navigator.clipboard.writeText(systemInfo).then(function () {
-                alert('Información del sistema copiada al portapapeles');
+                /* translators: browser alert after copying system info */
+                alert( __('Información del sistema copiada al portapapeles', 'braveschat') );
             }).catch(function () {
-                alert('No se pudo copiar. Por favor, copia manualmente.');
+                /* translators: browser alert when clipboard copy fails */
+                alert( __('No se pudo copiar. Por favor, copia manualmente.', 'braveschat') );
             });
         });
 

@@ -558,7 +558,7 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'bubble_text', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => 'Chat de voz'
+            'default' => 'Chat de voz' // translators: default label for voice bubble text
         ));
 
         add_settings_field(
@@ -914,11 +914,12 @@ class Settings {
     }
     
     public function bubble_text_callback() {
-        $value = get_option($this->option_prefix . 'bubble_text', 'Chat de voz');
+        $value = get_option($this->option_prefix . 'bubble_text', __('Chat de voz', 'braveschat'));
         printf(
-            '<input type="text" name="%s" value="%s" class="regular-text" placeholder="Chat de voz" />',
+            '<input type="text" name="%s" value="%s" class="regular-text" placeholder="%s" />',
             esc_attr($this->option_prefix . 'bubble_text'),
-            esc_attr($value)
+            esc_attr($value),
+            esc_attr(__('Chat de voz', 'braveschat'))
         );
         echo '<p class="description">' . esc_html__('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braveschat') . '</p>';
     }
@@ -1217,10 +1218,11 @@ class Settings {
             wp_enqueue_script(
                 'braves-chat-admin',
                 BRAVES_CHAT_PLUGIN_URL . 'assets/js/admin.js',
-                array('jquery'),
+                array('jquery', 'wp-i18n'),
                 BRAVES_CHAT_VERSION,
                 true
             );
+            wp_set_script_translations( 'braves-chat-admin', 'braveschat', BRAVES_CHAT_PLUGIN_DIR . 'languages' );
         }
 
         // Auth type toggle script (previously inline in settings.php template)

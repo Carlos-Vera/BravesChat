@@ -1,268 +1,2162 @@
-# Copyright (C) 2025 BravesChat iA
-# This file is distributed under the same license as the BravesChat iA package.
+# Copyright (C) 2026 Carlos Vera
+# This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: BravesChat iA 1.2.4\n"
-"Report-Msgid-Bugs-To: https://braveslab.com\n"
-"POT-Creation-Date: 2025-10-14 00:00:00+00:00\n"
+"Project-Id-Version: BravesChat 2.4.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/braveschat\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2026-04-12T01:05:33+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: braveschat\n"
 
+#. Plugin Name of the plugin
 #: braves_chat.php
-msgid "Ajustes"
+#: includes/admin/components/class_admin_header.php:245
+#: includes/admin/components/class_admin_header.php:249
+#: includes/class_customizer.php:69
+msgid "BravesChat"
 msgstr ""
 
-#: includes/class-settings.php
-msgid "BravesChat iA"
+#. Plugin URI of the plugin
+#: braves_chat.php
+msgid "https://github.com/Carlos-Vera/BravesChat"
 msgstr ""
 
-msgid "Configuración General"
+#. Description of the plugin
+#: braves_chat.php
+msgid "Una herramienta profesional que conecta tu sitio con tu agente de N8N, permitiéndote ofrecer atención con iA directamente en tu web."
 msgstr ""
 
-msgid "Configure los ajustes generales del chat."
+#. Author of the plugin
+#: braves_chat.php
+msgid "Carlos Vera"
 msgstr ""
 
-msgid "URL del Webhook"
+#. Author URI of the plugin
+#: braves_chat.php
+msgid "https://braveslab.com"
 msgstr ""
 
-msgid "URL del webhook de N8N para procesar los mensajes."
+#: braves_chat.php:142
+msgid "Tu agente de iA"
 msgstr ""
 
-msgid "Título del Header"
+#: braves_chat.php:143
+msgid "Estoy aquí para ayudarte"
 msgstr ""
 
-msgid "Subtítulo del Header"
+#: braves_chat.php:144
+msgid "¡Hola! ¿En qué puedo ayudarte hoy?"
 msgstr ""
 
-msgid "Mensaje de Bienvenida"
-msgstr ""
-
-msgid "Posición del Chat"
-msgstr ""
-
-msgid "Abajo Derecha"
-msgstr ""
-
-msgid "Abajo Izquierda"
-msgstr ""
-
-msgid "Centro"
-msgstr ""
-
-msgid "Modo de Visualización"
-msgstr ""
-
-msgid "Modal (Ventana emergente)"
-msgstr ""
-
-msgid "Pantalla completa"
-msgstr ""
-
-msgid "Páginas Excluidas"
-msgstr ""
-
-msgid "Seleccione las páginas donde NO desea mostrar el widget de chat."
-msgstr ""
-
-msgid "Páginas donde NO mostrar el chat"
-msgstr ""
-
-msgid "Mantenga presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas."
-msgstr ""
-
-msgid "Horarios de Disponibilidad"
-msgstr ""
-
-msgid "Configure los horarios de disponibilidad del chat."
-msgstr ""
-
-msgid "Habilitar Horarios"
-msgstr ""
-
-msgid "Activar restricción por horarios"
-msgstr ""
-
-msgid "Hora de Inicio"
-msgstr ""
-
-msgid "Hora de Fin"
-msgstr ""
-
-msgid "Zona Horaria"
-msgstr ""
-
-msgid "Mensaje Fuera de Horario"
-msgstr ""
-
+#: braves_chat.php:151
+#: config/defaults.php:42
+#: includes/admin/templates/availability.php:224
+#: includes/class_customizer.php:235
+#: includes/class_helpers.php:124
+#: includes/class_settings.php:667
 msgid "Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible."
 msgstr ""
 
-msgid "Guardar Cambios"
+#: braves_chat.php:154
+msgid "Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies y."
 msgstr ""
 
-msgid "Configuración guardada correctamente."
+#: braves_chat.php:155
+#: config/defaults.php:50
+#: includes/admin/templates/gdpr.php:163
+#: includes/admin/templates/gdpr.php:173
+#: includes/class_cookie_manager.php:335
+#: includes/class_frontend.php:113
+#: includes/class_settings.php:720
+#: assets/js/braves_chat_block_modal.js:415
+#: assets/js/braves_chat_block_screen.js:400
+msgid "Aceptar"
 msgstr ""
 
-msgid "Configure el widget de chat con IA de BravesLab para su sitio web."
+#: braves_chat.php:300
+#: includes/admin/components/class_admin_sidebar.php:117
+#: includes/admin/templates/dashboard.php:71
+#: includes/class_settings.php:223
+#: includes/class_settings.php:224
+msgid "Dashboard"
 msgstr ""
 
-msgid "Versión %s | Desarrollado por %s"
+#: braves_chat.php:306
+#: includes/admin/class_admin_controller.php:206
+#: includes/admin/class_admin_controller.php:207
+#: includes/admin/class_admin_controller.php:740
+#: includes/admin/components/class_admin_sidebar.php:124
+#: includes/class_settings.php:233
+#: includes/class_settings.php:234
+msgid "Ajustes"
 msgstr ""
 
-msgid "BravesLab AI Assistant"
+#: braves_chat.php:341
+msgid "Ver detalles"
 msgstr ""
 
-msgid "Artificial Intelligence Marketing Agency"
+#: config/defaults.php:25
+msgid "Chat de Soporte"
 msgstr ""
 
-msgid "¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?"
+#: config/defaults.php:26
+msgid "Estamos aquí para ayudarte"
 msgstr ""
 
-#: includes/class-customizer.php
-msgid "Personalice la apariencia y comportamiento del chat con IA."
+#: config/defaults.php:29
+msgid "¡Hola! ¿En qué podemos ayudarte hoy?"
 msgstr ""
 
+#: config/defaults.php:49
+msgid "Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies."
+msgstr ""
+
+#: includes/admin/class_admin_controller.php:179
+#: includes/admin/class_admin_controller.php:180
+#: includes/admin/components/class_admin_header.php:253
+#: includes/class_settings.php:211
+#: includes/class_settings.php:212
+msgid "BravesChat iA"
+msgstr ""
+
+#: includes/admin/class_admin_controller.php:215
+#: includes/admin/class_admin_controller.php:216
+#: includes/admin/class_admin_controller.php:741
+#: includes/admin/components/class_admin_sidebar.php:131
+#: includes/admin/templates/appearance.php:113
+#: includes/admin/templates/dashboard.php:103
+#: includes/class_customizer.php:76
 msgid "Apariencia"
 msgstr ""
 
-msgid "Comportamiento"
+#: includes/admin/class_admin_controller.php:224
+#: includes/admin/class_admin_controller.php:225
+#: includes/admin/class_admin_controller.php:742
+#: includes/admin/templates/availability.php:83
+msgid "Horarios"
 msgstr ""
 
-msgid "Habilitar Horarios de Disponibilidad"
+#: includes/admin/class_admin_controller.php:233
+#: includes/admin/class_admin_controller.php:234
+#: includes/admin/class_admin_controller.php:743
+#: includes/admin/templates/gdpr.php:83
+msgid "GDPR"
 msgstr ""
 
-msgid "URL del webhook de N8N para procesar mensajes."
+#: includes/admin/class_admin_controller.php:242
+#: includes/admin/class_admin_controller.php:243
+#: includes/admin/class_admin_controller.php:744
+msgid "Acerca de"
 msgstr ""
 
-#: includes/class-block.php
-msgid "Widget de chat con IA de BravesLab"
+#: includes/admin/class_admin_controller.php:251
+#: includes/admin/class_admin_controller.php:252
+#: includes/admin/class_admin_controller.php:745
+#: includes/admin/templates/history.php:228
+msgid "Historial"
 msgstr ""
 
-msgid "chat"
+#: includes/admin/class_admin_controller.php:479
+msgid "Agente"
 msgstr ""
 
-msgid "ia"
+#: includes/admin/class_admin_controller.php:481
+msgid "Chat vacío o formato inválido."
 msgstr ""
 
-msgid "asistente"
+#: includes/admin/class_admin_controller.php:482
+msgid "No se pudo visualizar el chat."
 msgstr ""
 
-msgid "Configuración del Chat"
+#: includes/admin/class_admin_controller.php:483
+msgid "No hay datos de historial."
 msgstr ""
 
-msgid "URL del webhook de N8N"
+#: includes/admin/class_admin_controller.php:739
+msgid "Resumen"
 msgstr ""
 
-msgid "Posición:"
+#: includes/admin/components/class_admin_header.php:103
+msgid "Ver información del plugin"
 msgstr ""
 
-msgid "Modal"
+#: includes/admin/components/class_admin_sidebar.php:100
+msgid "Guardar"
 msgstr ""
 
+#: includes/admin/components/class_admin_sidebar.php:138
+msgid "Disponibilidad"
+msgstr ""
+
+#: includes/admin/components/class_admin_sidebar.php:145
+msgid "Privacidad"
+msgstr ""
+
+#: includes/admin/components/class_admin_sidebar.php:152
+msgid "Conversaciones"
+msgstr ""
+
+#: includes/admin/templates/about.php:22
+#: includes/admin/templates/appearance.php:22
+#: includes/admin/templates/availability.php:22
+#: includes/admin/templates/dashboard.php:22
+#: includes/admin/templates/gdpr.php:22
+#: includes/admin/templates/history.php:22
+#: includes/admin/templates/settings.php:22
+msgid "No tienes permisos para acceder a esta página."
+msgstr ""
+
+#: includes/admin/templates/about.php:53
+msgid "Acerca de <strong>BravesChat iA</strong>"
+msgstr ""
+
+#: includes/admin/templates/about.php:55
+msgid "Información del plugin e historial de cambios."
+msgstr ""
+
+#: includes/admin/templates/about.php:62
+msgid "Información del Plugin"
+msgstr ""
+
+#: includes/admin/templates/about.php:71
+msgid "Versión"
+msgstr ""
+
+#: includes/admin/templates/about.php:73
+msgid "Last Update: <b>26/03/2026</b>"
+msgstr ""
+
+#: includes/admin/templates/about.php:85
+msgid "Autor Principal"
+msgstr ""
+
+#: includes/admin/templates/about.php:98
+msgid "Empresa"
+msgstr ""
+
+#: includes/admin/templates/about.php:113
+msgid "Historial de Cambios"
+msgstr ""
+
+#: includes/admin/templates/about.php:120
+msgid "Hoy"
+msgstr ""
+
+#: includes/admin/templates/about.php:128
+msgid "12 Abr 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:133
+msgid "Modo Mixto y compatibilidad con dark mode"
+msgstr ""
+
+#: includes/admin/templates/about.php:136
+#: includes/admin/templates/about.php:166
+#: includes/admin/templates/about.php:191
+#: includes/admin/templates/about.php:225
+#: includes/admin/templates/about.php:301
+#: includes/admin/templates/about.php:368
+#: includes/admin/templates/about.php:483
+#: includes/admin/templates/about.php:513
+#: includes/admin/templates/about.php:557
+#: includes/admin/templates/about.php:594
+#: includes/admin/templates/about.php:668
+#: includes/admin/templates/about.php:714
+#: includes/admin/templates/about.php:738
+#: includes/admin/templates/about.php:769
+msgid "Nuevas Funcionalidades"
+msgstr ""
+
+#: includes/admin/templates/about.php:138
+msgid "ADDED: Nuevo modo de visualización \"Mixto\" — el chat aparece como burbuja flotante en toda la web y como pantalla completa en las páginas donde añadas el bloque de Gutenberg."
+msgstr ""
+
+#: includes/admin/templates/about.php:142
+#: includes/admin/templates/about.php:251
+#: includes/admin/templates/about.php:429
+#: includes/admin/templates/about.php:491
+#: includes/admin/templates/about.php:531
+#: includes/admin/templates/about.php:571
+#: includes/admin/templates/about.php:611
+#: includes/admin/templates/about.php:635
+msgid "Correcciones"
+msgstr ""
+
+#: includes/admin/templates/about.php:144
+msgid "FIXED: En iOS Safari con dark mode activado, los colores del chat ya no se invierten — el widget mantiene siempre su diseño original."
+msgstr ""
+
+#: includes/admin/templates/about.php:145
+msgid "FIXED: El banner de privacidad GDPR ya no hereda colores de temas con dark mode — el texto se mantiene legible en cualquier tema."
+msgstr ""
+
+#: includes/admin/templates/about.php:146
+msgid "FIXED: Al abrir el chat en pantalla completa ya no aparece un destello de fondo blanco antes de que cargue la interfaz."
+msgstr ""
+
+#: includes/admin/templates/about.php:158
+msgid "26 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:163
+msgid "Modo oscuro en el panel"
+msgstr ""
+
+#: includes/admin/templates/about.php:168
+msgid "ADDED: El panel de administración ahora tiene modo oscuro. (Es mi obseción por cuidar mi vista). Actívalo con un botón — tu preferencia se guarda y se aplica al instante, sin destello al cargar."
+msgstr ""
+
+#: includes/admin/templates/about.php:169
+msgid "ADDED: El editor del mensaje de bienvenida también cambia al modo oscuro junto con el resto del panel."
+msgstr ""
+
+#: includes/admin/templates/about.php:173
+#: includes/admin/templates/about.php:197
+#: includes/admin/templates/about.php:315
+#: includes/admin/templates/about.php:346
+#: includes/admin/templates/about.php:399
+#: includes/admin/templates/about.php:436
+#: includes/admin/templates/about.php:692
+#: includes/admin/templates/about.php:747
+msgid "Mejoras"
+msgstr ""
+
+#: includes/admin/templates/about.php:175
+msgid "IMPROVED: Todo el diseño del panel cambia automáticamente al activar el modo oscuro — sin excepciones ni colores fijos que se escapen."
+msgstr ""
+
+#: includes/admin/templates/about.php:176
+msgid "IMPROVED: Los botones de selección de páginas excluidas ahora tienen el mismo aspecto que el resto del panel."
+msgstr ""
+
+#: includes/admin/templates/about.php:188
+msgid "Chat nativo en móviles"
+msgstr ""
+
+#: includes/admin/templates/about.php:193
+msgid "ADDED: En móviles el chat ahora ocupa toda la pantalla. Tiene su propio header con botón de cierre, respeta la muesca del iPhone y bloquea el scroll del fondo mientras está abierto."
+msgstr ""
+
+#: includes/admin/templates/about.php:199
+msgid "IMPROVED: El widget ya no interfiere con el carrito ni el checkout de WooCommerce — z-index ajustado para coexistir sin conflictos."
+msgstr ""
+
+#: includes/admin/templates/about.php:200
+msgid "IMPROVED: Los scripts del panel se cargan con el sistema de WordPress en lugar de estar embebidos en las plantillas — mayor compatibilidad y seguridad."
+msgstr ""
+
+#: includes/admin/templates/about.php:207
+msgid "25 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:217
+#: includes/admin/templates/about.php:261
+msgid "18 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:222
+msgid "Versículo del día"
+msgstr ""
+
+#: includes/admin/templates/about.php:227
+msgid "ADDED: Cada día aparece un versículo de la Biblia (NVI) en el encabezado del panel. Cambia solo a medianoche — sin configurar nada. Se obtiene de la API de la American Bible Society con caché de 24h en transient de WordPress. Totalmente seguro y sin recopilación de datos de usuario. "
+msgstr ""
+
+#: includes/admin/templates/about.php:239
+msgid "Mejoras de diseño UX/UI"
+msgstr ""
+
+#: includes/admin/templates/about.php:242
+#: includes/admin/templates/about.php:274
+#: includes/admin/templates/about.php:308
+#: includes/admin/templates/about.php:338
+#: includes/admin/templates/about.php:376
+#: includes/admin/templates/about.php:422
+#: includes/admin/templates/about.php:459
+#: includes/admin/templates/about.php:522
+#: includes/admin/templates/about.php:564
+#: includes/admin/templates/about.php:603
+#: includes/admin/templates/about.php:643
+msgid "Mejoras de Experiencia"
+msgstr ""
+
+#: includes/admin/templates/about.php:244
+msgid "IMPROVED: En móviles la burbuja ocupa menos espacio. El skin default se reduce a 48×48px; el skin Braves se contrae a avatar + botón redondo. En escritorio no cambia nada."
+msgstr ""
+
+#: includes/admin/templates/about.php:245
+msgid "IMPROVED: Los avisos de webhook y guardado suben al header. La página queda limpia."
+msgstr ""
+
+#: includes/admin/templates/about.php:246
+msgid "IMPROVED: Sidebar renombrado — Disponibilidad, Privacidad, Conversaciones. Más directo."
+msgstr ""
+
+#: includes/admin/templates/about.php:247
+msgid "IMPROVED: El badge de versión se marca cuando estás en esta página."
+msgstr ""
+
+#: includes/admin/templates/about.php:253
+msgid "FIXED: El botón para subir imagen personalizada en Apariencia ahora abre correctamente la biblioteca de medios de WordPress."
+msgstr ""
+
+#: includes/admin/templates/about.php:254
+msgid "FIXED: El Plugin Check de WordPress.org ya no reporta errores de text domain. El plugin usa el slug correcto (braveschat) en todos los archivos y en el ZIP de distribución."
+msgstr ""
+
+#: includes/admin/templates/about.php:271
+msgid "Escribe mientras el agente responde"
+msgstr ""
+
+#: includes/admin/templates/about.php:276
+msgid "IMPROVED: El campo de texto ya no se bloquea mientras el agente responde. Puedes escribir en cualquier momento. Si el agente está a mitad de respuesta, se cancela y tu nuevo mensaje se envía de inmediato."
+msgstr ""
+
+#: includes/admin/templates/about.php:283
+msgid "11 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:293
+msgid "10 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:298
+msgid "El token vive en el servidor"
+msgstr ""
+
+#: includes/admin/templates/about.php:303
+msgid "ADDED: El token de N8N ya no viaja al navegador. El frontend envía el mensaje a WordPress, y WordPress lo reenvía al webhook con el token añadido en el servidor — invisible para cualquier visitante."
+msgstr ""
+
+#: includes/admin/templates/about.php:304
+msgid "ADDED: Tres métodos de autenticación hacia N8N: cabecera personalizada, Basic Auth o sin autenticación."
+msgstr ""
+
+#: includes/admin/templates/about.php:310
+msgid "IMPROVED: El modo de visualización activo (modal o pantalla completa) aparece ahora en la cabecera del panel."
+msgstr ""
+
+#: includes/admin/templates/about.php:311
+msgid "IMPROVED: El bloque de Gutenberg muestra un preview rediseñado con el estilo del panel."
+msgstr ""
+
+#: includes/admin/templates/about.php:317
+msgid "IMPROVED: Licencia GPL-2.0-or-later, alineada con los requisitos de WordPress.org."
+msgstr ""
+
+#: includes/admin/templates/about.php:318
+msgid "IMPROVED: Banners, capturas e iconos convertidos a PNG para máxima compatibilidad."
+msgstr ""
+
+#: includes/admin/templates/about.php:330
+msgid "5 Mar 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:335
+msgid "Detalles del plugin sin salir del admin"
+msgstr ""
+
+#: includes/admin/templates/about.php:340
+msgid "ADDED: Haz clic en \"Ver detalles\" en la lista de plugins de WordPress para ver la ficha completa: capturas, FAQ, instrucciones y compatibilidad."
+msgstr ""
+
+#: includes/admin/templates/about.php:341
+msgid "IMPROVED: El mensaje del banner GDPR y el aviso de horario offline ahora usan editor visual. Puedes añadir negritas, listas o enlaces sin tocar HTML."
+msgstr ""
+
+#: includes/admin/templates/about.php:342
+msgid "FIXED: El panel de BravesChat ya no muestra avisos de otros plugins. Solo ves lo tuyo, sin ruido."
+msgstr ""
+
+#: includes/admin/templates/about.php:348
+msgid "ADDED: El panel detecta si tienes herramientas instaladas que puedan exportar el código del plugin y te avisa. Una capa extra de protección."
+msgstr ""
+
+#: includes/admin/templates/about.php:360
+msgid "26 Feb 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:365
+msgid "Historial de conversaciones"
+msgstr ""
+
+#: includes/admin/templates/about.php:370
+msgid "ADDED: Nueva sección <strong>Historial</strong>: accede a todas las conversaciones que tu agente ha tenido con tus visitantes."
+msgstr ""
+
+#: includes/admin/templates/about.php:371
+msgid "ADDED: Abre cualquier conversación con un clic y lee cada mensaje tal como ocurrió, en una interfaz de chat clara."
+msgstr ""
+
+#: includes/admin/templates/about.php:372
+msgid "ADDED: Exporta el historial completo a <strong>CSV</strong> con un clic para analizarlo en Excel, importarlo a tu CRM o compartirlo con tu equipo."
+msgstr ""
+
+#: includes/admin/templates/about.php:378
+msgid "IMPROVED: Los mensajes de tus clientes se muestran exactamente como los escribieron, sin ruido que dificulte la lectura."
+msgstr ""
+
+#: includes/admin/templates/about.php:379
+msgid "IMPROVED: Cada fila agrupa todos los mensajes de la conversación para que veas el contexto completo."
+msgstr ""
+
+#: includes/admin/templates/about.php:391
+msgid "23 Feb 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:396
+msgid "ZIP automático en cada release"
+msgstr ""
+
+#: includes/admin/templates/about.php:401
+msgid "ADDED: Cada vez que publicamos una versión, el ZIP listo para instalar se genera automáticamente en GitHub. Sin pasos manuales."
+msgstr ""
+
+#: includes/admin/templates/about.php:402
+msgid "FIXED: El proceso de generación automática del ZIP no se ejecutaba correctamente en versiones anteriores."
+msgstr ""
+
+#: includes/admin/templates/about.php:414
+msgid "20 Feb 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:419
+msgid "El chat ignora los estilos de tu tema"
+msgstr ""
+
+#: includes/admin/templates/about.php:424
+msgid "IMPROVED: El chat ya no hereda estilos del tema activo. Botones, inputs y textos se ven igual sin importar qué tema tengas instalado."
+msgstr ""
+
+#: includes/admin/templates/about.php:425
+msgid "IMPROVED: La tipografía Montserrat se aplica en todos los elementos del chat: modal, pantalla completa y banner GDPR."
+msgstr ""
+
+#: includes/admin/templates/about.php:431
+msgid "FIXED: El chat en posición central se veía desplazado en algunos temas. Ahora se centra correctamente."
+msgstr ""
+
+#: includes/admin/templates/about.php:432
+msgid "FIXED: La posición inferior izquierda en modo modal quedaba mal alineada en ciertos tamaños de pantalla."
+msgstr ""
+
+#: includes/admin/templates/about.php:438
+msgid "IMPROVED: Cada sección del panel tiene su propio título en la pestaña del navegador."
+msgstr ""
+
+#: includes/admin/templates/about.php:439
+msgid "IMPROVED: Al desinstalar el plugin, tus configuraciones se conservan por si lo reinstalás más adelante."
+msgstr ""
+
+#: includes/admin/templates/about.php:451
+#: includes/admin/templates/about.php:475
+msgid "16 Feb 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:456
+msgid "Markdown en tiempo real"
+msgstr ""
+
+#: includes/admin/templates/about.php:461
+msgid "IMPROVED: Las respuestas del agente se renderizan en tiempo real con formato Markdown. Negritas, listas y enlaces aparecen tal como llegan."
+msgstr ""
+
+#: includes/admin/templates/about.php:462
+msgid "FIXED: Al enviar un mensaje, el cursor vuelve automáticamente al campo de texto. Puedes seguir escribiendo sin hacer clic."
+msgstr ""
+
+#: includes/admin/templates/about.php:480
+msgid "Controla la velocidad de escritura"
+msgstr ""
+
+#: includes/admin/templates/about.php:485
+msgid "ADDED: Control deslizante para ajustar la velocidad a la que el agente \"escribe\" sus respuestas. Desde lenta y pausada hasta casi instantánea."
+msgstr ""
+
+#: includes/admin/templates/about.php:486
+msgid "ADDED: El banner GDPR ahora acepta texto enriquecido. Puedes añadir negritas, listas o enlaces directamente desde el campo de texto."
+msgstr ""
+
+#: includes/admin/templates/about.php:487
+msgid "ADDED: La tipografía del chat se carga desde el propio servidor, sin depender de servicios externos."
+msgstr ""
+
+#: includes/admin/templates/about.php:493
+msgid "FIXED: El scroll del chat baja automáticamente al llegar un mensaje nuevo. El banner GDPR se muestra correctamente en todos los temas."
+msgstr ""
+
+#: includes/admin/templates/about.php:505
+msgid "14 Feb 2026"
+msgstr ""
+
+#: includes/admin/templates/about.php:510
+msgid "BravesChat iA 2.0"
+msgstr ""
+
+#: includes/admin/templates/about.php:515
+msgid "ADDED: El plugin se renombra como BravesChat iA con arquitectura renovada de arriba abajo."
+msgstr ""
+
+#: includes/admin/templates/about.php:516
+msgid "ADDED: Botón para maximizar el chat. El usuario puede expandirlo a pantalla completa en cualquier momento."
+msgstr ""
+
+#: includes/admin/templates/about.php:517
+msgid "ADDED: El área de texto crece automáticamente al escribir varias líneas, sin desbordar el chat."
+msgstr ""
+
+#: includes/admin/templates/about.php:518
+msgid "ADDED: Tras interactuar, la burbuja del chat se minimiza en una pastilla compacta para no molestar."
+msgstr ""
+
+#: includes/admin/templates/about.php:524
+msgid "IMPROVED: Identidad visual renovada con los colores corporativos de BravesChat."
+msgstr ""
+
+#: includes/admin/templates/about.php:525
+msgid "IMPROVED: Las burbujas de mensajes ya no cortan el texto ni muestran bordes extraños."
+msgstr ""
+
+#: includes/admin/templates/about.php:526
+msgid "IMPROVED: El icono de enviar mensaje es ahora un diseño propio en blanco."
+msgstr ""
+
+#: includes/admin/templates/about.php:527
+msgid "IMPROVED: El tooltip del botón flotante dice por defecto \"Habla con nuestro asistente IA\"."
+msgstr ""
+
+#: includes/admin/templates/about.php:533
+msgid "FIXED: El botón de enviar ya no se queda bloqueado en situaciones inesperadas."
+msgstr ""
+
+#: includes/admin/templates/about.php:534
+msgid "FIXED: Al guardar ajustes de Páginas Excluidas, la selección ya no se perdía."
+msgstr ""
+
+#: includes/admin/templates/about.php:535
+msgid "FIXED: La integración con N8N ya no enviaba datos extra que podían confundir al agente."
+msgstr ""
+
+#: includes/admin/templates/about.php:536
+msgid "FIXED: Al guardar ajustes desde cualquier sección, ya no se perdían los valores configurados en otras páginas."
+msgstr ""
+
+#: includes/admin/templates/about.php:548
+msgid "17 Nov 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:554
+msgid "Tooltip personalizable"
+msgstr ""
+
+#: includes/admin/templates/about.php:559
+msgid "ADDED: Campo de texto para personalizar el mensaje que aparece al pasar el cursor sobre el botón flotante del chat."
+msgstr ""
+
+#: includes/admin/templates/about.php:560
+msgid "ADDED: Al activar el plugin, detecta automáticamente versiones anteriores instaladas, las desactiva y limpia los archivos obsoletos. Sin perder ninguna configuración."
+msgstr ""
+
+#: includes/admin/templates/about.php:566
+msgid "IMPROVED: El color por defecto del icono del botón flotante cambia a gris claro para mejor contraste sobre fondos oscuros."
+msgstr ""
+
+#: includes/admin/templates/about.php:567
+msgid "IMPROVED: Las opciones de Apariencia están mejor organizadas. El tooltip aparece justo antes del selector de iconos."
+msgstr ""
+
+#: includes/admin/templates/about.php:573
+msgid "FIXED: Error grave que impedía cargar WordPress cuando había dos versiones del plugin instaladas al mismo tiempo."
+msgstr ""
+
+#: includes/admin/templates/about.php:574
+msgid "FIXED: El color del icono no se aplicaba correctamente al editar la configuración de apariencia."
+msgstr ""
+
+#: includes/admin/templates/about.php:586
+msgid "26 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:591
+msgid "Personalización de colores e iconos"
+msgstr ""
+
+#: includes/admin/templates/about.php:596
+msgid "ADDED: Sistema completo de personalización de colores desde el panel: burbuja, color primario, fondo y texto del chat."
+msgstr ""
+
+#: includes/admin/templates/about.php:597
+msgid "ADDED: Selector de color nativo con sincronización a campo de texto hexadecimal. Escribe el código exacto o usa el picker visual."
+msgstr ""
+
+#: includes/admin/templates/about.php:598
+msgid "ADDED: Paleta de colores extraída automáticamente del tema activo, más una paleta por defecto de 8 colores."
+msgstr ""
+
+#: includes/admin/templates/about.php:599
+msgid "ADDED: Cuatro iconos para el botón flotante: Robot, Círculo, Happy y Burbuja."
+msgstr ""
+
+#: includes/admin/templates/about.php:605
+msgid "IMPROVED: Las paletas de colores se pueden expandir y contraer con animación suave para no saturar la pantalla."
+msgstr ""
+
+#: includes/admin/templates/about.php:606
+msgid "IMPROVED: El selector de iconos usa un diseño de pestañas horizontal, más claro y rápido de usar."
+msgstr ""
+
+#: includes/admin/templates/about.php:607
+msgid "IMPROVED: El panel de Apariencia es responsive. Los selectores se reorganizan en dos columnas en pantallas pequeñas."
+msgstr ""
+
+#: includes/admin/templates/about.php:613
+msgid "FIXED: Eliminada la dependencia de Lottie Player que se cargaba desde un CDN externo. El botón del chat ya no falla si no hay conexión a internet."
+msgstr ""
+
+#: includes/admin/templates/about.php:614
+msgid "FIXED: El botón flotante ahora usa un color sólido en lugar del gradiente que causaba inconsistencias visuales."
+msgstr ""
+
+#: includes/admin/templates/about.php:615
+msgid "FIXED: La imagen del botón pasó de animación a SVG estático. Más rápido y sin errores de consola."
+msgstr ""
+
+#: includes/admin/templates/about.php:627
+msgid "25 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:632
+msgid "Panel completo y funcional"
+msgstr ""
+
+#: includes/admin/templates/about.php:637
+msgid "FIXED: Los campos de configuración no se mostraban en algunas páginas del panel. Ahora aparecen correctamente en todas las secciones."
+msgstr ""
+
+#: includes/admin/templates/about.php:638
+msgid "FIXED: Al guardar desde cualquier página de ajustes, ya no se borraban los valores configurados en las otras secciones."
+msgstr ""
+
+#: includes/admin/templates/about.php:639
+msgid "FIXED: El icono del menú lateral mostraba gris en lugar de blanco al estar seleccionado."
+msgstr ""
+
+#: includes/admin/templates/about.php:645
+msgid "ADDED: Las notificaciones de guardado exitoso desaparecen solas tras unos segundos, con animación suave."
+msgstr ""
+
+#: includes/admin/templates/about.php:646
+msgid "IMPROVED: Los iconos del sidebar se actualizaron a versiones sólidas para mejor legibilidad."
+msgstr ""
+
+#: includes/admin/templates/about.php:647
+msgid "IMPROVED: Las tarjetas de información son ahora clicables con enlaces externos."
+msgstr ""
+
+#: includes/admin/templates/about.php:648
+msgid "IMPROVED: Todos los checkboxes del panel usan el estilo toggle del diseño Bentō."
+msgstr ""
+
+#: includes/admin/templates/about.php:660
+msgid "24 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:665
+msgid "Rediseño completo del panel de administración"
+msgstr ""
+
+#: includes/admin/templates/about.php:670
+msgid "ADDED: Panel de administración rediseñado con el estilo Bentō — limpio, modular y fácil de navegar."
+msgstr ""
+
+#: includes/admin/templates/about.php:671
+msgid "ADDED: Cinco secciones independientes: Resumen, Ajustes, Apariencia, Horarios y GDPR."
+msgstr ""
+
+#: includes/admin/templates/about.php:672
+msgid "ADDED: Sidebar compartido entre todas las páginas del panel para una navegación consistente."
+msgstr ""
+
+#: includes/admin/templates/about.php:684
+msgid "23 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:689
+msgid "Cambio de marca"
+msgstr ""
+
+#: includes/admin/templates/about.php:694
+msgid "IMPROVED: El plugin actualiza su marca de Weblandia a BravesLab — todas las URLs y referencias se actualizaron a braveslab.com."
+msgstr ""
+
+#: includes/admin/templates/about.php:706
+msgid "16 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:711
+msgid "Sistema de cookies y GDPR"
+msgstr ""
+
+#: includes/admin/templates/about.php:716
+msgid "ADDED: Sistema de identificación única de usuarios mediante fingerprinting del navegador, sin almacenar datos personales."
+msgstr ""
+
+#: includes/admin/templates/about.php:717
+msgid "ADDED: Banner de consentimiento GDPR configurable — bloquea el chat hasta que el usuario acepte."
+msgstr ""
+
+#: includes/admin/templates/about.php:718
+msgid "ADDED: Si las cookies están bloqueadas por el navegador, el historial de chat se guarda en memoria local como alternativa."
+msgstr ""
+
+#: includes/admin/templates/about.php:730
+msgid "1 Oct 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:735
+msgid "Horarios y páginas excluidas"
+msgstr ""
+
+#: includes/admin/templates/about.php:740
+msgid "ADDED: Define el horario en que el chat está disponible, con soporte de zonas horarias."
+msgstr ""
+
+#: includes/admin/templates/about.php:741
+msgid "ADDED: Mensaje automático fuera de horario. El agente responde con tu texto cuando no está disponible."
+msgstr ""
+
+#: includes/admin/templates/about.php:742
+msgid "ADDED: Selector de páginas excluidas. Elige en qué páginas de tu sitio no aparece el chat."
+msgstr ""
+
+#: includes/admin/templates/about.php:743
+msgid "ADDED: Token de autenticación para asegurar la comunicación con tu agente de N8N."
+msgstr ""
+
+#: includes/admin/templates/about.php:749
+msgid "IMPROVED: La configuración del webhook es más flexible y valida la URL antes de guardar."
+msgstr ""
+
+#: includes/admin/templates/about.php:761
+msgid "15 Sep 2025"
+msgstr ""
+
+#: includes/admin/templates/about.php:766
+msgid "Lanzamiento inicial"
+msgstr ""
+
+#: includes/admin/templates/about.php:771
+msgid "ADDED: Widget de chat con IA integrado en WordPress mediante bloque de Gutenberg."
+msgstr ""
+
+#: includes/admin/templates/about.php:772
+msgid "ADDED: Conexión directa con flujos de trabajo de N8N mediante webhook configurable."
+msgstr ""
+
+#: includes/admin/templates/about.php:773
+msgid "ADDED: Dos modos de visualización: modal flotante y pantalla completa."
+msgstr ""
+
+#: includes/admin/templates/about.php:774
+msgid "ADDED: Posicionamiento configurable del botón flotante: derecha, izquierda o centro."
+msgstr ""
+
+#: includes/admin/templates/about.php:775
+msgid "ADDED: Mensajes de bienvenida, título y subtítulo del chat personalizables desde el panel."
+msgstr ""
+
+#: includes/admin/templates/about.php:776
+msgid "ADDED: Preparado para traducción a cualquier idioma."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:80
+#: includes/admin/templates/availability.php:50
+#: includes/admin/templates/gdpr.php:50
+#: includes/admin/templates/history.php:238
+#: includes/admin/templates/settings.php:50
+msgid "¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:88
+#: includes/admin/templates/availability.php:58
+#: includes/admin/templates/gdpr.php:58
+#: includes/admin/templates/settings.php:58
+msgid "Configuración guardada correctamente."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:115
+msgid "Personaliza el aspecto visual del chat: títulos, mensajes, posición y modo de visualización."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:148
+msgid "Apariencia del Chat"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:157
+msgid "Burbuja Flotante"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:158
+#: assets/js/block.js:91
 msgid "Pantalla Completa"
 msgstr ""
 
-#: templates/modal.php, templates/screen.php
+#: includes/admin/templates/appearance.php:159
+msgid "Visualización Mixta"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:176
+msgid "Selecciona el comportamiento visual que mejor se adapte al diseño de tu web."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:178
+msgid "Modo Mixto: burbuja flotante en toda la web, pantalla completa en las páginas con el bloque de Gutenberg."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:185
+#: includes/class_customizer.php:154
+#: includes/class_settings.php:488
+msgid "Modo de Visualización"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:186
+msgid "Define cómo se presenta la ventana ante el visitante."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:201
+msgid "Skin Básico"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:202
+msgid "Skin Braves"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:205
+msgid "Elige la plantilla de diseño que mejor se adapte a tu marca."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:211
+msgid "Diseño del Chat"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:212
+msgid "Personaliza el estilo visual del Agente."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:235
+msgid "Seleccionar imagen"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:235
+msgid "Usar imagen"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:236
+msgid "Subir imagen"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:238
+msgid "Quitar imagen"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:241
+msgid ""
+"Sube una imagen personalizada (1:1) para el botón flotante.<br/>\n"
+"                                Solo visible en el skin Braves."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:248
+msgid "Imagen de Burbuja"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:249
+msgid "Reemplaza el icono por defecto con tu propia imagen."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:256
+#: includes/admin/templates/appearance.php:266
+#: includes/class_helpers.php:177
+#: templates/modal.php:30
+msgid "¿Necesitas ayuda?"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:268
+#: includes/class_settings.php:924
+msgid "Texto que aparece junto a la imagen de la burbuja (solo para skin Braves)."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:274
+#: includes/class_settings.php:566
+msgid "Texto de Burbuja"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:275
+msgid "Mensaje que acompaña el botón del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:283
+#: includes/admin/templates/appearance.php:293
+#: includes/class_customizer.php:83
+#: includes/class_settings.php:408
+msgid "BravesLab AI Assistant"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:295
+msgid "Título principal que aparece en la cabecera del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:301
+msgid "Título de la Cabecera"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:302
+msgid "El título principal que verán los usuarios en el chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:309
+#: includes/admin/templates/appearance.php:319
+#: includes/class_settings.php:423
+#: templates/modal.php:18
+msgid "Chateando con Charlie"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:321
+msgid "Texto que aparece con animación al lado del avatar cuando se abre el chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:327
+msgid "Texto de Estado (Animado)"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:328
+msgid "Texto que se despliega junto al avatar."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:335
+#: includes/admin/templates/appearance.php:345
+#: includes/class_customizer.php:98
+#: includes/class_settings.php:438
+msgid "Artificial Intelligence Marketing Agency"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:347
+msgid "Subtítulo que aparece debajo del título principal."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:353
+msgid "Subtítulo de la Cabecera"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:354
+msgid "Texto descriptivo que complementa el título."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:370
+msgid "Ej: Charlie"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:372
+msgid "Este nombre se usará en el historial para organizar y filtrar las conversaciones."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:376
+msgid "Nombre del Agente"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:377
+msgid "Define cómo reconocerás a tu agente en tus registros."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:384
+#: includes/class_customizer.php:113
+#: includes/class_helpers.php:129
+#: includes/class_settings.php:453
+msgid "¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:393
+msgid "¡Hola! ¿Cómo podemos ayudarte?"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:395
+msgid "Mensaje inicial que verá el usuario al abrir el chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:401
+#: includes/class_customizer.php:121
+#: includes/class_settings.php:458
+msgid "Mensaje de Bienvenida"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:402
+msgid "El primer mensaje que verá el usuario en el chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:412
+msgid "Abajo a la derecha"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:413
+msgid "Abajo a la izquierda"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:414
+#: includes/class_customizer.php:141
+#: includes/class_settings.php:882
+msgid "Centro"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:431
+msgid "Posición del widget de chat en la pantalla."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:437
+#: includes/class_customizer.php:135
+#: includes/class_settings.php:473
+msgid "Posición del Chat"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:438
+msgid "Dónde aparecerá el botón del chat en la pantalla."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:445
+#: includes/admin/templates/appearance.php:454
+#: includes/class_settings.php:512
+#: templates/modal.php:19
+#: templates/screen.php:16
 msgid "Habla con nuestro asistente IA"
 msgstr ""
 
+#: includes/admin/templates/appearance.php:458
+msgid "Texto que aparecerá al pasar el cursor sobre el botón flotante."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:464
+msgid "Tooltip del Botón"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:465
+msgid "Mensaje que se muestra al pasar el cursor sobre el botón."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:474
+msgid "Original"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:475
+msgid "Círculo"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:476
+msgid "Happy"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:477
+msgid "Burbuja"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:503
+msgid "Icono del Botón"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:504
+msgid "Icono que aparecerá en el botón flotante del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:523
+#: includes/admin/templates/appearance.php:593
+#: includes/admin/templates/appearance.php:652
+#: includes/admin/templates/appearance.php:711
+#: includes/admin/templates/appearance.php:780
+msgid "Seleccionar color personalizado"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:537
+#: includes/admin/templates/appearance.php:607
+#: includes/admin/templates/appearance.php:666
+#: includes/admin/templates/appearance.php:725
+#: includes/admin/templates/appearance.php:794
+msgid "Colores del tema"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:557
+msgid "Color del icono SVG en el botón flotante del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:563
+msgid "Color del Icono"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:564
+msgid "Color que se aplicará al icono SVG del botón."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:575
+msgid "Colores Personalizados"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:627
+msgid "Color del botón flotante (burbuja) del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:633
+msgid "Color de la Burbuja"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:634
+msgid "Color del botón flotante que abre el chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:686
+msgid "Color del header y mensajes del asistente."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:692
+msgid "Color Primario"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:693
+msgid "Color principal usado en el header del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:755
+msgid "Color de fondo de la ventana del chat."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:761
+msgid "Color de Fondo"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:762
+msgid "Color de fondo del área de mensajes."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:825
+msgid "Color del texto de los mensajes."
+msgstr ""
+
+#: includes/admin/templates/appearance.php:831
+msgid "Color de Texto"
+msgstr ""
+
+#: includes/admin/templates/appearance.php:832
+msgid "Color del texto principal en los mensajes."
+msgstr ""
+
+#: includes/admin/templates/availability.php:85
+msgid "Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado."
+msgstr ""
+
+#: includes/admin/templates/availability.php:106
+msgid "Configuración de Horarios"
+msgstr ""
+
+#: includes/admin/templates/availability.php:127
+msgid "Activar restricción por horarios de atención"
+msgstr ""
+
+#: includes/admin/templates/availability.php:133
+#: includes/class_settings.php:612
+msgid "Habilitar Horarios"
+msgstr ""
+
+#: includes/admin/templates/availability.php:134
+msgid "Activa las restricciones de horario para el chat."
+msgstr ""
+
+#: includes/admin/templates/availability.php:159
+msgid "Zona horaria de referencia para los horarios configurados."
+msgstr ""
+
+#: includes/admin/templates/availability.php:165
+#: includes/class_settings.php:657
+msgid "Zona Horaria"
+msgstr ""
+
+#: includes/admin/templates/availability.php:166
+msgid "Zona horaria de referencia para el horario."
+msgstr ""
+
+#: includes/admin/templates/availability.php:185
+msgid "Hora de inicio del horario de atención (formato 24h)."
+msgstr ""
+
+#: includes/admin/templates/availability.php:191
+#: includes/class_customizer.php:208
+#: includes/class_settings.php:627
+msgid "Hora de Inicio"
+msgstr ""
+
+#: includes/admin/templates/availability.php:192
+msgid "Hora en que el chat comienza a estar disponible."
+msgstr ""
+
+#: includes/admin/templates/availability.php:210
+msgid "Hora de fin del horario de atención (formato 24h)."
+msgstr ""
+
+#: includes/admin/templates/availability.php:216
+#: includes/class_customizer.php:225
+#: includes/class_settings.php:642
+msgid "Hora de Fin"
+msgstr ""
+
+#: includes/admin/templates/availability.php:217
+msgid "Hora en que el chat deja de estar disponible."
+msgstr ""
+
+#: includes/admin/templates/availability.php:227
+#: includes/class_customizer.php:242
+#: includes/class_settings.php:672
+msgid "Mensaje Fuera de Horario"
+msgstr ""
+
+#: includes/admin/templates/availability.php:228
+msgid "Texto que verán los usuarios fuera del horario de atención."
+msgstr ""
+
+#: includes/admin/templates/availability.php:240
+msgid "Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:44
+msgid "Falta el último cable."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:45
+msgid "Sin la URL del Webhook, el chat no puede comunicarse con N8N. Pásate por Ajustes y vincula tu flujo para activar la IA."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:74
+msgid "El centro de control de tu agente. Desde aquí gestionas cómo interactúa tu IA con el mundo."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:85
+msgid "Chat Activo"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:85
+msgid "Chat Offline"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:87
+msgid "Chat desactivado — actívalo en Ajustes para que tus visitas puedan usarlo."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:89
+msgid "Tu agente está online. Todo en orden, la IA ya está lista para atender a tus clientes."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:90
+msgid "Tu agente aún no está configurado. Configura el webhook para empezar."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:92
+msgid "Ver en vivo"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:92
+msgid "Ir a Configuración General"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:104
+msgid "Cerebro y estilo. Ajusta qué dice el chat, cómo lo dice y qué aspecto tiene."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:105
+msgid "Personalizar"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:115
+msgid "Documentación"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:116
+msgid "¿Necesitas ayuda? Guía paso a paso para exprimir todas las funciones de BravesChat."
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:117
+msgid "Abrir manual"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:129
+msgid "Acciones Rápidas"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:135
+msgid "Cambiar Diseño"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:141
+msgid "Vincular con N8N"
+msgstr ""
+
+#: includes/admin/templates/dashboard.php:147
+#: assets/js/admin.js:26
+#: assets/js/admin.js:49
+msgid "Modo Oscuro"
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:85
+msgid "Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR.<br/>El sistema utiliza cookies persistentes con fingerprinting del navegador."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:104
+#: includes/class_settings.php:681
+msgid "Compliance GDPR / Cookies"
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:125
+msgid "Mostrar banner de consentimiento de cookies. El consentimiento se guarda en localStorage."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:131
+#: includes/class_settings.php:695
+msgid "Habilitar Banner GDPR"
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:132
+msgid "Muestra un banner de consentimiento antes de crear cookies."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:140
+#: includes/class_cookie_manager.php:325
+#: includes/class_frontend.php:112
+#: includes/class_settings.php:705
+msgid "Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:143
+#: includes/class_settings.php:710
+msgid "Mensaje del Banner"
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:144
+msgid "Texto informativo sobre el uso de cookies en el chat."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:156
+msgid "Mensaje que se mostrará en el banner de cookies. Puedes usar negritas, cursivas y enlaces."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:175
+#: includes/class_settings.php:1024
+msgid "Texto del botón para aceptar las cookies (ej: \"Aceptar\", \"Entendido\", \"Acepto\")."
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:181
+#: includes/class_settings.php:725
+msgid "Texto del Botón de Aceptar"
+msgstr ""
+
+#: includes/admin/templates/gdpr.php:182
+msgid "Etiqueta del botón de aceptación de cookies."
+msgstr ""
+
+#. translators: %d is the HTTP error code number.
+#: includes/admin/templates/history.php:58
+#, php-format
+msgid "Error HTTP %d al conectar con el servidor."
+msgstr ""
+
+#: includes/admin/templates/history.php:90
+msgid "El webhook respondió con cuerpo vacío. Verifica que el flujo de N8N esté activo y retornando datos."
+msgstr ""
+
+#: includes/admin/templates/history.php:92
+msgid "La respuesta del webhook no es un JSON válido."
+msgstr ""
+
+#: includes/admin/templates/history.php:230
+msgid "Conversaciones registradas con tu agente de IA."
+msgstr ""
+
+#: includes/admin/templates/history.php:246
+msgid "Webhook no configurado:"
+msgstr ""
+
+#. translators: %s is the URL to the plugin settings page.
+#: includes/admin/templates/history.php:250
+#, php-format
+msgid "Configura la URL del webhook de historial en <a href=\"%s\">Ajustes</a>."
+msgstr ""
+
+#: includes/admin/templates/history.php:258
+#: includes/admin/templates/history.php:265
+msgid "No hay conversaciones registradas o hay un error de conexión."
+msgstr ""
+
+#. translators: %d is the number of conversations found.
+#: includes/admin/templates/history.php:278
+#, php-format
+msgid "%d conversación encontrada"
+msgid_plural "%d conversaciones encontradas"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/templates/history.php:283
+msgid "Descargar CSV"
+msgstr ""
+
+#: includes/admin/templates/history.php:292
+msgid "Contacto"
+msgstr ""
+
+#: includes/admin/templates/history.php:293
+msgid "Extracto"
+msgstr ""
+
+#: includes/admin/templates/history.php:294
+msgid "Fecha"
+msgstr ""
+
+#: includes/admin/templates/history.php:312
+msgid "(Sin mensajes)"
+msgstr ""
+
+#: includes/admin/templates/history.php:334
+msgid "Desconocido"
+msgstr ""
+
+#: includes/admin/templates/history.php:364
+msgid "Cerrar"
+msgstr ""
+
+#: includes/admin/templates/history.php:368
+msgid "Conversación del Chat"
+msgstr ""
+
+#: includes/admin/templates/settings.php:83
+msgid "Configuración del Agente"
+msgstr ""
+
+#: includes/admin/templates/settings.php:85
+msgid "Gestiona la conexión, visibilidad y comportamiento de tu Agente de IA."
+msgstr ""
+
+#: includes/admin/templates/settings.php:110
+#: includes/class_settings.php:326
+msgid "Configuración General"
+msgstr ""
+
+#: includes/admin/templates/settings.php:131
+msgid "Mostrar el chat en todas las páginas del sitio web"
+msgstr ""
+
+#: includes/admin/templates/settings.php:137
+msgid "Activación Global"
+msgstr ""
+
+#: includes/admin/templates/settings.php:138
+msgid "Habilita el agente en todas las páginas de la web."
+msgstr ""
+
+#: includes/admin/templates/settings.php:158
+msgid "URL del webhook de N8N para procesar los mensajes del chat."
+msgstr ""
+
+#: includes/admin/templates/settings.php:164
+#: includes/class_customizer.php:179
+#: includes/class_settings.php:355
+msgid "URL del Webhook"
+msgstr ""
+
+#: includes/admin/templates/settings.php:165
+msgid "El puente entre tu web y tu sistema N8N."
+msgstr ""
+
+#: includes/admin/templates/settings.php:183
+msgid "Sin autenticación"
+msgstr ""
+
+#: includes/admin/templates/settings.php:184
+msgid "Header personalizado (Header Auth)"
+msgstr ""
+
+#: includes/admin/templates/settings.php:185
+msgid "Basic Auth (usuario + contraseña)"
+msgstr ""
+
+#: includes/admin/templates/settings.php:188
+msgid "Elige el tipo de autenticación configurado en tu nodo Webhook o Chat Trigger de N8N."
+msgstr ""
+
+#: includes/admin/templates/settings.php:192
+msgid "Tipo de Autenticación"
+msgstr ""
+
+#: includes/admin/templates/settings.php:193
+msgid "Método de seguridad para proteger el acceso al webhook."
+msgstr ""
+
+#: includes/admin/templates/settings.php:233
+msgid "Credenciales"
+msgstr ""
+
+#: includes/admin/templates/settings.php:234
+msgid "Identidad del Agente (Usuario) <br/>Token de Seguridad (Contraseña)."
+msgstr ""
+
+#: includes/admin/templates/settings.php:261
+msgid "Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas."
+msgstr ""
+
+#: includes/admin/templates/settings.php:265
+msgid "Seleccionar todas"
+msgstr ""
+
+#: includes/admin/templates/settings.php:268
+msgid "Deseleccionar todas"
+msgstr ""
+
+#: includes/admin/templates/settings.php:275
+#: includes/class_settings.php:576
+msgid "Páginas Excluidas"
+msgstr ""
+
+#: includes/admin/templates/settings.php:276
+msgid "Selecciona las páginas donde NO aparecerá el chat."
+msgstr ""
+
+#: includes/admin/templates/settings.php:303
+msgid "Rápido (10ms)"
+msgstr ""
+
+#: includes/admin/templates/settings.php:304
+msgid "Lento (100ms)"
+msgstr ""
+
+#: includes/admin/templates/settings.php:321
+msgid "Ajusta la velocidad con la que el asistente \"escribe\" el mensaje.<br/>Un valor de 30-40ms se siente natural."
+msgstr ""
+
+#: includes/admin/templates/settings.php:327
+#: includes/class_settings.php:398
+msgid "Velocidad de Escritura"
+msgstr ""
+
+#: includes/admin/templates/settings.php:328
+msgid "Velocidad de la animación de texto (ms por carácter)."
+msgstr ""
+
+#: includes/admin/templates/settings.php:339
+msgid "Configuración de Historial"
+msgstr ""
+
+#: includes/admin/templates/settings.php:357
+msgid "URL del webhook de N8N que consulta el historial de conversaciones en Postgres."
+msgstr ""
+
+#: includes/admin/templates/settings.php:361
+msgid "URL Webhook de Historial"
+msgstr ""
+
+#: includes/admin/templates/settings.php:362
+msgid "Endpoint de N8N para recuperar las conversaciones registradas."
+msgstr ""
+
+#: includes/admin/templates/settings.php:381
+msgid "Clave de autenticación enviada en el header x-api-key al webhook de historial."
+msgstr ""
+
+#: includes/admin/templates/settings.php:385
+msgid "API Key de Historial"
+msgstr ""
+
+#: includes/admin/templates/settings.php:386
+msgid "Clave para autenticar las peticiones al webhook de historial."
+msgstr ""
+
+#: includes/class_ajax_handler.php:61
+msgid "El mensaje no puede estar vacío."
+msgstr ""
+
+#: includes/class_ajax_handler.php:71
+msgid "El webhook de N8N no está configurado."
+msgstr ""
+
+#. translators: %d: HTTP response code
+#: includes/class_ajax_handler.php:111
+#, php-format
+msgid "Error del webhook (HTTP %d)."
+msgstr ""
+
+#: includes/class_customizer.php:70
+msgid "Personalice la apariencia y comportamiento del chat con IA."
+msgstr ""
+
+#: includes/class_customizer.php:91
+#: includes/class_settings.php:413
+msgid "Título del Header"
+msgstr ""
+
+#: includes/class_customizer.php:106
+#: includes/class_settings.php:443
+msgid "Subtítulo del Header"
+msgstr ""
+
+#: includes/class_customizer.php:139
+#: includes/class_settings.php:880
+msgid "Abajo Derecha"
+msgstr ""
+
+#: includes/class_customizer.php:140
+#: includes/class_settings.php:881
+msgid "Abajo Izquierda"
+msgstr ""
+
+#: includes/class_customizer.php:158
+#: includes/class_settings.php:900
+msgid "Modal (Ventana emergente)"
+msgstr ""
+
+#: includes/class_customizer.php:159
+#: includes/class_settings.php:901
+msgid "Pantalla completa"
+msgstr ""
+
+#: includes/class_customizer.php:165
+msgid "Comportamiento"
+msgstr ""
+
+#: includes/class_customizer.php:180
+msgid "URL del webhook de N8N para procesar mensajes."
+msgstr ""
+
+#: includes/class_customizer.php:194
+msgid "Habilitar Horarios de Disponibilidad"
+msgstr ""
+
+#: includes/class_frontend.php:275
+#: includes/class_frontend.php:324
+#: includes/class_helpers.php:153
+#: includes/class_settings.php:917
+#: includes/class_settings.php:922
+msgid "Chat de voz"
+msgstr ""
+
+#: includes/class_settings.php:115
+msgid "Sin permisos."
+msgstr ""
+
+#: includes/class_settings.php:122
+msgid "Tipo de autenticación inválido."
+msgstr ""
+
+#: includes/class_settings.php:340
+msgid "Mostrar en toda la web"
+msgstr ""
+
+#: includes/class_settings.php:382
+msgid "Token de Autenticación N8N"
+msgstr ""
+
+#: includes/class_settings.php:428
+msgid "Texto de Estado del Header"
+msgstr ""
+
+#: includes/class_settings.php:589
+msgid "Páginas donde NO mostrar el chat"
+msgstr ""
+
+#: includes/class_settings.php:598
+msgid "Horarios de Disponibilidad"
+msgstr ""
+
+#: includes/class_settings.php:760
+msgid "Configure los ajustes generales del chat."
+msgstr ""
+
+#: includes/class_settings.php:770
+msgid "Seleccione las páginas donde NO desea mostrar el widget de chat."
+msgstr ""
+
+#: includes/class_settings.php:780
+msgid "Configure los horarios de disponibilidad del chat."
+msgstr ""
+
+#: includes/class_settings.php:790
+msgid "Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR. El sistema utiliza cookies persistentes con fingerprinting del navegador para identificar usuarios únicamente."
+msgstr ""
+
+#: includes/class_settings.php:801
+msgid "Mostrar el chat en todas las páginas del sitio"
+msgstr ""
+
+#: includes/class_settings.php:811
+msgid "URL del webhook de N8N para procesar los mensajes."
+msgstr ""
+
+#: includes/class_settings.php:830
+msgid "Token secreto para autenticar las peticiones al webhook de N8N (Header Auth X-N8N-Auth). Déjalo vacío si no usas autenticación."
+msgstr ""
+
+#: includes/class_settings.php:833
+msgid "Importante:"
+msgstr ""
+
+#: includes/class_settings.php:834
+msgid "Este token se enviará en cada petición al webhook para verificar que proviene del plugin."
+msgstr ""
+
+#: includes/class_settings.php:863
+msgid "Ej: Chateando con Charlie"
+msgstr ""
+
+#: includes/class_settings.php:864
+msgid "Texto que aparece con animación al lado del avatar."
+msgstr ""
+
+#: includes/class_settings.php:941
+msgid "Mantenga presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas."
+msgstr ""
+
+#: includes/class_settings.php:950
+msgid "Activar restricción por horarios"
+msgstr ""
+
+#: includes/class_settings.php:1003
+msgid "Mostrar banner de consentimiento de cookies"
+msgstr ""
+
+#: includes/class_settings.php:1004
+msgid "Cuando está habilitado, se mostrará un banner solicitando consentimiento antes de crear cookies. El consentimiento se guarda en localStorage."
+msgstr ""
+
+#: includes/class_settings.php:1014
+msgid "Mensaje que se mostrará en el banner de cookies. Explica el uso de cookies para la sesión del chat."
+msgstr ""
+
+#: includes/class_settings.php:1243
+msgid "Nombre del header"
+msgstr ""
+
+#: includes/class_settings.php:1244
+msgid "Ej: X-N8N-Auth. Debe coincidir con el \"Header Name\" configurado en N8N → Header Auth."
+msgstr ""
+
+#: includes/class_settings.php:1245
+msgid "Valor del token"
+msgstr ""
+
+#: includes/class_settings.php:1246
+msgid "Token secreto enviado como valor del header."
+msgstr ""
+
+#: includes/class_settings.php:1250
+msgid "Usuario"
+msgstr ""
+
+#: includes/class_settings.php:1251
+msgid "Debe coincidir con el campo \"User\" en N8N → Basic Auth."
+msgstr ""
+
+#: includes/class_settings.php:1252
+msgid "Contraseña"
+msgstr ""
+
+#: includes/class_settings.php:1253
+msgid "Debe coincidir con el campo \"Password\" en N8N → Basic Auth."
+msgstr ""
+
+#: templates/modal.php:43
+msgid "Hablemos"
+msgstr ""
+
+#: templates/modal.php:47
+msgid "Chat"
+msgstr ""
+
+#: templates/modal.php:56
+msgid "Volver"
+msgstr ""
+
+#: templates/modal.php:63
 msgid "Cerrar chat"
 msgstr ""
 
-msgid "Escribe tu mensaje..."
+#: templates/modal.php:88
+msgid "Expandir"
 msgstr ""
 
+#: templates/modal.php:127
+msgid "Enviar un mensaje"
+msgstr ""
+
+#: templates/modal.php:128
+#: templates/screen.php:85
 msgid "Escribe tu mensaje"
 msgstr ""
 
+#: templates/modal.php:132
+#: templates/screen.php:88
 msgid "Enviar mensaje"
 msgstr ""
 
-#: assets/js/braves_chat_block_modal.js, assets/js/braves_chat_block_screen.js
+#: templates/modal.php:149
+msgid "Minimizar chat"
+msgstr ""
+
+#: templates/screen.php:84
+msgid "Escribe tu mensaje..."
+msgstr ""
+
+#: templates/screen.php:95
+msgid "La IA puede cometer errores. Considera verificar la información importante."
+msgstr ""
+
+#. translators: button label to switch to light mode
+#: assets/js/admin.js:26
+#: assets/js/admin.js:49
+msgid "Modo Claro"
+msgstr ""
+
+#. translators: browser alert for invalid webhook URL
+#: assets/js/admin.js:71
+msgid "Por favor, introduce una URL válida que comience con http:// o https://"
+msgstr ""
+
+#. translators: browser alert for invalid time format
+#: assets/js/admin.js:89
+msgid "Por favor, introduce un horario válido en formato HH:MM (ejemplo: 09:00)"
+msgstr ""
+
+#. translators: %d = number of excluded pages
+#: assets/js/admin.js:125
+msgid "No hay páginas excluidas"
+msgstr ""
+
+#: assets/js/admin.js:126
+msgid "1 página excluida"
+msgstr ""
+
+#: assets/js/admin.js:127
+msgid "páginas excluidas"
+msgstr ""
+
+#. translators: browser alert shown when saving without a webhook URL
+#: assets/js/admin.js:154
+msgid "Por favor, introduce una URL de webhook válida antes de guardar."
+msgstr ""
+
+#. translators: browser confirmation when leaving page with unsaved changes
+#: assets/js/admin.js:191
+msgid "¿Estás seguro de que quieres salir? Los cambios no guardados se perderán."
+msgstr ""
+
+#. translators: browser alert after copying system info
+#: assets/js/admin.js:216
+msgid "Información del sistema copiada al portapapeles"
+msgstr ""
+
+#. translators: browser alert when clipboard copy fails
+#: assets/js/admin.js:219
+msgid "No se pudo copiar. Por favor, copia manualmente."
+msgstr ""
+
+#: assets/js/block.js:20
+msgid "BravesChat — Pantalla Completa"
+msgstr ""
+
+#: assets/js/block.js:21
+msgid "Muestra el chat de BravesChat en pantalla completa en esta página. Configura el webhook, colores y título desde el panel del plugin."
+msgstr ""
+
+#: assets/js/block.js:25
+msgid "chat"
+msgstr ""
+
+#: assets/js/block.js:26
+msgid "ia"
+msgstr ""
+
+#: assets/js/block.js:27
+msgid "asistente"
+msgstr ""
+
+#: assets/js/block.js:28
+msgid "braveslab"
+msgstr ""
+
+#: assets/js/block.js:29
+msgid "fullscreen"
+msgstr ""
+
+#: assets/js/block.js:50
+msgid "(Usa el mensaje configurado en el panel del plugin)"
+msgstr ""
+
+#: assets/js/block.js:57
+#: assets/js/block.js:61
+msgid "Mensaje de bienvenida"
+msgstr ""
+
+#: assets/js/block.js:67
+msgid "Primer mensaje que verá el usuario en esta página. Si lo dejas vacío se usará el mensaje global del plugin."
+msgstr ""
+
+#: assets/js/block.js:128
+msgid "Webhook, título, colores y posición se configuran desde el panel de BravesChat."
+msgstr ""
+
+#: assets/js/braves_chat_block_modal.js:411
+#: assets/js/braves_chat_block_screen.js:396
+msgid "Términos y condiciones"
+msgstr ""
+
+#: assets/js/braves_chat_block_modal.js:412
+#: assets/js/braves_chat_block_screen.js:397
+msgid "Al hacer clic en «Aceptar» y cada vez que interactúo con este agente de IA, doy mi consentimiento para que se graben, almacenen y compartan mis comunicaciones con terceros proveedores de servicios, tal y como se describe en la Política de privacidad. Si no desea que se graben sus conversaciones, le rogamos que se abstenga de utilizar este servicio."
+msgstr ""
+
+#: assets/js/braves_chat_block_modal.js:414
+#: assets/js/braves_chat_block_screen.js:399
+msgid "Cancelar"
+msgstr ""
+
+#: assets/js/braves_chat_block_modal.js:710
+#: assets/js/braves_chat_block_screen.js:735
 msgid "Error al procesar tu mensaje:"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:714
+#: assets/js/braves_chat_block_screen.js:739
 msgid "**No se pudo conectar con el servidor**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:715
+#: assets/js/braves_chat_block_screen.js:740
 msgid "Posibles causas:"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:716
+#: assets/js/braves_chat_block_screen.js:741
 msgid "• Sin conexión a internet"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:717
+#: assets/js/braves_chat_block_screen.js:742
 msgid "• El servidor N8N está caído"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:718
+#: assets/js/braves_chat_block_screen.js:743
 msgid "• Problema de CORS"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:719
+#: assets/js/braves_chat_block_screen.js:744
 msgid "• URL del webhook incorrecta"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:722
+#: assets/js/braves_chat_block_screen.js:747
 msgid "**Webhook no configurado**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:723
+#: assets/js/braves_chat_block_screen.js:748
 msgid "El administrador debe configurar la URL del webhook en:"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:724
+#: assets/js/braves_chat_block_screen.js:749
 msgid "WordPress Admin > Ajustes > BravesChat iA"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:727
+#: assets/js/braves_chat_block_screen.js:752
 msgid "**Error de autenticación**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:728
+#: assets/js/braves_chat_block_screen.js:753
 msgid "El token de autenticación es inválido o ha expirado."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:729
+#: assets/js/braves_chat_block_screen.js:754
 msgid "Contacta al administrador para verificar el token N8N."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:732
+#: assets/js/braves_chat_block_screen.js:757
 msgid "**Webhook no encontrado**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:733
+#: assets/js/braves_chat_block_screen.js:758
 msgid "La URL del webhook no existe o es incorrecta."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:734
+#: assets/js/braves_chat_block_screen.js:759
 msgid "Verifica la URL en los ajustes del plugin."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:737
+#: assets/js/braves_chat_block_screen.js:762
 msgid "**Respuesta inválida del servidor**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:738
+#: assets/js/braves_chat_block_screen.js:763
 msgid "El servidor N8N no devolvió un JSON válido."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:739
+#: assets/js/braves_chat_block_screen.js:764
 msgid "Verifica la configuración del workflow en N8N."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:742
+#: assets/js/braves_chat_block_screen.js:767
 msgid "**Formato de respuesta incorrecto**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:743
+#: assets/js/braves_chat_block_screen.js:768
 msgid "El servidor devolvió una respuesta pero sin el campo esperado."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:744
+#: assets/js/braves_chat_block_screen.js:769
 msgid "El webhook debe devolver: {output: \"mensaje\"} o {response: \"mensaje\"}"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:747
+#: assets/js/braves_chat_block_screen.js:772
 msgid "**Error del servidor**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:748
+#: assets/js/braves_chat_block_screen.js:773
 msgid "El servidor N8N tiene un problema interno."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:749
+#: assets/js/braves_chat_block_screen.js:774
 msgid "Contacta al administrador del servidor."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:752
+#: assets/js/braves_chat_block_screen.js:777
 msgid "**Error desconocido**"
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:753
+#: assets/js/braves_chat_block_screen.js:778
 msgid "Ocurrió un error inesperado. Por favor, intenta de nuevo."
 msgstr ""
 
+#: assets/js/braves_chat_block_modal.js:757
+#: assets/js/braves_chat_block_screen.js:782
 msgid "**Detalles técnicos:**"
 msgstr ""

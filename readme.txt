@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,11 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 5. Conversation history — session viewer with CSV export.
 
 == Changelog ==
+
+= 2.4.4 =
+* IMPROVED: All user-visible strings in the admin panel JavaScript are now fully translatable via WordPress i18n (wp.i18n.__).
+* IMPROVED: Admin script registered with translation support — JSON language files loaded automatically for the active locale.
+* FIXED: Hardcoded default text for bubble, screen footer, and settings fields is now translatable — no more untranslated strings in non-English installs.
 
 = 2.4.3 =
 * ADDED: Mixed display mode — floating bubble on all pages, fullscreen chat on pages with the Gutenberg block.
@@ -210,6 +215,9 @@ This plugin sends chat messages to an N8N webhook URL configured by the site adm
 The webhook URL, destination server, and all data processing are fully controlled by the site administrator. No data is sent to any Braves-operated server.
 
 == Upgrade Notice ==
+
+= 2.4.4 =
+Full internationalization — all strings now translatable, including JavaScript labels. Required for non-English installs.
 
 = 2.4.3 =
 New mixed display mode plus visual fixes for iOS Safari dark mode and GDPR banner. Recommended update for all users.
