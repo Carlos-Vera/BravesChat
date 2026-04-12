@@ -115,10 +115,6 @@ class BravesChat {
         // Agregar enlaces en la página de plugins
         add_filter('plugin_action_links_' . plugin_basename(BRAVES_CHAT_PLUGIN_FILE), array($this, 'add_action_links'));
 
-        // Enlace "Ver detalles" en la lista de plugins (requiere slug aprobado en WP.org)
-        if (is_admin()) {
-            add_filter('plugin_row_meta', array($this, 'add_plugin_row_meta'), 10, 2);
-        }
     }
 
     /**
@@ -307,41 +303,6 @@ class BravesChat {
         );
 
         array_unshift($links, $settings_link, $config_link);
-
-        return $links;
-    }
-
-    /**
-     * Añade el enlace "Ver detalles" en la fila del plugin en la lista de plugins
-     *
-     * @since 2.2.3
-     * @param array  $links Array de meta-enlaces de la fila del plugin.
-     * @param string $file  Ruta relativa del archivo principal del plugin.
-     * @return array Array modificado con el enlace "Ver detalles".
-     */
-    public function add_plugin_row_meta($links, $file) {
-        if (plugin_basename(BRAVES_CHAT_PLUGIN_FILE) !== $file) {
-            return $links;
-        }
-
-        $url = add_query_arg(
-            array(
-                'tab'       => 'plugin-information',
-                'plugin'    => 'braveschat',
-                'TB_iframe' => 'true',
-                'width'     => '772',
-                'height'    => '800',
-            ),
-            admin_url('plugin-install.php')
-        );
-
-        $details_link = sprintf(
-            '<a href="%s" class="thickbox open-plugin-details-modal">%s</a>',
-            esc_url($url),
-            __('Ver detalles', 'braveschat')
-        );
-
-        array_splice($links, 2, 0, array($details_link));
 
         return $links;
     }
