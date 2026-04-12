@@ -63,6 +63,16 @@ body #braveslab-chat-container textarea {
 }
 
 /* ============================================
+   OVERLAY — cubre el fondo blanco del tema
+   ============================================ */
+#braves-fullscreen-overlay {
+    position: fixed;
+    inset: 0;
+    background: #212121;
+    z-index: 999996;
+}
+
+/* ============================================
    CONTENEDORES PRINCIPALES (TEMA DARK / BLACK)
    ============================================ */
 body #braveslab-chat-container {
