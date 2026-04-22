@@ -25,11 +25,11 @@ return array(
     'webhook_url' => '',
 
     // Textos del encabezado
-    'header_title' => __('Chat de Soporte', 'braveschat'),
-    'header_subtitle' => __('Estamos aquí para ayudarte', 'braveschat'),
+    'header_title' => __('Support Chat', 'braveschat'),
+    'header_subtitle' => __('We are here to help you', 'braveschat'),
 
     // Mensaje de bienvenida
-    'welcome_message' => __('¡Hola! ¿En qué podemos ayudarte hoy?', 'braveschat'),
+    'welcome_message' => __('Hello! How can we help you today?', 'braveschat'),
 
     // Posición del widget (opciones: 'bottom-right', 'bottom-left')
     'position' => 'bottom-right',
@@ -42,13 +42,13 @@ return array(
     'availability_start' => '09:00',
     'availability_end' => '18:00',
     'availability_timezone' => 'America/New_York', // Ver: https://www.php.net/manual/en/timezones.php
-    'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat'),
+    'availability_message' => __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat'),
 
     // Modo de visualización (opciones: 'modal', 'fullscreen')
     'display_mode' => 'modal',
 
     // Configuración GDPR
     'gdpr_enabled' => false,
-    'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies.', 'braveschat'),
-    'gdpr_accept_text' => __('Aceptar', 'braveschat'),
+    'gdpr_message' => __('This site uses cookies to improve your experience. By continuing to browse, you accept our cookie policy.', 'braveschat'),
+    'gdpr_accept_text' => __('Accept', 'braveschat'),
 );

@@ -67,13 +67,13 @@ class Customizer {
         // Agregar panel
         $wp_customize->add_panel('braves_chat_panel', array(
             'title' => __('BravesChat', 'braveschat'),
-            'description' => __('Personalice la apariencia y comportamiento del chat con IA.', 'braveschat'),
+            'description' => __('Customize the appearance and behavior of the AI chat.', 'braveschat'),
             'priority' => 160,
         ));
         
         // Sección de Apariencia
         $wp_customize->add_section('braves_chat_appearance', array(
-            'title' => __('Apariencia', 'braveschat'),
+            'title' => __('Appearance', 'braveschat'),
             'panel' => 'braves_chat_panel',
             'priority' => 10,
         ));
@@ -88,7 +88,7 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_header_title', array(
-            'label' => __('Título del Header', 'braveschat'),
+            'label' => __('Header Title', 'braveschat'),
             'section' => 'braves_chat_appearance',
             'type' => 'text',
         ));
@@ -103,14 +103,14 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_header_subtitle', array(
-            'label' => __('Subtítulo del Header', 'braveschat'),
+            'label' => __('Header Subtitle', 'braveschat'),
             'section' => 'braves_chat_appearance',
             'type' => 'text',
         ));
         
         // Mensaje de bienvenida
         $wp_customize->add_setting('braves_chat_welcome_message', array(
-            'default' => __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braveschat'),
+            'default' => __("Hello! I'm the BravesLab assistant, your Artificial Intelligence Marketing Agency. We integrate AI into businesses to multiply results. How can we help you?", 'braveschat'),
             'type' => 'option',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'sanitize_textarea_field',
@@ -118,7 +118,7 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_welcome_message', array(
-            'label' => __('Mensaje de Bienvenida', 'braveschat'),
+            'label' => __('Welcome Message', 'braveschat'),
             'section' => 'braves_chat_appearance',
             'type' => 'textarea',
         ));
@@ -132,13 +132,13 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_position', array(
-            'label' => __('Posición del Chat', 'braveschat'),
+            'label' => __('Chat Position', 'braveschat'),
             'section' => 'braves_chat_appearance',
             'type' => 'select',
             'choices' => array(
-                'bottom-right' => __('Abajo Derecha', 'braveschat'),
-                'bottom-left' => __('Abajo Izquierda', 'braveschat'),
-                'center' => __('Centro', 'braveschat'),
+                'bottom-right' => __('Bottom Right', 'braveschat'),
+                'bottom-left' => __('Bottom Left', 'braveschat'),
+                'center' => __('Center', 'braveschat'),
             ),
         ));
         
@@ -151,18 +151,18 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_display_mode', array(
-            'label' => __('Modo de Visualización', 'braveschat'),
+            'label' => __('Display Mode', 'braveschat'),
             'section' => 'braves_chat_appearance',
             'type' => 'select',
             'choices' => array(
-                'modal' => __('Modal (Ventana emergente)', 'braveschat'),
-                'fullscreen' => __('Pantalla completa', 'braveschat'),
+                'modal' => __('Modal (Popup window)', 'braveschat'),
+                'fullscreen' => __('Full screen', 'braveschat'),
             ),
         ));
         
         // Sección de Comportamiento
         $wp_customize->add_section('braves_chat_behavior', array(
-            'title' => __('Comportamiento', 'braveschat'),
+            'title' => __('Behavior', 'braveschat'),
             'panel' => 'braves_chat_panel',
             'priority' => 20,
         ));
@@ -176,8 +176,8 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_webhook_url', array(
-            'label' => __('URL del Webhook', 'braveschat'),
-            'description' => __('URL del webhook de N8N para procesar mensajes.', 'braveschat'),
+            'label' => __('Webhook URL', 'braveschat'),
+            'description' => __('N8N webhook URL to process messages.', 'braveschat'),
             'section' => 'braves_chat_behavior',
             'type' => 'url',
         ));
@@ -191,7 +191,7 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_availability_enabled', array(
-            'label' => __('Habilitar Horarios de Disponibilidad', 'braveschat'),
+            'label' => __('Enable Availability Schedules', 'braveschat'),
             'section' => 'braves_chat_behavior',
             'type' => 'checkbox',
         ));
@@ -205,7 +205,7 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_availability_start', array(
-            'label' => __('Hora de Inicio', 'braveschat'),
+            'label' => __('Start Time', 'braveschat'),
             'section' => 'braves_chat_behavior',
             'type' => 'text',
             'input_attrs' => array(
@@ -222,7 +222,7 @@ class Customizer {
         ));
         
         $wp_customize->add_control('braves_chat_availability_end', array(
-            'label' => __('Hora de Fin', 'braveschat'),
+            'label' => __('End Time', 'braveschat'),
             'section' => 'braves_chat_behavior',
             'type' => 'text',
             'input_attrs' => array(
@@ -232,14 +232,14 @@ class Customizer {
         
         // Mensaje fuera de horario
         $wp_customize->add_setting('braves_chat_availability_message', array(
-            'default' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat'),
+            'default' => __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat'),
             'type' => 'option',
             'capability' => 'edit_theme_options',
             'sanitize_callback' => 'sanitize_textarea_field',
         ));
         
         $wp_customize->add_control('braves_chat_availability_message', array(
-            'label' => __('Mensaje Fuera de Horario', 'braveschat'),
+            'label' => __('Out of Hours Message', 'braveschat'),
             'section' => 'braves_chat_behavior',
             'type' => 'textarea',
         ));
