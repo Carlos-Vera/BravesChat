@@ -12,7 +12,7 @@
 .braves-hover-accent {
     border: 1px solid transparent;
     transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .braves-hover-accent:hover,
@@ -556,8 +556,8 @@ a.braves-card.braves-card--clickable:hover {
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-[data-braves-theme="dark"] .braves-toggle__input:checked + .braves-toggle__label .braves-toggle__switch,
-[data-braves-theme="dark"] .braves-toggle-input:checked + .braves-toggle-slider {
+[data-braves-theme="dark"] .braves-toggle__input:checked+.braves-toggle__label .braves-toggle__switch,
+[data-braves-theme="dark"] .braves-toggle-input:checked+.braves-toggle-slider {
     background: var(--braves-primary);
     border-color: var(--braves-primary);
     box-shadow: 0 0 10px rgba(1, 183, 175, 0.3);
@@ -718,129 +718,46 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
 }
 
 /* ==================== CHANGELOG TIMELINE ==================== */
-
 .braves-timeline {
-    display: grid;
-    grid-template-columns: 45% 10% 45%;
-    align-items: start;
-    row-gap: 0;
-    padding: 0 0 var(--braves-space-lg) 0;
     position: relative;
+    padding: 0 0 var(--braves-space-lg) 0;
+    max-width: 900px;
+    /* Ancho máximo ajustado para centrar el bloque en resoluciones grandes */
+    margin: 0 auto;
+    /* Centra el timeline entero */
+    /* Eliminado display: flex y gap para evitar colapso e inconsistencias nativas en alturas mixtas */
 }
 
-/* Línea vertical continua — centrada en el eje (col 2 = 45%–55%, centro = 50%) */
+/* Línea vertical izquierda */
 .braves-timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
-    top: 0;
+    left: 48px;
+    /* Centro del axis (ancho 96px) */
+    top: 24px;
+    /* Toca exactamente la caja contenedora de 'Today' */
     bottom: 0;
-    border-left: 2px dashed var(--braves-gray-300);
+    border-left: 1px solid var(--braves-gray-200);
+    /* Línea sólida delgada y elegante a lo ranomi */
     transform: translateX(-50%);
     z-index: 0;
     pointer-events: none;
 }
 
-/* display:contents hace que los hijos participen directamente en el grid padre */
-.braves-timeline__item {
-    display: contents;
+[data-braves-theme="dark"] .braves-timeline::before {
+    border-left-color: var(--braves-gray-700);
 }
 
-/* Posición explícita — sobreescribe la paridad por defecto */
-.braves-tl-left .braves-timeline__card-side { grid-column: 1; }
-.braves-tl-left .braves-timeline__axis      { grid-column: 2; }
-.braves-tl-left .braves-timeline__spacer    { grid-column: 3; }
-
-.braves-tl-right .braves-timeline__card-side { grid-column: 3; }
-.braves-tl-right .braves-timeline__axis      { grid-column: 2; }
-.braves-tl-right .braves-timeline__spacer    { grid-column: 1; }
-
-
-.braves-timeline__card-side {
-    position: relative;
-    min-width: 0;
-    margin-top: var(--braves-tl-nudge, 0px);
-    margin-bottom: var(--braves-space-lg);
-}
-
-.braves-timeline__spacer {
-    /* columna vacía, solo ocupa espacio */
-}
-
-/* Eje central — siempre en col 2 */
-.braves-timeline__axis {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-    margin-top: var(--braves-tl-nudge, 0px);
-}
-
-/* Sin línea vertical por ítem — el contenedor la gestiona */
-.braves-timeline__axis::before {
-    display: none;
-}
-
-/* Línea horizontal punteada — izquierda por defecto */
-.braves-timeline__axis::after {
-    content: '';
-    position: absolute;
-    top: calc(var(--braves-space-lg) + 13px);
-    left: 0;
-    right: auto;
-    width: 50%;
-    border-top: 2px dashed var(--braves-gray-300);
-    z-index: 0;
-}
-
-/* Overrides explícitos de dirección del conector */
-.braves-timeline__item.braves-tl-connector-left .braves-timeline__axis::after,
-.braves-timeline__item.braves-tl-left .braves-timeline__axis::after {
-    left: 0;
-    right: auto;
-}
-
-.braves-timeline__item.braves-tl-connector-right .braves-timeline__axis::after,
-.braves-timeline__item.braves-tl-right .braves-timeline__axis::after {
-    left: auto;
-    right: 0;
-}
-
-/* Badge de versión — pill centrado en el eje */
-.braves-timeline__badge {
-    background: var(--braves-text-primary);
-    color: var(--braves-bg-page);
-    border-radius: var(--braves-radius-full);
-    padding: 4px 12px;
-    font-size: var(--braves-text-xs);
-    font-weight: var(--braves-font-bold);
-    letter-spacing: 0.04em;
-    margin-top: var(--braves-space-lg);
-    position: relative;
-    z-index: 1;
-    white-space: nowrap;
-    line-height: 1.5;
-}
-
-.braves-timeline__label {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--braves-text-muted);
-    text-align: center;
-    margin-top: 5px;
-    white-space: nowrap;
-    line-height: 1.3;
-}
-
-/* Marcador "Hoy" — tope superior del timeline */
+/* Marcador "Hoy" */
 .braves-timeline__cap {
-    grid-column: 1 / -1;
     display: flex;
+    width: 96px;
+    /* Coincide con el ancho de la columna del eje temporal */
     justify-content: center;
-    padding-bottom: var(--braves-space-md);
+    /* Alineación perfecta con el centro de la columna (donde está la línea trazada) */
     position: relative;
     z-index: 2;
+    margin-bottom: var(--braves-space-md);
 }
 
 .braves-timeline__cap-label {
@@ -855,7 +772,127 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     line-height: 1.5;
 }
 
-/* Tarjeta de versión */
+[data-braves-theme="dark"] .braves-timeline__cap-label {
+    background: var(--braves-primary);
+    color: var(--braves-text-on-primary);
+}
+
+/* Cada ítem del timeline */
+.braves-timeline__item {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: var(--braves-space-lg);
+    position: relative;
+    align-items: flex-start;
+    opacity: 0;
+    margin-bottom: 40vh;
+    /* Respiración abismal simulando scroll de hito ranomi */
+    transform: translateY(40px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+/* Fija ambos elementos siempre en la primera fila (Row 1) ignorando el orden en HTML */
+.braves-timeline__item>* {
+    grid-row: 1;
+}
+
+.braves-timeline__item.braves-item--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Eje de la izquierda (Badge + Fecha) */
+.braves-timeline__axis {
+    position: sticky;
+    top: 40vh;
+    /* Un poco más arriba del centro, permite lectura cómoda */
+    height: 64px;
+    /* Otorga un ancla para absolute positioning de sus hijos */
+    z-index: 2;
+    grid-column: 1;
+}
+
+/* El hito elegante (Punto blanco/secundario en lugar de raya unida) */
+.braves-timeline__axis::before {
+    content: '';
+    position: absolute;
+    left: 48px;
+    /* Centro exacto sobre la línea vertical */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    /* Incrementado para mayor prominencia */
+    height: 12px;
+    background: var(--braves-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px var(--braves-bg-page);
+    /* Halo expandido para destacar más */
+    z-index: 5;
+}
+
+[data-braves-theme="dark"] .braves-timeline__axis::before {
+    background: var(--braves-text-primary);
+}
+
+/* Tipografía Rotada de Hito (Ex Badge) */
+.braves-timeline__badge {
+    position: absolute;
+    right: 78px;
+    /* Posicionado exactamente a 10px del centro (48px) hacia la izquierda */
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right center;
+    /* Pivota exactamente al nivel del centro vertical */
+    font-size: 2.5rem;
+    /* Enorme estilo watermark */
+    font-family: var(--braves-font-sans);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--braves-text-muted);
+    background: transparent !important;
+    white-space: nowrap;
+    opacity: 0.4;
+    /* Sutil y elegante */
+    z-index: 10;
+}
+
+[data-braves-theme="dark"] .braves-timeline__badge {
+    color: var(--braves-gray-500);
+}
+
+/* ELIMINADA la conexión forzada horizonal y el theme dark innecesario */
+
+.braves-timeline__label {
+    position: absolute;
+    left: 66px;
+    /* Posicionado hacia la derecha de la linea */
+    top: 170%;
+    transform: translateY(-50%) rotate(-90deg);
+    /* Mismo sentido que la versión para acompañar lectura */
+    transform-origin: left center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--braves-text-muted);
+    white-space: nowrap;
+    margin: 0;
+}
+
+[data-braves-theme="dark"] .braves-timeline__label {
+    color: var(--braves-primary);
+}
+
+/* Tarjeta (Derecha) */
+.braves-timeline__card-side {
+    grid-column: 2;
+    position: relative;
+    min-width: 0;
+    max-width: 720px;
+    z-index: 20;
+}
+
+/* ELIMINAMOS pseudo-elemento connecting line que estaba en ::before */
+
 .braves-changelog__version {
     padding: var(--braves-space-lg);
     background: var(--braves-surface);
@@ -901,94 +938,33 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     line-height: var(--braves-leading-relaxed);
 }
 
-/* Utilidades de desplazamiento vertical de tarjeta + badge
- *
- * Uso: añade la clase al div .braves-timeline__item
- * La variable CSS se hereda a ambos hijos — card y badge se mueven juntos.
- *
- * Escala en rem (pasos de 0.5rem) — igual para ambas columnas del grid.
- * Los % no funcionan aquí porque resuelven contra el ancho de cada celda
- * (col 1 = 45%, col 2 = 10%) dando distancias distintas por columna.
- *
- *   braves-tl-mt-1  →  +1rem  (~16px, baja poco)
- *   braves-tl-mt-5  →  +3rem  (~48px)
- *   braves-tl-mt-10 →  +5.5rem (~88px, baja mucho)
- *   braves-tl-mt-n1 →  -1rem  (prefijo n = sube)
- */
-.braves-tl-mt-1   { --braves-tl-nudge:  2rem; }
-.braves-tl-mt-2   { --braves-tl-nudge:  2.5rem; }
-.braves-tl-mt-3   { --braves-tl-nudge:  3rem; }
-.braves-tl-mt-4   { --braves-tl-nudge:  3.5rem; }
-.braves-tl-mt-5   { --braves-tl-nudge:  4rem; }
-.braves-tl-mt-6   { --braves-tl-nudge:  4.5rem; }
-.braves-tl-mt-7   { --braves-tl-nudge:  5rem; }
-.braves-tl-mt-8   { --braves-tl-nudge:  5.5rem; }
-.braves-tl-mt-9   { --braves-tl-nudge:  6rem; }
-.braves-tl-mt-10  { --braves-tl-nudge:  6.5rem; }
-
-.braves-tl-mt-n1  { --braves-tl-nudge: -2rem; }
-.braves-tl-mt-n2  { --braves-tl-nudge: -2.5rem; }
-.braves-tl-mt-n3  { --braves-tl-nudge: -3rem; }
-.braves-tl-mt-n4  { --braves-tl-nudge: -3.5rem; }
-.braves-tl-mt-n5  { --braves-tl-nudge: -4rem; }
-.braves-tl-mt-n6  { --braves-tl-nudge: -4.5rem; }
-.braves-tl-mt-n7  { --braves-tl-nudge: -5rem; }
-.braves-tl-mt-n8  { --braves-tl-nudge: -5.5rem; }
-.braves-tl-mt-n9  { --braves-tl-nudge: -6rem; }
-.braves-tl-mt-n10 { --braves-tl-nudge: -6.5rem; }
-
-/* ==================== DARK MODE: TIMELINE ==================== */
-[data-braves-theme="dark"] .braves-timeline::before {
-    border-left-color: var(--braves-primary);
-    opacity: 0.4;
-}
-
-[data-braves-theme="dark"] .braves-timeline__axis::after {
-    border-top-color: var(--braves-primary);
-    opacity: 0.4;
-}
-
-[data-braves-theme="dark"] .braves-timeline__badge {
-    background: var(--braves-primary);
-    color: var(--braves-text-on-primary);
-}
-
-[data-braves-theme="dark"] .braves-timeline__cap-label {
-    background: var(--braves-primary);
-    color: var(--braves-text-on-primary);
-}
-
-[data-braves-theme="dark"] .braves-timeline__label {
-    color: var(--braves-primary);
-}
-
-/* Timeline responsive — colapsa a columna única */
+/* Mobile Timeline */
 @media screen and (max-width: 768px) {
     .braves-timeline::before {
-        left: 28px; /* centro de la columna de eje en móvil (56px / 2) */
-        transform: none;
+        left: 32px;
+        /* Centro del axis (ancho 64px) */
     }
 
-    .braves-timeline {
-        grid-template-columns: 56px 1fr;
-        row-gap: var(--braves-space-md);
+    .braves-timeline__item {
+        grid-template-columns: 64px 1fr;
+        gap: var(--braves-space-sm);
     }
 
-    .braves-tl-left .braves-timeline__axis,
-    .braves-tl-right .braves-timeline__axis {
-        grid-column: 1;
-    }
-    .braves-tl-left .braves-timeline__card-side,
-    .braves-tl-right .braves-timeline__card-side {
-        grid-column: 2;
+    .braves-timeline__axis {
+        margin-top: 18px;
     }
 
-    .braves-timeline__spacer {
-        display: none;
+    .braves-timeline__cap {
+        padding-left: 8px;
     }
 
-    .braves-timeline__axis::after {
-        display: none;
+    .braves-timeline__badge {
+        font-size: 9px;
+        padding: 3px 8px;
+    }
+
+    .braves-timeline__badge::after {
+        width: var(--braves-space-sm);
     }
 }
 
@@ -1607,7 +1583,7 @@ a:has(.braves-about-team__member) .braves-about-team__member:hover {
     align-items: flex-start;
 }
 
-.braves-history-modal__header > div {
+.braves-history-modal__header>div {
     flex: 1;
     min-width: 0;
 }
