@@ -6,7 +6,7 @@
 
 /* ==================== DARK MODE TOGGLE ==================== */
 (function () {
-    var __ = ( wp && wp.i18n && wp.i18n.__ ) ? wp.i18n.__ : function( s ) { return s; };
+    const { __ } = wp.i18n;
 
     window.bravesToggleTheme = function () {
         var isDark   = document.documentElement.getAttribute('data-braves-theme') === 'dark';
@@ -23,7 +23,7 @@
             var span = btn.querySelector('.braves-button__text');
             if (span) {
                 /* translators: button label to switch to light mode */
-                span.textContent = newTheme === 'dark' ? __('Modo Claro', 'braveschat') : __('Modo Oscuro', 'braveschat');
+                span.textContent = newTheme === 'dark' ? __('Light Mode', 'braveschat') : __('Dark Mode', 'braveschat');
             }
         }
 
@@ -46,7 +46,8 @@
             var span = btn.querySelector('.braves-button__text');
             if (span) {
                 /* translators: button label to switch to light mode */
-                span.textContent = isDark ? __('Modo Claro', 'braveschat') : __('Modo Oscuro', 'braveschat');
+                /* translators: button label to switch to dark mode */
+                span.textContent = isDark ? __('Light Mode', 'braveschat') : __('Dark Mode', 'braveschat');
             }
         }
     });
@@ -55,7 +56,7 @@
 (function ($) {
     'use strict';
 
-    var __ = ( wp && wp.i18n && wp.i18n.__ ) ? wp.i18n.__ : function( s ) { return s; };
+    const { __ } = wp.i18n;
 
     $(document).ready(function () {
 
@@ -68,7 +69,7 @@
 
             if (url && !urlPattern.test(url)) {
                 /* translators: browser alert for invalid webhook URL */
-                alert( __('Por favor, introduce una URL válida que comience con http:// o https://', 'braveschat') );
+                alert( __('Please enter a valid URL starting with http:// or https://', 'braveschat') );
                 $(this).focus();
             }
         });
@@ -86,7 +87,7 @@
 
             if (time && !validateTimeFormat(time)) {
                 /* translators: browser alert for invalid time format */
-                alert( __('Por favor, introduce un horario válido en formato HH:MM (ejemplo: 09:00)', 'braveschat') );
+                alert( __('Please enter a valid time in HH:MM format (e.g. 09:00)', 'braveschat') );
                 $(this).val('09:00');
                 $(this).focus();
             }
@@ -122,9 +123,9 @@
             function updateCounter() {
                 var count = $excludedPages.find('option:selected').length;
                 /* translators: %d = number of excluded pages */
-                var text = count === 0 ? __('No hay páginas excluidas', 'braveschat') :
-                    count === 1 ? __('1 página excluida', 'braveschat') :
-                        count + ' ' + __('páginas excluidas', 'braveschat');
+                var text = count === 0 ? __('No excluded pages', 'braveschat') :
+                    count === 1 ? __('1 excluded page', 'braveschat') :
+                        count + ' ' + __('excluded pages', 'braveschat');
                 $counter.text(text);
             }
 
@@ -151,7 +152,7 @@
             if (!webhookUrl) {
                 e.preventDefault();
                 /* translators: browser alert shown when saving without a webhook URL */
-                alert( __('Por favor, introduce una URL de webhook válida antes de guardar.', 'braveschat') );
+                alert( __('Please enter a valid webhook URL before saving.', 'braveschat') );
                 $('input[name="braves_chat_webhook_url"]').focus();
                 return false;
             }
@@ -188,7 +189,7 @@
         $(window).on('beforeunload', function () {
             if (formChanged) {
                 /* translators: browser confirmation when leaving page with unsaved changes */
-                return __('¿Estás seguro de que quieres salir? Los cambios no guardados se perderán.', 'braveschat');
+                return __('Are you sure you want to leave? Unsaved changes will be lost.', 'braveschat');
             }
         });
 
@@ -213,10 +214,11 @@
 
             navigator.clipboard.writeText(systemInfo).then(function () {
                 /* translators: browser alert after copying system info */
-                alert( __('Información del sistema copiada al portapapeles', 'braveschat') );
+                alert( __('System information copied to clipboard', 'braveschat') );
             }).catch(function () {
                 /* translators: browser alert when clipboard copy fails */
-                alert( __('No se pudo copiar. Por favor, copia manualmente.', 'braveschat') );
+                /* translators: browser alert when clipboard copy fails */
+                alert( __('Could not copy. Please copy manually.', 'braveschat') );
             });
         });
 
@@ -275,4 +277,106 @@
             applyToAll(document.documentElement.getAttribute('data-braves-theme') === 'dark');
         }, 50);
     };
+})();
+
+/* ==================== CHANGELOG TIMELINE ACCORDION / ENTRANCE ==================== */
+(function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var timelineItems = document.querySelectorAll('.braves-timeline__item');
+        if (!timelineItems || timelineItems.length === 0) return;
+
+        // 1. Efecto de aparición inicial (Slide up al entrar por debajo)
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('braves-item--visible');
+                    } else if (entry.boundingClientRect.top > 0) {
+                        // Reset if it goes back below the screen to allow replay
+                        // Remove class to animate again when scrolling back down
+                        entry.target.classList.remove('braves-item--visible');
+                        entry.target.style.opacity = '';
+                        entry.target.style.transform = '';
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px 0px -50px 0px', // Animates slightly before taking up the screen
+                threshold: 0.1
+            });
+
+            timelineItems.forEach(function (item) {
+                observer.observe(item);
+            });
+        }
+
+        // 2. Efecto de desaparición superior (Fade out y push back)
+        // Aplicamos el transform SOLO al interior (.braves-timeline__card-side) 
+        // para que NO rompa el position: sticky del envoltorio.
+        function onScroll() {
+            var viewportHeight = window.innerHeight;
+            // El fade inicia un poco por encima del centro (donde está sticky el badge)
+            var fadeStart = (viewportHeight * 0.25) - 20; 
+            var fadeEnd = 30;    
+
+            timelineItems.forEach(function (item) {
+                if (!item.classList.contains('braves-item--visible')) return;
+
+                var rect = item.getBoundingClientRect();
+                var cardSide = item.querySelector('.braves-timeline__card-side');
+                var axis = item.querySelector('.braves-timeline__axis');
+                
+                if (rect.top < fadeStart && rect.bottom > 0) {
+                    var range = fadeStart - fadeEnd;
+                    var opacity = (rect.top - fadeEnd) / range;
+                    
+                    if (opacity < 0) opacity = 0;
+                    if (opacity > 1) opacity = 1;
+
+                    var scale = 0.95 + (opacity * 0.05); 
+                    var translateY = (1 - opacity) * -20; 
+
+                    if (cardSide) {
+                        cardSide.style.opacity = opacity;
+                        cardSide.style.transform = 'scale(' + scale + ') translateY(' + translateY + 'px)';
+                    }
+                    if (axis) {
+                        axis.style.opacity = opacity;
+                    }
+                } else if (rect.top >= fadeStart) {
+                    if (cardSide) {
+                        cardSide.style.opacity = '';
+                        cardSide.style.transform = '';
+                    }
+                    if (axis) {
+                        axis.style.opacity = '';
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    });
+})();
+
+/* ==================== SCROLL TO TOP BUTTON ==================== */
+(function () {
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function () {
+        var scrollTopWrapper = document.getElementById('braves-scroll-top-wrapper');
+        if (!scrollTopWrapper) return;
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 700) {
+                scrollTopWrapper.style.opacity = '1';
+                scrollTopWrapper.style.visibility = 'visible';
+            } else {
+                scrollTopWrapper.style.opacity = '0';
+                scrollTopWrapper.style.visibility = 'hidden';
+            }
+        }, { passive: true });
+    });
 })();

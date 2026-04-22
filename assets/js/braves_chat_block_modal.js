@@ -63,10 +63,7 @@ class BravesChatModal {
      */
     init() {
         console.log('Inicializando BravesChat Modal...');
-        console.log('BravesChatConfig completo:', window.BravesChatConfig);
-        console.log('Webhook URL:', this.webhook_url);
         console.log('Auth Token:', this.auth_token ? 'Configurado' : 'No configurado');
-        console.log('Auth Token value:', this.auth_token);
 
         // Elementos del DOM
         this.chat_container = document.getElementById('braveslab-chat-container');
@@ -408,11 +405,11 @@ class BravesChatModal {
         notice.className = 'braves-chat-gdpr-notice braves-gdpr-global-overlay';
         notice.innerHTML = `
             <div class="braves-gdpr-card">
-                <h3>${__('Términos y condiciones', 'braveschat')}</h3>
-                <p>${window.bravesFingerprint.gdpr_config.message || __('Al hacer clic en «Aceptar» y cada vez que interactúo con este agente de IA, doy mi consentimiento para que se graben, almacenen y compartan mis comunicaciones con terceros proveedores de servicios, tal y como se describe en la Política de privacidad. Si no desea que se graben sus conversaciones, le rogamos que se abstenga de utilizar este servicio.', 'braveschat')}</p>
+                <h3>${__('Terms and conditions', 'braveschat')}</h3>
+                <p>${window.bravesFingerprint.gdpr_config.message || __('By clicking "Accept" and each time I interact with this AI agent, I consent to my communications being recorded, stored and shared with third-party service providers, as described in the Privacy Policy. If you do not wish your conversations to be recorded, please refrain from using this service.', 'braveschat')}</p>
                 <div class="braves-gdpr-actions">
-                    <button class="braves-btn-cancel" id="braves-gdpr-cancel-btn">${__('Cancelar', 'braveschat')}</button>
-                    <button class="braves-btn-accept" id="braves-gdpr-accept-btn">${window.bravesFingerprint.gdpr_config.accept_text || __('Aceptar', 'braveschat')}</button>
+                    <button class="braves-btn-cancel" id="braves-gdpr-cancel-btn">${__('Cancel', 'braveschat')}</button>
+                    <button class="braves-btn-accept" id="braves-gdpr-accept-btn">${window.bravesFingerprint.gdpr_config.accept_text || __('Accept', 'braveschat')}</button>
                 </div>
             </div>
         `;
@@ -707,62 +704,61 @@ class BravesChatModal {
             this.hide_typing_indicator();
 
             // Construir mensaje de error descriptivo
-            let user_message = __('Error al procesar tu mensaje:', 'braveschat') + '\n\n';
+            let user_message = __('Error processing your message:', 'braveschat') + '\n\n';
             let technical_details = '';
 
             if (error.message.includes('Failed to fetch')) {
-                user_message += __('**No se pudo conectar con el servidor**', 'braveschat') + '\n\n';
-                user_message += __('Posibles causas:', 'braveschat') + '\n';
-                user_message += __('• Sin conexión a internet', 'braveschat') + '\n';
-                user_message += __('• El servidor N8N está caído', 'braveschat') + '\n';
-                user_message += __('• Problema de CORS', 'braveschat') + '\n';
-                user_message += __('• URL del webhook incorrecta', 'braveschat') + '\n\n';
+                user_message += __('**Could not connect to the server**', 'braveschat') + '\n\n';
+                user_message += __('Possible causes:', 'braveschat') + '\n';
+                user_message += __('• No internet connection', 'braveschat') + '\n';
+                user_message += __('• The N8N server is down', 'braveschat') + '\n';
+                user_message += __('• CORS problem', 'braveschat') + '\n';
+                user_message += __('• Incorrect webhook URL', 'braveschat') + '\n\n';
                 technical_details = `URL: ${this.webhook_url}\nError: ${error.message}`;
             } else if (error.message.includes('WEBHOOK_NOT_CONFIGURED')) {
-                user_message += __('**Webhook no configurado**', 'braveschat') + '\n\n';
-                user_message += __('El administrador debe configurar la URL del webhook en:', 'braveschat') + '\n';
-                user_message += __('WordPress Admin > Ajustes > BravesChat iA', 'braveschat') + '\n\n';
+                user_message += __('**Webhook not configured**', 'braveschat') + '\n\n';
+                user_message += __('The administrator must configure the webhook URL at:', 'braveschat') + '\n';
+                user_message += __('WordPress Admin > Settings > BravesChat iA', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('401') || error.message.includes('403')) {
-                user_message += __('**Error de autenticación**', 'braveschat') + '\n\n';
-                user_message += __('El token de autenticación es inválido o ha expirado.', 'braveschat') + '\n';
-                user_message += __('Contacta al administrador para verificar el token N8N.', 'braveschat') + '\n\n';
+                user_message += __('**Authentication error**', 'braveschat') + '\n\n';
+                user_message += __('The authentication token is invalid or has expired.', 'braveschat') + '\n';
+                user_message += __('Contact the administrator to verify the N8N token.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('404')) {
-                user_message += __('**Webhook no encontrado**', 'braveschat') + '\n\n';
-                user_message += __('La URL del webhook no existe o es incorrecta.', 'braveschat') + '\n';
-                user_message += __('Verifica la URL en los ajustes del plugin.', 'braveschat') + '\n\n';
+                user_message += __('**Webhook not found**', 'braveschat') + '\n\n';
+                user_message += __('The webhook URL does not exist or is incorrect.', 'braveschat') + '\n';
+                user_message += __('Check the URL in the plugin settings.', 'braveschat') + '\n\n';
                 technical_details = `URL: ${this.webhook_url}\n${error.message}`;
             } else if (error.message.includes('JSON_PARSE_ERROR')) {
-                user_message += __('**Respuesta inválida del servidor**', 'braveschat') + '\n\n';
-                user_message += __('El servidor N8N no devolvió un JSON válido.', 'braveschat') + '\n';
-                user_message += __('Verifica la configuración del workflow en N8N.', 'braveschat') + '\n\n';
+                user_message += __('**Invalid server response**', 'braveschat') + '\n\n';
+                user_message += __('The N8N server did not return a valid JSON.', 'braveschat') + '\n';
+                user_message += __('Check the workflow configuration in N8N.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('RESPONSE_FORMAT_ERROR')) {
-                user_message += __('**Formato de respuesta incorrecto**', 'braveschat') + '\n\n';
-                user_message += __('El servidor devolvió una respuesta pero sin el campo esperado.', 'braveschat') + '\n';
-                user_message += __('El webhook debe devolver: {output: "mensaje"} o {response: "mensaje"}', 'braveschat') + '\n\n';
+                user_message += __('**Incorrect response format**', 'braveschat') + '\n\n';
+                user_message += __('The server returned a response but without the expected field.', 'braveschat') + '\n';
+                user_message += __('The webhook must return: {output: "message"} or {response: "message"}', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else if (error.message.includes('500') || error.message.includes('502') || error.message.includes('503')) {
-                user_message += __('**Error del servidor**', 'braveschat') + '\n\n';
-                user_message += __('El servidor N8N tiene un problema interno.', 'braveschat') + '\n';
-                user_message += __('Contacta al administrador del servidor.', 'braveschat') + '\n\n';
+                user_message += __('**Server error**', 'braveschat') + '\n\n';
+                user_message += __('The N8N server has an internal problem.', 'braveschat') + '\n';
+                user_message += __('Contact the server administrator.', 'braveschat') + '\n\n';
                 technical_details = error.message;
             } else {
-                user_message += __('**Error desconocido**', 'braveschat') + '\n\n';
-                user_message += __('Ocurrió un error inesperado. Por favor, intenta de nuevo.', 'braveschat') + '\n\n';
+                user_message += __('**Unknown error**', 'braveschat') + '\n\n';
+                user_message += __('An unexpected error occurred. Please try again.', 'braveschat') + '\n\n';
                 technical_details = `${error.message}\n\nStack: ${error.stack}`;
             }
 
-            user_message += __('**Detalles técnicos:**', 'braveschat') + '\n';
+            user_message += __('**Technical details:**', 'braveschat') + '\n';
             user_message += '```\n' + technical_details + '\n```\n\n';
-            user_message += `${new Date().toLocaleString('es-ES')}`;
+            user_message += `${new Date().toLocaleString()}`;
 
             this.add_message(user_message, 'bot');
 
             // Log adicional para el administrador
             console.log('📊 INFORMACIÓN DE DEBUG:');
-            console.log('   - Webhook URL:', this.webhook_url);
             console.log('   - Auth Token configurado:', this.auth_token ? 'Sí' : 'No');
             console.log('   - Session ID:', this.session_id);
             console.log('   - Historial (mensajes):', this.conversation_history.length);
@@ -1113,11 +1109,10 @@ class BravesChatModal {
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
 
-        // 2. Parsear enlaces: [texto](url)
-        // Renderiza como <a href="url" target="_blank">texto</a>
+        // 2. Parsear enlaces: [texto](url) — solo acepta https?:// para prevenir javascript: XSS
         html = html.replace(
-            /\[([^\]]+)\]\(([^)]+)\)/g,
-            '<a href="$2" style="color: inherit; text-decoration: underline;">$1</a>'
+            /\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+            '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">$1</a>'
         );
 
         // 3. Parsear negrita: **texto**

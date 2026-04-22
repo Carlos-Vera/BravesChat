@@ -58,7 +58,7 @@ class Ajax_Handler {
             : '';
 
         if (empty($chat_input)) {
-            wp_send_json_error(array('message' => __('El mensaje no puede estar vacío.', 'braveschat')));
+            wp_send_json_error(array('message' => __('The message cannot be empty.', 'braveschat')));
         }
 
         // Obtener configuración desde el servidor (nunca desde el cliente)
@@ -68,11 +68,14 @@ class Ajax_Handler {
         $auth_token  = get_option('braves_chat_n8n_auth_token', '');
 
         if (empty($webhook_url)) {
-            wp_send_json_error(array('message' => __('El webhook de N8N no está configurado.', 'braveschat')));
+            wp_send_json_error(array('message' => __('The N8N webhook is not configured.', 'braveschat')));
         }
 
         // Construir cabeceras según el tipo de autenticación configurado
         $headers = array('Content-Type' => 'application/json');
+
+        // Sanitizar nombre del header para prevenir header injection (CRLF)
+        $auth_header = preg_replace( '/[^a-zA-Z0-9\-_]/', '', $auth_header );
 
         if ('basic' === $auth_type && !empty($auth_header) && !empty($auth_token)) {
             // Basic Auth: Authorization: Basic base64(usuario:contraseña)
@@ -108,7 +111,7 @@ class Ajax_Handler {
             wp_send_json_error(array(
                 'message' => sprintf(
                     /* translators: %d: HTTP response code */
-                    __('Error del webhook (HTTP %d).', 'braveschat'),
+                    __('Webhook error (HTTP %d).', 'braveschat'),
                     $http_code
                 ),
             ));

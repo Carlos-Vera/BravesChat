@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braveschat'));
+    wp_die(esc_html__('You do not have permission to access this page.', 'braveschat'));
 }
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
@@ -47,7 +47,7 @@ $option_prefix = 'braves_chat_';
         if (!$config_status['is_configured']) {
             ob_start();
             Template_Helpers::notice(
-                __('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'),
+                __('Almost there! Connect the Webhook URL in Settings so your agent can start working.', 'braveschat'),
                 'warning'
             );
             $notices_html .= ob_get_clean();
@@ -55,7 +55,7 @@ $option_prefix = 'braves_chat_';
         if ($settings_updated) {
             ob_start();
             Template_Helpers::notice(
-                __('Configuración guardada correctamente.', 'braveschat'),
+                __('Settings saved successfully.', 'braveschat'),
                 'success'
             );
             $notices_html .= ob_get_clean();
@@ -82,7 +82,7 @@ $option_prefix = 'braves_chat_';
                 <div class="braves-page-header">
                     <h1 class="braves-page-title"><strong><?php esc_html_e('GDPR', 'braveschat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php echo wp_kses_post( __('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR.<br/>El sistema utiliza cookies persistentes con fingerprinting del navegador.', 'braveschat') ); ?>
+                        <?php echo wp_kses_post( __('Configure the cookie consent banner to comply with GDPR regulations.<br/>The system uses persistent cookies with browser fingerprinting.', 'braveschat') ); ?>
                     </p>
                 </div>
 
@@ -101,7 +101,7 @@ $option_prefix = 'braves_chat_';
                     <!-- GDPR Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php esc_html_e('Compliance GDPR / Cookies', 'braveschat'); ?>
+                            <?php esc_html_e('GDPR / Cookie Compliance', 'braveschat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -122,14 +122,14 @@ $option_prefix = 'braves_chat_';
                                 <span class="braves-toggle-slider"></span>
                             </label>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Mostrar banner de consentimiento de cookies. El consentimiento se guarda en localStorage.', 'braveschat'); ?>
+                                <?php esc_html_e('Show cookie consent banner. Consent is saved in localStorage.', 'braveschat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Habilitar Banner GDPR', 'braveschat'),
-                                'description' => __('Muestra un banner de consentimiento antes de crear cookies.', 'braveschat'),
+                                'title' => __('Enable GDPR Banner', 'braveschat'),
+                                'description' => __('Shows a consent banner before creating cookies.', 'braveschat'),
                                 'content' => $toggle_content,
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -137,11 +137,11 @@ $option_prefix = 'braves_chat_';
 
                             <!-- Card: Mensaje del Banner -->
                             <?php
-                            $gdpr_message = get_option($option_prefix . 'gdpr_message', __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braveschat'));
+                            $gdpr_message = get_option($option_prefix . 'gdpr_message', __('This site uses cookies to improve your experience and provide a personalized chat service. By continuing to browse, you accept our cookie policy.', 'braveschat'));
                             ?>
                             <div class="braves-card braves-card--full-width">
-                                <h3 class="braves-card__title"><?php esc_html_e('Mensaje del Banner', 'braveschat'); ?></h3>
-                                <p class="braves-card__description"><?php esc_html_e('Texto informativo sobre el uso de cookies en el chat.', 'braveschat'); ?></p>
+                                <h3 class="braves-card__title"><?php esc_html_e('Banner Message', 'braveschat'); ?></h3>
+                                <p class="braves-card__description"><?php esc_html_e('Informational text about cookie usage in the chat.', 'braveschat'); ?></p>
                                 <div class="braves-card__content">
                                     <?php
                                     wp_editor($gdpr_message, 'braves_chat_gdpr_message', array(
@@ -153,14 +153,14 @@ $option_prefix = 'braves_chat_';
                                     ));
                                     ?>
                                     <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                        <?php esc_html_e('Mensaje que se mostrará en el banner de cookies. Puedes usar negritas, cursivas y enlaces.', 'braveschat'); ?>
+                                        <?php esc_html_e('Message shown in the cookie banner. You can use bold, italics and links.', 'braveschat'); ?>
                                     </p>
                                 </div>
                             </div>
 
                             <!-- Card: Texto del Botón de Aceptar -->
                             <?php
-                            $gdpr_accept_text = get_option($option_prefix . 'gdpr_accept_text', __('Aceptar', 'braveschat'));
+                            $gdpr_accept_text = get_option($option_prefix . 'gdpr_accept_text', __('Accept', 'braveschat'));
 
                             ob_start();
                             ?>
@@ -170,16 +170,16 @@ $option_prefix = 'braves_chat_';
                                    value="<?php echo esc_attr($gdpr_accept_text); ?>"
                                    class="braves-input"
                                    style="width: 100%;"
-                                   placeholder="<?php echo esc_attr(__('Aceptar', 'braveschat')); ?>">
+                                   placeholder="<?php echo esc_attr(__('Accept', 'braveschat')); ?>">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braveschat'); ?>
+                                <?php esc_html_e('Text for the cookie acceptance button (e.g.: "Accept", "Got it", "I agree").', 'braveschat'); ?>
                             </p>
                             <?php
                             $button_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Texto del Botón de Aceptar', 'braveschat'),
-                                'description' => __('Etiqueta del botón de aceptación de cookies.', 'braveschat'),
+                                'title' => __('Accept Button Text', 'braveschat'),
+                                'description' => __('Label for the cookie acceptance button.', 'braveschat'),
                                 'content' => $button_content,
                             ));
                             ?>

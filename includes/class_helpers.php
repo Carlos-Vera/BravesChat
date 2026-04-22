@@ -121,12 +121,12 @@ class Helpers {
     public static function get_welcome_message() {
         if (self::is_availability_enabled() && !self::is_within_availability_hours()) {
             return get_option('braves_chat_availability_message',
-                __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat')
+                __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat')
             );
         }
 
         return get_option('braves_chat_welcome_message',
-            __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braveschat')
+            __("Hello! I'm the BravesLab assistant, your Artificial Intelligence Marketing Agency. We integrate AI into businesses to multiply results. How can we help you?", 'braveschat')
         );
     }
 
@@ -142,7 +142,6 @@ class Helpers {
     public static function get_chat_config() {
         return array(
             'webhook_url'     => get_option('braves_chat_webhook_url'),
-            'n8n_auth_token'  => get_option('braves_chat_n8n_auth_token', ''),
             'header_title'    => get_option('braves_chat_header_title'),
             'header_subtitle' => get_option('braves_chat_header_subtitle'),
             'welcome_message' => self::get_welcome_message(),
@@ -150,7 +149,7 @@ class Helpers {
             'display_mode'    => get_option('braves_chat_display_mode', 'modal'),
             'skin'            => get_option('braves_chat_chat_skin', 'default'),
             'bubble_image'    => get_option('braves_chat_bubble_image', ''),
-            'bubble_text'     => get_option('braves_chat_bubble_text', __('Chat de voz', 'braveschat')),
+            'bubble_text'     => get_option('braves_chat_bubble_text', __('Voice chat', 'braveschat')),
             'is_available'    => !self::is_availability_enabled() || self::is_within_availability_hours(),
         );
     }
@@ -174,7 +173,7 @@ class Helpers {
             'displayMode'     => get_option('braves_chat_display_mode', 'modal'),
             'chatSkin'        => get_option('braves_chat_chat_skin', 'default'),
             'bubbleImage'     => get_option('braves_chat_bubble_image', ''),
-            'bubbleText'      => get_option('braves_chat_bubble_text', __('¿Necesitas ayuda?', 'braveschat')),
+            'bubbleText'      => get_option('braves_chat_bubble_text', __('Need help?', 'braveschat')),
         );
         
         $attributes = wp_parse_args($attributes, $defaults);

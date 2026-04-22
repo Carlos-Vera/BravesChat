@@ -203,8 +203,8 @@ class Admin_Controller {
 
         add_submenu_page(
             'braveschat',
-            __('Ajustes', 'braveschat'),
-            __('Ajustes', 'braveschat'),
+            __('Settings', 'braveschat'),
+            __('Settings', 'braveschat'),
             'manage_options',
             'braveschat-settings',
             array($this, 'render_settings_page')
@@ -212,8 +212,8 @@ class Admin_Controller {
 
         add_submenu_page(
             'braveschat',
-            __('Apariencia', 'braveschat'),
-            __('Apariencia', 'braveschat'),
+            __('Appearance', 'braveschat'),
+            __('Appearance', 'braveschat'),
             'manage_options',
             'braveschat-appearance',
             array($this, 'render_appearance_page')
@@ -221,8 +221,8 @@ class Admin_Controller {
 
         add_submenu_page(
             'braveschat',
-            __('Horarios', 'braveschat'),
-            __('Horarios', 'braveschat'),
+            __('Schedules', 'braveschat'),
+            __('Schedules', 'braveschat'),
             'manage_options',
             'braveschat-availability',
             array($this, 'render_availability_page')
@@ -239,8 +239,8 @@ class Admin_Controller {
 
         add_submenu_page(
             'braveschat',
-            __('Acerca de', 'braveschat'),
-            __('Acerca de', 'braveschat'),
+            __('About', 'braveschat'),
+            __('About', 'braveschat'),
             'manage_options',
             'braveschat-about',
             array($this, 'render_about_page')
@@ -248,8 +248,8 @@ class Admin_Controller {
 
         add_submenu_page(
             'braveschat',
-            __('Historial', 'braveschat'),
-            __('Historial', 'braveschat'),
+            __('History', 'braveschat'),
+            __('History', 'braveschat'),
             'manage_options',
             'braveschat-history',
             array($this, 'render_history_page')
@@ -476,11 +476,14 @@ class Admin_Controller {
         // History page script (previously inline in history.php template)
         if ( strpos( $hook, 'braveschat-history' ) !== false ) {
             $history_data = array(
-                'agentName' => get_option( 'braves_chat_agent_name', '' ) ?: __( 'Agente', 'braveschat' ),
+                'agentName' => get_option( 'braves_chat_agent_name', '' ) ?: __( 'Agent', 'braveschat' ),
                 'i18n'      => array(
-                    'chatEmpty'  => __( 'Chat vacío o formato inválido.', 'braveschat' ),
-                    'chatError'  => __( 'No se pudo visualizar el chat.', 'braveschat' ),
-                    'chatNoData' => __( 'No hay datos de historial.', 'braveschat' ),
+                    'chatEmpty'              => __( 'Empty chat or invalid format.', 'braveschat' ),
+                    'chatError'              => __( 'Could not display the conversation.', 'braveschat' ),
+                    'chatNoData'             => __( 'No conversation data.', 'braveschat' ),
+                    'anonymousConversation'  => __( 'Anonymous Conversation', 'braveschat' ),
+                    'session'                => __( 'Session', 'braveschat' ),
+                    'user'                   => __( 'User', 'braveschat' ),
                 ),
             );
             wp_add_inline_script(
@@ -554,11 +557,11 @@ document.addEventListener(\'DOMContentLoaded\', function() {
                 var clientName     = this.getAttribute(\'data-client-name\') || \'\';
                 var updateAt       = this.getAttribute(\'data-update-at\') || \'\';
 
-                modalTitle.textContent = clientName || \'Conversación Anónima\';
+                modalTitle.textContent = clientName || bravesHistoryData.i18n.anonymousConversation;
 
                 var sessionIdShort = sessionId.length > 7 ? \'…\' + sessionId.slice(-7) : sessionId;
                 var dateOnly = updateAt ? updateAt.split(\' \')[0] : \'\';
-                var subtitleParts = [\'Session: \' + sessionIdShort];
+                var subtitleParts = [bravesHistoryData.i18n.session + \': \' + sessionIdShort];
                 if (dateOnly) subtitleParts.push(dateOnly);
                 modalSubtitle.textContent = subtitleParts.join(\' · \');
 
@@ -597,7 +600,7 @@ document.addEventListener(\'DOMContentLoaded\', function() {
 
                                 var labelDiv = document.createElement(\'div\');
                                 labelDiv.className = \'braves-history-chat-sender\';
-                                labelDiv.textContent = isUser ? (clientName || \'Usuario\') : bravesAgentName;
+                                labelDiv.textContent = isUser ? (clientName || bravesHistoryData.i18n.user) : bravesAgentName;
 
                                 var msgDiv = document.createElement(\'div\');
                                 msgDiv.className = \'braves-history-chat-bubble \' + (isUser ? \'braves-history-chat-bubble--user\' : \'braves-history-chat-bubble--ai\');
@@ -657,6 +660,51 @@ document.addEventListener(\'DOMContentLoaded\', function() {
     }
 
 });'
+            );
+        }
+
+        // About page — timeline auto-layout script
+        if ( strpos( $hook, 'braveschat-about' ) !== false ) {
+            wp_add_inline_script(
+                'braves-admin-settings',
+'(function () {
+    function layoutTimeline() {
+        var items = Array.from(document.querySelectorAll(\'.braves-timeline__item\'));
+        if (items.length < 2) return;
+
+        // Reset previously applied nudges so resize works correctly
+        items.forEach(function (item) {
+            var card = item.querySelector(\'.braves-timeline__card-side\');
+            var axis = item.querySelector(\'.braves-timeline__axis\');
+            if (card) card.style.marginTop = \'\';
+            if (axis) axis.style.marginTop = \'\';
+        });
+
+        for (var i = 1; i < items.length; i++) {
+            var prevCard = items[i - 1].querySelector(\'.braves-timeline__card-side\');
+            var currCard = items[i].querySelector(\'.braves-timeline__card-side\');
+            var currAxis = items[i].querySelector(\'.braves-timeline__axis\');
+            if (!prevCard || !currCard || !currAxis) continue;
+
+            // Pull the current item up so its badge sits at the midpoint of the previous card.
+            // A small positive offset (32px) keeps the badge from touching the previous card edge.
+            var nudge = -(prevCard.offsetHeight / 2) + 32;
+
+            currCard.style.marginTop = nudge + \'px\';
+            currAxis.style.marginTop = nudge + \'px\';
+        }
+    }
+
+    document.addEventListener(\'DOMContentLoaded\', function () {
+        layoutTimeline();
+        // Recalculate on resize (font size / zoom changes card heights)
+        var resizeTimer;
+        window.addEventListener(\'resize\', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(layoutTimeline, 100);
+        });
+    });
+})();'
             );
         }
     }
@@ -736,13 +784,13 @@ document.addEventListener(\'DOMContentLoaded\', function() {
 
         // Mapeo de páginas a títulos
         $page_titles = array(
-            'toplevel_page_braveschat' => __('Resumen', 'braveschat'),
-            'braveschat_page_braveschat-settings' => __('Ajustes', 'braveschat'),
-            'braveschat_page_braveschat-appearance' => __('Apariencia', 'braveschat'),
-            'braveschat_page_braveschat-availability' => __('Horarios', 'braveschat'),
+            'toplevel_page_braveschat' => __('Overview', 'braveschat'),
+            'braveschat_page_braveschat-settings' => __('Settings', 'braveschat'),
+            'braveschat_page_braveschat-appearance' => __('Appearance', 'braveschat'),
+            'braveschat_page_braveschat-availability' => __('Schedules', 'braveschat'),
             'braveschat_page_braveschat-gdpr' => __('GDPR', 'braveschat'),
-            'braveschat_page_braveschat-about' => __('Acerca de', 'braveschat'),
-            'braveschat_page_braveschat-history' => __('Historial', 'braveschat'),
+            'braveschat_page_braveschat-about' => __('About', 'braveschat'),
+            'braveschat_page_braveschat-history' => __('History', 'braveschat'),
         );
 
         // Obtener título de la sección actual

@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braveschat'));
+    wp_die(esc_html__('You do not have permission to access this page.', 'braveschat'));
 }
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
@@ -47,7 +47,7 @@ $option_prefix = 'braves_chat_';
         if (!$config_status['is_configured']) {
             ob_start();
             Template_Helpers::notice(
-                __('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'),
+                __('Almost there! Connect the Webhook URL in Settings so your agent can start working.', 'braveschat'),
                 'warning'
             );
             $notices_html .= ob_get_clean();
@@ -55,7 +55,7 @@ $option_prefix = 'braves_chat_';
         if ($settings_updated) {
             ob_start();
             Template_Helpers::notice(
-                __('Configuración guardada correctamente.', 'braveschat'),
+                __('Settings saved successfully.', 'braveschat'),
                 'success'
             );
             $notices_html .= ob_get_clean();
@@ -80,9 +80,9 @@ $option_prefix = 'braves_chat_';
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><strong><?php esc_html_e('Horarios', 'braveschat'); ?></strong></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('Availability', 'braveschat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php esc_html_e('Configura los horarios de disponibilidad del chat. Cuando está activado, el chat solo estará disponible durante el horario especificado.', 'braveschat'); ?>
+                        <?php esc_html_e('Configure the chat availability schedule. When enabled, the chat will only be available during the specified hours.', 'braveschat'); ?>
                     </p>
                 </div>
 
@@ -103,7 +103,7 @@ $option_prefix = 'braves_chat_';
                     <!-- Horarios Section -->
                     <div class="braves-section">
                         <h2 class="braves-section__title">
-                            <?php esc_html_e('Configuración de Horarios', 'braveschat'); ?>
+                            <?php esc_html_e('Schedule Settings', 'braveschat'); ?>
                         </h2>
 
                         <div class="braves-card-grid braves-card-grid--2-cols">
@@ -124,14 +124,14 @@ $option_prefix = 'braves_chat_';
                                 <span class="braves-toggle-slider"></span>
                             </label>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Activar restricción por horarios de atención', 'braveschat'); ?>
+                                <?php esc_html_e('Enable business hours restriction', 'braveschat'); ?>
                             </p>
                             <?php
                             $toggle_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Habilitar Horarios', 'braveschat'),
-                                'description' => __('Activa las restricciones de horario para el chat.', 'braveschat'),
+                                'title' => __('Enable Schedule', 'braveschat'),
+                                'description' => __('Activate schedule restrictions for the chat.', 'braveschat'),
                                 'content' => $toggle_content,
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -156,14 +156,14 @@ $option_prefix = 'braves_chat_';
                                 <?php endforeach; ?>
                             </select>
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Zona horaria de referencia para los horarios configurados.', 'braveschat'); ?>
+                                <?php esc_html_e('Reference timezone for the configured schedule.', 'braveschat'); ?>
                             </p>
                             <?php
                             $timezone_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Zona Horaria', 'braveschat'),
-                                'description' => __('Zona horaria de referencia para el horario.', 'braveschat'),
+                                'title' => __('Timezone', 'braveschat'),
+                                'description' => __('Reference timezone for the schedule.', 'braveschat'),
                                 'content' => $timezone_content,
                                 'custom_class' => 'braves-card--full-width',
                             ));
@@ -182,14 +182,14 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Hora de inicio del horario de atención (formato 24h).', 'braveschat'); ?>
+                                <?php esc_html_e('Start time of the business hours (24h format).', 'braveschat'); ?>
                             </p>
                             <?php
                             $start_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Hora de Inicio', 'braveschat'),
-                                'description' => __('Hora en que el chat comienza a estar disponible.', 'braveschat'),
+                                'title' => __('Start Time', 'braveschat'),
+                                'description' => __('Time when the chat becomes available.', 'braveschat'),
                                 'content' => $start_content,
                             ));
                             ?>
@@ -207,25 +207,25 @@ $option_prefix = 'braves_chat_';
                                    class="braves-input"
                                    style="width: 100%;">
                             <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                <?php esc_html_e('Hora de fin del horario de atención (formato 24h).', 'braveschat'); ?>
+                                <?php esc_html_e('End time of the business hours (24h format).', 'braveschat'); ?>
                             </p>
                             <?php
                             $end_content = ob_get_clean();
 
                             Template_Helpers::card(array(
-                                'title' => __('Hora de Fin', 'braveschat'),
-                                'description' => __('Hora en que el chat deja de estar disponible.', 'braveschat'),
+                                'title' => __('End Time', 'braveschat'),
+                                'description' => __('Time when the chat stops being available.', 'braveschat'),
                                 'content' => $end_content,
                             ));
                             ?>
 
                             <!-- Card: Mensaje Fuera de Horario -->
                             <?php
-                            $availability_message = get_option($option_prefix . 'availability_message', __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat'));
+                            $availability_message = get_option($option_prefix . 'availability_message', __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat'));
                             ?>
                             <div class="braves-card braves-card--full-width">
-                                <h3 class="braves-card__title"><?php esc_html_e('Mensaje Fuera de Horario', 'braveschat'); ?></h3>
-                                <p class="braves-card__description"><?php esc_html_e('Texto que verán los usuarios fuera del horario de atención.', 'braveschat'); ?></p>
+                                <h3 class="braves-card__title"><?php esc_html_e('Off-Hours Message', 'braveschat'); ?></h3>
+                                <p class="braves-card__description"><?php esc_html_e('Text users will see outside business hours.', 'braveschat'); ?></p>
                                 <div class="braves-card__content">
                                     <?php
                                     wp_editor($availability_message, 'braves_chat_availability_message', array(
@@ -237,7 +237,7 @@ $option_prefix = 'braves_chat_';
                                     ));
                                     ?>
                                     <p class="braves-field-help" style="margin-top: 8px; font-size: 13px; color: #666;">
-                                        <?php esc_html_e('Mensaje que se mostrará cuando el usuario intente usar el chat fuera del horario de atención.', 'braveschat'); ?>
+                                        <?php esc_html_e('Message shown when the user tries to use the chat outside business hours.', 'braveschat'); ?>
                                     </p>
                                 </div>
                             </div>

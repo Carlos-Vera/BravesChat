@@ -112,14 +112,14 @@ class Settings {
         check_ajax_referer('braves_save_auth_type', 'nonce');
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(array('message' => __('Sin permisos.', 'braveschat')));
+            wp_send_json_error(array('message' => __('Unauthorized.', 'braveschat')));
         }
 
         $allowed = array('none', 'header', 'basic');
         $type    = sanitize_text_field(wp_unslash($_POST['auth_type'] ?? ''));
 
         if (!in_array($type, $allowed, true)) {
-            wp_send_json_error(array('message' => __('Tipo de autenticación inválido.', 'braveschat')));
+            wp_send_json_error(array('message' => __('Invalid authentication type.', 'braveschat')));
         }
 
         update_option($this->option_prefix . 'n8n_auth_type', $type);
@@ -185,7 +185,7 @@ class Settings {
                 }
             } elseif (is_bool($value) || $value === '1' || $value === '0') {
                 // Para checkboxes
-                echo '<input type="hidden" name="' . esc_attr($option_name) . '" value="' . ($value ? '1' : '0') . '">';
+                echo '<input type="hidden" name="' . esc_attr($option_name) . '" value="' . esc_attr( $value ? '1' : '0' ) . '">';
             } else {
                 // Para campos de texto normales
                 echo '<input type="hidden" name="' . esc_attr($option_name) . '" value="' . esc_attr($value) . '">';
@@ -230,8 +230,8 @@ class Settings {
         // Agregar submenú "Ajustes"
         add_submenu_page(
             'braves-chat-ia',                              // parent_slug
-            __('Ajustes', 'braveschat'),                  // page_title
-            __('Ajustes', 'braveschat'),                  // menu_title
+            __('Settings', 'braveschat'),                  // page_title
+            __('Settings', 'braveschat'),                  // menu_title
             'manage_options',                             // capability
             'braves-chat-settings',                        // menu_slug
             array($this, 'render_settings_page')          // callback
@@ -323,7 +323,7 @@ class Settings {
         // ==================== SECCIÓN GENERAL ====================
         add_settings_section(
             'braves_chat_general_section',
-            __('Configuración General', 'braveschat'),
+            __('General Settings', 'braveschat'),
             array($this, 'general_section_callback'),
             'braves_chat_settings'
         );
@@ -337,7 +337,7 @@ class Settings {
         
         add_settings_field(
             'global_enable',
-            __('Mostrar en toda la web', 'braveschat'),
+            __('Show across the entire website', 'braveschat'),
             array($this, 'global_enable_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -352,7 +352,7 @@ class Settings {
         
         add_settings_field(
             'webhook_url',
-            __('URL del Webhook', 'braveschat'),
+            __('Webhook URL', 'braveschat'),
             array($this, 'webhook_url_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -379,7 +379,7 @@ class Settings {
         
         add_settings_field(
             'n8n_auth_token',
-            __('Token de Autenticación N8N', 'braveschat'),
+            __('N8N Authentication Token', 'braveschat'),
             array($this, 'n8n_auth_token_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -395,7 +395,7 @@ class Settings {
 
         add_settings_field(
             'typing_speed',
-            __('Velocidad de Escritura', 'braveschat'),
+            __('Typing Speed', 'braveschat'),
             array($this, 'typing_speed_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -410,7 +410,7 @@ class Settings {
         
         add_settings_field(
             'header_title',
-            __('Título del Header', 'braveschat'),
+            __('Header Title', 'braveschat'),
             array($this, 'header_title_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -420,12 +420,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'header_status_text', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => __('Chateando con Charlie', 'braveschat')
+            'default' => __('Chatting with Charlie', 'braveschat')
         ));
         
         add_settings_field(
             'header_status_text',
-            __('Texto de Estado del Header', 'braveschat'),
+            __('Header Status Text', 'braveschat'),
             array($this, 'header_status_text_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -440,7 +440,7 @@ class Settings {
         
         add_settings_field(
             'header_subtitle',
-            __('Subtítulo del Header', 'braveschat'),
+            __('Header Subtitle', 'braveschat'),
             array($this, 'header_subtitle_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -450,12 +450,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'welcome_message', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_textarea_field',
-            'default' => __('¡Hola! Soy el asistente de BravesLab, tu Artificial Intelligence Marketing Agency. Integramos IA en empresas para multiplicar resultados. ¿Cómo podemos ayudarte?', 'braveschat')
+            'default' => __('Hello! I\'m the BravesLab assistant, your Artificial Intelligence Marketing Agency. We integrate AI into businesses to multiply results. How can we help you?', 'braveschat')
         ));
         
         add_settings_field(
             'welcome_message',
-            __('Mensaje de Bienvenida', 'braveschat'),
+            __('Welcome Message', 'braveschat'),
             array($this, 'welcome_message_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -470,7 +470,7 @@ class Settings {
         
         add_settings_field(
             'position',
-            __('Posición del Chat', 'braveschat'),
+            __('Chat Position', 'braveschat'),
             array($this, 'position_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -485,7 +485,7 @@ class Settings {
         
         add_settings_field(
             'display_mode',
-            __('Modo de Visualización', 'braveschat'),
+            __('Display Mode', 'braveschat'),
             array($this, 'display_mode_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -509,7 +509,7 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'bubble_tooltip', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => __('Habla con nuestro asistente IA', 'braveschat')
+            'default' => __('Chat with our AI assistant', 'braveschat')
         ));
 
         // Bubble Color
@@ -558,12 +558,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'bubble_text', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => 'Chat de voz' // translators: default label for voice bubble text
+            'default' => 'Voice chat' // translators: default label for voice bubble text
         ));
 
         add_settings_field(
             'bubble_text',
-            __('Texto de Burbuja', 'braveschat'),
+            __('Bubble Text', 'braveschat'),
             array($this, 'bubble_text_callback'),
             'braves_chat_settings',
             'braves_chat_general_section'
@@ -573,7 +573,7 @@ class Settings {
         // ==================== SECCIÓN PÁGINAS EXCLUIDAS ====================
         add_settings_section(
             'braves_chat_exclusions_section',
-            __('Páginas Excluidas', 'braveschat'),
+            __('Excluded Pages', 'braveschat'),
             array($this, 'exclusions_section_callback'),
             'braves_chat_settings'
         );
@@ -586,7 +586,7 @@ class Settings {
         
         add_settings_field(
             'excluded_pages',
-            __('Páginas donde NO mostrar el chat', 'braveschat'),
+            __('Pages where chat should NOT be shown', 'braveschat'),
             array($this, 'excluded_pages_callback'),
             'braves_chat_settings',
             'braves_chat_exclusions_section'
@@ -595,7 +595,7 @@ class Settings {
         // ==================== SECCIÓN DISPONIBILIDAD ====================
         add_settings_section(
             'braves_chat_availability_section',
-            __('Horarios de Disponibilidad', 'braveschat'),
+            __('Availability Schedule', 'braveschat'),
             array($this, 'availability_section_callback'),
             'braves_chat_settings'
         );
@@ -609,7 +609,7 @@ class Settings {
         
         add_settings_field(
             'availability_enabled',
-            __('Habilitar Horarios', 'braveschat'),
+            __('Enable Schedule', 'braveschat'),
             array($this, 'availability_enabled_callback'),
             'braves_chat_settings',
             'braves_chat_availability_section'
@@ -624,7 +624,7 @@ class Settings {
         
         add_settings_field(
             'availability_start',
-            __('Hora de Inicio', 'braveschat'),
+            __('Start Time', 'braveschat'),
             array($this, 'availability_start_callback'),
             'braves_chat_settings',
             'braves_chat_availability_section'
@@ -639,7 +639,7 @@ class Settings {
         
         add_settings_field(
             'availability_end',
-            __('Hora de Fin', 'braveschat'),
+            __('End Time', 'braveschat'),
             array($this, 'availability_end_callback'),
             'braves_chat_settings',
             'braves_chat_availability_section'
@@ -654,7 +654,7 @@ class Settings {
         
         add_settings_field(
             'availability_timezone',
-            __('Zona Horaria', 'braveschat'),
+            __('Timezone', 'braveschat'),
             array($this, 'availability_timezone_callback'),
             'braves_chat_settings',
             'braves_chat_availability_section'
@@ -664,12 +664,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'availability_message', array(
             'type' => 'string',
             'sanitize_callback' => 'wp_kses_post',
-            'default' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat')
+            'default' => __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat')
         ));
         
         add_settings_field(
             'availability_message',
-            __('Mensaje Fuera de Horario', 'braveschat'),
+            __('Offline Message', 'braveschat'),
             array($this, 'availability_message_callback'),
             'braves_chat_settings',
             'braves_chat_availability_section'
@@ -678,7 +678,7 @@ class Settings {
         // ==================== SECCIÓN GDPR/COOKIES ====================
         add_settings_section(
             'braves_chat_gdpr_section',
-            __('Compliance GDPR / Cookies', 'braveschat'),
+            __('GDPR / Cookies Compliance', 'braveschat'),
             array($this, 'gdpr_section_callback'),
             'braves_chat_settings'
         );
@@ -692,7 +692,7 @@ class Settings {
 
         add_settings_field(
             'gdpr_enabled',
-            __('Habilitar Banner GDPR', 'braveschat'),
+            __('Enable GDPR Banner', 'braveschat'),
             array($this, 'gdpr_enabled_callback'),
             'braves_chat_settings',
             'braves_chat_gdpr_section'
@@ -702,12 +702,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'gdpr_message', array(
             'type' => 'string',
             'sanitize_callback' => 'wp_kses_post',
-            'default' => __('Este sitio utiliza cookies para mejorar tu experiencia y proporcionar un servicio de chat personalizado. Al continuar navegando, aceptas nuestra política de cookies.', 'braveschat')
+            'default' => __('This site uses cookies to improve your experience and provide a personalized chat service. By continuing to browse, you accept our cookie policy.', 'braveschat')
         ));
 
         add_settings_field(
             'gdpr_message',
-            __('Mensaje del Banner', 'braveschat'),
+            __('Banner Message', 'braveschat'),
             array($this, 'gdpr_message_callback'),
             'braves_chat_settings',
             'braves_chat_gdpr_section'
@@ -717,12 +717,12 @@ class Settings {
         register_setting('braves_chat_settings', $this->option_prefix . 'gdpr_accept_text', array(
             'type' => 'string',
             'sanitize_callback' => 'sanitize_text_field',
-            'default' => __('Aceptar', 'braveschat')
+            'default' => __('Accept', 'braveschat')
         ));
 
         add_settings_field(
             'gdpr_accept_text',
-            __('Texto del Botón de Aceptar', 'braveschat'),
+            __('Accept Button Text', 'braveschat'),
             array($this, 'gdpr_accept_text_callback'),
             'braves_chat_settings',
             'braves_chat_gdpr_section'
@@ -757,7 +757,7 @@ class Settings {
      * @return void
      */
     public function general_section_callback() {
-        echo '<p>' . esc_html__('Configure los ajustes generales del chat.', 'braveschat') . '</p>';
+        echo '<p>' . esc_html__('Configure general chat settings.', 'braveschat') . '</p>';
     }
 
     /**
@@ -767,7 +767,7 @@ class Settings {
      * @return void
      */
     public function exclusions_section_callback() {
-        echo '<p>' . esc_html__('Seleccione las páginas donde NO desea mostrar el widget de chat.', 'braveschat') . '</p>';
+        echo '<p>' . esc_html__('Select the pages where you do NOT want to show the chat widget.', 'braveschat') . '</p>';
     }
 
     /**
@@ -777,7 +777,7 @@ class Settings {
      * @return void
      */
     public function availability_section_callback() {
-        echo '<p>' . esc_html__('Configure los horarios de disponibilidad del chat.', 'braveschat') . '</p>';
+        echo '<p>' . esc_html__('Configure chat availability schedule.', 'braveschat') . '</p>';
     }
 
     /**
@@ -787,7 +787,7 @@ class Settings {
      * @return void
      */
     public function gdpr_section_callback() {
-        echo '<p>' . esc_html__('Configure el banner de consentimiento de cookies para cumplir con las regulaciones GDPR. El sistema utiliza cookies persistentes con fingerprinting del navegador para identificar usuarios únicamente.', 'braveschat') . '</p>';
+        echo '<p>' . esc_html__('Configure the cookie consent banner to comply with GDPR regulations. The system uses persistent cookies with browser fingerprinting to uniquely identify users.', 'braveschat') . '</p>';
     }
     
     // ==================== CALLBACKS DE CAMPOS ====================
@@ -798,7 +798,7 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label>',
             esc_attr($this->option_prefix . 'global_enable'),
             checked(1, $value, false),
-            esc_html__('Mostrar el chat en todas las páginas del sitio', 'braveschat')
+            esc_html__('Show the chat on all pages of the site', 'braveschat')
         );
     }
 
@@ -808,7 +808,7 @@ class Settings {
             '<input type="url" name="%s" value="%s" class="regular-text" placeholder="https://flow.braveslab.com/webhook/..." /><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'webhook_url'),
             esc_attr($value),
-            esc_html__('URL del webhook de N8N para procesar los mensajes.', 'braveschat')
+            esc_html__('N8N webhook URL to process messages.', 'braveschat')
         );
     }
 
@@ -827,11 +827,11 @@ class Settings {
             placeholder="••••••••••••••••"
         />
         <p class="description">
-            <?php esc_html_e('Token secreto para autenticar las peticiones al webhook de N8N (Header Auth X-N8N-Auth). Déjalo vacío si no usas autenticación.', 'braveschat'); ?>
+            <?php esc_html_e('Secret token to authenticate requests to the N8N webhook (Header Auth X-N8N-Auth). Leave empty if you do not use authentication.', 'braveschat'); ?>
         </p>
         <p class="description">
-            <strong><?php esc_html_e('Importante:', 'braveschat'); ?></strong>
-            <?php esc_html_e('Este token se enviará en cada petición al webhook para verificar que proviene del plugin.', 'braveschat'); ?>
+            <strong><?php esc_html_e('Important:', 'braveschat'); ?></strong>
+            <?php esc_html_e('This token will be sent in every webhook request to verify it comes from the plugin.', 'braveschat'); ?>
         </p>
         <?php
     }
@@ -860,8 +860,8 @@ class Settings {
             '<input type="text" name="%s" value="%s" class="regular-text" placeholder="%s" /><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'header_status_text'),
             esc_attr($value),
-            esc_attr__('Ej: Chateando con Charlie', 'braveschat'),
-            esc_html__('Texto que aparece con animación al lado del avatar.', 'braveschat')
+            esc_attr__('Ex: Chatting with Charlie', 'braveschat'),
+            esc_html__('Text displayed with animation next to the avatar.', 'braveschat')
         );
     }
     
@@ -877,9 +877,9 @@ class Settings {
     public function position_callback() {
         $value = get_option($this->option_prefix . 'position');
         $positions = array(
-            'bottom-right' => __('Abajo Derecha', 'braveschat'),
-            'bottom-left' => __('Abajo Izquierda', 'braveschat'),
-            'center' => __('Centro', 'braveschat')
+            'bottom-right' => __('Bottom Right', 'braveschat'),
+            'bottom-left' => __('Bottom Left', 'braveschat'),
+            'center' => __('Center', 'braveschat')
         );
         
         echo '<select name="' . esc_attr($this->option_prefix . 'position') . '">';
@@ -897,8 +897,8 @@ class Settings {
     public function display_mode_callback() {
         $value = get_option($this->option_prefix . 'display_mode');
         $modes = array(
-            'modal' => __('Modal (Ventana emergente)', 'braveschat'),
-            'fullscreen' => __('Pantalla completa', 'braveschat')
+            'modal' => __('Modal (Popup)', 'braveschat'),
+            'fullscreen' => __('Fullscreen', 'braveschat')
         );
         
         echo '<select name="' . esc_attr($this->option_prefix . 'display_mode') . '">';
@@ -914,14 +914,14 @@ class Settings {
     }
     
     public function bubble_text_callback() {
-        $value = get_option($this->option_prefix . 'bubble_text', __('Chat de voz', 'braveschat'));
+        $value = get_option($this->option_prefix . 'bubble_text', __('Voice chat', 'braveschat'));
         printf(
             '<input type="text" name="%s" value="%s" class="regular-text" placeholder="%s" />',
             esc_attr($this->option_prefix . 'bubble_text'),
             esc_attr($value),
-            esc_attr(__('Chat de voz', 'braveschat'))
+            esc_attr(__('Voice chat', 'braveschat'))
         );
-        echo '<p class="description">' . esc_html__('Texto que aparece junto a la imagen de la burbuja (solo para skin Braves).', 'braveschat') . '</p>';
+        echo '<p class="description">' . esc_html__('Text displayed next to the bubble image (for Braves skin only).', 'braveschat') . '</p>';
     }
     
     public function excluded_pages_callback() {
@@ -938,7 +938,7 @@ class Settings {
             );
         }
         echo '</select>';
-        echo '<p class="description">' . esc_html__('Mantenga presionado Ctrl (Cmd en Mac) para seleccionar múltiples páginas.', 'braveschat') . '</p>';
+        echo '<p class="description">' . esc_html__('Hold Ctrl (Cmd on Mac) to select multiple pages.', 'braveschat') . '</p>';
     }
     
     public function availability_enabled_callback() {
@@ -947,7 +947,7 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label>',
             esc_attr($this->option_prefix . 'availability_enabled'),
             checked(1, $value, false),
-            esc_html__('Activar restricción por horarios', 'braveschat')
+            esc_html__('Enable schedule restriction', 'braveschat')
         );
     }
 
@@ -1000,8 +1000,8 @@ class Settings {
             '<label><input type="checkbox" name="%s" value="1" %s /> %s</label><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_enabled'),
             checked(1, $value, false),
-            esc_html__('Mostrar banner de consentimiento de cookies', 'braveschat'),
-            esc_html__('Cuando está habilitado, se mostrará un banner solicitando consentimiento antes de crear cookies. El consentimiento se guarda en localStorage.', 'braveschat')
+            esc_html__('Show cookie consent banner', 'braveschat'),
+            esc_html__('When enabled, a consent banner will be shown before creating cookies. Consent is saved in localStorage.', 'braveschat')
         );
     }
 
@@ -1011,7 +1011,7 @@ class Settings {
             '<textarea name="%s" rows="4" class="large-text">%s</textarea><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_message'),
             esc_textarea($value),
-            esc_html__('Mensaje que se mostrará en el banner de cookies. Explica el uso de cookies para la sesión del chat.', 'braveschat')
+            esc_html__('Message displayed in the cookie banner. Explain the use of cookies for the chat session.', 'braveschat')
         );
     }
 
@@ -1021,7 +1021,7 @@ class Settings {
             '<input type="text" name="%s" value="%s" class="regular-text" /><p class="description">%s</p>',
             esc_attr($this->option_prefix . 'gdpr_accept_text'),
             esc_attr($value),
-            esc_html__('Texto del botón para aceptar las cookies (ej: "Aceptar", "Entendido", "Acepto").', 'braveschat')
+            esc_html__('Button text to accept cookies (e.g., "Accept", "Got it", "I agree").', 'braveschat')
         );
     }
 
@@ -1240,17 +1240,17 @@ class Settings {
                     ),
                     'header' => array(
                         'show'        => true,
-                        'headerLabel' => __( 'Nombre del header', 'braveschat' ),
-                        'headerHelp'  => __( 'Ej: X-N8N-Auth. Debe coincidir con el "Header Name" configurado en N8N → Header Auth.', 'braveschat' ),
-                        'tokenLabel'  => __( 'Valor del token', 'braveschat' ),
-                        'tokenHelp'   => __( 'Token secreto enviado como valor del header.', 'braveschat' ),
+                        'headerLabel' => __( 'Header name', 'braveschat' ),
+                        'headerHelp'  => __( 'E.g., X-N8N-Auth. Must match the "Header Name" configured in N8N → Header Auth.', 'braveschat' ),
+                        'tokenLabel'  => __( 'Token value', 'braveschat' ),
+                        'tokenHelp'   => __( 'Secret token sent as the header value.', 'braveschat' ),
                     ),
                     'basic'  => array(
                         'show'        => true,
-                        'headerLabel' => __( 'Usuario', 'braveschat' ),
-                        'headerHelp'  => __( 'Debe coincidir con el campo "User" en N8N → Basic Auth.', 'braveschat' ),
-                        'tokenLabel'  => __( 'Contraseña', 'braveschat' ),
-                        'tokenHelp'   => __( 'Debe coincidir con el campo "Password" en N8N → Basic Auth.', 'braveschat' ),
+                        'headerLabel' => __( 'Username', 'braveschat' ),
+                        'headerHelp'  => __( 'Must match the "User" field in N8N → Basic Auth.', 'braveschat' ),
+                        'tokenLabel'  => __( 'Password', 'braveschat' ),
+                        'tokenHelp'   => __( 'Must match the "Password" field in N8N → Basic Auth.', 'braveschat' ),
                     ),
                 ),
             );

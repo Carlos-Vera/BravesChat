@@ -67,7 +67,8 @@ class Admin_Sidebar {
         }
 
         $defaults = array(
-            'form_id' => '',
+            'form_id'         => '',
+            'show_scroll_top' => false,
         );
         $args = wp_parse_args($args, $defaults);
 
@@ -97,7 +98,13 @@ class Admin_Sidebar {
             $form_id = esc_attr($args['form_id']);
             echo '<div class="braves-sidebar-save">';
             echo '<button type="submit" form="' . $form_id . '" class="button button-primary braves-sidebar-save__btn braves-hover-accent--dark">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $form_id is esc_attr().
-            echo esc_html__('Guardar', 'braveschat');
+            echo esc_html__('Save', 'braveschat');
+            echo '</button>';
+            echo '</div>';
+        } elseif (!empty($args['show_scroll_top'])) {
+            echo '<div class="braves-sidebar-save" id="braves-scroll-top-wrapper" style="opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;">';
+            echo '<button type="button" onclick="window.scrollTo({top: 0, behavior: \'smooth\'})" class="button button-secondary braves-sidebar-save__btn braves-hover-accent">';
+            echo wp_kses_post( '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-right: 6px; margin-bottom:-4px;" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-8 8h6v8h4v-8h6l-8-8z" fill="currentColor"/></svg>' ) . esc_html__('Back to top', 'braveschat');
             echo '</button>';
             echo '</div>';
         }
@@ -121,35 +128,35 @@ class Admin_Sidebar {
             ),
             array(
                 'id' => 'settings',
-                'label' => __('Ajustes', 'braveschat'),
+                'label' => __('Settings', 'braveschat'),
                 'url' => admin_url('admin.php?page=braveschat-settings'),
                 'page_slug' => 'braveschat-settings',
                 'icon' => $this->get_icon_svg('settings'),
             ),
             array(
                 'id' => 'appearance',
-                'label' => __('Apariencia', 'braveschat'),
+                'label' => __('Appearance', 'braveschat'),
                 'url' => admin_url('admin.php?page=braveschat-appearance'),
                 'page_slug' => 'braveschat-appearance',
                 'icon' => $this->get_icon_svg('appearance'),
             ),
             array(
                 'id' => 'availability',
-                'label' => __('Disponibilidad', 'braveschat'),
+                'label' => __('Availability', 'braveschat'),
                 'url' => admin_url('admin.php?page=braveschat-availability'),
                 'page_slug' => 'braveschat-availability',
                 'icon' => $this->get_icon_svg('availability'),
             ),
             array(
                 'id' => 'gdpr',
-                'label' => __('Privacidad', 'braveschat'),
+                'label' => __('Privacy', 'braveschat'),
                 'url' => admin_url('admin.php?page=braveschat-gdpr'),
                 'page_slug' => 'braveschat-gdpr',
                 'icon' => $this->get_icon_svg('gdpr'),
             ),
             array(
                 'id'        => 'history',
-                'label'     => __('Conversaciones', 'braveschat'),
+                'label'     => __('Conversations', 'braveschat'),
                 'url'       => admin_url('admin.php?page=braveschat-history'),
                 'page_slug' => 'braveschat-history',
                 'icon'      => $this->get_icon_svg('history'),

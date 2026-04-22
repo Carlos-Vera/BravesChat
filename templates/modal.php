@@ -15,8 +15,8 @@ if (!defined('ABSPATH')) {
 // Obtener el icono seleccionado y tooltip
 $chat_icon = get_option('braves_chat_chat_icon', 'robot-chat');
 $icon_path = BRAVES_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . '.svg';
-$header_status_text = get_option('braves_chat_header_status_text', __('Chateando con Charlie', 'braveschat'));
-$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'braveschat'));
+$header_status_text = get_option('braves_chat_header_status_text', __('Chatting with Charlie', 'braveschat'));
+$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Chat with our AI assistant', 'braveschat'));
 ?>
 <div id="<?php echo esc_attr($unique_id); ?>" class="braveslab-chat-widget-container position-<?php echo esc_attr($position); ?>">
     <div id="braveslab-chat-container" class="chat-closed braves-skin-<?php echo esc_attr($chat_skin); ?>">
@@ -27,7 +27,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                         <?php 
                         $img_src = !empty($bubble_image) ? $bubble_image : $icon_path;
                         // Asegurar que haya texto fallback si la opción está vacía
-                        $final_bubble_text = !empty(trim($bubble_text)) ? $bubble_text : __('¿Necesitas ayuda?', 'braveschat');
+                        $final_bubble_text = !empty(trim($bubble_text)) ? $bubble_text : __('Need help?', 'braveschat');
                         ?>
                         <img id="chat-bubble-image" src="<?php echo esc_url($img_src); ?>" alt="Chat" width="60" height="60">
                         <span class="braves-bubble-text"><?php echo esc_html($final_bubble_text); ?></span>
@@ -40,7 +40,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                                 </g>
                             </g>
                         </svg>
-                        <span class="braves-bubble-cta-text"><?php esc_html_e('Hablemos', 'braveschat'); ?></span>
+                        <span class="braves-bubble-cta-text"><?php esc_html_e("Let's talk", 'braveschat'); ?></span>
                     </div>
                 </div>
             <?php else: ?>
@@ -53,14 +53,14 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
 
             <!-- Mobile fullscreen header (visible solo en modo móvil) -->
             <div id="braves-mobile-header">
-                <button id="braves-mobile-back" aria-label="<?php esc_attr_e('Volver', 'braveschat'); ?>">
+                <button id="braves-mobile-back" aria-label="<?php esc_attr_e('Back', 'braveschat'); ?>">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
                 <span id="braves-mobile-title"><?php echo esc_html($header_title); ?></span>
-                <button id="braves-mobile-close" aria-label="<?php esc_attr_e('Cerrar chat', 'braveschat'); ?>">
+                <button id="braves-mobile-close" aria-label="<?php esc_attr_e('Close chat', 'braveschat'); ?>">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -85,7 +85,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     </div>
                 </div>
                 <div class="chat-header-actions">
-                     <button id="expand-chat" title="<?php esc_attr_e('Expandir', 'braveschat'); ?>">
+                     <button id="expand-chat" title="<?php esc_attr_e('Expand', 'braveschat'); ?>">
                         <svg class="icon-expand" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3H21V9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M9 21H3V15" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -124,12 +124,12 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     <textarea
                         id="chat-input"
                         rows="1"
-                        placeholder="<?php esc_attr_e('Enviar un mensaje', 'braveschat'); ?>"
-                        aria-label="<?php esc_attr_e('Escribe tu mensaje', 'braveschat'); ?>"
+                        placeholder="<?php esc_attr_e('Send a message', 'braveschat'); ?>"
+                        aria-label="<?php esc_attr_e('Type your message', 'braveschat'); ?>"
                         style="resize: none;"
                     ></textarea>
                     
-                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Enviar mensaje', 'braveschat'); ?>">
+                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Send message', 'braveschat'); ?>">
                         <svg width="20" height="20" viewBox="0 0 1624 1877" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                             <g transform="matrix(1,0,0,1,-11388.375,-2119.869508)">
                                 <g id="Enviar" transform="matrix(3.529117,0,0,4.079728,11388.375,2119.869508)">
@@ -146,7 +146,7 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                 </div>
             </div>
             
-            <button id="minimize-chat" aria-label="<?php esc_attr_e('Minimizar chat', 'braveschat'); ?>">
+            <button id="minimize-chat" aria-label="<?php esc_attr_e('Minimize chat', 'braveschat'); ?>">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 9L12 15L18 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

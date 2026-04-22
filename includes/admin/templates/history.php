@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
 
 // Verificar permisos
 if (!current_user_can('manage_options')) {
-    wp_die(esc_html__('No tienes permisos para acceder a esta página.', 'braveschat'));
+    wp_die(esc_html__('You do not have permission to access this page.', 'braveschat'));
 }
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template-scoped variables, not true globals.
@@ -42,12 +42,19 @@ $conversations = array();
 $fetch_error   = '';
 
 if (!empty($stats_webhook_url)) {
-    $response = wp_remote_get($stats_webhook_url, array(
-        'headers' => array(
-            'x-api-key' => $stats_api_key,
-        ),
-        'timeout' => 15,
-    ));
+    $stats_webhook_url = esc_url_raw( $stats_webhook_url );
+    $parsed_url        = wp_parse_url( $stats_webhook_url );
+    $allowed_schemes   = array( 'http', 'https' );
+
+    if ( empty( $parsed_url['scheme'] ) || ! in_array( $parsed_url['scheme'], $allowed_schemes, true ) ) {
+        $fetch_error = __( 'Invalid webhook URL: only HTTP and HTTPS are allowed.', 'braveschat' );
+    } else {
+        $response = wp_remote_get( $stats_webhook_url, array(
+            'headers' => array(
+                'x-api-key' => $stats_api_key,
+            ),
+            'timeout' => 15,
+        ) );
 
     if (is_wp_error($response)) {
         $fetch_error = $response->get_error_message();
@@ -55,7 +62,7 @@ if (!empty($stats_webhook_url)) {
         $response_code = wp_remote_retrieve_response_code($response);
         if ($response_code >= 400) {
             // translators: %d is the HTTP error code number.
-            $fetch_error = sprintf(__('Error HTTP %d al conectar con el servidor.', 'braveschat'), $response_code);
+            $fetch_error = sprintf(__('HTTP error %d when connecting to the server.', 'braveschat'), $response_code);
         } else {
             $body = wp_remote_retrieve_body($response);
             $body = wp_remote_retrieve_body($response);
@@ -87,12 +94,13 @@ if (!empty($stats_webhook_url)) {
                     }
                 }
             } elseif (empty($body)) {
-                $fetch_error = __('El webhook respondió con cuerpo vacío. Verifica que el flujo de N8N esté activo y retornando datos.', 'braveschat');
+                $fetch_error = __('The webhook responded with an empty body. Check that the N8N flow is active and returning data.', 'braveschat');
             } else {
-                $fetch_error = __('La respuesta del webhook no es un JSON válido.', 'braveschat');
+                $fetch_error = __('The webhook response is not valid JSON.', 'braveschat');
             }
         }
     }
+    } // end else (valid URL scheme)
 }
 
 // Agrupar mensajes individuales por session_id formando conversaciones
@@ -225,9 +233,9 @@ uasort($sessions, function ($a, $b) {
 
                 <!-- Page Header -->
                 <div class="braves-page-header">
-                    <h1 class="braves-page-title"><strong><?php esc_html_e('Historial', 'braveschat'); ?></strong></h1>
+                    <h1 class="braves-page-title"><strong><?php esc_html_e('History', 'braveschat'); ?></strong></h1>
                     <p class="braves-page-description">
-                        <?php esc_html_e('Conversaciones registradas con tu agente de IA.', 'braveschat'); ?>
+                        <?php esc_html_e('Conversations recorded with your AI agent.', 'braveschat'); ?>
                     </p>
                 </div>
 
@@ -235,7 +243,7 @@ uasort($sessions, function ($a, $b) {
                 <?php if (!$config_status['is_configured']): ?>
                 <div class="notice notice-warning inline">
                     <p>
-                        <?php esc_html_e('¡Casi lo tienes! Conecta la URL del Webhook en Ajustes para que tu agente empiece a trabajar.', 'braveschat'); ?>
+                        <?php esc_html_e('Almost there! Connect the Webhook URL in Settings so your agent can start working.', 'braveschat'); ?>
                     </p>
                 </div>
                 <?php endif; ?>
@@ -243,11 +251,11 @@ uasort($sessions, function ($a, $b) {
                 <?php if (empty($stats_webhook_url)): ?>
                     <div class="notice notice-warning inline">
                         <p>
-                            <strong><?php esc_html_e('Webhook no configurado:', 'braveschat'); ?></strong>
+                            <strong><?php esc_html_e('Webhook not configured:', 'braveschat'); ?></strong>
                             <?php
                             echo wp_kses_post( sprintf(
                                 /* translators: %s is the URL to the plugin settings page. */
-                                __('Configura la URL del webhook de historial en <a href="%s">Ajustes</a>.', 'braveschat'),
+                                __('Configure the history webhook URL in <a href="%s">Settings</a>.', 'braveschat'),
                                 esc_url(admin_url('admin.php?page=braveschat-settings'))
                             ) ); ?>
                         </p>
@@ -255,14 +263,14 @@ uasort($sessions, function ($a, $b) {
                 <?php elseif (!empty($fetch_error)): ?>
                     <div class="notice notice-error inline">
                         <p>
-                            <strong><?php esc_html_e('No hay conversaciones registradas o hay un error de conexión.', 'braveschat'); ?></strong> 
+                            <strong><?php esc_html_e('No conversations found or there is a connection error.', 'braveschat'); ?></strong>
                             <br><?php echo esc_html($fetch_error); ?>
                         </p>
                     </div>
                 <?php elseif (empty($sessions)): ?>
                     <div class="notice notice-info inline">
                         <p>
-                            <?php esc_html_e('No hay conversaciones registradas o hay un error de conexión.', 'braveschat'); ?>
+                            <?php esc_html_e('No conversations found or there is a connection error.', 'braveschat'); ?>
                         </p>
                     </div>
                 <?php else: ?>
@@ -275,12 +283,12 @@ uasort($sessions, function ($a, $b) {
                                 <?php
                                 echo esc_html( sprintf(
                                     // translators: %d is the number of conversations found.
-                                    _n('%d conversación encontrada', '%d conversaciones encontradas', count($sessions), 'braveschat'),
+                                    _n('%d conversation found', '%d conversations found', count($sessions), 'braveschat'),
                                     count($sessions)
                                 ) ); ?>
                             </h3>
                             <button type="button" id="braves-history-export-csv" class="button button-primary braves-btn">
-                                <?php esc_html_e('Descargar CSV', 'braveschat'); ?>
+                                <?php esc_html_e('Download CSV', 'braveschat'); ?>
                             </button>
                         </div>
                         
@@ -289,9 +297,9 @@ uasort($sessions, function ($a, $b) {
                         <table id="braves-history-table" class="braves-history-table">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="width: 25%;"><?php esc_html_e('Contacto', 'braveschat'); ?></th>
-                                    <th scope="col" style="width: 55%;"><?php esc_html_e('Extracto', 'braveschat'); ?></th>
-                                    <th scope="col" style="width: 20%;"><?php esc_html_e('Fecha', 'braveschat'); ?></th>
+                                    <th scope="col" style="width: 25%;"><?php esc_html_e('Contact', 'braveschat'); ?></th>
+                                    <th scope="col" style="width: 55%;"><?php esc_html_e('Excerpt', 'braveschat'); ?></th>
+                                    <th scope="col" style="width: 20%;"><?php esc_html_e('Date', 'braveschat'); ?></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -309,7 +317,7 @@ uasort($sessions, function ($a, $b) {
                                     }
 
                                     // Extracto: último mensaje del usuario (ya limpiado en PHP al construir sesiones)
-                                    $snippet = __('(Sin mensajes)', 'braveschat');
+                                    $snippet = __('(No messages)', 'braveschat');
                                     foreach (array_reverse($messages) as $msg) {
                                         if (!is_array($msg)) continue;
                                         $role = strtolower(trim(isset($msg['type']) ? $msg['type'] : (isset($msg['role']) ? $msg['role'] : '')));
@@ -331,7 +339,7 @@ uasort($sessions, function ($a, $b) {
                                         <?php if (!empty($client_name)): ?>
                                             <div class="braves-history-table__contact-name"><?php echo esc_html($client_name); ?></div>
                                         <?php else: ?>
-                                            <em><?php esc_html_e('Desconocido', 'braveschat'); ?></em>
+                                            <em><?php esc_html_e('Unknown', 'braveschat'); ?></em>
                                         <?php endif; ?>
                                     </td>
                                     <td>
@@ -361,11 +369,11 @@ uasort($sessions, function ($a, $b) {
 <!-- Chat History Viewer Modal -->
 <div id="braves-history-modal" class="braves-history-modal-overlay">
     <div class="braves-history-modal-wrapper">
-        <button type="button" id="braves-history-modal-close" class="braves-history-modal__close" aria-label="<?php esc_attr_e('Cerrar', 'braveschat'); ?>">&times;</button>
+        <button type="button" id="braves-history-modal-close" class="braves-history-modal__close" aria-label="<?php esc_attr_e('Close', 'braveschat'); ?>">&times;</button>
         <div class="braves-history-modal" role="dialog" aria-modal="true" aria-labelledby="braves-modal-title">
             <div class="braves-history-modal__header">
                 <div>
-                    <h3 id="braves-modal-title" class="braves-history-modal__title"><?php esc_html_e('Conversación del Chat', 'braveschat'); ?></h3>
+                    <h3 id="braves-modal-title" class="braves-history-modal__title"><?php esc_html_e('Chat Conversation', 'braveschat'); ?></h3>
                     <p id="braves-modal-subtitle" class="braves-history-modal__subtitle"></p>
                 </div>
             </div>

@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 // Obtener el icono seleccionado y tooltip
 $chat_icon = get_option('braves_chat_chat_icon', 'robot-chat');
 $icon_path = BRAVES_CHAT_PLUGIN_URL . 'assets/media/chat-icons/' . $chat_icon . '.svg';
-$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro asistente IA', 'braveschat'));
+$bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Chat with our AI assistant', 'braveschat'));
 ?>
 
 <script>
@@ -81,18 +81,18 @@ $bubble_tooltip = get_option('braves_chat_bubble_tooltip', __('Habla con nuestro
                     <textarea
                         id="chat-input"
                         rows="3"
-                        placeholder="<?php esc_attr_e('Escribe tu mensaje...', 'braveschat'); ?>"
-                        aria-label="<?php esc_attr_e('Escribe tu mensaje', 'braveschat'); ?>"
+                        placeholder="<?php esc_attr_e('Type your message...', 'braveschat'); ?>"
+                        aria-label="<?php esc_attr_e('Type your message', 'braveschat'); ?>"
                         style="resize: none;"
                     ></textarea>
-                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Enviar mensaje', 'braveschat'); ?>">
+                    <button id="send-button" disabled aria-label="<?php esc_attr_e('Send message', 'braveschat'); ?>">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </div>
                 <div class="chat-footer-text">
-                    <?php esc_html_e( 'La IA puede cometer errores. Considera verificar la información importante.', 'braveschat' ); ?>
+                    <?php esc_html_e( 'AI can make mistakes. Consider verifying important information.', 'braveschat' ); ?>
                 </div>
             </div>
         </div>
