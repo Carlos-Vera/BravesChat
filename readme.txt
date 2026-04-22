@@ -4,7 +4,7 @@ Tags: chat, ai, n8n, chatbot, webhook
 Requires at least: 5.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.4.4
+Stable tag: 2.4.6
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,22 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 5. Conversation history — session viewer with CSV export.
 
 == Changelog ==
+
+= 2.4.6 =
+* FIXED: Chat links from AI responses with non-HTTP protocols (e.g. javascript:) are no longer rendered — only https:// and http:// are accepted. Prevents potential XSS from malicious agent responses.
+* FIXED: Auth header name sanitized before use to prevent header injection.
+* FIXED: History modal no longer shows hardcoded Spanish labels ("Conversación Anónima", "Session:", "Usuario") — all strings are now translatable.
+* ADDED: Bible verses in the admin header now appear in English when WordPress is not set to Spanish.
+* IMPROVED: Changelog timeline in the About page no longer requires manual spacing values — adding a new entry is as simple as setting braves-tl-right or braves-tl-left.
+
+= 2.4.5 =
+* FIXED: Bible API dependency removed — verses now served from a local file with 365 NVI verses. No external requests.
+* ADDED: Full English translation of the admin UI with i18n support for es_ES.
+* ADDED: About page translated to English; Spanish translations preserved in the .po file.
+* FIXED: N8N auth token no longer exposed via console.log in the browser.
+* FIXED: HTTP/HTTPS scheme validation added before wp_remote_get() calls.
+* FIXED: $_GET['page'] sanitized and boolean values properly escaped in hidden inputs.
+* FIXED: i18n pattern in admin.js updated to use const { __ } = wp.i18n — compatible with wp i18n make-json.
 
 = 2.4.4 =
 * IMPROVED: All user-visible strings in the admin panel JavaScript are now fully translatable via WordPress i18n (wp.i18n.__).
@@ -188,20 +204,6 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == External services ==
 
-= API.Bible (scripture.api.bible) =
-
-This plugin connects to the API.Bible service, provided by the American Bible Society, to display a daily Bible verse in the WordPress admin dashboard header.
-
-**What data is sent:** Only a verse reference identifier (e.g. "JHN.3.16") selected by the day of the year. No user data, visitor data, IP addresses, or site-specific information is ever transmitted.
-
-**When:** Once per day, on the first admin page load after the 24-hour cache expires. The result is stored as a WordPress transient and reused for the rest of the day. Front-end visitors are never affected.
-
-**Why:** To show an inspirational verse to the site administrator in the plugin's admin header.
-
-* Service provider: American Bible Society
-* Terms of Service: https://scripture.api.bible/admin/terms-of-service
-* Privacy Policy: https://www.americanbible.org/privacy-policy
-
 = N8N Webhook (user-configured) =
 
 This plugin sends chat messages to an N8N webhook URL configured by the site administrator.
@@ -215,6 +217,12 @@ This plugin sends chat messages to an N8N webhook URL configured by the site adm
 The webhook URL, destination server, and all data processing are fully controlled by the site administrator. No data is sent to any Braves-operated server.
 
 == Upgrade Notice ==
+
+= 2.4.6 =
+Security fix: AI response links are now restricted to HTTP/HTTPS. History modal fully translatable. English Bible verses. Recommended update.
+
+= 2.4.5 =
+Bible API removed — verses now load locally. Full English UI with es_ES support. Security fixes for console.log token leak and HTTP validation. Recommended for all users.
 
 = 2.4.4 =
 Full internationalization — all strings now translatable, including JavaScript labels. Required for non-English installs.

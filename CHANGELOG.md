@@ -6,7 +6,9 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 
 ## 📋 Índice de Versiones
 
-- [2.4.4](#244---2026-04-12) - **Actual** - Internacionalización completa: 481 strings traducibles, soporte JS i18n y archivos de idioma para es_ES
+- [2.4.6](#246---2026-04-16) - **Actual** - Seguridad XSS, traducciones del historial, versículos en inglés y timeline automático
+- [2.4.5](#245---2026-04-15) - Versículos locales, UI traducida al inglés y correcciones de seguridad
+- [2.4.4](#244---2026-04-12) - Internacionalización completa: 481 strings traducibles, soporte JS i18n y archivos de idioma para es_ES
 - [2.4.3](#243---2026-04-12) - Modo Mixto de visualización y correcciones CSS para iOS Safari dark mode
 - [2.4.2](#242---2026-03-26) - Dark mode en el panel admin y limpieza de estilos hardcodeados
 - [2.4.0](#240---2026-03-25) - Mobile fullscreen mode, compatibilidad WooCommerce y mejoras Plugin Check
@@ -38,6 +40,41 @@ Todas las fechas en formato YYYY-MM-DD. Este proyecto sigue [Semantic Versioning
 - [1.1.1](#111---2025-10-16) - Sistema de cookies y fingerprinting
 - [1.1.0](#110---2025-10-01) - Horarios y páginas excluidas
 - [1.0.0](#100---2025-09-15) - Lanzamiento inicial
+
+---
+
+## [2.4.6] - 2026-04-16
+
+### 🔒 Seguridad
+- **FIXED**: El parser de Markdown en el chat (modal y pantalla completa) ya no renderiza enlaces con protocolos no HTTP/HTTPS — `javascript:`, `data:` y similares son ignorados. Previene XSS en respuestas de agentes N8N comprometidos.
+- **FIXED**: El nombre del header de autenticación de N8N se sanitiza con `preg_replace` antes de usarse como clave HTTP — previene inyección de headers por caracteres CRLF.
+
+### 🌍 Traducciones
+- **FIXED**: El modal de historial ya no muestra "Conversación Anónima", "Session:" ni "Usuario" hardcodeados en español. Todos los strings del visor de conversaciones pasan ahora por `__()` y son traducibles.
+- **FIXED**: El nombre del agente por defecto en el modal ahora se traduce correctamente ("Agent" en inglés, "Agente" en español).
+- **ADDED**: Versículos bíblicos en inglés (NIV) — cuando WordPress no está en español, el header del panel muestra versículos en inglés desde un archivo local de 365 entradas.
+
+### 🎨 UX/UI
+- **IMPROVED**: El timeline del changelog en la página "Acerca de" ya no usa valores de espaciado hardcodeados por ítem (`style="--braves-tl-nudge: ..."`). El layout es ahora automático — agregar una nueva versión solo requiere `braves-tl-right` o `braves-tl-left`.
+- **IMPROVED**: Eliminadas las clases de utilidad `braves-tl-mt-*` del CSS del panel — ya no son necesarias.
+
+---
+
+## [2.4.5] - 2026-04-15
+
+### ✨ Nuevas Funcionalidades
+- **ADDED**: Archivo local con 365 versículos NVI — eliminada la dependencia de scripture.api.bible. Sin peticiones externas.
+- **ADDED**: Traducción completa de la interfaz de administración al inglés con soporte i18n para es_ES — archivos `.po`, `.mo` y JSON actualizados.
+- **ADDED**: Página "Acerca de" traducida al inglés; traducciones al español en el archivo `.po`.
+
+### 🔒 Seguridad
+- **FIXED**: El token de autenticación de N8N ya no se expone en `console.log` del navegador.
+- **FIXED**: Validación del esquema HTTP/HTTPS añadida antes de cada llamada a `wp_remote_get()`.
+
+### 🐛 Correcciones WP.org
+- **FIXED**: `$_GET['page']` ahora se sanitiza correctamente antes de usarse.
+- **FIXED**: Valores booleanos escapados con `esc_attr()` en inputs ocultos de formularios.
+- **FIXED**: Patrón i18n en `admin.js` actualizado a `const { __ } = wp.i18n` — compatible con `wp i18n make-json`.
 
 ---
 

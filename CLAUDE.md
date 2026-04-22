@@ -4,7 +4,7 @@
 
 ## 📋 Información General
 - **Nombre:** BravesChat
-- **Versión:** 2.4.4
+- **Versión:** 2.4.6
 - **Descripción:** Plugin profesional de chat para WordPress con integración a N8N, soporte de horarios, cumplimiento GDPR, personalización avanzada y estadísticas de conversaciones.
 - **Autor:** Carlos Vera (BravesLab)
 - **Repositorio:** Carlos-Vera/BravesChat
@@ -43,6 +43,7 @@ El plugin sigue el patrón **Singleton** para sus clases principales, asegurando
 ### 2. Modos de Visualización
 - **Modal:** Widget flotante en esquina (configurable).
 - **Fullscreen:** Interfaz de chat a pantalla completa.
+- **Mixto (`mixed`):** Burbuja flotante global + pantalla completa en páginas con bloque Gutenberg.
 - **Skins:** "Default" y "Braves" (diseño personalizado con header transparente y avatares).
 
 ### 3. Personalización (Apariencia)
@@ -96,7 +97,7 @@ No se requiere compilación (Vanilla JS/CSS).
     - `readme.txt` — `Stable tag:`, sección `== Changelog ==` y `== Upgrade Notice ==` ⚠️ WordPress lo usa para detectar actualizaciones
     - `README.md` — actualizar número de versión donde aparezca mencionado
     - `CHANGELOG.md` — índice de versiones + nueva entrada al tope
-    - `includes/admin/templates/about.php` — nuevo bloque `.braves-changelog`
+    - `includes/admin/templates/about.php` — nuevo `<div class="braves-timeline__item braves-tl-left|braves-tl-right" data-tl-item>` en `[data-tl-source]`. Especificar la clase `braves-tl-left` o `braves-tl-right` manualmente. No añadir `style="--braves-tl-nudge:..."` ni clases `braves-tl-mt-*`.
     - `CLAUDE.md` — campo `Versión:` en Información General
     - `memory/MEMORY.md` — versión actual y cambios clave
     - `braves_chat.php` método `plugin_api_info()` — actualizar `$plugin->active_installs`
@@ -149,4 +150,70 @@ Preserva todas las opciones al guardar formularios parciales. Siempre que se reg
 ## ⚠️ Notas Importantes
 - **Cache:** Al actualizar Assets, incrementar `BRAVES_CHAT_VERSION` en `braves_chat.php` para romper la caché del navegador.
 - **Base de Datos:** Las opciones se guardan en `wp_options` con prefijo `braves_chat_`.
-- **API Key Versículo NVI:** La key de scripture.api.bible está hardcodeada en `includes/admin/components/class_admin_header.php` método `get_daily_verse()`. Si se regenera o rota la key en el panel de scripture.api.bible, hay que actualizarla en ese archivo y publicar nueva versión del plugin. ⚠️ Pendiente evaluar límites si el plugin escala en número de installs.
+- **Versículos diarios:** Servidos desde archivos locales sin peticiones externas. `get_daily_verse()` en `class_admin_header.php` carga `includes/admin/data/bible-verses-es.php` (NVI) o `bible-verses-en.php` (NIV) según `get_locale()`.
+
+# CLAUDE.md
+
+Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
+
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
+
+## 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.

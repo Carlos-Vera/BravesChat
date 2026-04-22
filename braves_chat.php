@@ -3,7 +3,7 @@
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
  * Description: Una herramienta profesional que conecta tu sitio con tu agente de N8N, permitiéndote ofrecer atención con iA directamente en tu web.
- * Version: 2.4.4
+ * Version: 2.4.6
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
  * Text Domain: braveschat
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Definir constantes del plugin
-define('BRAVES_CHAT_VERSION', '2.4.4');
+define('BRAVES_CHAT_VERSION', '2.4.6');
 define('BRAVES_CHAT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('BRAVES_CHAT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('BRAVES_CHAT_PLUGIN_FILE', __FILE__);
@@ -135,20 +135,20 @@ class BravesChat {
             // Fallback: valores genéricos si no existe config/defaults.php
             $defaults = array(
                 'webhook_url' => '',
-                'header_title' => __('Tu agente de iA', 'braveschat'),
-                'header_subtitle' => __('Estoy aquí para ayudarte', 'braveschat'),
-                'welcome_message' => __('¡Hola! ¿En qué puedo ayudarte hoy?', 'braveschat'),
+                'header_title' => __('Your AI agent', 'braveschat'),
+                'header_subtitle' => __('I am here to help you', 'braveschat'),
+                'welcome_message' => __('Hello! How can I help you today?', 'braveschat'),
                 'position' => 'bottom-right',
                 'excluded_pages' => array(),
                 'availability_enabled' => false,
                 'availability_start' => '09:00',
                 'availability_end' => '18:00',
                 'availability_timezone' => 'UTC',
-                'availability_message' => __('Nuestro horario de atención es de 9:00 a 18:00. Déjanos tu mensaje y te responderemos lo antes posible.', 'braveschat'),
+                'availability_message' => __('Our business hours are from 9:00 to 18:00. Leave us your message and we will get back to you as soon as possible.', 'braveschat'),
                 'display_mode' => 'modal',
                 'gdpr_enabled' => false,
-                'gdpr_message' => __('Este sitio utiliza cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra política de cookies y.', 'braveschat'),
-                'gdpr_accept_text' => __('Aceptar', 'braveschat'),
+                'gdpr_message' => __('This site uses cookies to improve your experience. By continuing to browse, you accept our cookie policy.', 'braveschat'),
+                'gdpr_accept_text' => __('Accept', 'braveschat'),
             );
         }
         
