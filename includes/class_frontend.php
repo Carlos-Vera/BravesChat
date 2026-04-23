@@ -272,7 +272,7 @@ class Frontend {
             'displayMode'     => $effective_display_mode,
             'chatSkin'        => get_option('braves_chat_chat_skin', 'default'),
             'bubbleImage'     => get_option('braves_chat_bubble_image', ''),
-            'bubbleText'      => get_option('braves_chat_bubble_text', __('Chat de voz', 'braveschat')),
+            'bubbleText'      => get_option('braves_chat_bubble_text', __('Voice chat', 'braveschat')),
         );
         
         echo self::render_chat_widget($attributes); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- render_chat_widget() builds safe internal HTML.
@@ -321,7 +321,7 @@ class Frontend {
         $display_mode = $attributes['displayMode'];
         $chat_skin = isset($attributes['chatSkin']) ? $attributes['chatSkin'] : 'default';
         $bubble_image = isset($attributes['bubbleImage']) ? $attributes['bubbleImage'] : '';
-        $bubble_text = isset($attributes['bubbleText']) ? $attributes['bubbleText'] : __('Chat de voz', 'braveschat');
+        $bubble_text = isset($attributes['bubbleText']) ? $attributes['bubbleText'] : __('Voice chat', 'braveschat');
         
         // Avatar URL - usar bubble_image por defecto para el avatar del header
         $avatar_url = $bubble_image;
