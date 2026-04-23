@@ -332,7 +332,7 @@ class BravesCookieManager {
      * @return string Texto personalizado o texto por defecto
      */
     public function get_gdpr_accept_text() {
-        $default_text = __('Aceptar', 'braveschat');
+        $default_text = __('Accept', 'braveschat');
         return get_option(self::GDPR_ACCEPT_TEXT_OPTION, $default_text);
     }
 
