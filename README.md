@@ -80,13 +80,13 @@ El plugin base seguirá siendo 100% libre, sin límites artificiales ni funcione
 
 ## Instalación
 
-### Desde WordPress.org *(en revisión)*
+### Desde WordPress.org
 1. Ve a **Plugins → Añadir nuevo** en tu WordPress.
 2. Busca **BravesChat**.
 3. Instala y activa.
 
 ### Desde el archivo ZIP
-1. Descarga el ZIP desde la [página de releases](https://github.com/Carlos-Vera/braveschat/releases).
+1. Descarga el ZIP desde [Github](https://github.com/Carlos-Vera/braveschat/releases) o desde [WordPress.org](https://wordpress.org/plugins/braveschat/).
 2. Ve a **Plugins → Añadir nuevo → Subir plugin**.
 3. Selecciona el ZIP y activa.
 
@@ -115,7 +115,7 @@ Parámetros fundamentales del chat:
 - Título, subtítulo y mensaje de bienvenida.
 - Nombre del agente — visible en el historial de conversaciones.
 - Posición: inferior derecha / inferior izquierda.
-- Modo de visualización: modal o pantalla completa.
+- Modo de visualización: modal, pantalla completa o mixto (burbuja global + pantalla completa en páginas con bloque Gutenberg).
 - Colores: primario, fondo, texto, burbuja, icono.
 - Icono: selección de SVGs o imagen personalizada.
 - Skin: Básico o Braves.
@@ -206,6 +206,7 @@ braves-chat/
 - **Prepared statements** — Prevención de SQL injection con `$wpdb->prepare()`.
 - **Fingerprinting privado** — Hash SHA-256 irreversible, sin datos personales.
 - **Flags de cookies** — `Secure` (HTTPS) y `SameSite=Lax`.
+- **Protección XSS en Markdown** — Los enlaces en respuestas del agente solo admiten `http://` y `https://`. Cualquier otro protocolo es ignorado.
 - **Limpieza al desinstalar** — El plugin no deja rastros en la base de datos.
 
 ---
