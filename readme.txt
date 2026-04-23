@@ -23,9 +23,11 @@ Connect your WordPress site to your N8N AI agent. Professional chat widget with 
 
 = Production-ready =
 
+* **Three display modes:** Floating widget, full screen, or mixed — global bubble with full screen on specific pages via a Gutenberg block.
+* **Dark mode admin panel:** Toggle between light and dark theme. Preference is saved per user and restored without flash.
 * **Configurable business hours:** Define when the chat is active and show a custom message outside those hours — ideal if your agent depends on a human in the loop.
 * **Built-in GDPR compliance:** Consent banner that blocks the chat until the user accepts. Montserrat font loaded locally, no external requests.
-* **Full brand customization:** Colors, texts, position, skin, and display mode (floating widget or full screen) — all adjustable without touching code.
+* **Full brand customization:** Colors, texts, position, skin, and display mode — all adjustable without touching code.
 * **Reinforced security:** The N8N authentication token travels only on the server — it is never exposed in the page HTML.
 * **WooCommerce compatible:** Works in WooCommerce stores without conflicts, enabling conversational assistance throughout the purchase process.
 
@@ -35,7 +37,7 @@ BravesChat generates a unique `sessionId` per visitor based on browser character
 
 == Installation ==
 
-1. Upload the `braves-chat` folder to the `/wp-content/plugins/` directory.
+1. Upload the `braveschat` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin from the **Plugins** menu in WordPress.
 3. Go to **BravesChat → Settings** and enter your N8N webhook URL.
 4. (Optional) Customize colors, texts, and position under **Appearance**.
@@ -81,11 +83,11 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 
 == Screenshots ==
 
-1. Floating widget on the frontend — Braves skin with avatar and custom header.
-2. Administration panel — Dashboard view with quick access to all sections.
-3. Settings — N8N webhook configuration, texts and chat behavior.
-4. Appearance — color, position, skin, and widget icon customization.
-5. Conversation history — session viewer with CSV export.
+1. Admin panel dark mode — full dark theme with the new toggle.
+2. Floating widget on the frontend — Braves skin showing different display behaviors.
+3. Appearance — color, position, skin, bubble image, and display mode customization.
+4. Conversation history — per-session viewer with chat bubbles and CSV export.
+5. Settings — N8N webhook configuration, authentication method, and chat behavior.
 
 == Changelog ==
 
@@ -136,7 +138,7 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * FIXED: External service disclosure added to API.Bible integration for WordPress.org compliance.
 
 = 2.3.8 =
-* ADDED: Un versículo de la Biblia (NVI) aparece cada día en el encabezado del panel. Cambia solo — sin configurar nada.
+* ADDED: A Bible verse (NIV) appears in the header of the panel every day. It updates automatically—no setup required.
 
 = 2.3.7 =
 * ADDED: Agent Name field in Appearance — label your agent to identify conversations in History.
@@ -173,6 +175,9 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * ADDED: "View details" link in the plugins list with full plugin information.
 * IMPROVED: Rich text editor for GDPR messages and out-of-hours messages.
 
+= 2.2.2 =
+* ADDED: Protection class detects ZIP export plugins installed on the site and shows a security notice in the admin panel.
+
 = 2.2.1 =
 * FIXED: Notices from other plugins no longer appear inside the BravesChat panel.
 
@@ -180,6 +185,19 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * ADDED: Full conversation history viewer with per-session modal.
 * ADDED: History export to CSV with all relevant fields.
 * IMPROVED: Conversations ordered from most recent to oldest.
+
+= 2.1.5 =
+* ADDED: History page replaces Statistics — open any session and read the full conversation thread with chat bubbles, timestamps, and sender labels.
+* ADDED: CSV export with all fields: session ID, client name, updated at, full chat history JSON.
+* IMPROVED: Messages displayed in chronological order inside the session modal.
+* FIXED: Internal N8N tool calls and JSON responses filtered from the conversation viewer.
+
+= 2.1.4 =
+* ADDED: Statistics tab with live conversation history fetched from your N8N/Postgres webhook.
+* ADDED: CSV export with all fields: session_id, client_mail, last_message, updated_at, chat_history, metadata.
+
+= 2.1.3 =
+* FIXED: GitHub Actions release workflow now correctly triggers on v* tags — automated ZIP generation working.
 
 = 2.1.2 =
 * IMPROVED: CSS isolation system to prevent conflicts with themes.
@@ -196,8 +214,39 @@ Yes. The token travels only on the server — it is never exposed in the page HT
 * MAJOR: Complete system restructuring with new BravesChat namespace.
 * ADDED: Maximize button, textarea auto-growth, minimized state.
 
+= 1.2.4 =
+* ADDED: Bubble tooltip customizable from the Appearance panel.
+* ADDED: Automatic detection and deactivation of older plugin versions on activation.
+* IMPROVED: Default icon color updated to #f2f2f2.
+
+= 1.2.3 =
+* ADDED: Full color customization — bubble, primary, background, and text colors with native color pickers.
+* ADDED: SVG icon selector with four styles (original, circle, happy, bubble).
+* FIXED: Removed Lottie Player CDN dependency — replaced with static SVG.
+
+= 1.2.2 =
+* FIXED: Critical — form inputs not rendering on Settings, Appearance, Schedules, and GDPR pages.
+* FIXED: Settings from other tabs were lost when saving a partial form.
+* IMPROVED: Admin notifications auto-hide after 3 seconds with slide animation.
+
+= 1.2.1 =
+* IMPROVED: Complete admin panel redesign with Bentō card layout.
+* ADDED: Shared sidebar navigation across all admin sections.
+* ADDED: Reusable component architecture — Header, Sidebar, Content.
+
+= 1.2.0 =
+* ADDED: New administration system with modern dashboard and Bentō design.
+
+= 1.1.2 =
+* CHANGED: Rebranding from Weblandia to BravesLab — updated URLs, author, and copyright.
+
 = 1.1.1 =
 * ADDED: Cookie system with fingerprinting for session identification.
+
+= 1.1.0 =
+* ADDED: Availability schedules with timezone support and custom offline message.
+* ADDED: Excluded pages — configure which pages should not show the chat widget.
+* ADDED: N8N authentication token support via X-N8N-Auth header.
 
 = 1.0.0 =
 * Initial plugin release.
