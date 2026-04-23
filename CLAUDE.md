@@ -94,7 +94,7 @@ No se requiere compilación (Vanilla JS/CSS).
 3.  **Commits:** Conventional Commits (e.g., `feat: nueva opción de color`, `fix: error en safari`).
 4.  **Archivos a actualizar en cada versión** (usar `/release` para automatizar esto):
     - `braves_chat.php` — header `Version:` y constante `BRAVES_CHAT_VERSION`
-    - `readme.txt` — `Stable tag:`, sección `== Changelog ==` y `== Upgrade Notice ==` ⚠️ WordPress lo usa para detectar actualizaciones
+    - `readme.txt` — `Stable tag:`, sección `== Changelog ==` y `== Upgrade Notice ==` ⚠️ WordPress lo usa para detectar actualizaciones. También actualizar `== Description ==` si se añade una feature notable, y `== Screenshots ==` si cambian las capturas (el slug correcto de la carpeta es `braveschat`, no `braves-chat`)
     - `README.md` — actualizar número de versión donde aparezca mencionado
     - `CHANGELOG.md` — índice de versiones + nueva entrada al tope
     - `includes/admin/templates/about.php` — nuevo `<div class="braves-timeline__item braves-tl-left|braves-tl-right" data-tl-item>` en `[data-tl-source]`. Especificar la clase `braves-tl-left` o `braves-tl-right` manualmente. No añadir `style="--braves-tl-nudge:..."` ni clases `braves-tl-mt-*`.
