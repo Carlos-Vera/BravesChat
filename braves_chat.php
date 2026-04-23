@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BravesChat
  * Plugin URI: https://github.com/Carlos-Vera/BravesChat
- * Description: Una herramienta profesional que conecta tu sitio con tu agente de N8N, permitiéndote ofrecer atención con iA directamente en tu web.
+ * Description: A professional tool that connects your website to your N8N agent, allowing you to provide AI-powered support directly on your website.
  * Version: 2.4.6
  * Author: Carlos Vera
  * Author URI: https://braveslab.com
