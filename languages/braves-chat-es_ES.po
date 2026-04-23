@@ -92,7 +92,7 @@ msgstr "Aceptar"
 #: includes/admin/templates/dashboard.php:71 includes/class_settings.php:223
 #: includes/class_settings.php:224
 msgid "Dashboard"
-msgstr "Cuadro de mandos"
+msgstr "Escritorio"
 
 #: braves_chat.php:302
 msgid "Ajustes"
@@ -1494,7 +1494,7 @@ msgstr "Piel de los Bravos"
 
 #: includes/admin/templates/appearance.php:205
 msgid "Choose the design template that best fits your brand."
-msgstr "Elija la plantilla de diseño que mejor se adapte a su marca."
+msgstr "Elige la plantilla de diseño que mejor se adapte a tu marca."
 
 #: includes/admin/templates/appearance.php:211
 msgid "Chat Design"
@@ -1502,7 +1502,7 @@ msgstr "Diseño de chat"
 
 #: includes/admin/templates/appearance.php:212
 msgid "Customize the visual style of the Agent."
-msgstr "Personalize el estilo visual del Agente."
+msgstr "Personaliza el estilo visual del agente."
 
 #: includes/admin/templates/appearance.php:235
 msgid "Select image"
@@ -1518,7 +1518,7 @@ msgstr "Cargar imagen"
 
 #: includes/admin/templates/appearance.php:238
 msgid "Remove image"
-msgstr "Eliminar imagen"
+msgstr "Borrar imagen"
 
 #. translators: %s: line break tag
 #: includes/admin/templates/appearance.php:243
@@ -1632,7 +1632,7 @@ msgstr "Nombre del agente"
 
 #: includes/admin/templates/appearance.php:380
 msgid "Defines how you will identify your agent in your records."
-msgstr "Define cómo identificará a su agente en sus registros."
+msgstr "Define cómo identificará a tu agente en tus registros."
 
 #: includes/admin/templates/appearance.php:387
 #: includes/class_customizer.php:113 includes/class_helpers.php:129
@@ -1928,12 +1928,12 @@ msgid ""
 "Your agent is online. Everything is in order, the AI is ready to assist your "
 "customers."
 msgstr ""
-"Su agente está en línea. Todo está en orden, la IA está lista para atender a "
-"sus clientes."
+"Tu agente está en línea. Todo está en orden, la IA está lista para atender a "
+"tus clientes."
 
 #: includes/admin/templates/dashboard.php:90
 msgid "Your agent is not configured yet. Set up the webhook to get started."
-msgstr "Su agente aún no está configurado. Configure el webhook para empezar."
+msgstr "Tu agente aún no está configurado. Configura el webhook para empezar."
 
 #: includes/admin/templates/dashboard.php:92
 msgid "View live"
@@ -2112,7 +2112,7 @@ msgstr "Descargar CSV"
 
 #: includes/admin/templates/history.php:300
 msgid "Contact"
-msgstr "Póngase en contacto con"
+msgstr "Contacto"
 
 #: includes/admin/templates/history.php:301
 msgid "Excerpt"
@@ -2178,7 +2178,7 @@ msgstr "El puente entre su sitio web y su sistema N8N."
 
 #: includes/admin/templates/settings.php:183
 msgid "No authentication"
-msgstr "Sin autenticación"
+msgstr "Sin identificación"
 
 #: includes/admin/templates/settings.php:184
 msgid "Custom header (Header Auth)"
@@ -2186,19 +2186,19 @@ msgstr "Encabezado personalizado (Header Auth)"
 
 #: includes/admin/templates/settings.php:185
 msgid "Basic Auth (username + password)"
-msgstr "Autenticación básica (nombre de usuario + contraseña)"
+msgstr "Identificación básica (nombre de usuario + contraseña)"
 
 #: includes/admin/templates/settings.php:188
 msgid ""
 "Choose the authentication type configured in your N8N Webhook or Chat "
 "Trigger node."
 msgstr ""
-"Elija el tipo de autenticación configurado en su nodo N8N Webhook o Chat "
+"Elige el tipo de identificación configurado en tu nodo N8N Webhook o Chat "
 "Trigger."
 
 #: includes/admin/templates/settings.php:192
 msgid "Authentication Type"
-msgstr "Tipo de autenticación"
+msgstr "Tipo de identificación"
 
 #: includes/admin/templates/settings.php:193
 msgid "Security method to protect access to the webhook."
@@ -2231,7 +2231,7 @@ msgstr "Páginas excluidas"
 
 #: includes/admin/templates/settings.php:276
 msgid "Select the pages where the chat will NOT appear."
-msgstr "Seleccione las páginas en las que NO aparecerá el chat."
+msgstr "Selecciona las páginas en las que NO aparecerá el chat."
 
 #: includes/admin/templates/settings.php:303
 msgid "Fast (10ms)"
@@ -2286,7 +2286,7 @@ msgstr "Historial Clave API"
 
 #: includes/admin/templates/settings.php:386
 msgid "Key to authenticate requests to the history webhook."
-msgstr "Clave para autenticar las solicitudes al webhook de historial."
+msgstr "Clave para identificar las solicitudes al webhook de historial."
 
 #: includes/class_ajax_handler.php:61
 msgid "The message cannot be empty."
@@ -2350,7 +2350,7 @@ msgstr "No autorizado."
 
 #: includes/class_settings.php:122
 msgid "Invalid authentication type."
-msgstr "Tipo de autenticación no válido."
+msgstr "Tipo de identificación no válido."
 
 #: includes/class_settings.php:340
 msgid "Show across the entire website"
@@ -2358,7 +2358,7 @@ msgstr "Mostrar en todo el sitio web"
 
 #: includes/class_settings.php:382
 msgid "N8N Authentication Token"
-msgstr "Token de autenticación N8N"
+msgstr "Token de identificación N8N"
 
 #: includes/class_settings.php:428
 msgid "Header Status Text"
@@ -2387,11 +2387,11 @@ msgstr "Cumplimiento GDPR / Cookies"
 
 #: includes/class_settings.php:760
 msgid "Configure general chat settings."
-msgstr "Configure los ajustes generales del chat."
+msgstr "Configura los ajustes generales del chat."
 
 #: includes/class_settings.php:770
 msgid "Select the pages where you do NOT want to show the chat widget."
-msgstr "Seleccione las páginas en las que NO desea mostrar el widget de chat."
+msgstr "Selecciona las páginas en las que NO deseas mostrar el widget de chat."
 
 #: includes/class_settings.php:780
 msgid "Configure chat availability schedule."
@@ -2575,12 +2575,12 @@ msgstr "Modo Luz"
 #. translators: browser alert for invalid webhook URL
 #: assets/js/admin.js:72
 msgid "Please enter a valid URL starting with http:// or https://"
-msgstr "Introduzca una URL válida que empiece por http:// o https://"
+msgstr "Introduce una URL válida que empiece por http:// o https://"
 
 #. translators: browser alert for invalid time format
 #: assets/js/admin.js:90
 msgid "Please enter a valid time in HH:MM format (e.g. 09:00)"
-msgstr "Introduzca una hora válida en formato HH:MM (por ejemplo, 09:00)"
+msgstr "Introduce una hora válida en formato HH:MM (por ejemplo, 09:00)"
 
 #. translators: %d = number of excluded pages
 #: assets/js/admin.js:126
@@ -2598,7 +2598,7 @@ msgstr "páginas excluidas"
 #. translators: browser alert shown when saving without a webhook URL
 #: assets/js/admin.js:155
 msgid "Please enter a valid webhook URL before saving."
-msgstr "Introduzca una URL de webhook válida antes de guardar."
+msgstr "Introduce una URL de webhook válida antes de guardar."
 
 #. translators: browser confirmation when leaving page with unsaved changes
 #: assets/js/admin.js:192
@@ -2749,17 +2749,17 @@ msgstr "Administración de WordPress > Ajustes > BravesChat iA"
 #: assets/js/braves_chat_block_modal.js:724
 #: assets/js/braves_chat_block_screen.js:749
 msgid "**Authentication error**"
-msgstr "**Error de autenticación**"
+msgstr "**Error de identificación**"
 
 #: assets/js/braves_chat_block_modal.js:725
 #: assets/js/braves_chat_block_screen.js:750
 msgid "The authentication token is invalid or has expired."
-msgstr "El token de autenticación no es válido o ha caducado."
+msgstr "El token de identificación no es válido o ha caducado."
 
 #: assets/js/braves_chat_block_modal.js:726
 #: assets/js/braves_chat_block_screen.js:751
 msgid "Contact the administrator to verify the N8N token."
-msgstr "Póngase en contacto con el administrador para verificar el token N8N."
+msgstr "Ponte en contacto con el administrador para verificar el token N8N."
 
 #: assets/js/braves_chat_block_modal.js:729
 #: assets/js/braves_chat_block_screen.js:754
@@ -2774,7 +2774,7 @@ msgstr "La URL del webhook no existe o es incorrecta."
 #: assets/js/braves_chat_block_modal.js:731
 #: assets/js/braves_chat_block_screen.js:756
 msgid "Check the URL in the plugin settings."
-msgstr "Compruebe la URL en la configuración del plugin."
+msgstr "Comprueba la URL en la configuración del plugin."
 
 #: assets/js/braves_chat_block_modal.js:734
 #: assets/js/braves_chat_block_screen.js:759
@@ -2789,7 +2789,7 @@ msgstr "El servidor N8N no ha devuelto un JSON válido."
 #: assets/js/braves_chat_block_modal.js:736
 #: assets/js/braves_chat_block_screen.js:761
 msgid "Check the workflow configuration in N8N."
-msgstr "Compruebe la configuración del flujo de trabajo en N8N."
+msgstr "Comprueba la configuración del flujo de trabajo en N8N."
 
 #: assets/js/braves_chat_block_modal.js:739
 #: assets/js/braves_chat_block_screen.js:764
@@ -2821,7 +2821,7 @@ msgstr "El servidor N8N tiene un problema interno."
 #: assets/js/braves_chat_block_modal.js:746
 #: assets/js/braves_chat_block_screen.js:771
 msgid "Contact the server administrator."
-msgstr "Póngase en contacto con el administrador del servidor."
+msgstr "Ponte en contacto con el administrador del servidor."
 
 #: assets/js/braves_chat_block_modal.js:749
 #: assets/js/braves_chat_block_screen.js:774
@@ -2831,7 +2831,7 @@ msgstr "**Error desconocido**"
 #: assets/js/braves_chat_block_modal.js:750
 #: assets/js/braves_chat_block_screen.js:775
 msgid "An unexpected error occurred. Please try again."
-msgstr "Se ha producido un error inesperado. Por favor, inténtelo de nuevo."
+msgstr "Se ha producido un error inesperado. Por favor, inténtalo de nuevo."
 
 #: assets/js/braves_chat_block_modal.js:754
 #: assets/js/braves_chat_block_screen.js:779
